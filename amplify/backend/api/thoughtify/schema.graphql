@@ -1,0 +1,42 @@
+type Thought @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  input: String
+  output: String
+  extract: AWSJSON
+}
+
+type Notification @model @auth(rules: [
+  # allow owner full auth
+  {allow: owner, operations: [read, create, update, delete]}
+]) {
+  id: ID!
+  title: String
+  content: String
+  readDate: AWSDateTime
+  type: NotificationType
+  userID: ID! @index(name: "byUser")
+  isUnread: Boolean
+  owner: String
+}
+
+enum NotificationType {
+  MESSAGE
+}
+
+## User details object. Links to cognito and square
+## Each user gets a Personal Tutor
+## Each user gets a Token Wallet
+type User @model @auth(rules: [
+  # allow the owner full access
+  {allow: owner, operations: [read, update, create, delete]},
+]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: AWSEmail
+  phone: AWSPhone
+  Notifications: [Notification] @hasMany(indexName: "byUser", fields: ["id"])
+  profileImage: String
+  cognitoSub: String
+  owner: String
+}

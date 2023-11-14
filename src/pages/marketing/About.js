@@ -1,0 +1,27 @@
+// material
+import { styled } from '@mui/material/styles';
+import { Divider } from '@mui/material';
+// components
+import Page from '../../demo/components/Page';
+import { AboutHero, AboutWhat, AboutTeam, AboutVision, AboutTestimonials } from '../../demo/components/_external-pages/about';
+
+// ----------------------------------------------------------------------
+
+const RootStyle = styled(Page)(({ theme }) => ({
+  paddingTop: theme.spacing(8),
+  [theme.breakpoints.up('md')]: {
+    paddingTop: theme.spacing(11)
+  }
+}));
+
+// ----------------------------------------------------------------------
+
+export default function About() {
+  return (
+    <RootStyle title="Edify - About Us">
+      <AboutHero />
+      <AboutVision />
+      <Divider orientation="vertical" sx={{ my: 10, mx: 'auto', width: 2, height: 40 }} />
+    </RootStyle>
+  );
+}
