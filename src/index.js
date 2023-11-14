@@ -19,7 +19,7 @@ import 'react-image-lightbox/style.css';
 // editor
 import 'react-quill/dist/quill.snow.css';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
+import {AmazonAIPredictionsProvider, Predictions} from '@aws-amplify/predictions';
 
 // slick-carousel
 import 'slick-carousel/slick/slick.css';
@@ -62,7 +62,9 @@ awsmobile.oauth.redirectSignIn = `${window.location.origin}/`;
  * Configure AWS Amplify provider globally.
  */
 Amplify.configure(awsmobile);
-Amplify.addPluggable(new AmazonAIPredictionsProvider());
+// Amplify.addPluggable(new AmazonAIPredictionsProvider());
+// Amplify.register(Predictions);
+Predictions.addPluggable(new AmazonAIPredictionsProvider());
 
 
 /**

@@ -7,11 +7,13 @@ import {useDatastore} from '../../useDatastore';
 
 /**
  * An accordion that utilizes a model query and subscription
+ * @param typename
  * @param model
  * @param title
  * @param icon
  * @param description
  * @param createItemButton
+ * @param deleteFunction
  * @param detailsComponent
  * @param onAfterQuery
  * @param idField
@@ -19,6 +21,9 @@ import {useDatastore} from '../../useDatastore';
  * @param predicate
  * @param filter
  * @param handleIcon
+ * @param titleField
+ * @param subTitleField
+ * @param sortFunction
  * @returns {JSX.Element}
  * @constructor
  */
@@ -29,6 +34,7 @@ export const useDataAccordion = ({
   icon,
   description,
   createItemButton,
+  deleteFunction,
   detailsComponent,
   onAfterQuery,
   idField,
@@ -36,7 +42,9 @@ export const useDataAccordion = ({
   predicate,
   filter,
   handleIcon,
-  sortFunction = (a, b) => a.name.localeCompare(b.name),
+  titleField = 'name',
+  subTitleField = 'description',
+  sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField]),
 }) => {
   const classes = useStyles();
 
@@ -86,6 +94,8 @@ export const useDataAccordion = ({
           detailsComponent={detailsComponent}
           handleIcon={handleIcon}
           typename={typename}
+          titleField={titleField}
+          subTitleField={subTitleField}
         />
       ))}
     </div>
@@ -108,12 +118,19 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '40%',
+    flexBasis: '80%',
     flexShrink: 0
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary
   },
+  dateHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    flexBasis: '20%',
+    alignSelf: "flex-end",
+    marginLeft: 'auto',
+},
   title: {}
 }));

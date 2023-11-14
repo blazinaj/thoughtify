@@ -62,6 +62,30 @@ export default function Router() {
       ]
     },
 
+    {
+      path: 'journal',
+      element: (
+        <AuthGuard>
+          <ApplicationLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { path: '', element: <JournalPage /> },
+      ]
+    },
+
+    {
+      path: 'biography',
+      element: (
+        <AuthGuard>
+          <ApplicationLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { path: '', element: <BiographyPage /> },
+      ]
+    },
+
     // Marketing Routes
     {
       path: '/',
@@ -98,6 +122,8 @@ export default function Router() {
 
 // IMPORT COMPONENTS
 const ThoughtsPage = Loadable(lazy(() => import('./thoughts/ThoughtsPage')));
+const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
+const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
 // Main
 const LandingPage = Loadable(lazy(() => import('./marketing/LandingPage')));
 const About = Loadable(lazy(() => import('./marketing/About')));

@@ -49,7 +49,7 @@ MBreadcrumbs.propTypes = {
 };
 
 export default function MBreadcrumbs({ links, activeLast = false, ...other }) {
-  const currentLink = last(links).name;
+  const currentLink = last(links)?.name;
 
   const listDefault = links.map((link) => <LinkItem key={link.name} link={link} />);
   const listActiveLast = links.map((link) => (

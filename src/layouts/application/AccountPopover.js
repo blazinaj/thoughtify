@@ -18,6 +18,7 @@ import MenuPopover from '../../demo/components/MenuPopover';
 import {Auth} from "@aws-amplify/auth";
 import {DataStore} from "@aws-amplify/datastore";
 
+
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [

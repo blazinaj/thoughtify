@@ -87,14 +87,7 @@ export default function LandingHero() {
 
             <motion.div variants={varFadeInRight}>
               <Typography sx={{ color: 'common.white' }}>
-                A modern way to
-                <Typography component="span" sx={{ color: 'primary.marketing' }}>
-                  &nbsp;Learn.
-                </Typography>{' '}
-                A better way to
-                <Typography component="span" sx={{ color: 'primary.marketing' }}>
-                  &nbsp;Teach.
-                </Typography>
+                AI-powered Journaling.
               </Typography>
             </motion.div>
 
@@ -103,7 +96,7 @@ export default function LandingHero() {
                 size="large"
                 variant="contained"
                 component={RouterLink}
-                to={PATH_LEARN.root}
+                to={'/thoughts'}
                 startIcon={<Icon icon={flashFill} width={20} height={20} />}
               >
                 Get Started

@@ -6,51 +6,29 @@ import {getIcon} from '../../utils/functions/getIcon';
 
 const sidebarConfig = [
   {
-    subheader: 'Interact',
     items: [
       {
-        title: 'AI Tutor',
-        icon: getIcon('fluent-mdl2:chat-bot'),
-        path: '/interact/tutor',
-      },
-    ]
-  },
-  {
-    subheader: 'Learn',
-    items: [
-      {
-        title: 'Dashboard',
-        icon: getIcon('material-symbols:play-lesson-outline'),
-        path: '/learn/dashboard',
-      },
-
-      {
-        title: 'Catalog',
-        icon: getIcon('carbon:catalog'),
-        path: '/learn/catalog',
+        title: 'Thoughts',
+        icon: getIcon('mingcute:thought-line'),
+        path: '/thoughts',
       },
       {
-        title: "Certifications",
-        icon: getIcon('carbon:certificate'),
-        path: '/learn/certifications',
-      }
-    ]
-  },
-  {
-    subheader: 'Teach',
-    items: [
-      {
-        title: 'Lessons',
-        icon: getIcon('carbon:application'),
-        path: '/teach/lessons',
-      },
-      {
-        title: 'Courses',
+        title: 'Journal',
         icon: getIcon('carbon:book'),
-        path: '/teach/courses',
-      }
+        path: '/journal',
+      },
+      {
+        title: 'Health',
+        icon: getIcon('ri:health-book-line'),
+        path: '/health',
+      },
+      {
+        title: 'Biography',
+        icon: getIcon('prime:book'),
+        path: '/biography',
+      },
     ]
-  }
+  },
 ];
 
 export default sidebarConfig;

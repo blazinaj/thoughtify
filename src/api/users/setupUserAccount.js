@@ -1,6 +1,7 @@
 import {DataStore} from "@aws-amplify/datastore";
 import {Notification, User} from "../../models";
 
+
 export const setupUserAccount = async ({cognitoUser, userData}) => {
 
   console.log('Setting up a new User Account for the Cognito User', {cognitoUser, userData})

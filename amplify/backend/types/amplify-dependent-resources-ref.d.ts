@@ -15,5 +15,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "predictions": {
+    "transcription": {
+      "language": "string",
+      "region": "string"
+    }
   }
 }

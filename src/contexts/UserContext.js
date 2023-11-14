@@ -1,5 +1,4 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {Auth} from "@aws-amplify/auth";
 import {AccountSetup} from "../views/User/AccountSetup";
 import {useNavigate} from "react-router-dom";
 import {setupUserAccount} from "../api/users/setupUserAccount";
@@ -29,16 +28,6 @@ const UserContextProvider = ({ children }) => {
    */
   const [user, setUser] = useState(null)
 
-  /**
-   * The currently selected tutor for the user.
-   */
-  const [personalTutor, setPersonalTutor] = useState(null)
-
-  /**
-   * The user's token wallet
-   */
-  const [tokenWallet, setTokenWallet] = useState(null)
-
   const [showAccountSetup, setShowAccountSetup] = useState(false);
 
   const navigate = useNavigate();
@@ -52,12 +41,10 @@ const UserContextProvider = ({ children }) => {
     setShowAccountSetup(true);
   }
 
-  const onAccountSetupComplete = async ({user, cognitoUser, tokenWallet, personalTutor}) => {
+  const onAccountSetupComplete = async ({user, cognitoUser}) => {
 
-    console.log("Account Setup Complete", {user, cognitoUser, tokenWallet, personalTutor})
+    console.log("Account Setup Complete", {user, cognitoUser})
     setUser(user)
-    setTokenWallet(tokenWallet)
-    setPersonalTutor(personalTutor)
 
     setShowAccountSetup(false);
     navigate('/learn/catalog')
@@ -125,8 +112,6 @@ const UserContextProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        personalTutor,
-        tokenWallet,
         isInitialized,
         owner: user?.username,
         onDeleteUser,

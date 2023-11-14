@@ -1,9 +1,6 @@
-import { sum, map, filter, uniqBy, reject } from 'lodash';
-import { createSlice } from '@reduxjs/toolkit';
+import {filter, map, reject, sum, uniqBy} from 'lodash';
+import {createSlice} from '@reduxjs/toolkit';
 // utils
-import axios from '../../../utils/axios';
-import {DataStore} from "@aws-amplify/datastore";
-import {LessonPlan} from "../../../models";
 
 // ----------------------------------------------------------------------
 

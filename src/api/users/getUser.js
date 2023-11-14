@@ -15,8 +15,6 @@ export const getUser = async ({username}) => {
         lastName
         email
         phone
-        personalTutorID
-        userTokenWalletId
       }
     }
   `

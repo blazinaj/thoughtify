@@ -7,6 +7,8 @@ import HeaderBreadcrumbs from "../../demo/components/HeaderBreadcrumbs";
 import {Thought} from "../../models";
 import {ThoughtDataCard} from "../../views/Thoughts/ThoughtDataCard";
 import {ThoughtInput} from "../../views/Thoughts/ThoughtInput";
+import {ThoughtGallery} from "../../views/Thoughts/ThoughtGallery";
+import {ExtractCards} from "../../views/Thoughts/ThoughtDetails";
 
 /**
  * This page displays the details of a course for a Teacher
@@ -26,20 +28,15 @@ const ThoughtsPage = () => {
 
 
   return (
-    <Page title="Thoughts">
+    <Page title="Thoughtify">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Thoughts"
           links={[
-            {name: 'Thoughts', href: 'thoughts'},
+            {name: 'Home', href: 'thoughts'},
           ]}
         />
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Box>
-              Thoughts..
-            </Box>
-          </Grid>
 
           <Grid item xs={12}>
 
@@ -48,8 +45,20 @@ const ThoughtsPage = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <ThoughtDataCard/>
+
+            <ExtractCards/>
+
           </Grid>
+
+          <Grid item xs={12}>
+
+            <ThoughtGallery/>
+
+          </Grid>
+
+          {/*<Grid item xs={12}>*/}
+          {/*  <ThoughtDataCard/>*/}
+          {/*</Grid>*/}
         </Grid>
       </Container>
     </Page>
