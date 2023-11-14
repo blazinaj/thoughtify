@@ -5,6 +5,8 @@ import {useParams} from "react-router-dom";
 import useSettings from "../../utils/hooks/useSettings";
 import HeaderBreadcrumbs from "../../demo/components/HeaderBreadcrumbs";
 import {Thought} from "../../models";
+import {ThoughtDataCard} from "../../views/Thoughts/ThoughtDataCard";
+import {ThoughtInput} from "../../views/Thoughts/ThoughtInput";
 
 /**
  * This page displays the details of a course for a Teacher
@@ -37,6 +39,16 @@ const ThoughtsPage = () => {
             <Box>
               Thoughts..
             </Box>
+          </Grid>
+
+          <Grid item xs={12}>
+
+            <ThoughtInput/>
+
+          </Grid>
+
+          <Grid item xs={12}>
+            <ThoughtDataCard/>
           </Grid>
         </Grid>
       </Container>

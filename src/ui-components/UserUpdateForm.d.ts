@@ -6,8 +6,17 @@
 
 import * as React from "react";
 import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { User } from "../models";
+export declare type EscapeHatchProps = {
+    [elementHierarchy: string]: Record<string, unknown>;
+} | null;
+export declare type VariantValues = {
+    [key: string]: string;
+};
+export declare type Variant = {
+    variantValues: VariantValues;
+    overrides: EscapeHatchProps;
+};
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -19,7 +28,8 @@ export declare type UserUpdateFormInputValues = {
     email?: string;
     phone?: string;
     profileImage?: string;
-    personalTutorID?: string;
+    cognitoSub?: string;
+    owner?: string;
 };
 export declare type UserUpdateFormValidationValues = {
     firstName?: ValidationFunction<string>;
@@ -27,7 +37,8 @@ export declare type UserUpdateFormValidationValues = {
     email?: ValidationFunction<string>;
     phone?: ValidationFunction<string>;
     profileImage?: ValidationFunction<string>;
-    personalTutorID?: ValidationFunction<string>;
+    cognitoSub?: ValidationFunction<string>;
+    owner?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UserUpdateFormOverridesProps = {
@@ -37,7 +48,8 @@ export declare type UserUpdateFormOverridesProps = {
     email?: PrimitiveOverrideProps<TextFieldProps>;
     phone?: PrimitiveOverrideProps<TextFieldProps>;
     profileImage?: PrimitiveOverrideProps<TextFieldProps>;
-    personalTutorID?: PrimitiveOverrideProps<TextFieldProps>;
+    cognitoSub?: PrimitiveOverrideProps<TextFieldProps>;
+    owner?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UserUpdateFormProps = React.PropsWithChildren<{
     overrides?: UserUpdateFormOverridesProps | undefined | null;

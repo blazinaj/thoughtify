@@ -7,14 +7,13 @@
 /* eslint-disable */
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { User } from "../models";
-import { fetchByPath, validateField } from "./utils";
+import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 export default function UserUpdateForm(props) {
   const {
     id: idProp,
-    user,
+    user: userModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -29,7 +28,8 @@ export default function UserUpdateForm(props) {
     email: "",
     phone: "",
     profileImage: "",
-    personalTutorID: "",
+    cognitoSub: "",
+    owner: "",
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
@@ -38,9 +38,8 @@ export default function UserUpdateForm(props) {
   const [profileImage, setProfileImage] = React.useState(
     initialValues.profileImage
   );
-  const [personalTutorID, setPersonalTutorID] = React.useState(
-    initialValues.personalTutorID
-  );
+  const [cognitoSub, setCognitoSub] = React.useState(initialValues.cognitoSub);
+  const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = userRecord
@@ -51,17 +50,20 @@ export default function UserUpdateForm(props) {
     setEmail(cleanValues.email);
     setPhone(cleanValues.phone);
     setProfileImage(cleanValues.profileImage);
-    setPersonalTutorID(cleanValues.personalTutorID);
+    setCognitoSub(cleanValues.cognitoSub);
+    setOwner(cleanValues.owner);
     setErrors({});
   };
-  const [userRecord, setUserRecord] = React.useState(user);
+  const [userRecord, setUserRecord] = React.useState(userModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp ? await DataStore.query(User, idProp) : user;
+      const record = idProp
+        ? await DataStore.query(User, idProp)
+        : userModelProp;
       setUserRecord(record);
     };
     queryData();
-  }, [idProp, user]);
+  }, [idProp, userModelProp]);
   React.useEffect(resetStateValues, [userRecord]);
   const validations = {
     firstName: [],
@@ -69,16 +71,18 @@ export default function UserUpdateForm(props) {
     email: [{ type: "Email" }],
     phone: [{ type: "Phone" }],
     profileImage: [],
-    personalTutorID: [],
+    cognitoSub: [],
+    owner: [],
   };
   const runValidationTasks = async (
     fieldName,
     currentValue,
     getDisplayValue
   ) => {
-    const value = getDisplayValue
-      ? getDisplayValue(currentValue)
-      : currentValue;
+    const value =
+      currentValue && getDisplayValue
+        ? getDisplayValue(currentValue)
+        : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -101,7 +105,8 @@ export default function UserUpdateForm(props) {
           email,
           phone,
           profileImage,
-          personalTutorID,
+          cognitoSub,
+          owner,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -127,8 +132,8 @@ export default function UserUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value.trim() === "") {
-              modelFields[key] = undefined;
+            if (typeof value === "string" && value === "") {
+              modelFields[key] = null;
             }
           });
           await DataStore.save(
@@ -162,7 +167,8 @@ export default function UserUpdateForm(props) {
               email,
               phone,
               profileImage,
-              personalTutorID,
+              cognitoSub,
+              owner,
             };
             const result = onChange(modelFields);
             value = result?.firstName ?? value;
@@ -191,7 +197,8 @@ export default function UserUpdateForm(props) {
               email,
               phone,
               profileImage,
-              personalTutorID,
+              cognitoSub,
+              owner,
             };
             const result = onChange(modelFields);
             value = result?.lastName ?? value;
@@ -220,7 +227,8 @@ export default function UserUpdateForm(props) {
               email: value,
               phone,
               profileImage,
-              personalTutorID,
+              cognitoSub,
+              owner,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -250,7 +258,8 @@ export default function UserUpdateForm(props) {
               email,
               phone: value,
               profileImage,
-              personalTutorID,
+              cognitoSub,
+              owner,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -279,7 +288,8 @@ export default function UserUpdateForm(props) {
               email,
               phone,
               profileImage: value,
-              personalTutorID,
+              cognitoSub,
+              owner,
             };
             const result = onChange(modelFields);
             value = result?.profileImage ?? value;
@@ -295,10 +305,10 @@ export default function UserUpdateForm(props) {
         {...getOverrideProps(overrides, "profileImage")}
       ></TextField>
       <TextField
-        label="Personal tutor id"
+        label="Cognito sub"
         isRequired={false}
         isReadOnly={false}
-        value={personalTutorID}
+        value={cognitoSub}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -308,20 +318,51 @@ export default function UserUpdateForm(props) {
               email,
               phone,
               profileImage,
-              personalTutorID: value,
+              cognitoSub: value,
+              owner,
             };
             const result = onChange(modelFields);
-            value = result?.personalTutorID ?? value;
+            value = result?.cognitoSub ?? value;
           }
-          if (errors.personalTutorID?.hasError) {
-            runValidationTasks("personalTutorID", value);
+          if (errors.cognitoSub?.hasError) {
+            runValidationTasks("cognitoSub", value);
           }
-          setPersonalTutorID(value);
+          setCognitoSub(value);
         }}
-        onBlur={() => runValidationTasks("personalTutorID", personalTutorID)}
-        errorMessage={errors.personalTutorID?.errorMessage}
-        hasError={errors.personalTutorID?.hasError}
-        {...getOverrideProps(overrides, "personalTutorID")}
+        onBlur={() => runValidationTasks("cognitoSub", cognitoSub)}
+        errorMessage={errors.cognitoSub?.errorMessage}
+        hasError={errors.cognitoSub?.hasError}
+        {...getOverrideProps(overrides, "cognitoSub")}
+      ></TextField>
+      <TextField
+        label="Owner"
+        isRequired={false}
+        isReadOnly={false}
+        value={owner}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              firstName,
+              lastName,
+              email,
+              phone,
+              profileImage,
+              cognitoSub,
+              owner: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.owner ?? value;
+          }
+          if (errors.owner?.hasError) {
+            runValidationTasks("owner", value);
+          }
+          setOwner(value);
+        }}
+        onBlur={() => runValidationTasks("owner", owner)}
+        errorMessage={errors.owner?.errorMessage}
+        hasError={errors.owner?.hasError}
+        {...getOverrideProps(overrides, "owner")}
       ></TextField>
       <Flex
         justifyContent="space-between"
@@ -334,7 +375,7 @@ export default function UserUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || user)}
+          isDisabled={!(idProp || userModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -346,7 +387,7 @@ export default function UserUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || user) ||
+              !(idProp || userModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}

@@ -6,4 +6,6 @@
 
 export { default as ThoughtCreateForm } from "./ThoughtCreateForm";
 export { default as ThoughtUpdateForm } from "./ThoughtUpdateForm";
+export { default as UserCreateForm } from "./UserCreateForm";
+export { default as UserUpdateForm } from "./UserUpdateForm";
 export { default as studioTheme } from "./studioTheme";
