@@ -16,7 +16,7 @@ export const Biography = () => {
   // biography is a collection of pages
   const getBiography = async () => {
 
-    if (!datastore.items) {
+    if (!datastore.items || datastore.items.length === 0) {
       return;
     }
 
@@ -51,15 +51,18 @@ export const Biography = () => {
 
   }
 
-  const [bio, setBio] = useState([])
+  const [bio, setBio] = useState(null);
 
   useEffect(() => {
 
-    getBiography().then(res => {
-      setBio(res)
-    })
+    if (!bio) {
+      getBiography().then(res => {
+        setBio(res)
+      })
+    }
 
-  }, [datastore.items])
+
+  }, [datastore?.items?.length])
 
   return (
     <Card>

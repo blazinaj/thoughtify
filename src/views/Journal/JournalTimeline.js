@@ -60,6 +60,7 @@ export default function JournalTimeline() {
     const journal = []
 
     for (const group of timeline) {
+
       const thoughts = group.thoughts;
       const prompt = `
         Generate a journal entry using the following thoughts:
@@ -85,14 +86,15 @@ export default function JournalTimeline() {
 
   }
 
-  const [journal, setJournal] = useState([])
+  const [journal, setJournal] = useState(null)
 
   useEffect(() => {
 
-    fetchJournal().then(res => {
-      setJournal(res)
-    })
-
+    if (!journal && datastore.items.length > 0) {
+      fetchJournal().then(res => {
+        setJournal(res)
+      })
+    }
   }, [datastore.items])
 
   return (
@@ -105,8 +107,8 @@ export default function JournalTimeline() {
     >
       {
         journal
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .map((group, index) => {
+        ?.sort((a, b) => new Date(b.date) - new Date(a.date))
+        ?.map((group, index) => {
           return (
             <TimelineItem key={index}>
               <TimelineOppositeContent color="textSecondary">
