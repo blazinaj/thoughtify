@@ -5,10 +5,10 @@ import Page from '../../demo/components/Page';
 import {
   LandingAdvertisement,
   LandingDarkMode,
-  LandingHero,
   LandingHugePackElements,
   LandingMinimal
 } from '../../demo/components/_external-pages/landing';
+import LandingHero from "./LandingHero";
 
 // ----------------------------------------------------------------------
 
@@ -37,9 +37,9 @@ export default function LandingPage() {
       <LandingHero />
       <ContentStyle>
         <LandingMinimal />
-        <LandingHugePackElements />
-        <LandingDarkMode />
-        <LandingAdvertisement />
+        {/*<LandingHugePackElements />*/}
+        {/*<LandingDarkMode />*/}
+        {/*<LandingAdvertisement />*/}
       </ContentStyle>
     </RootStyle>
   );

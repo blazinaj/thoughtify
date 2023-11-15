@@ -26,7 +26,7 @@ export default function MainLayout() {
     const listener = async (state, data) => {
       if (state === "signedin") {
         // Redirect the user to the /dashboard route upon successful sign-in
-        navigate("/learn");
+        navigate("/thoughts");
       }
     };
 
@@ -64,7 +64,7 @@ export default function MainLayout() {
             <Typography variant="caption" component="p">
               © All rights reserved
               <br /> made by &nbsp;
-              <Link href="https://www.edify.mobi/">Edify</Link>
+              <Link href="https://www.thoughtify.mobi/">Thoughtify</Link>
             </Typography>
           </Container>
         </Box>

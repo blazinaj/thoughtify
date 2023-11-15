@@ -84,7 +84,7 @@ const CustomInput = ({
   rows,
   onKeyPress,
   label,
-
+  onKeyDown,
   config = {
     // checkbox
     labelPlacement: "end",
@@ -224,37 +224,6 @@ const CustomInput = ({
             return (
               <>
                 {(() => {
-                  if (inputGroupAddon) {
-                    return (
-                      <div>
-                        {
-                          /*
-
-                              TODO: refactor to use material ui instead of reactstrap
-
-                           */
-                          // inputGroupAddon.addonType === "prepend" &&
-                          // <InputGroupAddon addonType="prepend">
-                          //   {inputGroupAddon.addonComponent}
-                          // </InputGroupAddon>
-                        }
-                        <TextField
-                          id={fieldName + componentId}
-                          type={inputType}
-                          placeholder={placeholder}
-                          value={input[fieldName]}
-                          onChange={(e) => onChange(e.target.value)}
-                          disabled={disabled}
-                          valid={isValid}
-                          invalid={isInvalid}
-                          autoComplete="new-password"
-                          data-testid={`useForm-input-${fieldName}`}
-                          rows={rows}
-                          onKeyPress={onKeyPress}
-                        />
-                      </div>
-                    );
-                  }
                   return (
                     <TextField
                       id={fieldName + componentId}
@@ -270,6 +239,7 @@ const CustomInput = ({
                       data-testid={`useForm-input-${fieldName}`}
                       rows={rows}
                       onKeyPress={onKeyPress}
+                      onKeyDown={onKeyDown}
                       error={isInvalid}
                       style={{ width: '100%' }}
                       inputProps={inputType === "number" && { inputMode: 'numeric', pattern: '[0-9]*' }}

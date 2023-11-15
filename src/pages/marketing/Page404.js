@@ -22,7 +22,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Page404() {
   return (
-    <RootStyle title="Edify - 404 Page Not Found">
+    <RootStyle title="Thoughtify - 404 Page Not Found">
       <Container>
         <MotionContainer initial="initial" open>
           <Box sx={{ maxWidth: 480, textAlign: 'center' }}>

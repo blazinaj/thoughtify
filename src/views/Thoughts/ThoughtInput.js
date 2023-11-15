@@ -1,9 +1,9 @@
-import {SpeechToText} from "./SpeechToText";
-import {Grid} from "@mui/material";
+import {Box, Grid} from "@mui/material";
 import {useForm} from "../../utils/hooks/useForm";
 import {Thought} from "../../models";
 import {DataStore} from "@aws-amplify/datastore";
-import {generate, handleCompletion} from "../../utils/openai/functions/generate";
+import {handleCompletion} from "../../utils/openai/functions/generate";
+import ThoughtInputField from "./ThoughtInputField";
 
 /**
  * Input Field for Thoughts.
@@ -85,24 +85,27 @@ export const ThoughtInput = () => {
     model: Thought,
     fieldConfig: {
       input: {
-        type: 'textarea',
+        inputType: 'text',
         label: 'Thought',
       }
     },
     callback: getThoughtExtract,
   })
 
+  const onSubmit = async (input) => {
+    console.log('saving thought', input)
+    const newThought = await DataStore.save(
+        new Thought({
+          ...input
+        })
+    );
+
+    const extract = await getThoughtExtract(newThought)
+  }
+
   return (
-    <div>
-
-      <Grid container spacing={2}>
-        <Grid item lg={12}>
-          {form.display}
-        </Grid>
-      </Grid>
-
-      {/*<SpeechToText/>*/}
-
-    </div>
+      <ThoughtInputField
+          onSubmit={onSubmit}
+      />
   )
 }

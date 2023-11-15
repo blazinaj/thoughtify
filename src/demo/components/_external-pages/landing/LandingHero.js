@@ -1,14 +1,13 @@
-import { Icon } from '@iconify/react';
-import { motion } from 'framer-motion';
+import {Icon} from '@iconify/react';
+import {motion} from 'framer-motion';
 import flashFill from '@iconify/icons-eva/flash-fill';
-import { Link as RouterLink } from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 // material
-import { styled } from '@mui/material/styles';
-import { Button, Box, Link, Container, Typography, Stack } from '@mui/material';
+import {styled} from '@mui/material/styles';
+import {Box, Button, Container, Stack, Typography} from '@mui/material';
 // routes
-import {PATH_DASHBOARD, PATH_LEARN} from '../../../routes/paths';
 //
-import { varFadeIn, varFadeInUp, varWrapEnter, varFadeInRight } from '../../animate';
+import {varFadeIn, varFadeInRight, varFadeInUp, varWrapEnter} from '../../animate';
 
 // ----------------------------------------------------------------------
 

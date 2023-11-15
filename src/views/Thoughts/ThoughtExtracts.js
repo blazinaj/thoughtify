@@ -70,7 +70,18 @@ export const ThoughtExtracts = () => {
   }, [datastore.items])
 
   return (
-    <Masonry spacing={2}>
+    <Masonry
+        spacing={2}
+        columns={{
+            xs: 1,
+            sm: 1,
+            md: 1,
+            lg: 1,
+            xl: 1,
+            xxl: 2,
+        }}
+        sx={{ width: "auto" }}
+    >
       {
         Object.entries(extracts)
         .map(([key, value]) => {

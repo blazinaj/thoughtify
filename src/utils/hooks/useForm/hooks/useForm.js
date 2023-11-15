@@ -114,6 +114,12 @@ export const useForm = ({
     toggleModal && toggleModal();
   };
 
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onSubmit();
+    }
+  }
+
   /**
    * The UI for the form
    * @type {JSX.Element}
@@ -121,11 +127,7 @@ export const useForm = ({
   const display = (
     <div>
       <FormHeader header={header} />
-      <FormFields fieldConfig={fieldConfig} input={input} setInput={setInput} />
-      {
-        // !disableResetButton &&
-        // <ResetButton reset={reset}/>
-      }
+      <FormFields fieldConfig={fieldConfig} input={input} setInput={setInput} onKeyDown={onKeyDown} />
       {!disableSubmitButton && <SubmitButton submit={onSubmit} submitDisabled={submitDisabled} />}
     </div>
   );
