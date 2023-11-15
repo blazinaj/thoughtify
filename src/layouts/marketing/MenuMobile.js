@@ -40,8 +40,8 @@ MenuMobileItem.propTypes = {
   onOpen: PropTypes.func
 };
 
-function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
-  const { title, path, icon, children } = item;
+function MenuMobileItem({ item = {}, isOpen, isActive, onOpen }) {
+  const { title, path, icon, children } = (item || {});
 
   if (children) {
     return (
@@ -59,7 +59,7 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <Box sx={{ display: 'flex', flexDirection: 'column-reverse' }}>
             <NavSection
-              navConfig={menuConfig[2].children}
+              navConfig={menuConfig[1].children}
               sx={{
                 '& .MuiList-root:last-of-type .MuiListItemButton-root': {
                   height: 200,
