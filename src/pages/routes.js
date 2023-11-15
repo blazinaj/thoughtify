@@ -49,71 +49,6 @@ const Loadable = (Component) => (props) => {
 export default function Router() {
   return useRoutes([
 
-    // User Application Routes
-    {
-      path: 'thoughts',
-      element: (
-        <AuthGuard>
-          <ApplicationLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { path: '', element: <ThoughtsPage /> },
-        { path: '*', element: <Navigate to="/thoughts" replace /> }
-      ]
-    },
-
-    {
-      path: 'journal',
-      element: (
-        <AuthGuard>
-          <ApplicationLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { path: '', element: <JournalPage /> },
-        { path: '*', element: <Navigate to="/journal" replace /> }
-      ]
-    },
-
-    {
-      path: 'biography',
-      element: (
-        <AuthGuard>
-          <ApplicationLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { path: '', element: <BiographyPage /> },
-        { path: '*', element: <Navigate to="/biography" replace /> }
-      ]
-    },
-
-    {
-      path: 'health',
-      element: (
-        <AuthGuard>
-          <ApplicationLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { path: '', element: <HealthPage /> },
-        { path: '*', element: <Navigate to="/health" replace /> }
-      ]
-    },
-
-    {
-      path: 'user',
-      element: (
-          <AuthGuard>
-            <ApplicationLayout />
-          </AuthGuard>
-      ),
-      children: [
-        { path: '', element: <HealthPage /> },
-      ]
-    },
-
     // Marketing Routes
     {
       path: '/',
@@ -128,6 +63,25 @@ export default function Router() {
         { path: 'pricing', element: <Pricing /> },
       ]
     },
+
+    // User Application Routes
+    {
+      path: '/',
+      element: (
+        <AuthGuard>
+          <ApplicationLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { path: 'thoughts', element: <ThoughtsPage /> },
+        { path: 'journal', element: <JournalPage /> },
+        { path: 'biography', element: <BiographyPage /> },
+        { path: 'user', element: <UserAccountPage /> },
+        { path: 'health', element: <HealthPage /> },
+      ]
+    },
+
+
 
     // Redirects the home page to the lesson dashboard
     {path: 'home', element: <Navigate to={"/thoughts"}/>},
@@ -153,6 +107,7 @@ const ThoughtsPage = Loadable(lazy(() => import('./thoughts/ThoughtsPage')));
 const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
 const HealthPage = Loadable(lazy(() => import('./health/HealthPage')));
+const UserAccountPage = Loadable(lazy(() => import('./user/UserAccountPage')));
 
 // Main
 const LandingPage = Loadable(lazy(() => import('./marketing/LandingPage')));
