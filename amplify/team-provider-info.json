@@ -16,5 +16,29 @@
         "thoughtify": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-thoughtify-prod-203925-authRole",
+      "UnauthRoleArn": "arn:aws:iam::455968286047:role/amplify-thoughtify-prod-203925-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::455968286047:role/amplify-thoughtify-prod-203925-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-thoughtify-prod-203925-deployment",
+      "UnauthRoleName": "amplify-thoughtify-prod-203925-unauthRole",
+      "StackName": "amplify-thoughtify-prod-203925",
+      "StackId": "arn:aws:cloudformation:us-west-2:455968286047:stack/amplify-thoughtify-prod-203925/f90e8c00-8370-11ee-89cb-06b8263ff243",
+      "AmplifyAppId": "d1d8vpf1p4j3dt"
+    },
+    "categories": {
+      "auth": {
+        "thoughtify": {}
+      },
+      "api": {
+        "thoughtify": {}
+      },
+      "predictions": {
+        "transcription": {}
+      }
+    }
   }
 }
