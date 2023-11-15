@@ -5,7 +5,6 @@ import {Link as RouterLink, useLocation} from 'react-router-dom';
 import {alpha, styled} from '@mui/material/styles';
 import {Box, CardActionArea, Drawer, Stack, Tooltip} from '@mui/material';
 // hooks
-import useAuth from '../../utils/hooks/useAuth';
 import useCollapseDrawer from '../../utils/hooks/useCollapseDrawer';
 // routes
 // components
@@ -14,6 +13,7 @@ import NavSection from '../../demo/components/NavSection';
 import {MHidden} from '../../demo/components/@material-extend';
 //
 import sidebarConfig from './sidebarConfig';
+import {useTheme} from "../../theme/useTheme";
 
 // ----------------------------------------------------------------------
 
@@ -76,6 +76,7 @@ function IconCollapse({ onToggleCollapse, collapseClick }) {
 
 const EdifyLogo = styled('img')(({ theme }) => ({
   borderRadius: "5px",
+    // filter: "invert(100%)",
 }));
 
 /**
@@ -88,7 +89,9 @@ const EdifyLogo = styled('img')(({ theme }) => ({
 const ApplicationSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
   const { pathname } = useLocation();
 
-  const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } =
+    const {theme} = useTheme();
+
+    const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } =
     useCollapseDrawer();
 
   useEffect(() => {
@@ -121,7 +124,7 @@ const ApplicationSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
         }}
       >
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-          <EdifyLogo src={'/static/brand/Thoughtify-Logo.svg'} alt="logo"  />
+          <EdifyLogo src={theme?.palette?.mode === 'light' ? 'static/brand/Thoughtify-Logo-Black.svg' : '/static/brand/Thoughtify-Logo-White.svg'} alt="logo"  />
         </Box>
       </Stack>
 
