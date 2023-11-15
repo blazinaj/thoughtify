@@ -17,7 +17,7 @@ export const setupUserAccount = async ({cognitoUser, userData}) => {
   console.log("Creating a new User Object")
 
   const newUser = await DataStore.save(new User({
-    username,
+    cognitoSub: username,
     firstName,
     lastName,
     email,

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Router from './pages/routes';
 import Settings from './demo/components/settings';
 import RtlLayoutContext from './contexts/RtlLayoutContext';
@@ -10,8 +10,6 @@ import useLocales from "./utils/hooks/useLocales";
 import {ThemeProvider} from "./contexts/ThemeProvider";
 import {SettingsProvider} from "./contexts/SettingsContext";
 import {CollapseDrawerProvider} from "./contexts/CollapseDrawerContext";
-import Amplify from "@aws-amplify/core";
-import {AmazonAIPredictionsProvider} from "@aws-amplify/predictions";
 // ----------------------------------------------------------------------
 
 /**
@@ -31,15 +29,6 @@ import {AmazonAIPredictionsProvider} from "@aws-amplify/predictions";
 const App = () => {
 
   const { currentLang } = useLocales();
-
-  // useEffect(() => {
-  //   try {
-  //     Amplify.addPluggable(new AmazonAIPredictionsProvider())
-  //   } catch (error) {
-  //     console.log('Already added pluggable')
-  //     Amplify.removePluggable('AmazonAIPredictionsProvider')
-  //   }
-  // },[]);
 
   return (
     <SettingsProvider>

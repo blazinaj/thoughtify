@@ -8,9 +8,9 @@ export const getUser = async ({username}) => {
   console.log("Fetching User Object",)
 
   const query = `
-    query GetUser($username:ID!) {
-      getUser(username:$username) {
-        username
+    query GetUser($id:ID!) {
+      getUser(id:$id) {
+        id
         firstName
         lastName
         email
@@ -22,7 +22,7 @@ export const getUser = async ({username}) => {
   const apiResponse = await API.graphql(
     graphqlOperation(
       query,
-      {username},
+      {id: username},
     )
   )
 

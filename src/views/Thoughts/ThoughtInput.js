@@ -3,7 +3,7 @@ import {Grid} from "@mui/material";
 import {useForm} from "../../utils/hooks/useForm";
 import {Thought} from "../../models";
 import {DataStore} from "@aws-amplify/datastore";
-import {generate} from "../../utils/openai/functions/generate";
+import {generate, handleCompletion} from "../../utils/openai/functions/generate";
 
 /**
  * Input Field for Thoughts.
@@ -64,7 +64,7 @@ export const ThoughtInput = () => {
       Format the response as a javascript parseable JSON object string
       
     `
-    const response = await generate({
+    const response = await handleCompletion({
       prompt: _prompt,
       response_format: { type: "json_object" },
       seed: 101,
@@ -75,7 +75,7 @@ export const ThoughtInput = () => {
     // update the thought in the datastore
     await DataStore.save(
       Thought.copyOf(newThought, updated => {
-        updated.extract = response.data.choices[0].text
+        updated.extract = response
       })
     )
 

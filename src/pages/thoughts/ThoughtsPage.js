@@ -1,14 +1,10 @@
 import Page from "../../utils/components/Page";
-import {Box, Container, Grid} from "@mui/material";
-import {useDatastore} from "../../utils/hooks/useDatastore";
-import {useParams} from "react-router-dom";
+import {Container, Grid} from "@mui/material";
 import useSettings from "../../utils/hooks/useSettings";
 import HeaderBreadcrumbs from "../../demo/components/HeaderBreadcrumbs";
-import {Thought} from "../../models";
-import {ThoughtDataCard} from "../../views/Thoughts/ThoughtDataCard";
 import {ThoughtInput} from "../../views/Thoughts/ThoughtInput";
 import {ThoughtGallery} from "../../views/Thoughts/ThoughtGallery";
-import {ExtractCards} from "../../views/Thoughts/ThoughtDetails";
+import {ThoughtExtracts} from "../../views/Thoughts/ThoughtExtracts";
 
 /**
  * This page displays the details of a course for a Teacher
@@ -18,14 +14,6 @@ import {ExtractCards} from "../../views/Thoughts/ThoughtDetails";
 const ThoughtsPage = () => {
 
   const {themeStretch} = useSettings();
-
-  const {id} = useParams()
-
-  const datastore = useDatastore({
-    model: Thought,
-    itemId: id,
-  })
-
 
   return (
     <Page title="Thoughtify">
@@ -46,7 +34,7 @@ const ThoughtsPage = () => {
 
           <Grid item xs={12}>
 
-            <ExtractCards/>
+            <ThoughtExtracts/>
 
           </Grid>
 
@@ -56,9 +44,6 @@ const ThoughtsPage = () => {
 
           </Grid>
 
-          {/*<Grid item xs={12}>*/}
-          {/*  <ThoughtDataCard/>*/}
-          {/*</Grid>*/}
         </Grid>
       </Container>
     </Page>

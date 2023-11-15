@@ -47,7 +47,7 @@ const UserContextProvider = ({ children }) => {
     setUser(user)
 
     setShowAccountSetup(false);
-    navigate('/learn/catalog')
+    navigate('/thoughts')
   }
 
   /**
@@ -59,31 +59,18 @@ const UserContextProvider = ({ children }) => {
     const cognitoUsername = username;
 
     console.log("Fetching User Object", {cognitoUsername})
+    const user = await DataStore.query(
+        User,
+        user => user.cognitoSub.eq(cognitoUsername)
+    )
 
     // When the cognito user changes, fetch the user object.
     // If the user object doesn't exist, then create it.
     if (cognitoUsername) {
 
-      const fetchQuery = await fetchUser2({
-        username,
-      })
-
-      console.log({fetchQuery})
-
-
-      // const user = await DataStore.query(User, cognitoUsername)
-      const user = fetchQuery;
-
-      // const user = userResult?.[0] || userResult;
-
-      if (user) {
+      if (user[0]) {
         console.log("CURRENT USER OBJECT: ", user)
-        const userQuery = await DataStore.query(
-          User,
-          username
-        )
-        console.log({userQuery})
-        setUser(user)
+        setUser(user[0])
       }
       else {
 

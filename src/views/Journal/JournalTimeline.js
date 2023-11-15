@@ -1,17 +1,16 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent, {
-  timelineOppositeContentClasses,
-} from '@mui/lab/TimelineOppositeContent';
+import TimelineOppositeContent, {timelineOppositeContentClasses,} from '@mui/lab/TimelineOppositeContent';
 import {useDatastore} from "../../utils/hooks/useDatastore";
 import {Thought} from "../../models";
-import {generate} from "../../utils/openai/functions/generate";
-import {useEffect, useState} from "react";
+import {handleCompletion} from "../../utils/openai/functions/generate";
+import {DataStore} from "@aws-amplify/datastore";
 
 export default function JournalTimeline() {
 
@@ -22,8 +21,8 @@ export default function JournalTimeline() {
   // creates a timeline item for each date entry (grouped by day, month, or year)
   // creates a group for each Day
   // [{ date: "2021-10-10", thoughts: [thought1, thought2, thought3] }]
-  const createTimeline = (thoughts, groupBy = "day") => {
-    const timeline = []
+  const createTimeline = async (groupBy = "day") => {
+    const thoughts = await DataStore.query(Thought)
     const groups = []
     thoughts.forEach((thought) => {
       let date = new Date(thought.createdAt);
@@ -55,7 +54,7 @@ export default function JournalTimeline() {
 
   // for each grouping of thoughts, use completion to create a 'Journal Entry'
   const fetchJournal = async () => {
-    const timeline = createTimeline(datastore.items);
+    const timeline = await createTimeline("day");
 
     const journal = []
 
@@ -70,15 +69,15 @@ export default function JournalTimeline() {
           }).join("\n")
         }
       `
-      const completion = await generate({
+      const completion = await handleCompletion({
         prompt,
         seed: 202,
+        responseFormat: null,
       })
-
 
       journal.push({
         date: group.date,
-        entry: completion.data.choices[0].text,
+        entry: completion,
       })
     };
 

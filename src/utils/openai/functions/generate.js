@@ -123,7 +123,7 @@ export const handleCompletion = async (
   {
     prompt,
     seed,
-    responseFormat
+    responseFormat = { type: "json_object"},
   }) => {
 
   const configuration = new Configuration({
