@@ -21,7 +21,7 @@ const ThoughtsPage = () => {
         <HeaderBreadcrumbs
           heading="Thoughts"
           links={[
-            {name: 'Home', href: 'thoughts'},
+            // {name: 'Home', href: 'thoughts'},
           ]}
         />
         <Grid container spacing={3}>

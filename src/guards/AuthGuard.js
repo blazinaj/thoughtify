@@ -56,7 +56,7 @@ const components = {
     return (
       <div>
         <HeaderLogo
-          src={'/static/brand/Edify-Logo-Full.svg'}
+          src={'/static/brand/Thoughtify-Logo.svg'}
           alt="logo"
         />
       </div>

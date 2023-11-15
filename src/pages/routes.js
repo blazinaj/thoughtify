@@ -59,6 +59,7 @@ export default function Router() {
       ),
       children: [
         { path: '', element: <ThoughtsPage /> },
+        { path: "*", element: <Navigate to={""}/> },
       ]
     },
 
@@ -92,6 +93,18 @@ export default function Router() {
         <AuthGuard>
           <ApplicationLayout />
         </AuthGuard>
+      ),
+      children: [
+        { path: '', element: <HealthPage /> },
+      ]
+    },
+
+    {
+      path: 'user',
+      element: (
+          <AuthGuard>
+            <ApplicationLayout />
+          </AuthGuard>
       ),
       children: [
         { path: '', element: <HealthPage /> },
