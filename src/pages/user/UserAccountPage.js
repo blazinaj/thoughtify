@@ -14,7 +14,7 @@ const UserAccountPage = () => {
   const { themeStretch } = useSettings();
 
   return (
-    <Page title="Edify - Account Settings">
+    <Page title="Thoughtify - Account Settings">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="User Account Settings"

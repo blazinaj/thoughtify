@@ -121,7 +121,7 @@ const ApplicationSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
         }}
       >
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-          <EdifyLogo src={'/static/brand/Edify-Logo-Full.svg'} alt="logo"  />
+          <EdifyLogo src={'/static/brand/Thoughtify-Logo.svg'} alt="logo"  />
         </Box>
       </Stack>
 
