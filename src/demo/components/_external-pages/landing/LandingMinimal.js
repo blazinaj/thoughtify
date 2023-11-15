@@ -8,19 +8,24 @@ import {useState} from "react";
 
 const CARDS = [
   {
-    icon: '/static/icons/ic_design.svg',
-    title: 'Personalized',
-    description: 'Choose a curriculum suited to you.'
+    icon: '/static/icons/elephant.svg',
+    title: 'Save your thoughts',
+    description: 'Record your thoughts, notes, events, or anything else you want to remember.',
   },
   {
     icon: '/static/icons/ic_code.svg',
-    title: 'Effective',
-    description: 'Easy to create lessons, and simple to complete courses.'
+    title: 'Organize your thoughts',
+    description: 'Artificial Intelligence automatically extracts the most important information from your thoughts, categorizes them, groups them, and makes them searchable.'
   },
   {
-    icon: '/static/brand/logo_single.svg',
-    title: 'Rewarding',
-    description: 'Earn rewards for Learning and Teaching.'
+    icon: '/static/icons/ic_design.svg',
+    title: 'Explore your thoughts',
+    description: 'Automatically generate Journals, Biographys, Health Reports, and more.'
+  },
+  {
+    icon: '/static/icons/love-camera.svg',
+    title: 'Share your thoughts',
+    description: 'Connect with friends and share your thoughts with them in a private and secure way.'
   }
 ];
 
@@ -99,12 +104,12 @@ export default function LandingMinimalHelps() {
         <Box sx={{ mb: { xs: 10, md: 25 } }}>
           <MotionInView variants={varFadeInUp}>
             <Typography component="p" variant="overline" sx={{ mb: 2, color: 'text.secondary', textAlign: 'center' }}>
-              Collect Your Thoughts
+              Thoughtify
             </Typography>
           </MotionInView>
           <MotionInView variants={varFadeInDown}>
             <Typography variant="h2" sx={{ textAlign: 'center' }}>
-              What is Edify?
+              How does it work?
             </Typography>
           </MotionInView>
         </Box>

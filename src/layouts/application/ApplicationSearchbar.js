@@ -59,21 +59,21 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const [recentSearches, setRecentSearches] = useLocalStorage("application-searchbar-recents", []);
+  const [recentSearches, setRecentSearches] = useLocalStorage("thoughtify-application-searchbar-recents", []);
 
-  const lessonDatastore = useDatastore({
+  const thoughtDatastore = useDatastore({
     model: Thought,
   })
 
   useEffect(() => {
     if (searchQuery === '') {
       setSearchResults([
-        ...recentSearches.map(item => ({item: {...item, recentSearch: true, type: "lesson"}})),
+        ...recentSearches.map(item => ({item: {...item, recentSearch: true, type: "thought"}})),
       ]);
     }
   }, [searchQuery])
 
-  const linkTo = (id) => `catalog/lesson/${id}`;
+  const linkTo = (id) => `thoughts/${id}`;
 
   const handleChangeSearch = async (event) => {
     try {
@@ -82,10 +82,10 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
 
       const options = {
         includeScore: true,
-        keys: ['name', 'description']
+        keys: ['input']
       }
 
-      const fuse = new Fuse(lessonDatastore.items, options)
+      const fuse = new Fuse(thoughtDatastore.items, options)
 
       const result = fuse.search(value)
 
@@ -148,7 +148,7 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
           <TextField
             {...params}
             autoFocus
-            placeholder="Search Edify..."
+            placeholder="Search Thoughtify..."
             InputProps={{
               ...params.InputProps,
               startAdornment: (

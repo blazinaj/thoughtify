@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { Box, Typography, Button } from '@mui/material';
 import { AutoAwesome } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import {Thought} from "../../models";
+import {DataStore} from "@aws-amplify/datastore";
 
 // ----------------------------------------------------------------------
-
-SearchNotFound.propTypes = {
-  searchQuery: PropTypes.string
-};
 
 export default function SearchNotFound({ searchQuery = '', onClickSearchResult, ...other }) {
 
@@ -27,10 +25,14 @@ export default function SearchNotFound({ searchQuery = '', onClickSearchResult, 
             <AutoAwesome/>
           }
           onClick={() => {
-            onClickSearchResult && onClickSearchResult({id: searchQuery, name: searchQuery}, `/teach/lessons/create_lesson?name=${searchQuery}`);
+            searchQuery !== '' && DataStore.save(
+                new Thought({
+                    input: searchQuery,
+                })
+            )
           }}
         >
-          Create a Lesson
+          Save a Thought
         </Button>
       </Typography>
     </Box>

@@ -10,10 +10,11 @@ import { isInvalidField } from '../functions/isInvalidField';
  * @param fields - if an array of fields is passed in, it will only use those fields. if no array, it shows all available fields
  * @param input - the current input state for this form
  * @param setInput - the function to update the input state
+ * @param onKeyDown
  * @returns {JSX.Element}
  * @constructor
  */
-export const FormFields = ({ fieldConfig, fields, input, setInput }) => (
+export const FormFields = ({ fieldConfig, fields, input, setInput, onKeyDown }) => (
   <Grid container spacing={3} direction="column" justifyContent="center" alignItems="stretch">
     {
       // eslint-disable-next-line array-callback-return
@@ -36,6 +37,7 @@ export const FormFields = ({ fieldConfig, fields, input, setInput }) => (
                 isHidden={isHidden}
                 required={required}
                 createItemComponent={createItemComponent}
+                onKeyDown={onKeyDown}
               />
             </Grid>
           );

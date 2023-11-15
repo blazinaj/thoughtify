@@ -58,7 +58,16 @@ export const Health = () => {
 
   return (
     <div>
-      <Masonry columns={4} spacing={2}>
+      <Masonry
+          columns={{
+            xs: 1,
+            sm: 2,
+            md: 3,
+            lg: 4,
+            xl: 5,
+          }}
+          spacing={2}
+      >
         {
           (Object.entries(health || {}))
           .map(([category, attributes]) => {
