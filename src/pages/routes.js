@@ -86,6 +86,18 @@ export default function Router() {
       ]
     },
 
+    {
+      path: 'health',
+      element: (
+        <AuthGuard>
+          <ApplicationLayout />
+        </AuthGuard>
+      ),
+      children: [
+        { path: '', element: <HealthPage /> },
+      ]
+    },
+
     // Marketing Routes
     {
       path: '/',
@@ -124,6 +136,8 @@ export default function Router() {
 const ThoughtsPage = Loadable(lazy(() => import('./thoughts/ThoughtsPage')));
 const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
+const HealthPage = Loadable(lazy(() => import('./health/HealthPage')));
+
 // Main
 const LandingPage = Loadable(lazy(() => import('./marketing/LandingPage')));
 const About = Loadable(lazy(() => import('./marketing/About')));

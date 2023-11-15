@@ -12,7 +12,7 @@ import {AccountSetupTerms} from "./AccountSetupTerms";
 
 // ----------------------------------------------------------------------
 
-const STEPS = ['Personality', 'Skills and Interests', 'Terms and Conditions'];
+const STEPS = ['Personality', 'Terms and Conditions'];
 
 const QontoConnector = withStyles((theme) => ({
   alternativeLabel: {
@@ -91,7 +91,7 @@ export const AccountSetup = ({setupUserAccount, cognitoUser, onComplete}) => {
   }, [isComplete])
 
   return (
-    <Page title="Edify - Account Setup">
+    <Page title="Thoughtify - Account Setup">
       <Container maxWidth={'md'} sx={{p: 5}}>
 
         <Grid container justifyContent={isComplete ? 'center' : 'center'}>
@@ -125,7 +125,7 @@ export const AccountSetup = ({setupUserAccount, cognitoUser, onComplete}) => {
         {!isComplete ? (
           <>
             {activeStep === 0 && <AccountSetupBasicInformation setUserData={setUserData} userData={userData} setActiveStep={setActiveStep} />}
-            {activeStep === 2 && <AccountSetupTerms setActiveStep={setActiveStep} />}
+            {activeStep === 1 && <AccountSetupTerms setActiveStep={setActiveStep} />}
           </>
         ) : (
           <Backdrop open={isComplete} sx={{ zIndex: 9999 }}>

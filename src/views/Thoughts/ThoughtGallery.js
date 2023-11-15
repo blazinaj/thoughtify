@@ -17,11 +17,6 @@ export const ThoughtGallery = () => {
         </Stack>
       )
     },
-    // subTitleField: (item) => {
-    //   if (Array.isArray(item?.extract?.sentiments)) {
-    //     return item?.extract?.sentiments?.join(", ");
-    //   }
-    // },
     detailsComponent: <ThoughtDetails/>,
     sortFunction: (a, b) => b?.createdAt?.localeCompare(a?.createdAt),
   })
