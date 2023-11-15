@@ -59,7 +59,7 @@ export default function Router() {
       ),
       children: [
         { path: '', element: <ThoughtsPage /> },
-        { path: "*", element: <Navigate to={""}/> },
+        { path: '*', element: <Navigate to="/thoughts" replace /> }
       ]
     },
 
@@ -72,6 +72,7 @@ export default function Router() {
       ),
       children: [
         { path: '', element: <JournalPage /> },
+        { path: '*', element: <Navigate to="/journal" replace /> }
       ]
     },
 
@@ -84,6 +85,7 @@ export default function Router() {
       ),
       children: [
         { path: '', element: <BiographyPage /> },
+        { path: '*', element: <Navigate to="/biography" replace /> }
       ]
     },
 
@@ -96,6 +98,7 @@ export default function Router() {
       ),
       children: [
         { path: '', element: <HealthPage /> },
+        { path: '*', element: <Navigate to="/health" replace /> }
       ]
     },
 
