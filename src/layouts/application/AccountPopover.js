@@ -1,23 +1,22 @@
-import {Icon} from '@iconify/react';
-import {useSnackbar} from 'notistack';
-import {useRef, useState} from 'react';
+import { Icon } from '@iconify/react';
+import { useSnackbar } from 'notistack';
+import { useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
-import {Link as RouterLink, useNavigate} from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
-import {alpha, styled} from '@mui/material/styles';
-import {Box, Button, Divider, MenuItem, Typography} from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
+import { Box, Button, Divider, MenuItem, Typography } from '@mui/material';
 // routes
 // hooks
 import useAuth from '../../utils/hooks/useAuth';
 import useIsMountedRef from '../../utils/hooks/useIsMountedRef';
 // components
-import {MIconButton} from '../../demo/components/@material-extend';
+import { MIconButton } from '../../demo/components/@material-extend';
 import MyAvatar from '../../demo/components/MyAvatar';
 import MenuPopover from '../../demo/components/MenuPopover';
-import {Auth} from "@aws-amplify/auth";
-import {DataStore} from "@aws-amplify/datastore";
-
+import { Auth } from '@aws-amplify/auth';
+import { DataStore } from '@aws-amplify/datastore';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +29,7 @@ const MENU_OPTIONS = [
   {
     label: 'Settings',
     icon: settings2Fill,
-    linkTo: '/user/account',
+    linkTo: '/user/account'
   }
 ];
 
@@ -40,7 +39,7 @@ const AccountStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 2.5),
   borderRadius: theme.shape.borderRadiusSm,
   backgroundColor: theme.palette.grey[500_12],
-  margin: "1em",
+  margin: '1em'
 }));
 
 // ----------------------------------------------------------------------
@@ -70,16 +69,13 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-
-      console.log('Clearing Datastore..')
-      await DataStore.clear()
+      console.log('Clearing Datastore..');
+      await DataStore.clear();
 
       await Auth.signOut()
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-        .finally(() => {
-
-        })
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
+        .finally(() => {});
       navigate('/');
       if (isMountedRef.current) {
         handleClose();

@@ -26,9 +26,9 @@ import {
   ProfileGallery,
   ProfileFollowers
 } from '../../components/_dashboard/user/profile';
-import {Post} from "../../../models";
-import {useDatastore} from "../../../utils/hooks/useDatastore";
-import {useUserContext} from "../../../contexts/UserContext";
+import { Post } from '../../../models';
+import { useDatastore } from '../../../utils/hooks/useDatastore';
+import { useUserContext } from '../../../contexts/UserContext';
 // ----------------------------------------------------------------------
 
 const TabsWrapperStyle = styled('div')(({ theme }) => ({
@@ -77,7 +77,6 @@ export const UserProfile = () => {
 
   if (!myProfile) {
     // return null;
-
     // myProfile = {
     //
     // }
@@ -88,7 +87,7 @@ export const UserProfile = () => {
   //   model: Post,
   // })
 
-  const posts = [] //postsDatastore.items;
+  const posts = []; //postsDatastore.items;
 
   const PROFILE_TABS = [
     {
@@ -145,6 +144,6 @@ export const UserProfile = () => {
       </Container>
     </Page>
   );
-}
+};
 
 export default UserProfile;

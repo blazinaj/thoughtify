@@ -30,36 +30,38 @@ export default function FullScreenDialogs() {
     setOpen(false);
   };
 
-  return <>
-    <Button variant="outlined" color="error" onClick={handleClickOpen}>
-      Full Screen Dialogs
-    </Button>
+  return (
+    <>
+      <Button variant="outlined" color="error" onClick={handleClickOpen}>
+        Full Screen Dialogs
+      </Button>
 
-    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-      <AppBar position="relative">
-        <Toolbar>
-          <IconButton color="inherit" edge="start" onClick={handleClose} size="large">
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flex: 1, ml: 2 }}>
-            Sound
-          </Typography>
-          <Button autoFocus color="inherit" onClick={handleClose}>
-            Save
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <List>
-        <ListItemButton>
-          <ListItemText primary="Phone ringtone" secondary="Titania" />
-        </ListItemButton>
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar position="relative">
+          <Toolbar>
+            <IconButton color="inherit" edge="start" onClick={handleClose} size="large">
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h6" sx={{ flex: 1, ml: 2 }}>
+              Sound
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleClose}>
+              Save
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <List>
+          <ListItemButton>
+            <ListItemText primary="Phone ringtone" secondary="Titania" />
+          </ListItemButton>
 
-        <Divider />
+          <Divider />
 
-        <ListItemButton>
-          <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-        </ListItemButton>
-      </List>
-    </Dialog>
-  </>;
+          <ListItemButton>
+            <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+          </ListItemButton>
+        </List>
+      </Dialog>
+    </>
+  );
 }

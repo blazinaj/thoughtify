@@ -1,4 +1,4 @@
-import {Configuration, OpenAIApi} from "openai";
+import { Configuration, OpenAIApi } from 'openai';
 
 /**
  * Calls the backend AI API call to get a response to the user's question.
@@ -26,76 +26,76 @@ import {Configuration, OpenAIApi} from "openai";
  * @param messages
  * @returns {Promise<void>}
  */
-const tutorChatCompletion = async (
-  {
-    messages = [],
-    lesson,
-    prompt = "You are a general tutor",
-    tutorID,
-    userID,
-    tutorMemory,
-    numberOfMessages = 5,
-  }) => {
-
+const tutorChatCompletion = async ({
+  messages = [],
+  lesson,
+  prompt = 'You are a general tutor',
+  tutorID,
+  userID,
+  tutorMemory,
+  numberOfMessages = 5
+}) => {
   const configuration = new Configuration({
-    organization: "org-Gesve0eSdjX4qWCOl3fuhct0",
+    organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
     // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: "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",
+    apiKey: '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'
   });
 
   const openai = new OpenAIApi(configuration);
 
   try {
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: 'gpt-3.5-turbo',
       messages: [
-        {role: "system", content: AI_PROMPT_RULES},
-        {role: "system", content: lesson ? await generateLessonPlanPrompt({lesson}) : prompt},
+        { role: 'system', content: AI_PROMPT_RULES },
+        { role: 'system', content: lesson ? await generateLessonPlanPrompt({ lesson }) : prompt },
         // only send the last x messages
-        ...messages.slice((messages?.length - numberOfMessages > 0 ? messages?.length - numberOfMessages : 0), messages?.length).map(({role, content}) => ({role, content})),
-      ],
+        ...messages
+          .slice(messages?.length - numberOfMessages > 0 ? messages?.length - numberOfMessages : 0, messages?.length)
+          .map(({ role, content }) => ({ role, content }))
+      ]
     });
 
     const response = completion.data.choices[0].message;
 
     return {
       response
-    }
-  }
-  catch (e) {
+    };
+  } catch (e) {
     // token too large, save history to a 'memory' and create a new one.
     if (e.toJSON().status === 400) {
-
       // Retry the completion but with only the last 2 messages from the old memory
       const completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
+        model: 'gpt-3.5-turbo',
         messages: [
-          {role: "system", content: AI_PROMPT_RULES},
-          {role: "system", content: lesson ? await generateLessonPlanPrompt({lesson}) : prompt},
-          ...messages.slice(messages?.length - 5, messages?.length).map(({role, content}) => ({role, content})),
-        ],
-      })
+          { role: 'system', content: AI_PROMPT_RULES },
+          { role: 'system', content: lesson ? await generateLessonPlanPrompt({ lesson }) : prompt },
+          ...messages.slice(messages?.length - 5, messages?.length).map(({ role, content }) => ({ role, content }))
+        ]
+      });
 
       const response = completion.data.choices[0].message;
 
       // Send back the response and the memory
       return {
-        response,
-      }
+        response
+      };
     }
   }
-}
+};
 
-const generateLessonPlanPrompt = async ({lesson}) => {
+const generateLessonPlanPrompt = async ({ lesson }) => {
   return `
     You are the subject matter expert and will provide guidance for the following lesson:
     
     Lesson Name: ${lesson.name}
     Lesson Description: ${lesson.description}
     
-    Topics: ${(await lesson.LessonNodes.toArray()).map(topic => `Name: ${topic.name}\nContent: ${topic.content}`).join(", ")}
-  `
-}
+    Topics: ${(await lesson.LessonNodes.toArray())
+      .map((topic) => `Name: ${topic.name}\nContent: ${topic.content}`)
+      .join(', ')}
+  `;
+};
 
 export const AI_PROMPT_RULES = `
 - You are a tutor, and you are helping a student solve a problem.
@@ -122,7 +122,7 @@ export const AI_PROMPT_RULES = `
 
 Respond using formatted rich text.   
 
-`
+`;
 
 /**
  * Example openAI response:

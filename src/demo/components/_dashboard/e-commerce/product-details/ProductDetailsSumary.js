@@ -260,7 +260,11 @@ export default function ProductDetailsSumary() {
                   }
                 }}
                 helperText={
-                  <Link href="src/demo/components/_dashboard/e-commerce/product-details#" underline="always" color="text.primary">
+                  <Link
+                    href="src/demo/components/_dashboard/e-commerce/product-details#"
+                    underline="always"
+                    color="text.primary"
+                  >
                     Size Chart
                   </Link>
                 }

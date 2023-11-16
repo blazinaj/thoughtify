@@ -73,7 +73,12 @@ TestimonialCard.propTypes = {
 
 function TestimonialLink() {
   return (
-    <Link disabled href="src/demo/components/_external-pages/about#" variant="subtitle2" sx={{ display: 'flex', alignItems: 'center' }}>
+    <Link
+      disabled
+      href="src/demo/components/_external-pages/about#"
+      variant="subtitle2"
+      sx={{ display: 'flex', alignItems: 'center' }}
+    >
       Read more testimonials
       <Box component={Icon} icon={roundArrowRightAlt} sx={{ ml: 1, width: 20, height: 20 }} />
     </Link>
@@ -138,8 +143,8 @@ export default function AboutTestimonials() {
 
               <MotionInView variants={varFadeInUp}>
                 <Typography sx={{ color: 'common.white' }}>
-                  Our goal is to create a positive impact on both Students and Teachers.
-                  We are working hard to make Edify the best platform for students to learn and teachers to teach.
+                  Our goal is to create a positive impact on both Students and Teachers. We are working hard to make
+                  Edify the best platform for students to learn and teachers to teach.
                 </Typography>
               </MotionInView>
 

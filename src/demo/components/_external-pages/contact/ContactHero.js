@@ -12,7 +12,7 @@ const CONTACTS = [
     country: 'United States',
     address: '8675 301st Street, New York, NY 10001',
     phoneNumber: '(239) 555-0108'
-  },
+  }
 ];
 
 const RootStyle = styled(motion.div)(({ theme }) => ({

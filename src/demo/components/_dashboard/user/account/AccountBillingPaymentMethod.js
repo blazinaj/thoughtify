@@ -50,7 +50,8 @@ export default function AccountBillingPaymentMethod({ formik, cards, isOpen, onO
                 right: 8,
                 position: 'absolute'
               }}
-              size="large">
+              size="large"
+            >
               <Icon icon={moreVerticalFill} width={20} height={20} />
             </IconButton>
           </Paper>

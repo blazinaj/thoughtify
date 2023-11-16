@@ -1,5 +1,5 @@
 // material
-import {styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 // components
 import Page from '../../demo/components/Page';
 import {
@@ -8,7 +8,7 @@ import {
   LandingHugePackElements,
   LandingMinimal
 } from '../../demo/components/_external-pages/landing';
-import LandingHero from "./LandingHero";
+import LandingHero from './LandingHero';
 
 // ----------------------------------------------------------------------
 

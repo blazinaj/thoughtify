@@ -26,33 +26,31 @@ export const DeleteItemButton = ({ item, model, onBeforeDelete, onAfterDelete })
     onAfterDelete && onAfterDelete(item);
   };
 
-  return <>
-    <Dialog
-      open={dialogOpen}
-      onClose={() => setDialogOpen(false)}
-      aria-labelledby="form-dialog-title"
-      fullWidth
-      maxWidth="md"
-    >
-      <DialogTitle id="form-dialog-title">Deleting an Item</DialogTitle>
-      <DialogContent>
-        <DialogContentText>...</DialogContentText>
-      </DialogContent>
-      {/* <DialogActions> */}
-      {/*  <Button onClick={cancel} color="primary"> */}
-      {/*    Cancel */}
-      {/*  </Button> */}
-      {/*  <Button onClick={submit} color="primary"> */}
-      {/*    Submit */}
-      {/*  </Button> */}
-      {/* </DialogActions> */}
-    </Dialog>
-    <IconButton
-      aria-label="delete"
-      onClick={() => handleDelete()}
-      size="large"
-    >
-      <Delete />
-    </IconButton>
-  </>;
+  return (
+    <>
+      <Dialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        aria-labelledby="form-dialog-title"
+        fullWidth
+        maxWidth="md"
+      >
+        <DialogTitle id="form-dialog-title">Deleting an Item</DialogTitle>
+        <DialogContent>
+          <DialogContentText>...</DialogContentText>
+        </DialogContent>
+        {/* <DialogActions> */}
+        {/*  <Button onClick={cancel} color="primary"> */}
+        {/*    Cancel */}
+        {/*  </Button> */}
+        {/*  <Button onClick={submit} color="primary"> */}
+        {/*    Submit */}
+        {/*  </Button> */}
+        {/* </DialogActions> */}
+      </Dialog>
+      <IconButton aria-label="delete" onClick={() => handleDelete()} size="large">
+        <Delete />
+      </IconButton>
+    </>
+  );
 };

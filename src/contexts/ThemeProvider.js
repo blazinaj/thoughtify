@@ -1,7 +1,7 @@
-import {CssBaseline} from "@mui/material";
-import GlobalStyles from "../theme/globalStyles";
-import {ThemeProvider as MUIThemeProvider} from "@mui/material/styles";
-import {useTheme} from "../theme/useTheme";
+import { CssBaseline } from '@mui/material';
+import GlobalStyles from '../theme/globalStyles';
+import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
+import { useTheme } from '../theme/useTheme';
 
 /**
  * Initialize the theme provider and pass the theme to the children.
@@ -12,8 +12,7 @@ import {useTheme} from "../theme/useTheme";
  * @constructor
  */
 export const ThemeProvider = ({ children }) => {
-
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
   return (
     <MUIThemeProvider theme={theme}>
@@ -21,5 +20,5 @@ export const ThemeProvider = ({ children }) => {
       <GlobalStyles />
       {children}
     </MUIThemeProvider>
-  )
-}
+  );
+};

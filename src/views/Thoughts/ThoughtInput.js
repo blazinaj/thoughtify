@@ -1,9 +1,9 @@
-import {Box, Grid} from "@mui/material";
-import {useForm} from "../../utils/hooks/useForm";
-import {Thought} from "../../models";
-import {DataStore} from "@aws-amplify/datastore";
-import {handleCompletion} from "../../utils/openai/functions/generate";
-import ThoughtInputField from "./ThoughtInputField";
+import { Box, Grid } from '@mui/material';
+import { useForm } from '../../utils/hooks/useForm';
+import { Thought } from '../../models';
+import { DataStore } from '@aws-amplify/datastore';
+import { handleCompletion } from '../../utils/openai/functions/generate';
+import ThoughtInputField from './ThoughtInputField';
 
 /**
  * Input Field for Thoughts.
@@ -15,7 +15,6 @@ import ThoughtInputField from "./ThoughtInputField";
  * @constructor
  */
 export const ThoughtInput = () => {
-
   // const transcribe = async () => {
   //   Predictions.convert({
   //     transcription: {
@@ -38,16 +37,16 @@ export const ThoughtInput = () => {
    * @returns {Promise<void>}
    */
   const getThoughtExtract = async (newThought) => {
-
-    const existingThoughts = await DataStore.query(Thought)
+    const existingThoughts = await DataStore.query(Thought);
 
     const _prompt = `
       Existing Thoughts:
       
-      ${existingThoughts.map((thought) => {
-          return `${thought.extract ? JSON.stringify(thought.extract) : thought.input}`
-        }).join("\n")
-      }
+      ${existingThoughts
+        .map((thought) => {
+          return `${thought.extract ? JSON.stringify(thought.extract) : thought.input}`;
+        })
+        .join('\n')}
     
       Analyze this person's new thought and extract the following:
       
@@ -63,49 +62,44 @@ export const ThoughtInput = () => {
       
       Format the response as a javascript parseable JSON object string
       
-    `
+    `;
     const response = await handleCompletion({
       prompt: _prompt,
-      response_format: { type: "json_object" },
-      seed: 101,
-    })
+      response_format: { type: 'json_object' },
+      seed: 101
+    });
 
-    console.log({response})
+    console.log({ response });
 
     // update the thought in the datastore
     await DataStore.save(
-      Thought.copyOf(newThought, updated => {
-        updated.extract = response
+      Thought.copyOf(newThought, (updated) => {
+        updated.extract = response;
       })
-    )
-
-  }
+    );
+  };
 
   const form = useForm({
     model: Thought,
     fieldConfig: {
       input: {
         inputType: 'text',
-        label: 'Thought',
+        label: 'Thought'
       }
     },
-    callback: getThoughtExtract,
-  })
+    callback: getThoughtExtract
+  });
 
   const onSubmit = async (input) => {
-    console.log('saving thought', input)
+    console.log('saving thought', input);
     const newThought = await DataStore.save(
-        new Thought({
-          ...input
-        })
+      new Thought({
+        ...input
+      })
     );
 
-    const extract = await getThoughtExtract(newThought)
-  }
+    const extract = await getThoughtExtract(newThought);
+  };
 
-  return (
-      <ThoughtInputField
-          onSubmit={onSubmit}
-      />
-  )
-}
+  return <ThoughtInputField onSubmit={onSubmit} />;
+};

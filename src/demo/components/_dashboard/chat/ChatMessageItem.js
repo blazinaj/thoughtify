@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { formatDistanceToNowStrict, isDate } from 'date-fns';
 // material
-import {createTheme, styled} from '@mui/material/styles';
+import { createTheme, styled } from '@mui/material/styles';
 import { Avatar, Box, Typography } from '@mui/material';
-import React, {useEffect, useState} from "react";
-import MUIRichTextEditor from "mui-rte";
-import {ContentState, convertFromHTML, convertToRaw} from "draft-js";
-import {ThemeProvider} from "@mui/styles";
+import React, { useEffect, useState } from 'react';
+import MUIRichTextEditor from 'mui-rte';
+import { ContentState, convertFromHTML, convertToRaw } from 'draft-js';
+import { ThemeProvider } from '@mui/styles';
 // import "./ChatMessageItem.css";
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ const RootStyle = styled('div')(({ theme }) => ({
 }));
 
 const ContentStyle = styled('div')(({ theme }) => ({
-  maxWidth: "100%",
+  maxWidth: '100%',
   padding: theme.spacing(1.5),
   marginTop: theme.spacing(0.5),
   borderRadius: theme.shape.borderRadius,
@@ -65,50 +65,53 @@ ChatMessageItem.propTypes = {
 export default function ChatMessageItem({ message, onOpenLightbox, ...other }) {
   // const sender = conversation.participants.find((participant) => participant.id === message.senderId);
   const sender = message.role;
-  const senderDetails = sender === "user" ? { type: 'me' } : {
-    // avatar: sender.avatar,
-    name: "Tutor"
-  };
+  const senderDetails =
+    sender === 'user'
+      ? { type: 'me' }
+      : {
+          // avatar: sender.avatar,
+          name: 'Tutor'
+        };
 
   const isMe = senderDetails.type === 'me';
   const isImage = message.contentType === 'image';
   const firstName = senderDetails.name && senderDetails.name.split(' ')[0];
 
-  const [formattedDate, setFormattedDate] = useState(null)
+  const [formattedDate, setFormattedDate] = useState(null);
 
   useEffect(() => {
     const timeout = setInterval(() => {
       setFormattedDate(
         formatDistanceToNowStrict(new Date(message.createdAt || new Date()), {
           addSuffix: true,
-          roundingMethod: "round"
+          roundingMethod: 'round'
         })
-      )
-    }, 1000)
+      );
+    }, 1000);
 
     return () => {
       clearInterval(timeout);
-    }
-  }, [message?.createdAt])
+    };
+  }, [message?.createdAt]);
 
-  const [richText, setRichText] = useState("");
+  const [richText, setRichText] = useState('');
 
   useEffect(() => {
     if (message?.content) {
-      const contentHTML = convertFromHTML(message.content)
-      const state = ContentState.createFromBlockArray(contentHTML.contentBlocks, contentHTML.entityMap)
-      const content = JSON.stringify(convertToRaw(state))
-      setRichText(content)
+      const contentHTML = convertFromHTML(message.content);
+      const state = ContentState.createFromBlockArray(contentHTML.contentBlocks, contentHTML.entityMap);
+      const content = JSON.stringify(convertToRaw(state));
+      setRichText(content);
     }
-  } ,[message])
+  }, [message]);
 
-  const defaultTheme = createTheme()
+  const defaultTheme = createTheme();
 
   Object.assign(defaultTheme, {
     overrides: {
       MUIRichTextEditor: {
         container: {
-          margin: 0,
+          margin: 0
         },
         editor: {
           margin: 0
@@ -118,7 +121,7 @@ export default function ChatMessageItem({ message, onOpenLightbox, ...other }) {
         }
       }
     }
-  })
+  });
 
   return (
     <RootStyle {...other}>
@@ -126,13 +129,17 @@ export default function ChatMessageItem({ message, onOpenLightbox, ...other }) {
         sx={{
           display: 'flex',
           ...(isMe && {
-            ml: 'auto',
+            ml: 'auto'
           })
         }}
       >
-        <Box sx={{ ml: {xs: 0, md: 2 }}}>
+        <Box sx={{ ml: { xs: 0, md: 2 } }}>
           {senderDetails.type !== 'me' && (
-            <Avatar alt={senderDetails.name} src={senderDetails.avatar} sx={{ width: 32, height: 32, display: { xs: "none", md: undefined }}} />
+            <Avatar
+              alt={senderDetails.name}
+              src={senderDetails.avatar}
+              sx={{ width: 32, height: 32, display: { xs: 'none', md: undefined } }}
+            />
           )}
           <InfoStyle noWrap variant="caption" sx={{ ...(isMe && { justifyContent: 'flex-end' }) }}>
             {!isMe && `${firstName},`}&nbsp;
@@ -145,27 +152,18 @@ export default function ChatMessageItem({ message, onOpenLightbox, ...other }) {
                 color: 'grey.800',
                 bgcolor: 'primary.lighter',
                 // maxWidth: "60vw",
-                width: "100%",
+                width: '100%'
               }),
               ...(!isMe && {
-                maxWidth: "100%",
+                maxWidth: '100%'
               })
             }}
           >
             {isImage ? (
-              <MessageImgStyle
-                alt="attachment"
-                src={message.content}
-                onClick={() => onOpenLightbox(message.content)}
-              />
+              <MessageImgStyle alt="attachment" src={message.content} onClick={() => onOpenLightbox(message.content)} />
             ) : (
               <ThemeProvider theme={defaultTheme}>
-                <MUIRichTextEditor
-                  defaultValue={richText}
-                  readOnly={true}
-                  toolbar={false}
-                  style={{margin: 0}}
-                />
+                <MUIRichTextEditor defaultValue={richText} readOnly={true} toolbar={false} style={{ margin: 0 }} />
               </ThemeProvider>
             )}
           </ContentStyle>

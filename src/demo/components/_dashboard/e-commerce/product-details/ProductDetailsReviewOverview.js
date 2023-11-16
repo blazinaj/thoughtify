@@ -63,7 +63,6 @@ ProductDetailsReviewOverview.propTypes = {
 };
 
 export default function ProductDetailsReviewOverview({ product, onOpen }) {
-
   const { totalRating, totalReview, ratings } = product;
 
   const total = sumBy(ratings, (star) => star.starCount);

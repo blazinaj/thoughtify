@@ -1,18 +1,18 @@
 import * as Yup from 'yup';
-import {useSnackbar} from 'notistack';
-import React, {useCallback} from 'react';
-import {Form, FormikProvider, useFormik} from 'formik';
+import { useSnackbar } from 'notistack';
+import React, { useCallback } from 'react';
+import { Form, FormikProvider, useFormik } from 'formik';
 // material
-import {Box, Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField, Typography} from '@mui/material';
-import {LoadingButton} from '@mui/lab';
+import { Box, Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 // hooks
 import useIsMountedRef from '../../utils/hooks/useIsMountedRef';
-import {UploadAvatar} from '../../demo/components/upload';
+import { UploadAvatar } from '../../demo/components/upload';
 // utils
-import {fData} from '../../utils/formatNumber';
+import { fData } from '../../utils/formatNumber';
 //
-import {useUserContext} from "../../contexts/UserContext";
-import {AccountSettings} from "@aws-amplify/ui-react";
+import { useUserContext } from '../../contexts/UserContext';
+import { AccountSettings } from '@aws-amplify/ui-react';
 
 // ----------------------------------------------------------------------
 

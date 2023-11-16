@@ -11,15 +11,7 @@ import { generateId } from '../../../functions/generateId';
  * @param style
  * @constructor
  */
-const Switch = (
-  {
-    onChange,
-    value,
-    disabled,
-    switchConfig = {},
-    style = {}
-  }) => {
-
+const Switch = ({ onChange, value, disabled, switchConfig = {}, style = {} }) => {
   const { onLabel, offLabel, label } = switchConfig;
   const [id] = useState(generateId());
 

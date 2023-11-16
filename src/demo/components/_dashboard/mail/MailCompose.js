@@ -8,17 +8,7 @@ import collapseFill from '@iconify/icons-eva/collapse-fill';
 import roundAddPhotoAlternate from '@iconify/icons-ic/round-add-photo-alternate';
 // material
 import { useTheme, styled } from '@mui/material/styles';
-import {
-  Box,
-  Input,
-  Portal,
-  Button,
-  Divider,
-  Backdrop,
-  IconButton,
-  Typography,
-  useMediaQuery
-} from '@mui/material';
+import { Box, Input, Portal, Button, Divider, Backdrop, IconButton, Typography, useMediaQuery } from '@mui/material';
 //
 import { QuillEditor } from '../../editor';
 
@@ -112,9 +102,7 @@ export default function MailCompose({ isOpenCompose, onCloseCompose }) {
           <Typography variant="h6">New Message</Typography>
           <Box sx={{ flexGrow: 1 }} />
 
-          <IconButton
-            onClick={fullScreen ? handleExitFullScreen : handleEnterFullScreen}
-            size="large">
+          <IconButton onClick={fullScreen ? handleExitFullScreen : handleEnterFullScreen} size="large">
             <Icon icon={fullScreen ? collapseFill : expandFill} width={20} height={20} />
           </IconButton>
 

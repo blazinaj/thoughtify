@@ -24,7 +24,7 @@ export default function RtlLayoutContext({ children }) {
   const cacheRtl = createCache({
     key: theme.direction === 'rtl' ? 'rtl' : 'css',
     stylisPlugins: theme.direction === 'rtl' ? [rtlPlugin] : [],
-    prepend: true,
+    prepend: true
   });
 
   cacheRtl.compat = true;

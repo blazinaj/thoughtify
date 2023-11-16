@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {withStyles} from "@mui/styles";
-import {Backdrop, Box, Container, Grid, Step, StepConnector, StepLabel, Stepper, Typography} from "@mui/material";
-import PropTypes from "prop-types";
-import {Icon} from "@iconify/react";
-import checkmarkFill from "@iconify/icons-eva/checkmark-fill";
-import Page from "../../demo/components/Page";
-import {AccountSetupBasicInformation} from "./AccountSetupBasicInformation";
-import {MotionInView, varFadeInUp} from "../../demo/components/animate";
-import {AccountSetupTerms} from "./AccountSetupTerms";
-
+import React, { useEffect, useState } from 'react';
+import { withStyles } from '@mui/styles';
+import { Backdrop, Box, Container, Grid, Step, StepConnector, StepLabel, Stepper, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
+import { Icon } from '@iconify/react';
+import checkmarkFill from '@iconify/icons-eva/checkmark-fill';
+import Page from '../../demo/components/Page';
+import { AccountSetupBasicInformation } from './AccountSetupBasicInformation';
+import { MotionInView, varFadeInUp } from '../../demo/components/animate';
+import { AccountSetupTerms } from './AccountSetupTerms';
 
 // ----------------------------------------------------------------------
 
@@ -52,7 +51,11 @@ function QontoStepIcon({ active, completed }) {
       }}
     >
       {completed ? (
-        <Box component={Icon} icon={checkmarkFill} sx={{ zIndex: 1, width: 20, height: 20, color: 'primary.marketing' }} />
+        <Box
+          component={Icon}
+          icon={checkmarkFill}
+          sx={{ zIndex: 1, width: 20, height: 20, color: 'primary.marketing' }}
+        />
       ) : (
         <Box
           sx={{
@@ -67,39 +70,33 @@ function QontoStepIcon({ active, completed }) {
   );
 }
 
-export const AccountSetup = ({setupUserAccount, cognitoUser, onComplete}) => {
-
+export const AccountSetup = ({ setupUserAccount, cognitoUser, onComplete }) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const [userData, setUserData] = useState({
     bio: '',
-    interests: [],
-  })
+    interests: []
+  });
 
   const isComplete = activeStep === STEPS.length;
 
   useEffect(() => {
     if (isComplete) {
-
-        setupUserAccount({cognitoUser, userData}).then((result) => {
-          console.log({cognitoUser, userData, result})
-          setTimeout(() => {
-            onComplete && onComplete(result);
-          }, 1800)
-        })
+      setupUserAccount({ cognitoUser, userData }).then((result) => {
+        console.log({ cognitoUser, userData, result });
+        setTimeout(() => {
+          onComplete && onComplete(result);
+        }, 1800);
+      });
     }
-  }, [isComplete])
+  }, [isComplete]);
 
   return (
     <Page title="Thoughtify - Account Setup">
-      <Container maxWidth={'md'} sx={{p: 5}}>
-
+      <Container maxWidth={'md'} sx={{ p: 5 }}>
         <Grid container justifyContent={isComplete ? 'center' : 'center'}>
-
           <MotionInView variants={varFadeInUp}>
-            <Typography variant="h3">
-              Let's get started with Thoughtify!
-            </Typography>
+            <Typography variant="h3">Let's get started with Thoughtify!</Typography>
           </MotionInView>
           <Grid item xs={12} md={8} sx={{ mb: 5 }}>
             <Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
@@ -124,14 +121,20 @@ export const AccountSetup = ({setupUserAccount, cognitoUser, onComplete}) => {
 
         {!isComplete ? (
           <>
-            {activeStep === 0 && <AccountSetupBasicInformation setUserData={setUserData} userData={userData} setActiveStep={setActiveStep} />}
+            {activeStep === 0 && (
+              <AccountSetupBasicInformation
+                setUserData={setUserData}
+                userData={userData}
+                setActiveStep={setActiveStep}
+              />
+            )}
             {activeStep === 1 && <AccountSetupTerms setActiveStep={setActiveStep} />}
           </>
         ) : (
           <Backdrop open={isComplete} sx={{ zIndex: 9999 }}>
             <MotionInView variants={varFadeInUp}>
               <Typography variant="h3">
-                Congratulations! Your account has been created. <br/>
+                Congratulations! Your account has been created. <br />
                 Give us one second to log you in...
               </Typography>
             </MotionInView>
@@ -140,4 +143,4 @@ export const AccountSetup = ({setupUserAccount, cognitoUser, onComplete}) => {
       </Container>
     </Page>
   );
-}
+};

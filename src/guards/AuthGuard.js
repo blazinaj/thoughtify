@@ -1,9 +1,9 @@
-import {useState} from 'react';
-import {Navigate, useLocation} from 'react-router-dom';
-import {withAuthenticator} from "@aws-amplify/ui-react";
-import {UserContextProvider} from "../contexts/UserContext";
-import {styled} from "@mui/material/styles";
-import {CognitoContextProvider} from "../contexts/CognitoContext";
+import { useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { UserContextProvider } from '../contexts/UserContext';
+import { styled } from '@mui/material/styles';
+import { CognitoContextProvider } from '../contexts/CognitoContext';
 // ----------------------------------------------------------------------
 
 /**
@@ -30,19 +30,17 @@ const AuthGuard = ({ children, isPassedToWithAuthenticator, signOut, user }) => 
 
   return (
     <CognitoContextProvider>
-      <UserContextProvider>
-        {children}
-      </UserContextProvider>
+      <UserContextProvider>{children}</UserContextProvider>
     </CognitoContextProvider>
-  )
-}
+  );
+};
 
 /**
  * Custom Header logo on top of the login form
  * @type {StyledComponent<MUIStyledCommonProps<Theme>, JSX.IntrinsicElements[string], {}>}
  */
 const HeaderLogo = styled('img')(({ theme }) => ({
-  borderRadius: "5px",
+  borderRadius: '5px'
 }));
 
 /**
@@ -50,18 +48,14 @@ const HeaderLogo = styled('img')(({ theme }) => ({
  * @type {{Header(): JSX.Element}}
  */
 const components = {
-
   // Custom Header logo on top of the login form
   Header() {
     return (
       <div>
-        <HeaderLogo
-          src={'/static/brand/Thoughtify-Logo.svg'}
-          alt="logo"
-        />
+        <HeaderLogo src={'/static/brand/Thoughtify-Logo.svg'} alt="logo" />
       </div>
     );
-  },
-}
+  }
+};
 
-export default withAuthenticator(AuthGuard, {components});
+export default withAuthenticator(AuthGuard, { components });

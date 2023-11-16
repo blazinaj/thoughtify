@@ -32,24 +32,24 @@ export const PATH_PAGE = {
   page404: '/404',
   page500: '/500',
   components: '/components',
-  privacy: '/privacy',
+  privacy: '/privacy'
 };
 
-export const PATH_LEARN  = {
+export const PATH_LEARN = {
   root: ROOTS_LEARN,
   catalog: {
     root: path(ROOTS_LEARN, '/catalog'),
     lesson: path(ROOTS_LEARN, '/catalog/lesson/:id')
   }
-}
+};
 
-export const PATH_TEACH  = {
+export const PATH_TEACH = {
   root: ROOTS_TEACH,
   catalog: {
     root: path(ROOTS_TEACH, '/lesson_plans'),
     lesson_plans: path(ROOTS_TEACH, '/lesson_plans/:id')
   }
-}
+};
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,

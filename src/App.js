@@ -4,12 +4,12 @@ import Settings from './demo/components/settings';
 import RtlLayoutContext from './contexts/RtlLayoutContext';
 import ScrollToTop from './demo/components/ScrollToTop';
 import NotistackProvider from './contexts/NotistackProvider';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {LocalizationProvider} from '@mui/x-date-pickers';
-import useLocales from "./utils/hooks/useLocales";
-import {ThemeProvider} from "./contexts/ThemeProvider";
-import {SettingsProvider} from "./contexts/SettingsContext";
-import {CollapseDrawerProvider} from "./contexts/CollapseDrawerContext";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import useLocales from './utils/hooks/useLocales';
+import { ThemeProvider } from './contexts/ThemeProvider';
+import { SettingsProvider } from './contexts/SettingsContext';
+import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
 // ----------------------------------------------------------------------
 
 /**
@@ -27,7 +27,6 @@ import {CollapseDrawerProvider} from "./contexts/CollapseDrawerContext";
  * @constructor
  */
 const App = () => {
-
   const { currentLang } = useLocales();
 
   return (
@@ -39,7 +38,7 @@ const App = () => {
               <NotistackProvider>
                 <Settings />
                 <ScrollToTop />
-                <Viewport/>
+                <Viewport />
               </NotistackProvider>
             </RtlLayoutContext>
           </LocalizationProvider>
@@ -47,12 +46,10 @@ const App = () => {
       </CollapseDrawerProvider>
     </SettingsProvider>
   );
-}
+};
 
 const Viewport = () => {
-  return (
-    <Router />
-  )
-}
+  return <Router />;
+};
 
 export default App;

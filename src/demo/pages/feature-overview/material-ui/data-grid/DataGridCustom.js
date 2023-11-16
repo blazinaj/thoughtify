@@ -132,7 +132,11 @@ const columns = [
       return (
         <Stack alignItems="center" sx={{ width: 1, textAlign: 'center' }}>
           {getAdmin ? (
-            <Box component={Icon} icon={checkmarkCircle2Fill} sx={{ width: 20, height: 20, color: 'primary.marketing' }} />
+            <Box
+              component={Icon}
+              icon={checkmarkCircle2Fill}
+              sx={{ width: 20, height: 20, color: 'primary.marketing' }}
+            />
           ) : (
             '-'
           )}

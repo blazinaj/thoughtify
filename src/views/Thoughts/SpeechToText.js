@@ -1,30 +1,32 @@
-import {Predictions} from "@aws-amplify/predictions";
-import {useEffect, useState} from "react";
-import {Thought} from "../../models";
-import {DataStore} from "@aws-amplify/datastore";
+import { Predictions } from '@aws-amplify/predictions';
+import { useEffect, useState } from 'react';
+import { Thought } from '../../models';
+import { DataStore } from '@aws-amplify/datastore';
 import MicrophoneStream from 'microphone-stream';
-import {Buffer} from 'buffer';
-import {TextField} from "@mui/material";
+import { Buffer } from 'buffer';
+import { TextField } from '@mui/material';
 
-Buffer.from('anything','base64');
+Buffer.from('anything', 'base64');
 // eslint-disable-next-line global-require
-window.Buffer = window.Buffer || require("buffer").Buffer;
+window.Buffer = window.Buffer || require('buffer').Buffer;
 
 export function SpeechToText(props) {
-  const [response, setResponse] = useState("Press 'start recording' to begin your transcription. Press STOP recording once you finish speaking.")
+  const [response, setResponse] = useState(
+    "Press 'start recording' to begin your transcription. Press STOP recording once you finish speaking."
+  );
 
   function AudioRecorder(props) {
     const [recording, setRecording] = useState(false);
     const [micStream, setMicStream] = useState();
     const [audioBuffer] = useState(
-      (function() {
+      (function () {
         let buffer = [];
         function add(raw) {
           buffer = buffer.concat(...raw);
           return buffer;
         }
         function newBuffer() {
-          console.log("resetting buffer");
+          console.log('resetting buffer');
           buffer = [];
         }
 
@@ -45,12 +47,12 @@ export function SpeechToText(props) {
     const [transcriptLength, setTranscriptLength] = useState(0);
 
     // eslint-disable-next-line
-    const [inputMessageText, setInputMessageText] = useState("");
+    const [inputMessageText, setInputMessageText] = useState('');
     // eslint-disable-next-line
     const [recordedAudio, setRecordedAudio] = useState(null);
     useEffect(() => {
-      if(recordedAudio){
-        console.log("recorded!");
+      if (recordedAudio) {
+        console.log('recorded!');
         console.log(recordedAudio);
       }
     }, [recordedAudio]);
@@ -120,14 +122,13 @@ export function SpeechToText(props) {
 
       const resultBuffer = audioBuffer.getData();
 
-      console.log({resultBuffer})
+      console.log({ resultBuffer });
 
       // clearInterval(timerInterval);
 
-      if (typeof finishRecording === "function") {
+      if (typeof finishRecording === 'function') {
         finishRecording(resultBuffer);
       }
-
     }
 
     return (
@@ -153,32 +154,33 @@ export function SpeechToText(props) {
   function convertFromBuffer(bytes) {
     setResponse('Converting text...');
 
-
-
     Predictions.convert({
       transcription: {
         source: {
           // bytes: new Blob(bytes)
           bytes
         },
-        language: "en-US", // other options are "en-GB", "fr-FR", "fr-CA", "es-US"
-      },
-    }).then((result) => {
-      const {transcription} = result;
-      const {fullText} = transcription;
-
-      console.log({fullText})
-
-      if (fullText && fullText !== "") {
-        // save Thought
-        DataStore.save(new Thought({
-          input: fullText,
-        }))
+        language: 'en-US' // other options are "en-GB", "fr-FR", "fr-CA", "es-US"
       }
-
-      setResponse(fullText)
     })
-    .catch(err => setResponse(JSON.stringify(err, null, 2)))
+      .then((result) => {
+        const { transcription } = result;
+        const { fullText } = transcription;
+
+        console.log({ fullText });
+
+        if (fullText && fullText !== '') {
+          // save Thought
+          DataStore.save(
+            new Thought({
+              input: fullText
+            })
+          );
+        }
+
+        setResponse(fullText);
+      })
+      .catch((err) => setResponse(JSON.stringify(err, null, 2)));
   }
 
   return (

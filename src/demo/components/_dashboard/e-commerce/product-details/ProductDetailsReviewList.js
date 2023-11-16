@@ -19,10 +19,10 @@ ReviewItem.propTypes = {
 const usePublicUser = ({ userID }) => {
   return {
     id: userID,
-    firstName: "John",
-    profileImage: "https://cdn.fakercloud.com/avatars/nelshd_128.jpg",
-  }
-}
+    firstName: 'John',
+    profileImage: 'https://cdn.fakercloud.com/avatars/nelshd_128.jpg'
+  };
+};
 
 function ReviewItem({ item }) {
   const [isHelpful, setHelpfuls] = useState(false);
@@ -37,12 +37,12 @@ function ReviewItem({ item }) {
     review,
     rating,
     userID,
-    createdAt,
+    createdAt
   } = item;
 
   const publicUser = usePublicUser({
-    userID,
-  })
+    userID
+  });
 
   const handleClickHelpful = () => {
     setHelpfuls((prev) => !prev);
@@ -92,7 +92,10 @@ function ReviewItem({ item }) {
           <Rating size="small" value={rating} precision={0.1} readOnly />
 
           {isPurchased && (
-            <Typography variant="caption" sx={{ my: 1, display: 'flex', alignItems: 'center', color: 'primary.marketing' }}>
+            <Typography
+              variant="caption"
+              sx={{ my: 1, display: 'flex', alignItems: 'center', color: 'primary.marketing' }}
+            >
               <Icon icon={roundVerified} width={16} height={16} />
               &nbsp;Verified purchase
             </Typography>
@@ -127,7 +130,6 @@ ProductDetailsReviewList.propTypes = {
 };
 
 export default function ProductDetailsReviewList({ reviews }) {
-
   return (
     <Box sx={{ pt: 3, px: 2, pb: 5 }}>
       <List disablePadding>

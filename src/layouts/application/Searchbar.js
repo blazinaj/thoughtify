@@ -1,19 +1,19 @@
-import {Icon} from '@iconify/react';
-import {useState} from 'react';
+import { Icon } from '@iconify/react';
+import { useState } from 'react';
 import searchFill from '@iconify/icons-eva/search-fill';
 // material
-import {styled} from '@mui/styles';
-import {ClickAwayListener, Grid, Slide} from '@mui/material';
-import {MIconButton} from "../../demo/components/@material-extend";
-import {alpha} from "@mui/material/styles";
-import {ApplicationSearchbar} from "./ApplicationSearchbar";
+import { styled } from '@mui/styles';
+import { ClickAwayListener, Grid, Slide } from '@mui/material';
+import { MIconButton } from '../../demo/components/@material-extend';
+import { alpha } from '@mui/material/styles';
+import { ApplicationSearchbar } from './ApplicationSearchbar';
 // import {Scrollbar} from "../";
 // components
 
 // ----------------------------------------------------------------------
 
-const APPBAR_MOBILE = "80vh";
-const APPBAR_DESKTOP = "50vh";
+const APPBAR_MOBILE = '80vh';
+const APPBAR_DESKTOP = '50vh';
 
 const SearchbarStyle = styled('div')(({ theme }) => ({
   top: 0,
@@ -22,7 +22,7 @@ const SearchbarStyle = styled('div')(({ theme }) => ({
   width: '100%',
   // display: 'flex',
   position: 'absolute',
-  paddingTop: "2em",
+  paddingTop: '2em',
   // alignItems: 'center',
   height: APPBAR_MOBILE,
   backdropFilter: 'blur(6px)',
@@ -60,25 +60,18 @@ export default function Searchbar() {
 
         <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
           <SearchbarStyle>
-
             <Grid
               container
               spacing={3}
               sx={{
                 mt: {
-                  md: "1em",
-                  lg: "1em",
+                  md: '1em',
+                  lg: '1em'
                 }
               }}
             >
-              <Grid
-                item
-                xs={12} sm={12} md={8} lg={8}
-                order={{ xs: 2, sm: 2, md: 1, lg: 1 }}
-              >
-                <ApplicationSearchbar
-                  handleClose={handleClose}
-                />
+              <Grid item xs={12} sm={12} md={8} lg={8} order={{ xs: 2, sm: 2, md: 1, lg: 1 }}>
+                <ApplicationSearchbar handleClose={handleClose} />
               </Grid>
             </Grid>
           </SearchbarStyle>

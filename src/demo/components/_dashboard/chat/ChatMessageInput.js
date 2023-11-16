@@ -99,12 +99,7 @@ export default function ChatMessageInput({ disabled, conversationId, onSend, ...
 
       <Divider orientation="vertical" flexItem />
 
-      <IconButton
-        color="primary"
-        disabled={!message}
-        onClick={handleSend}
-        sx={{ mx: 1 }}
-        size="large">
+      <IconButton color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
         <Icon icon={roundSend} width={24} height={24} />
       </IconButton>
 

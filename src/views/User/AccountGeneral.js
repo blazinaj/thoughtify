@@ -1,18 +1,18 @@
 import * as Yup from 'yup';
-import {useSnackbar} from 'notistack';
-import {useCallback} from 'react';
-import {Form, FormikProvider, useFormik} from 'formik';
+import { useSnackbar } from 'notistack';
+import { useCallback } from 'react';
+import { Form, FormikProvider, useFormik } from 'formik';
 // material
-import {Box, Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField, Typography} from '@mui/material';
-import {LoadingButton} from '@mui/lab';
+import { Box, Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 // hooks
 import useIsMountedRef from '../../utils/hooks/useIsMountedRef';
-import {UploadAvatar} from '../../demo/components/upload';
+import { UploadAvatar } from '../../demo/components/upload';
 // utils
-import {fData} from '../../utils/formatNumber';
+import { fData } from '../../utils/formatNumber';
 //
-import {useUserContext} from "../../contexts/UserContext";
-import EcommerceCheckout from "../../demo/pages/dashboard/EcommerceCheckout";
+import { useUserContext } from '../../contexts/UserContext';
+import EcommerceCheckout from '../../demo/pages/dashboard/EcommerceCheckout';
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ export default function AccountGeneral() {
     initialValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
-      displayName: (user?.firstName && user?.lastName) ? `${user?.firstName} ${user?.lastName}` : '',
+      displayName: user?.firstName && user?.lastName ? `${user?.firstName} ${user?.lastName}` : '',
       email: user?.email,
       photoURL: user?.photoURL,
       phoneNumber: user?.phoneNumber,

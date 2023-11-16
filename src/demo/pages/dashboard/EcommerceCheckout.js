@@ -65,7 +65,11 @@ function QontoStepIcon({ active, completed }) {
       }}
     >
       {completed ? (
-        <Box component={Icon} icon={checkmarkFill} sx={{ zIndex: 1, width: 20, height: 20, color: 'primary.marketing' }} />
+        <Box
+          component={Icon}
+          icon={checkmarkFill}
+          sx={{ zIndex: 1, width: 20, height: 20, color: 'primary.marketing' }}
+        />
       ) : (
         <Box
           sx={{

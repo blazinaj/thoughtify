@@ -1,7 +1,6 @@
-import {API, graphqlOperation} from "aws-amplify";
+import { API, graphqlOperation } from 'aws-amplify';
 
-export const getTokenWallet = async ({id}) => {
-
+export const getTokenWallet = async ({ id }) => {
   // graphql string
   const query = `
     query GetTokenWallet($id:ID!) {
@@ -13,21 +12,17 @@ export const getTokenWallet = async ({id}) => {
         }
       }
     }
-  `
+  `;
 
-  console.log("Fetching Token Wallet",)
+  console.log('Fetching Token Wallet');
 
   const apiResponse = await API.graphql(
-    graphqlOperation(
-      query,
-      {
-        id
-      },
-    )
-  )
+    graphqlOperation(query, {
+      id
+    })
+  );
 
-  console.log(`Fetched Token Wallet: `, {apiResponse})
+  console.log(`Fetched Token Wallet: `, { apiResponse });
 
   return apiResponse.data.getTokenWallet;
-
-}
+};

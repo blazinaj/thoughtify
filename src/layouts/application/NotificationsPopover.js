@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import {noCase} from 'change-case';
-import {useRef, useState} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
-import {Icon} from '@iconify/react';
+import { noCase } from 'change-case';
+import { useRef, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 import bellFill from '@iconify/icons-eva/bell-fill';
 import clockFill from '@iconify/icons-eva/clock-fill';
 import doneAllFill from '@iconify/icons-eva/done-all-fill';
 // material
-import {alpha} from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import {
   Avatar,
   Badge,
@@ -23,14 +23,14 @@ import {
   Typography
 } from '@mui/material';
 // utils
-import {fToNow} from '../../utils/formatTime';
+import { fToNow } from '../../utils/formatTime';
 // components
 import Scrollbar from '../../demo/components/Scrollbar';
 import MenuPopover from '../../demo/components/MenuPopover';
-import {MIconButton} from '../../demo/components/@material-extend';
-import {useDatastore} from "../../utils/hooks/useDatastore";
-import {Notification as NotificationModel} from "../../models";
-import {DataStore} from "@aws-amplify/datastore";
+import { MIconButton } from '../../demo/components/@material-extend';
+import { useDatastore } from '../../utils/hooks/useDatastore';
+import { Notification as NotificationModel } from '../../models';
+import { DataStore } from '@aws-amplify/datastore';
 // ----------------------------------------------------------------------
 
 // const MOCK_NOTIFICATIONS = [...Array(5)].map((_, index) => ({
@@ -57,7 +57,7 @@ function renderContent(notification) {
 
   if (notification.type === 'MESSAGE') {
     return {
-      avatar: <img alt={"Notification"} src="/static/icons/ic_notification_chat.svg" />,
+      avatar: <img alt={'Notification'} src="/static/icons/ic_notification_chat.svg" />,
       title
     };
   }
@@ -129,9 +129,9 @@ export default function NotificationsPopover() {
 
   const notificationsDatastore = useDatastore({
     model: NotificationModel,
-    typename: "Notification",
-    enableSubscriptions: true,
-  })
+    typename: 'Notification',
+    enableSubscriptions: true
+  });
 
   const notifications = notificationsDatastore.items;
   const setNotifications = notificationsDatastore.setItems;
@@ -149,8 +149,8 @@ export default function NotificationsPopover() {
   const handleMarkAllAsRead = () => {
     for (const notification of notifications) {
       DataStore.save(
-        NotificationModel.copyOf(notification, updated => {
-          updated.isUnread = false
+        NotificationModel.copyOf(notification, (updated) => {
+          updated.isUnread = false;
         })
       );
     }

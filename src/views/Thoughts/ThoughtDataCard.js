@@ -1,10 +1,10 @@
-import {Thought} from "../../models";
-import {useDataCard} from "../../utils/hooks/useDataCard";
+import { Thought } from '../../models';
+import { useDataCard } from '../../utils/hooks/useDataCard';
 
 export const ThoughtDataCard = () => {
   const dataCard = useDataCard({
-    model: Thought,
-  })
+    model: Thought
+  });
 
   return dataCard.display;
-}
+};

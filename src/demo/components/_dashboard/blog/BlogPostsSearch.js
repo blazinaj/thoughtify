@@ -20,13 +20,13 @@ import SearchNotFound from '../../SearchNotFound';
 
 const RootStyle = styled('div')(({ theme }) => ({
   '& .MuiAutocomplete-root': {
-    width: "25%",
+    width: '25%',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.easeInOut,
       duration: theme.transitions.duration.shorter
     }),
     '&.Mui-focused': {
-      width: "50%",
+      width: '50%',
       '& .MuiAutocomplete-inputRoot': {
         boxShadow: theme.customShadows.z12
       }
@@ -81,7 +81,7 @@ export default function BlogPostsSearch({ sx }) {
             display: 'none'
           }
         }),
-        width: "100%",
+        width: '100%',
         ...sx
       }}
     >

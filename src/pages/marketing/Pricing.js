@@ -27,7 +27,7 @@ const PLANS = [
   {
     subscription: 'starter',
     icon: <PlanStarterIcon />,
-    price: "TBD",
+    price: 'TBD',
     caption: 'saving $TBD a year',
     lists: [
       { text: 'AI Tutors', isAvailable: true },
@@ -41,7 +41,7 @@ const PLANS = [
   {
     subscription: 'premium',
     icon: <PlanPremiumIcon />,
-    price: "TBD",
+    price: 'TBD',
     caption: 'saving $TBD a year',
     lists: [
       { text: 'AI Tutors', isAvailable: true },
@@ -66,7 +66,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 export default function Pricing() {
   return (
     <RootStyle title="Edify - Pricing">
-      <Container maxWidth="lg" sx={{my: 10}}>
+      <Container maxWidth="lg" sx={{ my: 10 }}>
         <Typography variant="h3" align="center" paragraph>
           Flexible plans for your needs
         </Typography>

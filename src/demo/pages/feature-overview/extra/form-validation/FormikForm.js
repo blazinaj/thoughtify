@@ -72,204 +72,206 @@ export default function FormikForm({ openDevTool }) {
     fileInputRef.current?.click();
   };
 
-  return <>
-    <FormikProvider value={formik}>
-      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack spacing={3}>
-          <TextField
-            fullWidth
-            label="Full Name"
-            {...getFieldProps('fullName')}
-            error={Boolean(touched.fullName && errors.fullName)}
-            helperText={touched.fullName && errors.fullName}
-          />
+  return (
+    <>
+      <FormikProvider value={formik}>
+        <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+          <Stack spacing={3}>
+            <TextField
+              fullWidth
+              label="Full Name"
+              {...getFieldProps('fullName')}
+              error={Boolean(touched.fullName && errors.fullName)}
+              helperText={touched.fullName && errors.fullName}
+            />
 
-          <TextField
-            fullWidth
-            type="email"
-            label="Email address"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-          />
+            <TextField
+              fullWidth
+              type="email"
+              label="Email address"
+              {...getFieldProps('email')}
+              error={Boolean(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
+            />
 
-          <TextField
-            fullWidth
-            label="Age"
-            {...getFieldProps('age')}
-            error={Boolean(touched.age && errors.age)}
-            helperText={touched.age && errors.age}
-          />
+            <TextField
+              fullWidth
+              label="Age"
+              {...getFieldProps('age')}
+              error={Boolean(touched.age && errors.age)}
+              helperText={touched.age && errors.age}
+            />
 
-          <Stack spacing={1}>
-            <Stack spacing={{ xs: 2, sm: 3 }} direction={{ xs: 'column', sm: 'row' }}>
-              <DatePicker
-                label="Start date"
-                {...getFieldProps('startDate')}
-                onChange={(date) => setFieldValue('startDate', date)}
-                renderInput={(params) => (
-                  <TextField fullWidth {...params} error={Boolean(touched.startDate && errors.startDate)} />
-                )}
-                inputFormat="dd/MM/yyyy"
-              />
+            <Stack spacing={1}>
+              <Stack spacing={{ xs: 2, sm: 3 }} direction={{ xs: 'column', sm: 'row' }}>
+                <DatePicker
+                  label="Start date"
+                  {...getFieldProps('startDate')}
+                  onChange={(date) => setFieldValue('startDate', date)}
+                  renderInput={(params) => (
+                    <TextField fullWidth {...params} error={Boolean(touched.startDate && errors.startDate)} />
+                  )}
+                  inputFormat="dd/MM/yyyy"
+                />
 
-              <DatePicker
-                label="End date"
-                {...getFieldProps('endDate')}
-                onChange={(date) => setFieldValue('endDate', date)}
-                renderInput={(params) => (
-                  <TextField fullWidth {...params} error={Boolean(touched.endDate && errors.endDate)} />
-                )}
-                inputFormat="dd/MM/yyyy"
-              />
+                <DatePicker
+                  label="End date"
+                  {...getFieldProps('endDate')}
+                  onChange={(date) => setFieldValue('endDate', date)}
+                  renderInput={(params) => (
+                    <TextField fullWidth {...params} error={Boolean(touched.endDate && errors.endDate)} />
+                  )}
+                  inputFormat="dd/MM/yyyy"
+                />
+              </Stack>
+
+              {Boolean(touched.startDate && errors.startDate) && (
+                <FormHelperText sx={{ px: 2 }} error>
+                  {errors.startDate}
+                </FormHelperText>
+              )}
+              {Boolean(touched.endDate && errors.endDate) && (
+                <FormHelperText sx={{ px: 2 }} error>
+                  {errors.endDate}
+                </FormHelperText>
+              )}
             </Stack>
 
-            {Boolean(touched.startDate && errors.startDate) && (
-              <FormHelperText sx={{ px: 2 }} error>
-                {errors.startDate}
-              </FormHelperText>
-            )}
-            {Boolean(touched.endDate && errors.endDate) && (
-              <FormHelperText sx={{ px: 2 }} error>
-                {errors.endDate}
-              </FormHelperText>
-            )}
-          </Stack>
-
-          <TextField
-            fullWidth
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            {...getFieldProps('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end" size="large">
-                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-          />
-
-          <TextField
-            fullWidth
-            type={showPassword ? 'text' : 'password'}
-            label="Confirm Password"
-            {...getFieldProps('confirmPassword')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end" size="large">
-                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            error={Boolean(touched.confirmPassword && errors.confirmPassword)}
-            helperText={touched.confirmPassword && errors.confirmPassword}
-          />
-
-          <div>
-            <Typography variant="subtitle2" sx={{ color: 'text.secondary' }} gutterBottom>
-              Quill Editor
-            </Typography>
-            <QuillEditor
-              id="formik-content"
-              value={values.quillEditor}
-              onChange={(val) => setFieldValue('quillEditor', val)}
-              error={Boolean(touched.quillEditor && errors.quillEditor)}
+            <TextField
+              fullWidth
+              type={showPassword ? 'text' : 'password'}
+              label="Password"
+              {...getFieldProps('password')}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword} edge="end" size="large">
+                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              error={Boolean(touched.password && errors.password)}
+              helperText={touched.password && errors.password}
             />
-            {touched.quillEditor && errors.quillEditor && (
-              <FormHelperText error sx={{ px: 2, textTransform: 'capitalize' }}>
-                {touched.quillEditor && errors.quillEditor}
-              </FormHelperText>
-            )}
-          </div>
 
-          <div>
-            <Typography variant="subtitle2" sx={{ color: 'text.secondary' }} gutterBottom>
-              Draft Editor
-            </Typography>
-            <DraftEditor
-              editorState={values.draftEditor}
-              onEditorStateChange={(val) => setFieldValue('draftEditor', val)}
-              error={Boolean(touched.draftEditor && errors.draftEditor)}
+            <TextField
+              fullWidth
+              type={showPassword ? 'text' : 'password'}
+              label="Confirm Password"
+              {...getFieldProps('confirmPassword')}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword} edge="end" size="large">
+                      <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+              error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+              helperText={touched.confirmPassword && errors.confirmPassword}
             />
-            {touched.draftEditor && errors.draftEditor && (
-              <FormHelperText error sx={{ px: 2, textTransform: 'capitalize' }}>
-                {touched.draftEditor && errors.draftEditor}
-              </FormHelperText>
-            )}
-          </div>
 
-          <div>
-            <Stack direction="row" alignItems="center" spacing={3}>
-              <Button
-                color="warning"
-                variant="contained"
-                onClick={handleClickAttachPhoto}
-                startIcon={<Icon icon={cloudUploadFill} />}
-              >
-                Upload photo
-              </Button>
-
-              <div>
-                {values.photo?.name && <Typography variant="subtitle2">{values.photo.name}</Typography>}
-                {values.photo?.size && (
-                  <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                    {fData(values.photo.size)}
-                  </Typography>
-                )}
-              </div>
-
-              <input
-                ref={fileInputRef}
-                id="photo"
-                name="photo"
-                type="file"
-                onChange={(event) => {
-                  setFieldValue('photo', event.target.files?.[0]);
-                }}
-                style={{ display: 'none' }}
+            <div>
+              <Typography variant="subtitle2" sx={{ color: 'text.secondary' }} gutterBottom>
+                Quill Editor
+              </Typography>
+              <QuillEditor
+                id="formik-content"
+                value={values.quillEditor}
+                onChange={(val) => setFieldValue('quillEditor', val)}
+                error={Boolean(touched.quillEditor && errors.quillEditor)}
               />
+              {touched.quillEditor && errors.quillEditor && (
+                <FormHelperText error sx={{ px: 2, textTransform: 'capitalize' }}>
+                  {touched.quillEditor && errors.quillEditor}
+                </FormHelperText>
+              )}
+            </div>
+
+            <div>
+              <Typography variant="subtitle2" sx={{ color: 'text.secondary' }} gutterBottom>
+                Draft Editor
+              </Typography>
+              <DraftEditor
+                editorState={values.draftEditor}
+                onEditorStateChange={(val) => setFieldValue('draftEditor', val)}
+                error={Boolean(touched.draftEditor && errors.draftEditor)}
+              />
+              {touched.draftEditor && errors.draftEditor && (
+                <FormHelperText error sx={{ px: 2, textTransform: 'capitalize' }}>
+                  {touched.draftEditor && errors.draftEditor}
+                </FormHelperText>
+              )}
+            </div>
+
+            <div>
+              <Stack direction="row" alignItems="center" spacing={3}>
+                <Button
+                  color="warning"
+                  variant="contained"
+                  onClick={handleClickAttachPhoto}
+                  startIcon={<Icon icon={cloudUploadFill} />}
+                >
+                  Upload photo
+                </Button>
+
+                <div>
+                  {values.photo?.name && <Typography variant="subtitle2">{values.photo.name}</Typography>}
+                  {values.photo?.size && (
+                    <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      {fData(values.photo.size)}
+                    </Typography>
+                  )}
+                </div>
+
+                <input
+                  ref={fileInputRef}
+                  id="photo"
+                  name="photo"
+                  type="file"
+                  onChange={(event) => {
+                    setFieldValue('photo', event.target.files?.[0]);
+                  }}
+                  style={{ display: 'none' }}
+                />
+              </Stack>
+              {touched.photo && errors.photo && (
+                <FormHelperText sx={{ px: 2, display: 'block' }} error>
+                  {errors.photo}
+                </FormHelperText>
+              )}
+            </div>
+
+            <Stack>
+              <FormControlLabel
+                control={<Checkbox {...getFieldProps('terms')} checked={values.terms} />}
+                label=" Terms and Conditions"
+              />
+
+              {touched.terms && errors.terms && (
+                <FormHelperText sx={{ px: 2 }} error>
+                  {errors.terms}
+                </FormHelperText>
+              )}
             </Stack>
-            {touched.photo && errors.photo && (
-              <FormHelperText sx={{ px: 2, display: 'block' }} error>
-                {errors.photo}
-              </FormHelperText>
-            )}
-          </div>
 
-          <Stack>
-            <FormControlLabel
-              control={<Checkbox {...getFieldProps('terms')} checked={values.terms} />}
-              label=" Terms and Conditions"
-            />
-
-            {touched.terms && errors.terms && (
-              <FormHelperText sx={{ px: 2 }} error>
-                {errors.terms}
-              </FormHelperText>
-            )}
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              loading={isSubmitting}
+              disabled={!dirty}
+            >
+              Submit Formik Form
+            </LoadingButton>
           </Stack>
+        </Form>
+      </FormikProvider>
 
-          <LoadingButton
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
-            disabled={!dirty}
-          >
-            Submit Formik Form
-          </LoadingButton>
-        </Stack>
-      </Form>
-    </FormikProvider>
-
-    {openDevTool && <HelperFormik formik={formik} placement="left" />}
-  </>;
+      {openDevTool && <HelperFormik formik={formik} placement="left" />}
+    </>
+  );
 }

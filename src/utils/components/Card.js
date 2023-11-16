@@ -44,14 +44,14 @@ export default function Card({
   formButtonText = <Add />,
   formModalTitle,
   formModalSubTitle,
-  className,
+  className
 }) {
   const classes = useStyles();
 
   const navigate = useNavigate();
 
   return (
-    <MUICard className={`classes.root ${className || ""}`} variant="outlined" style={style}>
+    <MUICard className={`classes.root ${className || ''}`} variant="outlined" style={style}>
       <CardHeader
         action={
           <ButtonGroup>

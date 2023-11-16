@@ -46,9 +46,8 @@ export const useDataCard = ({
   route,
   onRowClick,
   items,
-  deleteFunction,
+  deleteFunction
 }) => {
-
   const dataTable = useDataTable({
     typename,
     model,
@@ -59,20 +58,16 @@ export const useDataCard = ({
     filter,
     onRowClick,
     items,
-    deleteFunction,
+    deleteFunction
   });
 
   const getHeaderAction = (headerButton, formComponent) => {
     if (formComponent) {
       return (
-        <CreateItemButton
-          icon={formButtonIcon}
-          text={formButtonText}
-          title={formModalTitle}
-        >
+        <CreateItemButton icon={formButtonIcon} text={formButtonText} title={formModalTitle}>
           {React.cloneElement(formComponent)}
         </CreateItemButton>
-      )
+      );
     }
     if (headerButton) {
       return headerButton;
@@ -83,16 +78,8 @@ export const useDataCard = ({
 
   const display = (
     <Card style={style}>
-      <CardHeader
-        title={title}
-        subTitle={subTitle}
-        action={getHeaderAction(headerButton, formComponent)}
-      />
-      <CardContent
-        style={{ height: '90%', width: '100%' }}
-      >
-        {children || dataTable.display}
-      </CardContent>
+      <CardHeader title={title} subTitle={subTitle} action={getHeaderAction(headerButton, formComponent)} />
+      <CardContent style={{ height: '90%', width: '100%' }}>{children || dataTable.display}</CardContent>
     </Card>
   );
 

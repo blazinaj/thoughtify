@@ -1,14 +1,6 @@
 import { useState } from 'react';
 // material
-import {
-  Button,
-  Dialog,
-  TextField,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  DialogContentText
-} from '@mui/material';
+import { Button, Dialog, TextField, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material';
 
 // ----------------------------------------------------------------------
 

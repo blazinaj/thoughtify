@@ -110,7 +110,8 @@ function FriendCard({ friend }) {
           right: 8,
           position: 'absolute'
         }}
-        size="large">
+        size="large"
+      >
         <Icon icon={moreVerticalFill} width={20} height={20} />
       </IconButton>
     </Card>

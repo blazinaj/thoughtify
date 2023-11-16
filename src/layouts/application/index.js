@@ -1,14 +1,14 @@
-import {useState} from 'react';
-import {Outlet} from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 // material
-import {styled, useTheme} from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 // hooks
 import useCollapseDrawer from '../../utils/hooks/useCollapseDrawer';
 //
 import ApplicationNavbar from './ApplicationNavbar';
 import ApplicationSidebar from './ApplicationSidebar';
-import LoadingScreen from "../../demo/components/LoadingScreen";
-import {useUserContext} from "../../contexts/UserContext";
+import LoadingScreen from '../../demo/components/LoadingScreen';
+import { useUserContext } from '../../contexts/UserContext';
 
 // ----------------------------------------------------------------------
 
@@ -49,10 +49,10 @@ export default function ApplicationLayout() {
   const { collapseClick } = useCollapseDrawer();
   const [open, setOpen] = useState(false);
 
-  const {isInitialized} = useUserContext();
+  const { isInitialized } = useUserContext();
 
   if (!isInitialized) {
-    return <LoadingScreen />
+    return <LoadingScreen />;
   }
 
   return (
