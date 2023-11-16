@@ -51,12 +51,12 @@ export const ThoughtInput = () => {
     
       Analyze this person's new thought and extract the following:
       
-      Summary
-      Similar thoughts
-      Emotions
-      People
-      Projects
-      Categories
+      summary
+      similar_thoughts
+      emotions
+      people
+      projects
+      categories
       
       New Thought:
       ${newThought.input}

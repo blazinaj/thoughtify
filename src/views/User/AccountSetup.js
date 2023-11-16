@@ -98,7 +98,7 @@ export const AccountSetup = ({setupUserAccount, cognitoUser, onComplete}) => {
 
           <MotionInView variants={varFadeInUp}>
             <Typography variant="h3">
-              Let's get started with Edify!
+              Let's get started with Thoughtify!
             </Typography>
           </MotionInView>
           <Grid item xs={12} md={8} sx={{ mb: 5 }}>

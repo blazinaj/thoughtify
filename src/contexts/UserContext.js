@@ -5,12 +5,9 @@ import {setupUserAccount} from "../api/users/setupUserAccount";
 import {DataStore} from "@aws-amplify/datastore";
 import {User} from "../models";
 import {useCognitoContext} from "./CognitoContext";
-import {getUser as fetchUser2} from "../api/users/getUser";
 
 const initialState = {
   user: null,
-  personalTutor: null,
-  tokenWallet: null,
   isInitialized: false,
   owner: null,
   attributes: null,
