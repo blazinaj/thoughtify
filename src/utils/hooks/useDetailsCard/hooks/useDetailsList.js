@@ -27,7 +27,7 @@ export const useDetailsList = ({ item, fields = [], fieldConfig }) => {
     <div className={classes.root}>
       <List component="nav" aria-label="main mailbox folders">
         {fields.map((field, index) => (
-          <DetailsListItem item={item} field={field} key={`details-list-item${index}`} fieldConfig={fieldConfig}/>
+          <DetailsListItem item={item} field={field} key={`details-list-item${index}`} fieldConfig={fieldConfig} />
         ))}
       </List>
     </div>
@@ -49,17 +49,17 @@ const DetailsListItem = ({ field, item, fieldConfig }) => (
   <span>
     <Divider />
     <ListItem button>
-      <ListItemAvatar style={{width: "100px", textTransform: "capitalize", fontWeight: "bold"}}>{field}</ListItemAvatar>
-      {
-        fieldConfig?.[field] ?
-          React.cloneElement(fieldConfig[field]?.component, {
-            item,
-              field
-            }
-          )
-         :  <ListItemText primary={item?.[field]} />
-      }
-
+      <ListItemAvatar style={{ width: '100px', textTransform: 'capitalize', fontWeight: 'bold' }}>
+        {field}
+      </ListItemAvatar>
+      {fieldConfig?.[field] ? (
+        React.cloneElement(fieldConfig[field]?.component, {
+          item,
+          field
+        })
+      ) : (
+        <ListItemText primary={item?.[field]} />
+      )}
     </ListItem>
   </span>
 );

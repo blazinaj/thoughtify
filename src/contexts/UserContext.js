@@ -1,29 +1,28 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {AccountSetup} from "../views/User/AccountSetup";
-import {useNavigate} from "react-router-dom";
-import {setupUserAccount} from "../api/users/setupUserAccount";
-import {DataStore} from "@aws-amplify/datastore";
-import {User} from "../models";
-import {useCognitoContext} from "./CognitoContext";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { AccountSetup } from '../views/User/AccountSetup';
+import { useNavigate } from 'react-router-dom';
+import { setupUserAccount } from '../api/users/setupUserAccount';
+import { DataStore } from '@aws-amplify/datastore';
+import { User } from '../models';
+import { useCognitoContext } from './CognitoContext';
 
 const initialState = {
   user: null,
   isInitialized: false,
   owner: null,
-  attributes: null,
+  attributes: null
 };
 
 const UserContext = createContext(initialState);
 
 const UserContextProvider = ({ children }) => {
-
-  const {cognitoUser} = useCognitoContext();
+  const { cognitoUser } = useCognitoContext();
 
   /**
    * TODO: sync user object with database changes
    * Holds the internal user object.
    */
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   const [showAccountSetup, setShowAccountSetup] = useState(false);
 
@@ -36,61 +35,52 @@ const UserContextProvider = ({ children }) => {
 
   const initiateAccountSetup = async () => {
     setShowAccountSetup(true);
-  }
+  };
 
-  const onAccountSetupComplete = async ({user, cognitoUser}) => {
-
-    console.log("Account Setup Complete", {user, cognitoUser})
-    setUser(user)
+  const onAccountSetupComplete = async ({ user, cognitoUser }) => {
+    console.log('Account Setup Complete', { user, cognitoUser });
+    setUser(user);
 
     setShowAccountSetup(false);
-    navigate('/thoughts')
-  }
+    navigate('/thoughts');
+  };
 
   /**
    * Fetches the user object from the database based on the cognitoSub field matching the logged in cognito user.
    * @returns {Promise<void>}
    */
-  const fetchUser = async ({username}) => {
-
+  const fetchUser = async ({ username }) => {
     const cognitoUsername = username;
 
-    console.log("Fetching User Object", {cognitoUsername})
-    const user = await DataStore.query(
-        User,
-        user => user.cognitoSub.eq(cognitoUsername)
-    )
+    console.log('Fetching User Object', { cognitoUsername });
+    const user = await DataStore.query(User, (user) => user.cognitoSub.eq(cognitoUsername));
 
     // When the cognito user changes, fetch the user object.
     // If the user object doesn't exist, then create it.
     if (cognitoUsername) {
-
       if (user[0]) {
-        console.log("CURRENT USER OBJECT: ", user)
-        setUser(user[0])
-      }
-      else {
-
-        console.log("NO CURRENT USER OBJECT, INITIATING ACCOUNT SETUP")
+        console.log('CURRENT USER OBJECT: ', user);
+        setUser(user[0]);
+      } else {
+        console.log('NO CURRENT USER OBJECT, INITIATING ACCOUNT SETUP');
 
         await initiateAccountSetup();
-
       }
     }
-  }
+  };
 
   const onDeleteUser = () => {
-    alert('User is deleted')
-  }
+    alert('User is deleted');
+  };
 
   useEffect(() => {
-    console.log("Current Cognito User Has changed: ", cognitoUser?.username)
+    console.log('Current Cognito User Has changed: ', cognitoUser?.username);
     if (cognitoUser?.username) {
-      fetchUser({username: cognitoUser?.username}).then(() => {
-        setIsInitialized(true)
-      })
+      fetchUser({ username: cognitoUser?.username }).then(() => {
+        setIsInitialized(true);
+      });
     }
-  }, [cognitoUser?.username])
+  }, [cognitoUser?.username]);
 
   return (
     <UserContext.Provider
@@ -98,21 +88,22 @@ const UserContextProvider = ({ children }) => {
         user,
         isInitialized,
         owner: user?.username,
-        onDeleteUser,
+        onDeleteUser
       }}
     >
-      {
-        showAccountSetup ?
-          <AccountSetup
-            cognitoUser={cognitoUser}
-            setupUserAccount={setupUserAccount}
-            onComplete={onAccountSetupComplete}
-          /> : children
-      }
+      {showAccountSetup ? (
+        <AccountSetup
+          cognitoUser={cognitoUser}
+          setupUserAccount={setupUserAccount}
+          onComplete={onAccountSetupComplete}
+        />
+      ) : (
+        children
+      )}
     </UserContext.Provider>
   );
-}
+};
 
-const useUserContext = () => useContext(UserContext)
+const useUserContext = () => useContext(UserContext);
 
 export { UserContextProvider, UserContext, useUserContext };

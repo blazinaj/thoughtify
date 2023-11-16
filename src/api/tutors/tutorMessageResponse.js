@@ -1,3 +1,1 @@
-export const tutorMessageResponse = () => {
-
-}
+export const tutorMessageResponse = () => {};

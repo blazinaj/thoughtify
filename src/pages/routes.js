@@ -1,5 +1,5 @@
-import {lazy, Suspense} from 'react';
-import {Navigate, useRoutes} from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import MainLayout from '../layouts/marketing';
 import ApplicationLayout from '../layouts/application';
@@ -13,7 +13,6 @@ import LoadingScreen from '../demo/components/LoadingScreen';
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) => {
-
   return (
     <Suspense
       fallback={
@@ -47,59 +46,59 @@ const Loadable = (Component) => (props) => {
  * @constructor
  */
 export default function Router() {
-  return useRoutes([
+  return useRoutes(
+    [
+      // Marketing Routes
+      {
+        path: '/',
+        element: <MainLayout />,
+        children: [
+          { path: '/', element: <LandingPage /> },
+          { path: 'about-us', element: <About /> },
+          { path: 'contact-us', element: <Contact /> },
+          { path: 'faqs', element: <Faqs /> },
+          { path: 'privacy', element: <Privacy /> },
+          { path: 'terms-and-conditions', element: <TermsAndConditions /> },
+          { path: 'pricing', element: <Pricing /> }
+        ]
+      },
 
-    // Marketing Routes
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
-        { path: '/', element: <LandingPage /> },
-        { path: 'about-us', element: <About /> },
-        { path: 'contact-us', element: <Contact /> },
-        { path: 'faqs', element: <Faqs /> },
-        { path: 'privacy', element: <Privacy/> },
-        { path: 'terms-and-conditions', element: <TermsAndConditions/> },
-        { path: 'pricing', element: <Pricing /> },
-      ]
-    },
+      // User Application Routes
+      {
+        path: '/',
+        element: (
+          <AuthGuard>
+            <ApplicationLayout />
+          </AuthGuard>
+        ),
+        children: [
+          { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
+          { path: 'journal', element: <JournalPage /> },
+          { path: 'biography', element: <BiographyPage /> },
+          { path: 'user/*', element: <UserAccountPage /> },
+          { path: 'health', element: <HealthPage /> }
+        ]
+      },
 
-    // User Application Routes
-    {
-      path: '/',
-      element: (
-        <AuthGuard>
-          <ApplicationLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
-        { path: 'journal', element: <JournalPage /> },
-        { path: 'biography', element: <BiographyPage /> },
-        { path: 'user/*', element: <UserAccountPage /> },
-        { path: 'health', element: <HealthPage /> },
-      ]
-    },
+      // Redirects the home page to the lesson dashboard
+      { path: 'home', element: <Navigate to={'/thoughts'} /> },
 
-
-
-    // Redirects the home page to the lesson dashboard
-    {path: 'home', element: <Navigate to={"/thoughts"}/>},
-
-    // Wildcard Routes, used to display pages keeping the path intact
-    {
-      path: '*',
-      element: <LogoOnlyLayout />,
-      children: [
-        { path: 'coming-soon', element: <ComingSoon /> },
-        { path: 'maintenance', element: <Maintenance /> },
-        { path: 'payment', element: <Payment /> },
-        { path: '500', element: <Page500 /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" replace /> }
-      ]
-    },
-  ], "");
+      // Wildcard Routes, used to display pages keeping the path intact
+      {
+        path: '*',
+        element: <LogoOnlyLayout />,
+        children: [
+          { path: 'coming-soon', element: <ComingSoon /> },
+          { path: 'maintenance', element: <Maintenance /> },
+          { path: 'payment', element: <Payment /> },
+          { path: '500', element: <Page500 /> },
+          { path: '404', element: <NotFound /> },
+          { path: '*', element: <Navigate to="/404" replace /> }
+        ]
+      }
+    ],
+    ''
+  );
 }
 
 // IMPORT COMPONENTS

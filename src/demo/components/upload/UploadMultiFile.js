@@ -114,7 +114,11 @@ export default function UploadMultiFile({ error, showPreview = false, files, onR
 
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             Drop files here or click&nbsp;
-            <Typography variant="body2" component="span" sx={{ color: 'primary.marketing', textDecoration: 'underline' }}>
+            <Typography
+              variant="body2"
+              component="span"
+              sx={{ color: 'primary.marketing', textDecoration: 'underline' }}
+            >
               browse
             </Typography>
             &nbsp;thorough your machine

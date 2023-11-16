@@ -41,7 +41,7 @@ MenuMobileItem.propTypes = {
 };
 
 function MenuMobileItem({ item = {}, isOpen, isActive, onOpen }) {
-  const { title, path, icon, children } = (item || {});
+  const { title, path, icon, children } = item || {};
 
   if (children) {
     return (

@@ -68,12 +68,7 @@ export const CreateItemButton = ({
 
   return (
     <div>
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => setOpen(true)}
-        startIcon={formButtonIcon}
-      >
+      <Button variant="outlined" color="primary" onClick={() => setOpen(true)} startIcon={formButtonIcon}>
         {text}
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby="form-dialog-title" fullWidth maxWidth="md">
@@ -86,8 +81,7 @@ export const CreateItemButton = ({
             <DefaultForm item={item} fieldConfig={fieldConfig} setItem={setItem} model={model} />
           )}
         </DialogContent>
-        {
-          model &&
+        {model && (
           <DialogActions>
             <Button onClick={cancel} color="primary">
               Cancel
@@ -96,8 +90,7 @@ export const CreateItemButton = ({
               Submit
             </Button>
           </DialogActions>
-        }
-
+        )}
       </Dialog>
     </div>
   );

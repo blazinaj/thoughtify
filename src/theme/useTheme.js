@@ -1,13 +1,13 @@
-import useSettings from "../utils/hooks/useSettings";
-import palette from "./palette";
-import shadows, {customShadows} from "./shadows";
-import {alpha, createTheme} from "@mui/material/styles";
-import {useMemo} from "react";
-import shape from "./shape";
-import typography from "./typography";
-import breakpoints from "./breakpoints";
-import {adaptV4Theme} from "@mui/material";
-import componentsOverride from "./overrides";
+import useSettings from '../utils/hooks/useSettings';
+import palette from './palette';
+import shadows, { customShadows } from './shadows';
+import { alpha, createTheme } from '@mui/material/styles';
+import { useMemo } from 'react';
+import shape from './shape';
+import typography from './typography';
+import breakpoints from './breakpoints';
+import { adaptV4Theme } from '@mui/material';
+import componentsOverride from './overrides';
 
 /**
  * Creates the theme object to and modifies it based on the user settings.
@@ -23,11 +23,10 @@ export const useTheme = () => {
     let _palette = {};
 
     if (isLight) {
-      _palette = {...palette.light};
+      _palette = { ...palette.light };
       _palette.mode = 'light';
-    }
-    else {
-      _palette = {...palette.dark};
+    } else {
+      _palette = { ...palette.dark };
       _palette.mode = 'dark';
     }
 
@@ -36,15 +35,14 @@ export const useTheme = () => {
     }
 
     return _palette;
-  }
+  };
 
   const getCustomShadows = () => {
-    let _customShadows = {...customShadows.light};
+    let _customShadows = { ...customShadows.light };
 
     if (isLight) {
       _customShadows = customShadows.light;
-    }
-    else {
+    } else {
       _customShadows = customShadows.dark;
     }
 
@@ -53,7 +51,7 @@ export const useTheme = () => {
     }
 
     return _customShadows;
-  }
+  };
 
   const themeOptions = useMemo(
     () => ({
@@ -63,7 +61,7 @@ export const useTheme = () => {
       breakpoints,
       direction: themeDirection,
       shadows: isLight ? shadows.light : shadows.dark,
-      customShadows: getCustomShadows(),
+      customShadows: getCustomShadows()
     }),
     [themeDirection, isLight, setColor]
   );
@@ -72,6 +70,6 @@ export const useTheme = () => {
   theme.components = componentsOverride(theme);
 
   return {
-    theme,
-  }
-}
+    theme
+  };
+};

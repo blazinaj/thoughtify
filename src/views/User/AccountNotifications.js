@@ -14,18 +14,17 @@ const TEACHER_OPTIONS = [
   {
     value: 'activityComments',
     label: 'Email me when someone enrolls in my Lesson'
-  },
+  }
 ];
 
 const STUDENT_OPTIONS = [
   { value: 'lessonDigests', label: 'Weekly lesson digest' },
-  { value: 'lessonSuggestions', label: 'Weekly lesson suggestions' },
+  { value: 'lessonSuggestions', label: 'Weekly lesson suggestions' }
 ];
 
 const APPLICATION_OPTIONS = [
   { value: 'applicationNews', label: 'News and announcements' },
-  { value: 'applicationProduct', label: 'Product updates' },
-
+  { value: 'applicationProduct', label: 'Product updates' }
 ];
 
 // ----------------------------------------------------------------------
@@ -58,9 +57,7 @@ export default function AccountNotifications() {
     <Card sx={{ p: 3 }}>
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-
           <Stack spacing={3} alignItems="flex-end">
-
             <Stack spacing={2} sx={{ width: 1 }}>
               <Typography variant="overline" sx={{ color: 'text.secondary' }}>
                 Application
@@ -108,7 +105,6 @@ export default function AccountNotifications() {
                 ))}
               </Stack>
             </Stack>
-
           </Stack>
         </Form>
       </FormikProvider>

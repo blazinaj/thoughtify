@@ -63,7 +63,8 @@ function ColorCard({ hexColor, variation, onCopy }) {
               position: 'absolute',
               color: theme.palette.getContrastText(hexColor)
             }}
-            size="large">
+            size="large"
+          >
             <Icon icon={copyFill} width={20} height={20} />
           </IconButton>
         </Tooltip>

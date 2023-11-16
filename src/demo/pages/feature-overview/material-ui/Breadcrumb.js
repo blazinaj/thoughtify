@@ -59,11 +59,19 @@ export default function BreadcrumbComponent() {
           <Grid item xs={12} md={6}>
             <Block title="With Icon" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Breadcrumbs>
-                <Link color="inherit" href="feature-overview/material-ui#" sx={{ display: 'flex', alignItems: 'center' }}>
+                <Link
+                  color="inherit"
+                  href="feature-overview/material-ui#"
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                >
                   <HomeIcon sx={{ mr: 0.5, width: 20, height: 20 }} />
                   Material-UI
                 </Link>
-                <Link color="inherit" href="feature-overview/material-ui#" sx={{ display: 'flex', alignItems: 'center' }}>
+                <Link
+                  color="inherit"
+                  href="feature-overview/material-ui#"
+                  sx={{ display: 'flex', alignItems: 'center' }}
+                >
                   <WhatshotIcon sx={{ mr: 0.5, width: 20, height: 20 }} />
                   Core
                 </Link>

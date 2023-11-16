@@ -74,73 +74,75 @@ function SubMenu({ parent, pathname }) {
   };
 
   if (children) {
-    return <>
-      <ParentItem title={title} icon={icon} onClick={handleOpen} hasSub />
+    return (
+      <>
+        <ParentItem title={title} icon={icon} onClick={handleOpen} hasSub />
 
-      <Drawer
-        open={open}
-        onClose={handleClose}
-        ModalProps={{ keepMounted: true }}
-        PaperProps={{ sx: { width: DRAWER_WIDTH - 12 } }}
-      >
-        <Stack direction="row" alignItems="center" px={1} py={1.5}>
-          <IconButton onClick={handleClose} size="large">
-            <Icon icon={arrowIosBackFill} width={20} height={20} />
-          </IconButton>
-          <Typography noWrap variant="subtitle1" sx={{ ml: 1, textTransform: 'capitalize' }}>
-            {title}
-          </Typography>
-        </Stack>
-        <Divider />
-
-        <Scrollbar>
-          <Stack spacing={5} py={3}>
-            {children.map((list) => {
-              const { subheader, items } = list;
-
-              return (
-                <List key={subheader} disablePadding>
-                  <Typography
-                    component="div"
-                    variant="overline"
-                    sx={{ px: 2.5, mb: 1, color: 'text.secondary' }}
-                    noWrap
-                  >
-                    {subheader}
-                  </Typography>
-                  {items.map((link) => (
-                    <ListItemButton
-                      disableGutters
-                      key={link.title}
-                      component={RouterLink}
-                      to={link.path}
-                      sx={{ px: 1.5 }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          mr: 0.5,
-                          width: ICON_SIZE,
-                          height: ICON_SIZE,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                      >
-                        <Box sx={{ width: 4, height: 4, bgcolor: 'currentColor', borderRadius: '50%' }} />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={link.title}
-                        primaryTypographyProps={{ typography: 'body2', noWrap: true }}
-                      />
-                    </ListItemButton>
-                  ))}
-                </List>
-              );
-            })}
+        <Drawer
+          open={open}
+          onClose={handleClose}
+          ModalProps={{ keepMounted: true }}
+          PaperProps={{ sx: { width: DRAWER_WIDTH - 12 } }}
+        >
+          <Stack direction="row" alignItems="center" px={1} py={1.5}>
+            <IconButton onClick={handleClose} size="large">
+              <Icon icon={arrowIosBackFill} width={20} height={20} />
+            </IconButton>
+            <Typography noWrap variant="subtitle1" sx={{ ml: 1, textTransform: 'capitalize' }}>
+              {title}
+            </Typography>
           </Stack>
-        </Scrollbar>
-      </Drawer>
-    </>;
+          <Divider />
+
+          <Scrollbar>
+            <Stack spacing={5} py={3}>
+              {children.map((list) => {
+                const { subheader, items } = list;
+
+                return (
+                  <List key={subheader} disablePadding>
+                    <Typography
+                      component="div"
+                      variant="overline"
+                      sx={{ px: 2.5, mb: 1, color: 'text.secondary' }}
+                      noWrap
+                    >
+                      {subheader}
+                    </Typography>
+                    {items.map((link) => (
+                      <ListItemButton
+                        disableGutters
+                        key={link.title}
+                        component={RouterLink}
+                        to={link.path}
+                        sx={{ px: 1.5 }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            mr: 0.5,
+                            width: ICON_SIZE,
+                            height: ICON_SIZE,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          <Box sx={{ width: 4, height: 4, bgcolor: 'currentColor', borderRadius: '50%' }} />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={link.title}
+                          primaryTypographyProps={{ typography: 'body2', noWrap: true }}
+                        />
+                      </ListItemButton>
+                    ))}
+                  </List>
+                );
+              })}
+            </Stack>
+          </Scrollbar>
+        </Drawer>
+      </>
+    );
   }
 
   return <ParentItem component={RouterLink} title={title} icon={icon} to={path} />;

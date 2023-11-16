@@ -1,30 +1,29 @@
-
 // ----------------------------------------------------------------------
 
-import {darken, lighten, styled} from "@mui/material/styles";
-import {useEffect, useState} from "react";
-import {Autocomplete, Box, InputAdornment, TextField, Typography} from "@mui/material";
-import SearchNotFound from "../../demo/components/SearchNotFound";
-import {Icon} from "@iconify/react";
-import searchFill from "@iconify/icons-eva/search-fill";
-import match from "autosuggest-highlight/match";
-import parse from "autosuggest-highlight/parse";
-import {useNavigate} from "react-router-dom";
-import {Thought} from "../../models";
-import {useDatastore} from "../../utils/hooks/useDatastore";
-import Fuse from 'fuse.js'
-import useLocalStorage from "../../utils/hooks/useLocalStorage";
+import { darken, lighten, styled } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
+import { Autocomplete, Box, InputAdornment, TextField, Typography } from '@mui/material';
+import SearchNotFound from '../../demo/components/SearchNotFound';
+import { Icon } from '@iconify/react';
+import searchFill from '@iconify/icons-eva/search-fill';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import { useNavigate } from 'react-router-dom';
+import { Thought } from '../../models';
+import { useDatastore } from '../../utils/hooks/useDatastore';
+import Fuse from 'fuse.js';
+import useLocalStorage from '../../utils/hooks/useLocalStorage';
 
 const RootStyle = styled('div')(({ theme }) => ({
   '& .MuiAutocomplete-root': {
-    width: "100%",
-    mt: "2em",
+    width: '100%',
+    mt: '2em',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.easeInOut,
       duration: theme.transitions.duration.shorter
     }),
     '&.Mui-focused': {
-      width: "100%",
+      width: '100%',
       '& .MuiAutocomplete-inputRoot': {
         boxShadow: theme.customShadows.z12
       }
@@ -59,19 +58,17 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const [recentSearches, setRecentSearches] = useLocalStorage("thoughtify-application-searchbar-recents", []);
+  const [recentSearches, setRecentSearches] = useLocalStorage('thoughtify-application-searchbar-recents', []);
 
   const thoughtDatastore = useDatastore({
-    model: Thought,
-  })
+    model: Thought
+  });
 
   useEffect(() => {
     if (searchQuery === '') {
-      setSearchResults([
-        ...recentSearches.map(item => ({item: {...item, recentSearch: true, type: "thought"}})),
-      ]);
+      setSearchResults([...recentSearches.map((item) => ({ item: { ...item, recentSearch: true, type: 'thought' } }))]);
     }
-  }, [searchQuery])
+  }, [searchQuery]);
 
   const linkTo = (id) => `thoughts/${id}`;
 
@@ -83,11 +80,11 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
       const options = {
         includeScore: true,
         keys: ['input']
-      }
+      };
 
-      const fuse = new Fuse(thoughtDatastore.items, options)
+      const fuse = new Fuse(thoughtDatastore.items, options);
 
-      const result = fuse.search(value)
+      const result = fuse.search(value);
 
       if (value) {
         setSearchResults(result);
@@ -104,12 +101,11 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
   const navigate = useNavigate();
 
   const onClickSearchResult = (item, route) => {
-
     // add to recent searches
     // remove other recent searches with same id
 
-    setRecentSearches(r => {
-      const newRecentSearches = r.filter(i => i.id !== item.id);
+    setRecentSearches((r) => {
+      const newRecentSearches = r.filter((i) => i.id !== item.id);
       newRecentSearches.unshift(item);
       return newRecentSearches;
     });
@@ -118,7 +114,7 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
     setSearchQuery('');
     handleClose && handleClose();
     navigate(route || linkTo(item.id));
-  }
+  };
 
   return (
     <RootStyle
@@ -128,7 +124,7 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
             display: 'none'
           }
         }),
-        width: "100%",
+        width: '100%',
         ...sx
       }}
     >
@@ -138,7 +134,7 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
         disablePortal
         autoFocus
         popupIcon={null}
-        options={searchResults.map(r => r.item)}
+        options={searchResults.map((r) => r.item)}
         groupBy={(option) => option.recentSearch}
         disableCloseOnSelect
         onInputChange={handleChangeSearch}
@@ -176,11 +172,9 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
           const matches = match(name, inputValue);
           const parts = parse(name, matches);
           return (
-            <li
-              {...props}
-            >
+            <li {...props}>
               <Box
-                style={{height: "100%", width: "100%"}}
+                style={{ height: '100%', width: '100%' }}
                 onClick={() => {
                   onClickSearchResult(lesson);
                 }}
@@ -201,16 +195,14 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
         }}
         renderGroup={(params) => (
           <li key={params.key}>
-            <GroupHeader>
-              {searchQuery === '' ? 'Recent Searches' : 'Search Results'}
-            </GroupHeader>
+            <GroupHeader>{searchQuery === '' ? 'Recent Searches' : 'Search Results'}</GroupHeader>
             <GroupItems>{params.children}</GroupItems>
           </li>
         )}
       />
     </RootStyle>
   );
-}
+};
 
 const GroupHeader = styled('div')(({ theme }) => ({
   position: 'sticky',
@@ -220,11 +212,11 @@ const GroupHeader = styled('div')(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'light'
       ? lighten(theme.palette.primary.light, 0.85)
-      : darken(theme.palette.primary.main, 0.8),
+      : darken(theme.palette.primary.main, 0.8)
 }));
 
 const GroupItems = styled('ul')({
-  padding: 0,
+  padding: 0
 });
 
 export default ApplicationSearchbar;

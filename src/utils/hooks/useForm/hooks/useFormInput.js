@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useInitialState } from './useInitialState';
 
 /**
@@ -13,10 +13,10 @@ export const useFormInput = (fieldConfig, item, onChange) => {
   const { getInitialState: setInitialState } = useInitialState(fieldConfig, item, setInput);
 
   useEffect(() => {
-    if (typeof(onChange) === 'function') {
+    if (typeof onChange === 'function') {
       onChange(input);
     }
-  }, [input])
+  }, [input]);
 
   return [input, setInput, setInitialState];
 };

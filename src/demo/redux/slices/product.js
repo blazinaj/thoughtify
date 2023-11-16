@@ -2,8 +2,8 @@ import { sum, map, filter, uniqBy, reject } from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
 // utils
 import axios from '../../../utils/axios';
-import {DataStore} from "@aws-amplify/datastore";
-import {Thought} from "../../../models";
+import { DataStore } from '@aws-amplify/datastore';
+import { Thought } from '../../../models';
 
 // ----------------------------------------------------------------------
 
@@ -219,10 +219,9 @@ export function getProducts() {
   return async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
-
       DataStore.query(Thought).then((lessonPlans) => {
         dispatch(slice.actions.getProductsSuccess(lessonPlans));
-      })
+      });
 
       // const response = await axios.get('/api/products');
       // dispatch(slice.actions.getProductsSuccess(response.data.products));

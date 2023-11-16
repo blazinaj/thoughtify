@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
-import {DataStore} from '@aws-amplify/datastore';
-import {getItems} from '../functions/getItems';
-import {useDataStoreSubscription} from './useDataStoreSubscription';
-import {useBoolean} from '../../useBoolean';
-import {isNullOrUndefined} from '../../../functions/isNullOrUndefined';
+import { useEffect, useState } from 'react';
+import { DataStore } from '@aws-amplify/datastore';
+import { getItems } from '../functions/getItems';
+import { useDataStoreSubscription } from './useDataStoreSubscription';
+import { useBoolean } from '../../useBoolean';
+import { isNullOrUndefined } from '../../../functions/isNullOrUndefined';
 
 /**
  * Uses Amplify CLI Datastore for a single database model type
@@ -22,9 +22,8 @@ export const useDatastore = ({
   itemId,
   predicate,
   filter,
-  typename,
+  typename
 }) => {
-
   useEffect(() => {
     if (itemId) {
       console.log(`Fetching ${typename || model?.name} for: ${itemId}`);
@@ -57,7 +56,6 @@ export const useDatastore = ({
    * Queries the items from DataStore and stores into state
    */
   const handleQuery = () => {
-
     if (!model) {
       console.log(`No model provided for ${typename || model?.name}`);
       return;
@@ -80,7 +78,7 @@ export const useDatastore = ({
       }
 
       // exit the function
-      return ;
+      return;
     }
 
     /**
@@ -136,17 +134,14 @@ export const useDatastore = ({
    * Handle initial data loading
    */
   useEffect(() => {
-
     if (Array.isArray(itemsInit)) {
-      console.log(`DataStore is in a controlled state, passing update along..`)
-      setItems(itemsInit)
-    }
-    else {
-      console.log(`DataStore is in an uncontrolled state, handling automatic query..`)
+      console.log(`DataStore is in a controlled state, passing update along..`);
+      setItems(itemsInit);
+    } else {
+      console.log(`DataStore is in an uncontrolled state, handling automatic query..`);
       // Handle the query
       handleQuery();
     }
-
   }, [JSON.stringify({ itemId, predicate, itemsInit })]);
 
   return {

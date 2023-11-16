@@ -1,12 +1,12 @@
-import {useRef, useState} from 'react';
-import {Icon} from '@iconify/react';
+import { useRef, useState } from 'react';
+import { Icon } from '@iconify/react';
 import attach2Fill from '@iconify/icons-eva/attach-2-fill';
 import roundAddPhotoAlternate from '@iconify/icons-ic/round-add-photo-alternate';
 // material
-import {Box, Button, Card, IconButton, TextField} from '@mui/material';
-import {Post} from "../../../../../models";
-import {DataStore} from "@aws-amplify/datastore";
-import {useUserContext} from "../../../../../contexts/UserContext";
+import { Box, Button, Card, IconButton, TextField } from '@mui/material';
+import { Post } from '../../../../../models';
+import { DataStore } from '@aws-amplify/datastore';
+import { useUserContext } from '../../../../../contexts/UserContext';
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ export default function ProfilePostInput() {
     fileInputRef.current.click();
   };
 
-  const {user} = useUserContext();
+  const { user } = useUserContext();
 
   const [value, setValue] = useState('');
 
@@ -25,13 +25,12 @@ export default function ProfilePostInput() {
     if (user?.cognitoSub) {
       const d = DataStore.save(
         new Post({
-          "title": input.title,
+          title: input.title,
           userID: user?.cognitoSub
         })
-      )
+      );
     }
-
-  }
+  };
 
   return (
     <Card sx={{ p: 3 }}>
@@ -40,7 +39,7 @@ export default function ProfilePostInput() {
         fullWidth
         rows={4}
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
         placeholder="Share what you are thinking here..."
         sx={{
           '& fieldset': {
@@ -69,7 +68,7 @@ export default function ProfilePostInput() {
         <Button
           variant="contained"
           onClick={async () => {
-            await onSubmit({title: value})
+            await onSubmit({ title: value });
           }}
         >
           Post

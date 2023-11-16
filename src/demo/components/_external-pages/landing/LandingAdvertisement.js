@@ -5,8 +5,8 @@ import { styled } from '@mui/material/styles';
 import { Button, Box, Container, Typography } from '@mui/material';
 //
 import { varFadeInDown, varFadeInUp, MotionInView } from '../../animate';
-import {PATH_LEARN, PATH_TEACH} from "../../../routes/paths";
-import {paramCase} from "change-case";
+import { PATH_LEARN, PATH_TEACH } from '../../../routes/paths';
+import { paramCase } from 'change-case';
 
 // ----------------------------------------------------------------------
 

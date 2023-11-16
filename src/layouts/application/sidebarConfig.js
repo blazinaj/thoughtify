@@ -1,7 +1,7 @@
 import React from 'react';
 // routes
 // components
-import {getIcon} from '../../utils/functions/getIcon';
+import { getIcon } from '../../utils/functions/getIcon';
 // ----------------------------------------------------------------------
 
 const sidebarConfig = [
@@ -10,25 +10,25 @@ const sidebarConfig = [
       {
         title: 'Thoughts',
         icon: getIcon('mingcute:thought-line'),
-        path: '/thoughts',
+        path: '/thoughts'
       },
       {
         title: 'Journal',
         icon: getIcon('carbon:book'),
-        path: '/journal',
+        path: '/journal'
       },
       {
         title: 'Health',
         icon: getIcon('ri:health-book-line'),
-        path: '/health',
+        path: '/health'
       },
       {
         title: 'Biography',
         icon: getIcon('prime:book'),
-        path: '/biography',
-      },
+        path: '/biography'
+      }
     ]
-  },
+  }
 ];
 
 export default sidebarConfig;

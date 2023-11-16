@@ -15,11 +15,11 @@ export const useDetailsCard = ({ model, itemId, fields, typename, fieldConfig = 
     model,
     itemId,
     typename,
-    enableSubscription,
+    enableSubscription
   });
 
   useEffect(() => {
-    console.log(`Loading ${typename} Details: ` , { itemId, item });
+    console.log(`Loading ${typename} Details: `, { itemId, item });
   }, [itemId, item]);
 
   const list = useDetailsList({
@@ -31,7 +31,7 @@ export const useDetailsCard = ({ model, itemId, fields, typename, fieldConfig = 
   return {
     item,
     ...dataStore,
-    ...list,
+    ...list
     // display: handleLoader({component: list.display, isLoading})
   };
 };

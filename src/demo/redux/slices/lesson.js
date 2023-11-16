@@ -1,5 +1,5 @@
-import {filter, map, reject, sum, uniqBy} from 'lodash';
-import {createSlice} from '@reduxjs/toolkit';
+import { filter, map, reject, sum, uniqBy } from 'lodash';
+import { createSlice } from '@reduxjs/toolkit';
 // utils
 
 // ----------------------------------------------------------------------
@@ -13,7 +13,7 @@ const initialState = {
   filters: {
     priceRange: '',
     rating: '',
-    categories: [],
+    categories: []
   },
   checkout: {
     activeStep: 0,

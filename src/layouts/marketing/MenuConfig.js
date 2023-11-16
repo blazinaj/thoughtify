@@ -35,7 +35,7 @@ const menuConfig = [
           { title: 'Contact us', path: PATH_PAGE.contact },
           { title: 'Pricing', path: PATH_PAGE.pricing },
           { title: 'Privacy', path: PATH_PAGE.privacy },
-          { title: 'Terms and Conditions', path: '/terms-and-conditions' },
+          { title: 'Terms and Conditions', path: '/terms-and-conditions' }
         ]
       },
       {
@@ -43,7 +43,7 @@ const menuConfig = [
         items: [{ title: 'Dashboard', path: '/learn/dashboard' }]
       }
     ]
-  },
+  }
 ];
 
 export default menuConfig;

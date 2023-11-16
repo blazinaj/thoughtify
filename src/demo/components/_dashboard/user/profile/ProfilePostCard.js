@@ -142,27 +142,28 @@ export default function ProfilePostCard({ post }) {
 
         {hasComments && (
           <Stack spacing={1.5}>
-            {post.comments && post.comments.map((comment) => (
-              <Stack key={comment.id} direction="row" spacing={2}>
-                <Avatar alt={comment.author.name} src={comment.author.avatarUrl} />
-                <Paper sx={{ p: 1.5, flexGrow: 1, bgcolor: 'background.neutral' }}>
-                  <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    alignItems={{ sm: 'center' }}
-                    justifyContent="space-between"
-                    sx={{ mb: 0.5 }}
-                  >
-                    <Typography variant="subtitle2">{comment.author.name}</Typography>
-                    <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-                      {fDate(comment.createdAt)}
+            {post.comments &&
+              post.comments.map((comment) => (
+                <Stack key={comment.id} direction="row" spacing={2}>
+                  <Avatar alt={comment.author.name} src={comment.author.avatarUrl} />
+                  <Paper sx={{ p: 1.5, flexGrow: 1, bgcolor: 'background.neutral' }}>
+                    <Stack
+                      direction={{ xs: 'column', sm: 'row' }}
+                      alignItems={{ sm: 'center' }}
+                      justifyContent="space-between"
+                      sx={{ mb: 0.5 }}
+                    >
+                      <Typography variant="subtitle2">{comment.author.name}</Typography>
+                      <Typography variant="caption" sx={{ color: 'text.disabled' }}>
+                        {fDate(comment.createdAt)}
+                      </Typography>
+                    </Stack>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                      {comment.message}
                     </Typography>
-                  </Stack>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    {comment.message}
-                  </Typography>
-                </Paper>
-              </Stack>
-            ))}
+                  </Paper>
+                </Stack>
+              ))}
           </Stack>
         )}
 

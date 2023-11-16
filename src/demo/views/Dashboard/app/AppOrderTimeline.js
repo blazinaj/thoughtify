@@ -2,14 +2,7 @@ import faker from 'faker';
 import PropTypes from 'prop-types';
 // material
 import { Card, CardContent, CardHeader, Typography } from '@mui/material';
-import {
-  Timeline,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator
-} from '@mui/lab';
+import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab';
 // utils
 import { fDateTime } from '../../../../utils/functions/formatTime';
 

@@ -86,16 +86,15 @@ export const useTimeline = ({ title, items }) => {
     >
       <CardHeader title={title} />
       <CardContent>
-        {
-          items?.length > 0 ? (
-            <MUITimeline>
-              {items?.map((item, index) => (
-                <OrderItem key={item.title} item={item} isLast={index === TIMELINES.length - 1} />
-              ))}
-            </MUITimeline>
-          ) : <i>Timeline is Empty</i>
-        }
-
+        {items?.length > 0 ? (
+          <MUITimeline>
+            {items?.map((item, index) => (
+              <OrderItem key={item.title} item={item} isLast={index === TIMELINES.length - 1} />
+            ))}
+          </MUITimeline>
+        ) : (
+          <i>Timeline is Empty</i>
+        )}
       </CardContent>
     </Card>
   );

@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
-import {Icon} from '@iconify/react';
+import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 // material
-import {alpha, styled} from '@mui/material/styles';
-import {AppBar, Box, IconButton, Slide, Stack, Toolbar} from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
+import { AppBar, Box, IconButton, Slide, Stack, Toolbar } from '@mui/material';
 // hooks
 import useCollapseDrawer from '../../utils/hooks/useCollapseDrawer';
 // components
-import {MHidden} from '../../demo/components/@material-extend';
+import { MHidden } from '../../demo/components/@material-extend';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
-import {useEffect, useState} from "react";
-import Searchbar from "./Searchbar";
+import { useEffect, useState } from 'react';
+import Searchbar from './Searchbar';
 
 // ----------------------------------------------------------------------
 
@@ -67,7 +67,6 @@ export default function ApplicationNavbar({ onOpenSidebar }) {
     let currentScrollPosition = 0;
 
     window.addEventListener('scroll', (e) => {
-
       // Get the new Value
       currentScrollPosition = window.pageYOffset;
 
@@ -84,7 +83,7 @@ export default function ApplicationNavbar({ onOpenSidebar }) {
   }, []);
 
   return (
-    <Slide direction={"down"} in={show} >
+    <Slide direction={'down'} in={show}>
       <RootStyle
         sx={{
           ...(isCollapse && {
@@ -94,15 +93,12 @@ export default function ApplicationNavbar({ onOpenSidebar }) {
       >
         <ToolbarStyle>
           <MHidden width="lgUp">
-            <IconButton
-              onClick={onOpenSidebar}
-              sx={{ mr: 1, color: 'text.primary' }}
-              size="large">
+            <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }} size="large">
               <Icon icon={menu2Fill} />
             </IconButton>
           </MHidden>
 
-          <Searchbar/>
+          <Searchbar />
 
           <Box sx={{ flexGrow: 1 }} />
 

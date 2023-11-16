@@ -128,7 +128,8 @@ export default function Outlined() {
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
-                    size="large">
+                    size="large"
+                  >
                     {values.showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>

@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 // hooks
 import useAuth from '../utils/hooks/useAuth';
 // routes
-import {PATH_DASHBOARD, PATH_LEARN} from '../demo/routes/paths';
+import { PATH_DASHBOARD, PATH_LEARN } from '../demo/routes/paths';
 
 // ----------------------------------------------------------------------
 

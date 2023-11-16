@@ -3,19 +3,20 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, Typography, useMediaQuery } from '@mui/material';
 //
 import { varFadeInUp, MotionInView, varFadeInDown } from '../../animate';
-import {useState} from "react";
+import { useState } from 'react';
 // ----------------------------------------------------------------------
 
 const CARDS = [
   {
     icon: '/static/icons/elephant.svg',
     title: 'Save your thoughts',
-    description: 'Record your thoughts, notes, events, or anything else you want to remember.',
+    description: 'Record your thoughts, notes, events, or anything else you want to remember.'
   },
   {
     icon: '/static/icons/ic_code.svg',
     title: 'Organize your thoughts',
-    description: 'Artificial Intelligence automatically extracts the most important information from your thoughts, categorizes them, groups them, and makes them searchable.'
+    description:
+      'Artificial Intelligence automatically extracts the most important information from your thoughts, categorizes them, groups them, and makes them searchable.'
   },
   {
     icon: '/static/icons/ic_design.svg',

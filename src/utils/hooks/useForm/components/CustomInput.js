@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import RichText from './RichText';
 import Switch from './Switch';
@@ -7,9 +7,8 @@ import ImagePicker from './ImagePicker';
 import DatePicker from './DatePicker';
 import FileInput from './FileInput';
 import Dropdown from './Dropdown';
-import {generateId} from '../../../functions/generateId';
-import {Checkbox, FormControlLabel, TextareaAutosize} from "@mui/material";
-
+import { generateId } from '../../../functions/generateId';
+import { Checkbox, FormControlLabel, TextareaAutosize } from '@mui/material';
 
 /**
  * Custom Input Component handler for the useForm hook
@@ -87,16 +86,15 @@ const CustomInput = ({
   onKeyDown,
   config = {
     // checkbox
-    labelPlacement: "end",
+    labelPlacement: 'end'
   }
 }) => {
   const onChange = (value) => {
     const newInput = { ...input };
 
-    if (inputType === "number") {
-      newInput[fieldName] = parseInt(value, 10)
-    }
-    else {
+    if (inputType === 'number') {
+      newInput[fieldName] = parseInt(value, 10);
+    } else {
       newInput[fieldName] = value;
     }
 
@@ -204,7 +202,7 @@ const CustomInput = ({
                 autoComplete="new-password"
                 style={{ width: '100%' }}
               />
-            )
+            );
           case 'checkbox':
             return (
               <FormControlLabel
@@ -242,7 +240,7 @@ const CustomInput = ({
                       onKeyDown={onKeyDown}
                       error={isInvalid}
                       style={{ width: '100%' }}
-                      inputProps={inputType === "number" && { inputMode: 'numeric', pattern: '[0-9]*' }}
+                      inputProps={inputType === 'number' && { inputMode: 'numeric', pattern: '[0-9]*' }}
                       helperText={
                         required &&
                         (input[fieldName] === '' || input[fieldName] === null || input[fieldName] === undefined)

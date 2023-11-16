@@ -6,4 +6,4 @@ export const signOut = async () => {
   } catch (error) {
     console.log('error signing out: ', error);
   }
-}
+};

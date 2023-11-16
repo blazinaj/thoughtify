@@ -1,10 +1,8 @@
-import {DataStore} from "@aws-amplify/datastore";
-import {Notification, User} from "../../models";
+import { DataStore } from '@aws-amplify/datastore';
+import { Notification, User } from '../../models';
 
-
-export const setupUserAccount = async ({cognitoUser, userData}) => {
-
-  console.log('Setting up a new User Account for the Cognito User', {cognitoUser, userData})
+export const setupUserAccount = async ({ cognitoUser, userData }) => {
+  console.log('Setting up a new User Account for the Cognito User', { cognitoUser, userData });
 
   const username = cognitoUser?.username;
   const cognitoSub = cognitoUser?.attributes.sub;
@@ -14,29 +12,32 @@ export const setupUserAccount = async ({cognitoUser, userData}) => {
   const phone = cognitoUser?.attributes.phone_number;
   const profileImage = cognitoUser?.attributes.profileImage;
 
-  console.log("Creating a new User Object")
+  console.log('Creating a new User Object');
 
-  const newUser = await DataStore.save(new User({
-    cognitoSub: username,
-    firstName,
-    lastName,
-    email,
-    phone,
-    profileImage,
-    bio: userData.bio,
-  }))
+  const newUser = await DataStore.save(
+    new User({
+      cognitoSub: username,
+      firstName,
+      lastName,
+      email,
+      phone,
+      profileImage,
+      bio: userData.bio
+    })
+  );
 
-  console.log("Creating a new Welcome Notification")
+  console.log('Creating a new Welcome Notification');
   // Create a welcome notification
-  await DataStore.save(new Notification({
-    title: "Welcome to Thoughtify!",
-    content: "We're excited to have you here!",
-    type: "MESSAGE",
-    userID: username,
-  }))
+  await DataStore.save(
+    new Notification({
+      title: 'Welcome to Thoughtify!',
+      content: "We're excited to have you here!",
+      type: 'MESSAGE',
+      userID: username
+    })
+  );
 
   return {
-    user: newUser,
-  }
-
-}
+    user: newUser
+  };
+};

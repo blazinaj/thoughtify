@@ -36,12 +36,7 @@ export const useDetails = ({ itemId, item: inputItem, model, fields, setItem, ti
   const subTitleComponent = <Tooltip children={<span>{ID}</span>} title={<span>{JSON.stringify(item)}</span>} />;
 
   const card = (
-    <Card
-      title={title}
-      route={route}
-      subTitle={subTitle || subTitleComponent}
-      refreshFunction={reset}
-    >
+    <Card title={title} route={route} subTitle={subTitle || subTitleComponent} refreshFunction={reset}>
       {display}
     </Card>
   );

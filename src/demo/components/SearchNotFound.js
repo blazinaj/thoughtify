@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { Box, Typography, Button } from '@mui/material';
 import { AutoAwesome } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import {Thought} from "../../models";
-import {DataStore} from "@aws-amplify/datastore";
+import { Thought } from '../../models';
+import { DataStore } from '@aws-amplify/datastore';
 
 // ----------------------------------------------------------------------
 
 export default function SearchNotFound({ searchQuery = '', onClickSearchResult, ...other }) {
-
   const navigate = useNavigate();
 
   return (
@@ -21,15 +20,14 @@ export default function SearchNotFound({ searchQuery = '', onClickSearchResult, 
         No results found for &nbsp;
         <strong>&quot;{searchQuery}&quot;</strong>. Try checking for typos or
         <Button
-          startIcon={
-            <AutoAwesome/>
-          }
+          startIcon={<AutoAwesome />}
           onClick={() => {
-            searchQuery !== '' && DataStore.save(
+            searchQuery !== '' &&
+              DataStore.save(
                 new Thought({
-                    input: searchQuery,
+                  input: searchQuery
                 })
-            )
+              );
           }}
         >
           Save a Thought

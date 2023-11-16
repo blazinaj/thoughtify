@@ -1,45 +1,35 @@
-import {API, graphqlOperation} from "aws-amplify";
+import { API, graphqlOperation } from 'aws-amplify';
 
-export const getQuery = async (
-    {
-        model,
-        id,
-        fields,
-        primaryKey = 'id'
-    }) => {
+export const getQuery = async ({ model, id, fields, primaryKey = 'id' }) => {
+  if (!model) {
+    throw new Error('No model specified');
+  }
 
-    if (!model) {
-        throw new Error("No model specified")
-    }
+  const queryName = `Get${model.name}`;
+  const responseName = `get${model.name}`;
 
-    const queryName = `Get${model.name}`;
-    const responseName = `get${model.name}`;
+  const typename = model.name;
 
-    const typename = model.name;
+  console.log('Performing getQuery on model: ', typename);
 
-    console.log("Performing getQuery on model: ", typename);
-
-    const query = `
+  const query = `
         query ${queryName}($${primaryKey}:ID!) {
           ${responseName}(${primaryKey}:$${primaryKey}) {
             ${primaryKey}
-            ${typeof(fields) === 'string' ? fields : fields.map(field => field.name).join("\n")}
+            ${typeof fields === 'string' ? fields : fields.map((field) => field.name).join('\n')}
           }
         }
-  `
+  `;
 
-    const apiResponse = await API.graphql(
-        graphqlOperation(
-            query,
-            {
-                [primaryKey]: id,
-            },
-        )
-    )
+  const apiResponse = await API.graphql(
+    graphqlOperation(query, {
+      [primaryKey]: id
+    })
+  );
 
-    const result = apiResponse.data[responseName];
+  const result = apiResponse.data[responseName];
 
-    console.log(`Fetched ${typename}: `, {result})
+  console.log(`Fetched ${typename}: `, { result });
 
-    return result;
-}
+  return result;
+};

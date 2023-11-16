@@ -3,7 +3,7 @@ import useAuth from '../../utils/hooks/useAuth';
 //
 import { MAvatar } from './@material-extend';
 import createAvatar from '../../utils/createAvatar';
-import {useUserContext} from "../../contexts/UserContext";
+import { useUserContext } from '../../contexts/UserContext';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ import {useUserContext} from "../../contexts/UserContext";
 export default function MyAvatar({ ...other }) {
   // const { user } = useAuth();
 
-  const { user } = useUserContext()
+  const { user } = useUserContext();
 
   return (
     <MAvatar

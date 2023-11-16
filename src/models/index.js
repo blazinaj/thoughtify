@@ -3,14 +3,9 @@ import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
 const NotificationType = {
-  "MESSAGE": "MESSAGE"
+  MESSAGE: 'MESSAGE'
 };
 
 const { Thought, Notification, User } = initSchema(schema);
 
-export {
-  Thought,
-  Notification,
-  User,
-  NotificationType
-};
+export { Thought, Notification, User, NotificationType };

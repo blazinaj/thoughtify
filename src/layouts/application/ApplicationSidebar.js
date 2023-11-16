@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
-import {useEffect} from 'react';
-import {Link as RouterLink, useLocation} from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
-import {alpha, styled} from '@mui/material/styles';
-import {Box, CardActionArea, Drawer, Stack, Tooltip} from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
+import { Box, CardActionArea, Drawer, Stack, Tooltip } from '@mui/material';
 // hooks
 import useCollapseDrawer from '../../utils/hooks/useCollapseDrawer';
 // routes
 // components
 import Scrollbar from '../../demo/components/Scrollbar';
 import NavSection from '../../demo/components/NavSection';
-import {MHidden} from '../../demo/components/@material-extend';
+import { MHidden } from '../../demo/components/@material-extend';
 //
 import sidebarConfig from './sidebarConfig';
-import {useTheme} from "../../theme/useTheme";
+import { useTheme } from '../../theme/useTheme';
 
 // ----------------------------------------------------------------------
 
@@ -75,8 +75,8 @@ function IconCollapse({ onToggleCollapse, collapseClick }) {
 }
 
 const EdifyLogo = styled('img')(({ theme }) => ({
-  borderRadius: "5px",
-    // filter: "invert(100%)",
+  borderRadius: '5px'
+  // filter: "invert(100%)",
 }));
 
 /**
@@ -89,10 +89,9 @@ const EdifyLogo = styled('img')(({ theme }) => ({
 const ApplicationSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
   const { pathname } = useLocation();
 
-    const {theme} = useTheme();
+  const { theme } = useTheme();
 
-    const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } =
-    useCollapseDrawer();
+  const { isCollapse, collapseClick, collapseHover, onHoverEnter, onHoverLeave } = useCollapseDrawer();
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -124,17 +123,20 @@ const ApplicationSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
         }}
       >
         <Box component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
-          <EdifyLogo src={theme?.palette?.mode === 'light' ? 'static/brand/Thoughtify-Logo-Black.svg' : '/static/brand/Thoughtify-Logo-White.svg'} alt="logo"  />
+          <EdifyLogo
+            src={
+              theme?.palette?.mode === 'light'
+                ? 'static/brand/Thoughtify-Logo-Black.svg'
+                : '/static/brand/Thoughtify-Logo-White.svg'
+            }
+            alt="logo"
+          />
         </Box>
       </Stack>
 
-      <NavSection
-        navConfig={sidebarConfig}
-        isShow={!isCollapse}
-      />
+      <NavSection navConfig={sidebarConfig} isShow={!isCollapse} />
 
       <Box sx={{ flexGrow: 1 }} />
-
     </Scrollbar>
   );
 
@@ -189,6 +191,6 @@ const ApplicationSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
       </MHidden>
     </RootStyle>
   );
-}
+};
 
 export default ApplicationSidebar;

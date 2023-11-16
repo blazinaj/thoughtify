@@ -130,9 +130,7 @@ export default function AnalyticsTasks() {
     initialValues: {
       checked: [TASKS[2]]
     },
-    onSubmit: (values) => {
-
-    }
+    onSubmit: (values) => {}
   });
 
   const { values, handleSubmit } = formik;

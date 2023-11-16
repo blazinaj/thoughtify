@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 // material
-import {adaptV4Theme, alpha, createTheme, StyledEngineProvider, ThemeProvider, useTheme} from '@mui/material/styles';
+import { adaptV4Theme, alpha, createTheme, StyledEngineProvider, ThemeProvider, useTheme } from '@mui/material/styles';
 // hooks
 import useLocales from '../utils/hooks/useLocales';
-import React, {useMemo} from "react";
-import useSettings from "../utils/hooks/useSettings";
-import componentsOverride from "../theme/overrides";
+import React, { useMemo } from 'react';
+import useSettings from '../utils/hooks/useSettings';
+import componentsOverride from '../theme/overrides';
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,6 @@ ThemeLocalizationProvider.propTypes = {
 };
 
 export default function ThemeLocalizationProvider({ children }) {
-
   const defaultTheme = useTheme();
 
   const { setColor } = useSettings();

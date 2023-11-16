@@ -1,8 +1,8 @@
-import Page from "../../demo/components/Page";
-import {Container} from "@mui/material";
-import HeaderBreadcrumbs from "../../demo/components/HeaderBreadcrumbs";
-import {UserAccount} from "../../views/User/UserAccount";
-import useSettings from "../../utils/hooks/useSettings";
+import Page from '../../demo/components/Page';
+import { Container } from '@mui/material';
+import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
+import { UserAccount } from '../../views/User/UserAccount';
+import useSettings from '../../utils/hooks/useSettings';
 
 /**
  * Displays the User Account Settings page
@@ -10,7 +10,6 @@ import useSettings from "../../utils/hooks/useSettings";
  * @constructor
  */
 const UserAccountPage = () => {
-
   const { themeStretch } = useSettings();
 
   return (
@@ -23,10 +22,10 @@ const UserAccountPage = () => {
             { name: 'Settings', href: '/user/account' }
           ]}
         />
-        <UserAccount/>
+        <UserAccount />
       </Container>
     </Page>
-  )
-}
+  );
+};
 
 export default UserAccountPage;

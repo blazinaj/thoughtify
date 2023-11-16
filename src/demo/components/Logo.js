@@ -17,7 +17,7 @@ export default function Logo({ sx }) {
 
   return (
     <Box sx={{ width: 40, height: 40, ...sx }}>
-      <img src={"./static/brand/Thoughtify-Icon.svg"} alt={"Thoughtify Icon"} />
+      <img src={'./static/brand/Thoughtify-Icon.svg'} alt={'Thoughtify Icon'} />
     </Box>
   );
 }

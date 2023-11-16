@@ -118,7 +118,7 @@ export const useForm = ({
     if (e.key === 'Enter') {
       onSubmit();
     }
-  }
+  };
 
   /**
    * The UI for the form

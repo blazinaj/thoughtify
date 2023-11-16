@@ -6,16 +6,7 @@ import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
-import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  IconButton,
-  InputAdornment,
-  Link,
-  Stack,
-  TextField
-} from '@mui/material';
+import { Button, Checkbox, FormControlLabel, IconButton, InputAdornment, Link, Stack, TextField } from '@mui/material';
 
 // ----------------------------------------------------------------------
 

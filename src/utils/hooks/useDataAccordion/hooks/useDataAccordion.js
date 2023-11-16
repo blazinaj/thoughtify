@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import {makeStyles} from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import DataAccordionItem from '../components/DataAccordionItem';
-import {useDatastore} from '../../useDatastore';
+import { useDatastore } from '../../useDatastore';
 
 /**
  * An accordion that utilizes a model query and subscription
@@ -44,7 +44,7 @@ export const useDataAccordion = ({
   handleIcon,
   titleField = 'name',
   subTitleField = 'description',
-  sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField]),
+  sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField])
 }) => {
   const classes = useStyles();
 
@@ -63,18 +63,18 @@ export const useDataAccordion = ({
         container
         justifyContent="space-between"
         sx={{
-          display: (title || description || createItemButton) ? undefined : 'none',
+          display: title || description || createItemButton ? undefined : 'none'
         }}
       >
         <Grid
           item
           sx={{
-            display: (title || description) ? undefined : 'none',
+            display: title || description ? undefined : 'none'
           }}
         >
           <h2
             style={{
-              display: (title) ? undefined : 'none',
+              display: title ? undefined : 'none'
             }}
           >
             <span style={{ marginRight: '1em' }}>{icon}</span>
@@ -82,9 +82,7 @@ export const useDataAccordion = ({
           </h2>
           {description && <Typography>{description}</Typography>}
         </Grid>
-        <Grid item>
-          {createItemButton}
-        </Grid>
+        <Grid item>{createItemButton}</Grid>
       </Grid>
       {items.sort(sortFunction).map((item, index) => (
         <DataAccordionItem
@@ -129,8 +127,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
     flexBasis: '20%',
-    alignSelf: "flex-end",
-    marginLeft: 'auto',
-},
+    alignSelf: 'flex-end',
+    marginLeft: 'auto'
+  },
   title: {}
 }));

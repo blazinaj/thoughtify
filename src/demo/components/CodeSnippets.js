@@ -30,7 +30,8 @@ export default function CodeSnippets({ source, title, sx }) {
             bottom: 8,
             position: 'absolute'
           }}
-          size="large">
+          size="large"
+        >
           <Icon icon={codeFill} width={20} height={20} />
         </IconButton>
       </Tooltip>

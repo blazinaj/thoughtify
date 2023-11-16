@@ -1,17 +1,17 @@
 import * as Yup from 'yup';
-import {useFormik} from 'formik';
-import {useState} from 'react';
-import {useSnackbar} from 'notistack';
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import { useSnackbar } from 'notistack';
 // material
-import {Box, Button, Card, Grid, Stack, Typography} from '@mui/material';
+import { Box, Button, Card, Grid, Stack, Typography } from '@mui/material';
 // redux
-import {useSelector} from '../../demo/redux/store';
+import { useSelector } from '../../demo/redux/store';
 // utils
 import fakeRequest from '../../utils/fakeRequest';
 //
 import AccountBillingPaymentMethod from '../../demo/components/_dashboard/user/account/AccountBillingPaymentMethod';
 import AccountBillingInvoiceHistory from '../../demo/components/_dashboard/user/account/AccountBillingInvoiceHistory';
-import {useUserContext} from "../../contexts/UserContext";
+import { useUserContext } from '../../contexts/UserContext';
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ export default function AccountBilling() {
   const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
-  const {user = {}} = useUserContext();
+  const { user = {} } = useUserContext();
 
   const NewCardSchema = Yup.object().shape({
     cardName: Yup.string().required('Name is required'),
@@ -67,7 +67,7 @@ export default function AccountBilling() {
                 position: { sm: 'absolute' },
                 top: { sm: 24 },
                 right: { sm: 24 },
-                display: "none", // temp
+                display: 'none' // temp
               }}
             >
               <Button size="small" color="inherit" variant="outlined" sx={{ mr: 1 }}>
@@ -78,7 +78,6 @@ export default function AccountBilling() {
               </Button>
             </Box>
           </Card>
-
         </Stack>
       </Grid>
     </Grid>

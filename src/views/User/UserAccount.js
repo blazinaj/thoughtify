@@ -1,20 +1,20 @@
-import {Icon} from '@iconify/react';
-import {capitalCase} from 'change-case';
-import {useEffect, useState} from 'react';
+import { Icon } from '@iconify/react';
+import { capitalCase } from 'change-case';
+import { useEffect, useState } from 'react';
 import bellFill from '@iconify/icons-eva/bell-fill';
 import roundReceipt from '@iconify/icons-ic/round-receipt';
 import roundAccountBox from '@iconify/icons-ic/round-account-box';
 // material
-import {Box, Stack, Tab, Tabs} from '@mui/material';
+import { Box, Stack, Tab, Tabs } from '@mui/material';
 // redux
-import {useDispatch} from '../../demo/redux/store';
-import {getAddressBook, getCards, getInvoices, getNotifications, getProfile} from '../../demo/redux/slices/user';
+import { useDispatch } from '../../demo/redux/store';
+import { getAddressBook, getCards, getInvoices, getNotifications, getProfile } from '../../demo/redux/slices/user';
 // routes
 // hooks
 // components
-import {AccountBilling, AccountGeneral, AccountNotifications} from '../../demo/components/_dashboard/user/account';
-import AccountDelete from "./AccountDelete";
-import AccountChangePassword from "./AccountChangePassword";
+import { AccountBilling, AccountGeneral, AccountNotifications } from '../../demo/components/_dashboard/user/account';
+import AccountDelete from './AccountDelete';
+import AccountChangePassword from './AccountChangePassword';
 
 // ----------------------------------------------------------------------
 
@@ -53,9 +53,9 @@ export const UserAccount = () => {
     },
     {
       value: 'delete-account',
-      icon: <Icon icon="mdi:delete-forever-outline" width={20} height={20} style={{color: "red"}} />,
+      icon: <Icon icon="mdi:delete-forever-outline" width={20} height={20} style={{ color: 'red' }} />,
       component: <AccountDelete />
-    },
+    }
   ];
 
   const handleChangeTab = (event, newValue) => {
@@ -81,6 +81,6 @@ export const UserAccount = () => {
       })}
     </Stack>
   );
-}
+};
 
 export default UserAccount;

@@ -6,7 +6,7 @@ import {
   DateRangePicker,
   MobileDateRangePicker,
   DesktopDateRangePicker,
-  StaticDateRangePicker,
+  StaticDateRangePicker
 } from '@mui/x-date-pickers-pro';
 
 import '@mui/lab';

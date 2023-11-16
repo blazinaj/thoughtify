@@ -1,10 +1,10 @@
-import React, {useMemo, useState} from 'react';
-import {DataGrid, GridActionsCellItem, GridColDef} from '@mui/x-data-grid';
-import {makeStyles} from '@mui/styles';
-import {useNavigate} from 'react-router-dom';
-import {useDatastore} from '../../useDatastore';
-import {useModal} from '../../useModal/hooks/useModal';
-import {Delete} from "@mui/icons-material";
+import React, { useMemo, useState } from 'react';
+import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
+import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router-dom';
+import { useDatastore } from '../../useDatastore';
+import { useModal } from '../../useModal/hooks/useModal';
+import { Delete } from '@mui/icons-material';
 
 /**
  * Display an array of data objects from Amplify Datastore in a table format
@@ -13,20 +13,18 @@ import {Delete} from "@mui/icons-material";
  * @param {GridColDef[]} fields - the column configuration
  * @returns {{display: JSX.Element}}
  */
-export const useDataTable = (
-  {
-    typename,
-    model,
-    columns,
-    items: itemsInit,
-    predicate,
-    detailsComponent,
-    route,
-    filter,
-    onRowClick: onRowClickProp,
-    deleteFunction,
-  }) => {
-
+export const useDataTable = ({
+  typename,
+  model,
+  columns,
+  items: itemsInit,
+  predicate,
+  detailsComponent,
+  route,
+  filter,
+  onRowClick: onRowClickProp,
+  deleteFunction
+}) => {
   /**
    * Datastore instance holding the state for this table
    */
@@ -77,7 +75,7 @@ export const useDataTable = (
     if (window.confirm('Are you sure you want to delete this item?')) {
       await deleteFunction(id);
     }
-  }
+  };
 
   // internal columns configuration with actions and other transforms applied
   const _columns = useMemo(() => {
@@ -86,22 +84,19 @@ export const useDataTable = (
 
       // add an actions column
       if (deleteFunction) {
-        newColumns.push(
-          {
-            field: 'actions',
-            type: 'actions',
-            header: "Actions",
-            getActions: (params) => [
-              <GridActionsCellItem icon={<Delete/>} onClick={() => handleDeleteFunction(params.id)} label="Delete" />,
-            ]
-          },
-        )
+        newColumns.push({
+          field: 'actions',
+          type: 'actions',
+          header: 'Actions',
+          getActions: (params) => [
+            <GridActionsCellItem icon={<Delete />} onClick={() => handleDeleteFunction(params.id)} label="Delete" />
+          ]
+        });
       }
 
       return newColumns;
     }
-
-  }, [columns, deleteFunction])
+  }, [columns, deleteFunction]);
 
   /**
    * Aggregrates the props that are passed to the DataGrid instance
@@ -109,7 +104,7 @@ export const useDataTable = (
   const dataGridProps = {
     rows: items,
     columns: _columns,
-    onRowClick,
+    onRowClick
   };
 
   /**
@@ -121,10 +116,7 @@ export const useDataTable = (
   const display = (
     <>
       {detailsModal.modal}
-      <DataGrid
-        className={classes.root}
-        {...dataGridProps}
-      />
+      <DataGrid className={classes.root} {...dataGridProps} />
     </>
   );
 
@@ -132,7 +124,7 @@ export const useDataTable = (
     display,
     items,
     setItems,
-    reset,
+    reset
   };
 };
 
