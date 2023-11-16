@@ -13,10 +13,8 @@ import {getAddressBook, getCards, getInvoices, getNotifications, getProfile} fro
 // hooks
 // components
 import {AccountBilling, AccountGeneral, AccountNotifications} from '../../demo/components/_dashboard/user/account';
-import {useUserContext} from "../../contexts/UserContext";
 import AccountDelete from "./AccountDelete";
 import AccountChangePassword from "./AccountChangePassword";
-import {testGetUser} from "../../api/users/testGetUser";
 
 // ----------------------------------------------------------------------
 
@@ -43,11 +41,11 @@ export const UserAccount = () => {
       icon: <Icon icon={roundReceipt} width={20} height={20} />,
       component: <AccountBilling />
     },
-    {
-      value: 'notifications',
-      icon: <Icon icon={bellFill} width={20} height={20} />,
-      component: <AccountNotifications />
-    },
+    // {
+    //   value: 'notifications',
+    //   icon: <Icon icon={bellFill} width={20} height={20} />,
+    //   component: <AccountNotifications />
+    // },
     {
       value: 'change-password',
       icon: <Icon icon={bellFill} width={20} height={20} />,
@@ -77,15 +75,6 @@ export const UserAccount = () => {
           <Tab disableRipple key={tab.value} label={capitalCase(tab.value)} icon={tab.icon} value={tab.value} />
         ))}
       </Tabs>
-
-      <button
-        onClick={async () => {
-          testGetUser();
-        }}
-      >
-        Get User
-      </button>
-
       {ACCOUNT_TABS.map((tab) => {
         const isMatched = tab.value === currentTab;
         return isMatched && <Box key={tab.value}>{tab.component}</Box>;

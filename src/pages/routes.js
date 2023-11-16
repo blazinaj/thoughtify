@@ -73,10 +73,10 @@ export default function Router() {
         </AuthGuard>
       ),
       children: [
-        { path: 'thoughts', element: <ThoughtsPage /> },
+        { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
         { path: 'journal', element: <JournalPage /> },
         { path: 'biography', element: <BiographyPage /> },
-        { path: 'user', element: <UserAccountPage /> },
+        { path: 'user/*', element: <UserAccountPage /> },
         { path: 'health', element: <HealthPage /> },
       ]
     },
