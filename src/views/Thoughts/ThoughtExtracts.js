@@ -8,7 +8,7 @@ import { Chip } from '@mui/material';
 import { Masonry } from '@mui/lab';
 
 export const ThoughtExtracts = () => {
-  const attributes = ['emotions', 'people', 'projects', 'categories'];
+  const attributes = ['emotions', 'people', 'projects', 'categories', 'reminders', 'questions'];
 
   const datastore = useDatastore({
     model: Thought,

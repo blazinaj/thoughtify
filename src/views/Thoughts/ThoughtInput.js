@@ -1,9 +1,7 @@
-import { Box, Grid } from '@mui/material';
-import { useForm } from '../../utils/hooks/useForm';
-import { Thought } from '../../models';
-import { DataStore } from '@aws-amplify/datastore';
-import { handleCompletion } from '../../utils/openai/functions/generate';
+import {Thought} from '../../models';
+import {DataStore} from '@aws-amplify/datastore';
 import ThoughtInputField from './ThoughtInputField';
+import {generateThoughtExtract} from "../../api/thoughts/generateThoughtExtract";
 
 /**
  * Input Field for Thoughts.
@@ -15,80 +13,6 @@ import ThoughtInputField from './ThoughtInputField';
  * @constructor
  */
 export const ThoughtInput = () => {
-  // const transcribe = async () => {
-  //   Predictions.convert({
-  //     transcription: {
-  //       source: {
-  //         bytes
-  //       }
-  //       // language: "en-US",
-  //     }
-  //   })
-  //   .then(({ transcription: { fullText } }) => console.log({ fullText }))
-  //   .catch((err) => console.log({ err }));
-  // }
-
-  /**
-   * Similar thoughts
-   * Emotions
-   * People
-   * Projects
-   * Categories
-   * @returns {Promise<void>}
-   */
-  const getThoughtExtract = async (newThought) => {
-    const existingThoughts = await DataStore.query(Thought);
-
-    const _prompt = `
-      Existing Thoughts:
-      
-      ${existingThoughts
-        .map((thought) => {
-          return `${thought.extract ? JSON.stringify(thought.extract) : thought.input}`;
-        })
-        .join('\n')}
-    
-      Analyze this person's new thought and extract the following:
-      
-      summary
-      similar_thoughts
-      emotions
-      people
-      projects
-      categories
-      
-      New Thought:
-      ${newThought.input}
-      
-      Format the response as a javascript parseable JSON object string
-      
-    `;
-    const response = await handleCompletion({
-      prompt: _prompt,
-      response_format: { type: 'json_object' },
-      seed: 101
-    });
-
-    console.log({ response });
-
-    // update the thought in the datastore
-    await DataStore.save(
-      Thought.copyOf(newThought, (updated) => {
-        updated.extract = response;
-      })
-    );
-  };
-
-  const form = useForm({
-    model: Thought,
-    fieldConfig: {
-      input: {
-        inputType: 'text',
-        label: 'Thought'
-      }
-    },
-    callback: getThoughtExtract
-  });
 
   const onSubmit = async (input) => {
     console.log('saving thought', input);
@@ -98,7 +22,13 @@ export const ThoughtInput = () => {
       })
     );
 
-    const extract = await getThoughtExtract(newThought);
+    const extract = await generateThoughtExtract(newThought);
+
+    await DataStore.save(
+      Thought.copyOf(newThought, (updated) => {
+        updated.extract = extract;
+      })
+    );
   };
 
   return <ThoughtInputField onSubmit={onSubmit} />;
