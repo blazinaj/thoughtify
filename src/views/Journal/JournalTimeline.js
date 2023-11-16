@@ -11,8 +11,11 @@ import {useDatastore} from "../../utils/hooks/useDatastore";
 import {Thought} from "../../models";
 import {handleCompletion} from "../../utils/openai/functions/generate";
 import {DataStore} from "@aws-amplify/datastore";
+import LoadingScreen from "../../demo/components/LoadingScreen";
 
 export default function JournalTimeline() {
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const datastore = useDatastore({
     model: Thought,
@@ -54,6 +57,7 @@ export default function JournalTimeline() {
 
   // for each grouping of thoughts, use completion to create a 'Journal Entry'
   const fetchJournal = async () => {
+
     const timeline = await createTimeline("day");
 
     const journal = []
@@ -88,13 +92,22 @@ export default function JournalTimeline() {
   const [journal, setJournal] = useState(null)
 
   useEffect(() => {
-
+    setIsLoading(true)
     if (!journal && datastore.items.length > 0) {
       fetchJournal().then(res => {
         setJournal(res)
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
     }
   }, [datastore.items])
+
+  if (isLoading) {
+    return (
+      <LoadingScreen/>
+    )
+  }
 
   return (
     <Timeline
@@ -126,13 +139,6 @@ export default function JournalTimeline() {
                 {
                   group?.entry
                 }
-                {/*{group?.thoughts.map((thought) => {*/}
-                {/*  return (*/}
-                {/*    <div>*/}
-                {/*      {thought.input}*/}
-                {/*    </div>*/}
-                {/*  )*/}
-                {/*})}*/}
               </TimelineContent>
             </TimelineItem>
           )
@@ -140,4 +146,23 @@ export default function JournalTimeline() {
       }
     </Timeline>
   );
+}
+
+const SkeletonLoader = () => {
+    return (
+      <Timeline>
+        <TimelineItem>
+          <TimelineOppositeContent color="textSecondary">
+          Loading...
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+          <TimelineDot />
+          <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>
+          Loading...
+          </TimelineContent>
+        </TimelineItem>
+      </Timeline>
+    )
 }
