@@ -1,12 +1,14 @@
-import HTMLFlipBook from 'react-pageflip';
 import {Thought} from "../../models";
 import {useDatastore} from "../../utils/hooks/useDatastore";
 import {useEffect, useState} from "react";
-import {generate, handleCompletion} from "../../utils/openai/functions/generate";
+import {handleCompletion} from "../../utils/openai/functions/generate";
 import Card from "../../utils/components/Card";
-
+import LoadingScreen from "../../demo/components/LoadingScreen";
+import * as React from "react";
 
 export const Biography = () => {
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const datastore = useDatastore({
     model: Thought,
@@ -39,13 +41,9 @@ export const Biography = () => {
       responseFormat: { type: "json_object" },
     });
 
-    console.log({completion})
-
     const biography = completion;
 
     const parsedBiography = JSON.parse(biography);
-
-    console.log({parsedBiography})
 
     return parsedBiography;
 
@@ -54,15 +52,22 @@ export const Biography = () => {
   const [bio, setBio] = useState(null);
 
   useEffect(() => {
-
     if (!bio) {
+      setIsLoading(true);
       getBiography().then(res => {
         setBio(res)
       })
+      .finally(() => {
+        setIsLoading(false);
+      })
     }
-
-
   }, [datastore?.items?.length])
+
+  if (isLoading) {
+    return (
+        <LoadingScreen/>
+    )
+  }
 
   return (
     <Card>
@@ -77,34 +82,4 @@ export const Biography = () => {
       }
     </Card>
   )
-
-  // return (
-  //   <HTMLFlipBook
-  //     width={550}
-  //     height={733}
-  //     size="stretch"
-  //     minWidth={315}
-  //     maxWidth={1000}
-  //     minHeight={400}
-  //     maxHeight={1533}
-  //     maxShadowOpacity={0.5}
-  //     showCover={true}
-  //     mobileScrollSupport={true}
-  //     // onFlip={this.onPage}
-  //     // onChangeOrientation={this.onChangeOrientation}
-  //     // onChangeState={this.onChangeState}
-  //     className="demo-book"
-  //     showPageCorners={true}
-  //   >
-  //     {
-  //       bio?.pages?.map((page) => {
-  //         return (
-  //           <div className="demoPage">
-  //             {page}
-  //           </div>
-  //         )
-  //       })
-  //     }
-  //   </HTMLFlipBook>
-  // );
 }

@@ -5,8 +5,12 @@ import {sentenceCase} from "change-case";
 import Card from "../../utils/components/Card";
 import {Masonry} from "@mui/lab";
 import {DataStore} from "@aws-amplify/datastore";
+import LoadingScreen from "../../demo/components/LoadingScreen";
+import * as React from "react";
 
 export const Health = () => {
+
+  const [isLoading, setIsLoading] = useState(true)
 
   const [health, setHealth] = useState(null)
 
@@ -42,19 +46,26 @@ export const Health = () => {
       seed: 404,
     })
 
-    console.log({completion})
-
     return JSON.parse(completion);
   }
 
   useEffect(() => {
     if (!health) {
-      console.log('Fetching Health Data..')
+        setIsLoading(true)
       getHealth().then(res => {
         setHealth(res)
       })
+    .finally(() => {
+        setIsLoading(false)
+    })
     }
   }, [])
+
+    if (isLoading) {
+        return (
+            <LoadingScreen/>
+        )
+    }
 
   return (
     <div>

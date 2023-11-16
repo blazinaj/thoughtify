@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Card from "../../utils/components/Card";
 import {sentenceCase} from "change-case";
-import {Chip, Stack} from "@mui/material";
+import {Chip} from "@mui/material";
 import {Masonry} from "@mui/lab";
 
 export const ThoughtExtracts = () => {
@@ -71,48 +71,46 @@ export const ThoughtExtracts = () => {
 
   return (
     <Masonry
-        spacing={2}
-        columns={{
-            xs: 1,
-            sm: 1,
-            md: 1,
-            lg: 1,
-            xl: 1,
-            xxl: 2,
-        }}
-        sx={{ width: "auto" }}
+      spacing={2}
+      columns={{
+          xs: 1,
+          sm: 1,
+          md: 1,
+          lg: 1,
+          xl: 1,
+          xxl: 2,
+      }}
+      sx={{ width: "auto" }}
     >
       {
         Object.entries(extracts)
         .map(([key, value]) => {
-
           return (
-
-              <Card
-                title={sentenceCase(key)}
-                key={key}
-                sx={{
-                    display: !value || value?.length < 1 ? "none" : undefined,
-                }}
+            <Card
+              title={sentenceCase(key)}
+              key={key}
+              sx={{
+                  display: !value || value?.length < 1 ? "none" : undefined,
+              }}
+            >
+              <Grid
+                  container
+                direction={"row"}
+                spacing={2}
               >
-                <Grid
-                    container
-                  direction={"row"}
-                  spacing={2}
-                >
-                  {
-                    Array.isArray(value) ? value.map((item) => {
-                      return (
-                        <Grid item>
-                            <Chip label={item}/>
-                        </Grid>
-                      )
-                    }) : (
-                      <Chip label={value}/>
+                {
+                  Array.isArray(value) ? value.map((item) => {
+                    return (
+                      <Grid item>
+                          <Chip label={item}/>
+                      </Grid>
                     )
-                  }
-                </Grid>
-              </Card>
+                  }) : (
+                    <Chip label={value}/>
+                  )
+                }
+              </Grid>
+            </Card>
           )
         })
       }
