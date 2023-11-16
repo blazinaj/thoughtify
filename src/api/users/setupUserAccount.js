@@ -29,7 +29,7 @@ export const setupUserAccount = async ({cognitoUser, userData}) => {
   console.log("Creating a new Welcome Notification")
   // Create a welcome notification
   await DataStore.save(new Notification({
-    title: "Welcome to Edify!",
+    title: "Welcome to Thoughtify!",
     content: "We're excited to have you here!",
     type: "MESSAGE",
     userID: username,
