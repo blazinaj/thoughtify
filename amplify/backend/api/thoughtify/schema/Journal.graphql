@@ -1,0 +1,13 @@
+type JournalEntry @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    date: AWSDateTime
+    cadence: JournalCadence
+    entry: String
+}
+
+enum JournalCadence {
+    DAILY
+    WEEKLY
+    MONTHLY
+    YEARLY
+}

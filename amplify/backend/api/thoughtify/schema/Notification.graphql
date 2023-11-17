@@ -1,0 +1,17 @@
+type Notification @model @auth(rules: [
+    # allow owner full auth
+    {allow: owner, operations: [read, create, update, delete]}
+]) {
+    id: ID!
+    title: String
+    content: String
+    readDate: AWSDateTime
+    type: NotificationType
+    userID: ID! @index(name: "byUser")
+    isUnread: Boolean
+    owner: String
+}
+
+enum NotificationType {
+    MESSAGE
+}

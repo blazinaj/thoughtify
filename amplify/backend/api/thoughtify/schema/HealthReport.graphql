@@ -1,0 +1,6 @@
+type HealthReport @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    date: AWSDateTime
+    cadence: JournalCadence
+    report: AWSJSON
+}
