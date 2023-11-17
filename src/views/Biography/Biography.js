@@ -5,6 +5,7 @@ import { handleCompletion } from '../../utils/openai/functions/generate';
 import Card from '../../utils/components/Card';
 import LoadingScreen from '../../demo/components/LoadingScreen';
 import * as React from 'react';
+import {getBiography} from '../../api/biography/getBiography'
 
 export const Biography = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,46 +14,12 @@ export const Biography = () => {
     model: Thought
   });
 
-  // uses thoughts to create a biography
-  // biography is a collection of pages
-  const getBiography = async () => {
-    if (!datastore.items || datastore.items.length === 0) {
-      return;
-    }
-
-    const prompt = `
-      Generate a biography based on the following user's thoughts:
-      
-      ${datastore.items
-        .map((thought) => {
-          return `${thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
-        })
-        .join('\n')}
-      
-      Output the biography as a collection of pages. Javascript parseable JSON array of strings.
-     
-    `;
-
-    const completion = await handleCompletion({
-      prompt,
-      maxTokens: 2000,
-      seed: 303,
-      responseFormat: { type: 'json_object' }
-    });
-
-    const biography = completion;
-
-    const parsedBiography = JSON.parse(biography);
-
-    return parsedBiography;
-  };
-
   const [bio, setBio] = useState(null);
 
   useEffect(() => {
     if (!bio) {
       setIsLoading(true);
-      getBiography()
+      getBiography(datastore.items)
         .then((res) => {
           setBio(res);
         })
