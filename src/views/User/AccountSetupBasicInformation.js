@@ -5,6 +5,14 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
   const form = useForm({
     item: userData,
     fieldConfig: {
+      'firstName': {
+        defaultValue: userData.firstName || '',
+        label: 'First Name',
+      },
+      'lastName': {
+        defaultValue: userData.lastName || '',
+        label: 'Last Name',
+      },
       'Tell us a little about yourself': {
         defaultValue: userData['Tell us a little about yourself'],
         label: 'Tell us a little about yourself',
