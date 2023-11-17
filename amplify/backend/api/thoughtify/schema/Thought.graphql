@@ -1,0 +1,6 @@
+type Thought @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    input: String
+    output: String
+    extract: AWSJSON
+}

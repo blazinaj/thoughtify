@@ -6,9 +6,11 @@ import Card from '../../utils/components/Card';
 import { sentenceCase } from 'change-case';
 import { Chip } from '@mui/material';
 import { Masonry } from '@mui/lab';
+import {useModal} from "../../utils/hooks/useModal";
+import {ThoughtExtractInsight} from "./ThoughtExtractInsight";
 
 export const ThoughtExtracts = () => {
-  const attributes = ['emotions', 'people', 'projects', 'categories'];
+  const attributes = ['emotions', 'people', 'projects', 'categories', 'reminders', 'questions'];
 
   const datastore = useDatastore({
     model: Thought,
@@ -80,7 +82,7 @@ export const ThoughtExtracts = () => {
                 value.map((item) => {
                   return (
                     <Grid item>
-                      <Chip label={item} />
+                      <ThoughtExtractChip type={sentenceCase(key)} value={item} />
                     </Grid>
                   );
                 })
@@ -94,3 +96,25 @@ export const ThoughtExtracts = () => {
     </Masonry>
   );
 };
+
+export const ThoughtExtractChip = ({type, value, thought}) => {
+
+  const modal = useModal({
+    title: `${type}: ${value}`,
+    children: (
+      <ThoughtExtractInsight
+        type={type}
+        value={value}
+      />
+    ),
+    button: (
+      <Chip
+        title={type}
+        label={value}
+      />
+    )
+  })
+
+  return modal.modalButton;
+
+}

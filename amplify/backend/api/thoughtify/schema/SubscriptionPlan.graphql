@@ -1,0 +1,20 @@
+type SubscriptionPlan @model @auth(rules: [
+    # allow owner to read subscription plan
+    {allow: owner, operations: [read, create, update]},
+]) {
+    id: ID!
+    subscriptionTier: SubscriptionTier
+    status: SubscriptionStatus
+    squareSubscriptionID: String
+    owner: String
+}
+
+enum SubscriptionStatus {
+    ACTIVE
+    INACTIVE
+}
+
+enum SubscriptionTier {
+    FREE
+    PREMIUM
+}
