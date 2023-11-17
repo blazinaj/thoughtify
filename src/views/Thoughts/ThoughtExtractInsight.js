@@ -95,7 +95,14 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
 
       <Grid container spacing={2}>
 
-        <Grid item lg={6} >
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={6}
+          xl={6}
+        >
           <Typography
             variant={'h6'}
             sx={{
@@ -138,7 +145,14 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
 
         </Grid>
 
-        <Grid item lg={6}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={6}
+          xl={6}
+        >
 
           <Typography
             variant={'h6'}
