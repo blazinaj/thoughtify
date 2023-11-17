@@ -1,7 +1,7 @@
-import { Chip } from '@mui/material';
 import Card from '../../utils/components/Card';
-import { sentenceCase } from 'change-case';
-import { Masonry } from '@mui/lab';
+import {sentenceCase} from 'change-case';
+import {Masonry} from '@mui/lab';
+import {ThoughtExtractChip} from "./ThoughtExtracts";
 
 /**
  * Similar thoughts
@@ -38,11 +38,6 @@ export const ThoughtDetails = ({ item }) => {
             <Card
               key={key}
               title={sentenceCase(key)}
-              style={
-                {
-                  // display: (!value || value?.length < 1) && "none",
-                }
-              }
             >
               <Masonry
                 spacing={1}
@@ -56,11 +51,11 @@ export const ThoughtDetails = ({ item }) => {
                 }}
               >
                 {Array.isArray(value) ? (
-                  value.map((item) => {
-                    return <Chip label={item} />;
+                  value.map((chip) => {
+                    return <ThoughtExtractChip value={chip} type={sentenceCase(key)} thought={item} />
                   })
                 ) : (
-                  <Chip label={value} />
+                  <ThoughtExtractChip value={value} type={sentenceCase(key)} thought={item} />
                 )}
               </Masonry>
             </Card>

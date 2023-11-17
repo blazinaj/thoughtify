@@ -23,7 +23,7 @@ import {ThoughtExtractChip} from "./ThoughtExtracts";
  * @constructor
  */
 export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
-  
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [insight, setInsight] = useState(null);
