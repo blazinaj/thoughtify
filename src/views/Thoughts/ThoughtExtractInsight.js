@@ -1,15 +1,14 @@
-import {useParams} from "react-router-dom";
 import {DataStore} from "@aws-amplify/datastore";
 import {Thought} from "../../models";
+import * as React from "react";
 import {useEffect, useState} from "react";
 import {handleCompletion} from "../../utils/openai/functions/generate";
 import LoadingScreen from "../../demo/components/LoadingScreen";
-import * as React from "react";
 import Grid from "@mui/material/Grid";
 import {Masonry} from "@mui/lab";
 import Card from "../../utils/components/Card";
 import {sentenceCase} from "change-case";
-import {Chip, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineOppositeContent, {timelineOppositeContentClasses} from "@mui/lab/TimelineOppositeContent";
 import TimelineItem from "@mui/lab/TimelineItem";
@@ -24,9 +23,7 @@ import {ThoughtExtractChip} from "./ThoughtExtracts";
  * @constructor
  */
 export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
-
-  const {params} = useParams();
-
+  
   const [isLoading, setIsLoading] = useState(true);
 
   const [insight, setInsight] = useState(null);
@@ -71,8 +68,6 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
       seed: 505,
     });
 
-    console.log({response});
-
     return JSON.parse(response);
 
   }
@@ -96,7 +91,7 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
 
   return (
 
-    <div className="ThoughtExtractInsight">
+    <div>
 
       <Grid container spacing={2}>
 
@@ -109,9 +104,6 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
           >
             Timeline
           </Typography>
-
-          {/*{"timeline":{"2023-11-15T23:18:25.205Z":"Heading out to pick up Ethan with Taylor and then I'm going to take Logan to the eye doctor","2023-11-16T06:51:23.993Z":"Watching homestead rescue","2023-11-16T07:06:30.080Z":"Ethan and Logan are already asleep","2023-11-16T15:35:59.605Z":"Woke up feeling good this morning. Taylor just left with the boys, she'll drop them off at her folks place and then go to work. Her grandpa Tully's 75th birthday is today, we are going to go celebrate with him later tonight"},"relatedThoughts":[{"thought":"Heading out to pick up Ethan with Taylor and then I'm going to take Logan to the eye doctor"},{"thought":"Ethan and Logan are already asleep"},{"thought":"Woke up feeling good this morning. Taylor just left with the boys, she'll drop them off at her folks place and then go to work. Her grandpa Tully's 75th birthday is today, we are going to go celebrate with him later tonight"}],"relatedPeople":["Ethan","Taylor","Logan"],"relatedProjects":[],"relatedCategories":["Transportation","Healthcare","Entertainment","Sleep"],"relatedReminders":[],"relatedQuestions":[]}*/}
-
           <Timeline
             sx={{
               [`& .${timelineOppositeContentClasses.root}`]: {
