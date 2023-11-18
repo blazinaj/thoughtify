@@ -1,0 +1,33 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "locationId",
+      "environmentVariableName": "LOCATION_ID"
+    },
+    {
+      "cloudFormationParameterName": "accessToken",
+      "environmentVariableName": "ACCESS_TOKEN"
+    },
+    {
+      "cloudFormationParameterName": "planVariantIdMonthly",
+      "environmentVariableName": "PLAN_VARIANT_ID_MONTHLY"
+    },
+    {
+      "cloudFormationParameterName": "planVariantIdAnnual",
+      "environmentVariableName": "PLAN_VARIANT_ID_ANNUAL"
+    },
+    {
+      "cloudFormationParameterName": "planCatalogItemId",
+      "environmentVariableName": "PLAN_CATALOG_ITEM_ID"
+    },
+    {
+      "cloudFormationParameterName": "planCatalogItemVariantFree",
+      "environmentVariableName": "PLAN_CATALOG_ITEM_VARIANT_FREE"
+    },
+    {
+      "cloudFormationParameterName": "planCatalogItemVariantPremium",
+      "environmentVariableName": "PLAN_CATALOG_ITEM_VARIANT_PREMIUM"
+    }
+  ]
+}

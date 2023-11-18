@@ -14,6 +14,25 @@
     "categories": {
       "auth": {
         "thoughtify": {}
+      },
+      "function": {
+        "subscriptionPlan": {
+          "deploymentBucketName": "amplify-thoughtify-staging-02929-deployment",
+          "s3Key": "amplify-builds/subscriptionPlan-30344d62616d474f3838-build.zip",
+          "locationId": "L05SBNPVKGB6B",
+          "accessToken": "EAAAENYmVk9cmk3W0EsuQqNBbINP70vV6TljGjzoU5NPirrQH4zpB608nwyIwQRG",
+          "planVariantIdMonthly": "NMHPQPCRFTHCETTQTLVSENUI",
+          "planVariantIdAnnual": "K2C2RSH54EVZMUNDBF6AMVIV",
+          "planCatalogItemId": "K7KBGDY4SSN3DO3DTGSWI3MW",
+          "planCatalogItemVariantFree": "TN6NQQ5EIEFVIJ45VFECKLRI",
+          "planCatalogItemVariantPremium": "TYDTRUEXGDV6FX2NQRG5DTM2"
+        }
+      },
+      "api": {
+        "thoughtify": {}
+      },
+      "predictions": {
+        "transcription": {}
       }
     }
   }

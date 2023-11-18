@@ -60,6 +60,87 @@
       "service": "Cognito"
     }
   },
+  "function": {
+    "subscriptionPlan": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_subscriptionPlan_accessToken": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_locationId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_planCatalogItemId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_planCatalogItemVariantFree": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_planCatalogItemVariantPremium": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_planVariantIdAnnual": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_planVariantIdMonthly": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscriptionPlan_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscriptionPlan"
+        }
+      ]
+    }
+  },
   "predictions": {
     "transcription": {
       "convertType": "transcription",
