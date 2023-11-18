@@ -11,12 +11,13 @@ import {
   Flex,
   Grid,
   SelectField,
+  TextAreaField,
   TextField,
 } from "@aws-amplify/ui-react";
-import { SubscriptionPlan } from "../models";
+import { HealthReport } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function SubscriptionPlanCreateForm(props) {
+export default function HealthReportCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -28,32 +29,24 @@ export default function SubscriptionPlanCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    subscriptionTier: "",
-    status: "",
-    squareSubscriptionID: "",
-    owner: "",
+    date: "",
+    cadence: "",
+    report: "",
   };
-  const [subscriptionTier, setSubscriptionTier] = React.useState(
-    initialValues.subscriptionTier
-  );
-  const [status, setStatus] = React.useState(initialValues.status);
-  const [squareSubscriptionID, setSquareSubscriptionID] = React.useState(
-    initialValues.squareSubscriptionID
-  );
-  const [owner, setOwner] = React.useState(initialValues.owner);
+  const [date, setDate] = React.useState(initialValues.date);
+  const [cadence, setCadence] = React.useState(initialValues.cadence);
+  const [report, setReport] = React.useState(initialValues.report);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setSubscriptionTier(initialValues.subscriptionTier);
-    setStatus(initialValues.status);
-    setSquareSubscriptionID(initialValues.squareSubscriptionID);
-    setOwner(initialValues.owner);
+    setDate(initialValues.date);
+    setCadence(initialValues.cadence);
+    setReport(initialValues.report);
     setErrors({});
   };
   const validations = {
-    subscriptionTier: [],
-    status: [],
-    squareSubscriptionID: [],
-    owner: [],
+    date: [],
+    cadence: [],
+    report: [{ type: "JSON" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -72,6 +65,23 @@ export default function SubscriptionPlanCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -81,10 +91,9 @@ export default function SubscriptionPlanCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          subscriptionTier,
-          status,
-          squareSubscriptionID,
-          owner,
+          date,
+          cadence,
+          report,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -114,7 +123,7 @@ export default function SubscriptionPlanCreateForm(props) {
               modelFields[key] = null;
             }
           });
-          await DataStore.save(new SubscriptionPlan(modelFields));
+          await DataStore.save(new HealthReport(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -127,141 +136,109 @@ export default function SubscriptionPlanCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "SubscriptionPlanCreateForm")}
+      {...getOverrideProps(overrides, "HealthReportCreateForm")}
       {...rest}
     >
-      <SelectField
-        label="Subscription tier"
-        placeholder="Please select an option"
-        isDisabled={false}
-        value={subscriptionTier}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              subscriptionTier: value,
-              status,
-              squareSubscriptionID,
-              owner,
-            };
-            const result = onChange(modelFields);
-            value = result?.subscriptionTier ?? value;
-          }
-          if (errors.subscriptionTier?.hasError) {
-            runValidationTasks("subscriptionTier", value);
-          }
-          setSubscriptionTier(value);
-        }}
-        onBlur={() => runValidationTasks("subscriptionTier", subscriptionTier)}
-        errorMessage={errors.subscriptionTier?.errorMessage}
-        hasError={errors.subscriptionTier?.hasError}
-        {...getOverrideProps(overrides, "subscriptionTier")}
-      >
-        <option
-          children="Free"
-          value="FREE"
-          {...getOverrideProps(overrides, "subscriptionTieroption0")}
-        ></option>
-        <option
-          children="Premium"
-          value="PREMIUM"
-          {...getOverrideProps(overrides, "subscriptionTieroption1")}
-        ></option>
-      </SelectField>
-      <SelectField
-        label="Status"
-        placeholder="Please select an option"
-        isDisabled={false}
-        value={status}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              subscriptionTier,
-              status: value,
-              squareSubscriptionID,
-              owner,
-            };
-            const result = onChange(modelFields);
-            value = result?.status ?? value;
-          }
-          if (errors.status?.hasError) {
-            runValidationTasks("status", value);
-          }
-          setStatus(value);
-        }}
-        onBlur={() => runValidationTasks("status", status)}
-        errorMessage={errors.status?.errorMessage}
-        hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
-      >
-        <option
-          children="Active"
-          value="ACTIVE"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="Inactive"
-          value="INACTIVE"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
-      </SelectField>
       <TextField
-        label="Square subscription id"
+        label="Date"
         isRequired={false}
         isReadOnly={false}
-        value={squareSubscriptionID}
+        type="datetime-local"
+        value={date && convertToLocal(new Date(date))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              date: value,
+              cadence,
+              report,
+            };
+            const result = onChange(modelFields);
+            value = result?.date ?? value;
+          }
+          if (errors.date?.hasError) {
+            runValidationTasks("date", value);
+          }
+          setDate(value);
+        }}
+        onBlur={() => runValidationTasks("date", date)}
+        errorMessage={errors.date?.errorMessage}
+        hasError={errors.date?.hasError}
+        {...getOverrideProps(overrides, "date")}
+      ></TextField>
+      <SelectField
+        label="Cadence"
+        placeholder="Please select an option"
+        isDisabled={false}
+        value={cadence}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              subscriptionTier,
-              status,
-              squareSubscriptionID: value,
-              owner,
+              date,
+              cadence: value,
+              report,
             };
             const result = onChange(modelFields);
-            value = result?.squareSubscriptionID ?? value;
+            value = result?.cadence ?? value;
           }
-          if (errors.squareSubscriptionID?.hasError) {
-            runValidationTasks("squareSubscriptionID", value);
+          if (errors.cadence?.hasError) {
+            runValidationTasks("cadence", value);
           }
-          setSquareSubscriptionID(value);
+          setCadence(value);
         }}
-        onBlur={() =>
-          runValidationTasks("squareSubscriptionID", squareSubscriptionID)
-        }
-        errorMessage={errors.squareSubscriptionID?.errorMessage}
-        hasError={errors.squareSubscriptionID?.hasError}
-        {...getOverrideProps(overrides, "squareSubscriptionID")}
-      ></TextField>
-      <TextField
-        label="Owner"
+        onBlur={() => runValidationTasks("cadence", cadence)}
+        errorMessage={errors.cadence?.errorMessage}
+        hasError={errors.cadence?.hasError}
+        {...getOverrideProps(overrides, "cadence")}
+      >
+        <option
+          children="Daily"
+          value="DAILY"
+          {...getOverrideProps(overrides, "cadenceoption0")}
+        ></option>
+        <option
+          children="Weekly"
+          value="WEEKLY"
+          {...getOverrideProps(overrides, "cadenceoption1")}
+        ></option>
+        <option
+          children="Monthly"
+          value="MONTHLY"
+          {...getOverrideProps(overrides, "cadenceoption2")}
+        ></option>
+        <option
+          children="Yearly"
+          value="YEARLY"
+          {...getOverrideProps(overrides, "cadenceoption3")}
+        ></option>
+      </SelectField>
+      <TextAreaField
+        label="Report"
         isRequired={false}
         isReadOnly={false}
-        value={owner}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              subscriptionTier,
-              status,
-              squareSubscriptionID,
-              owner: value,
+              date,
+              cadence,
+              report: value,
             };
             const result = onChange(modelFields);
-            value = result?.owner ?? value;
+            value = result?.report ?? value;
           }
-          if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+          if (errors.report?.hasError) {
+            runValidationTasks("report", value);
           }
-          setOwner(value);
+          setReport(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
-        errorMessage={errors.owner?.errorMessage}
-        hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
-      ></TextField>
+        onBlur={() => runValidationTasks("report", report)}
+        errorMessage={errors.report?.errorMessage}
+        hasError={errors.report?.hasError}
+        {...getOverrideProps(overrides, "report")}
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

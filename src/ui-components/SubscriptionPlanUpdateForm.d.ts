@@ -6,8 +6,17 @@
 
 import * as React from "react";
 import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { SubscriptionPlan } from "../models";
+export declare type EscapeHatchProps = {
+    [elementHierarchy: string]: Record<string, unknown>;
+} | null;
+export declare type VariantValues = {
+    [key: string]: string;
+};
+export declare type Variant = {
+    variantValues: VariantValues;
+    overrides: EscapeHatchProps;
+};
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -15,16 +24,12 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type SubscriptionPlanUpdateFormInputValues = {
     subscriptionTier?: string;
-    startDate?: string;
-    endDate?: string;
     status?: string;
     squareSubscriptionID?: string;
     owner?: string;
 };
 export declare type SubscriptionPlanUpdateFormValidationValues = {
     subscriptionTier?: ValidationFunction<string>;
-    startDate?: ValidationFunction<string>;
-    endDate?: ValidationFunction<string>;
     status?: ValidationFunction<string>;
     squareSubscriptionID?: ValidationFunction<string>;
     owner?: ValidationFunction<string>;
@@ -33,8 +38,6 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type SubscriptionPlanUpdateFormOverridesProps = {
     SubscriptionPlanUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     subscriptionTier?: PrimitiveOverrideProps<SelectFieldProps>;
-    startDate?: PrimitiveOverrideProps<TextFieldProps>;
-    endDate?: PrimitiveOverrideProps<TextFieldProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
     squareSubscriptionID?: PrimitiveOverrideProps<TextFieldProps>;
     owner?: PrimitiveOverrideProps<TextFieldProps>;
