@@ -61,6 +61,18 @@
       },
       "predictions": {
         "transcription": {}
+      },
+      "function": {
+        "api": {},
+        "subscriptionPlan": {
+          "locationId": "TEMP",
+          "accessToken": "TEMP",
+          "planVariantIdMonthly": "TEMP",
+          "planVariantIdAnnual": "TEMP",
+          "planCatalogItemId": "TEMP",
+          "planCatalogItemVariantFree": "TEMP",
+          "planCatalogItemVariantPremium": "TEMP"
+        }
       }
     }
   }
