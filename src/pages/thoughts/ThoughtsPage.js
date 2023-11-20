@@ -4,7 +4,7 @@ import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
 import { ThoughtInput } from '../../views/Thoughts/ThoughtInput';
 import { ThoughtGallery } from '../../views/Thoughts/ThoughtGallery';
-import { ThoughtExtracts } from '../../views/Thoughts/ThoughtExtracts';
+import { ThoughtExtracts } from '../../views/Thoughts/ThoughtExtracts/components/ThoughtExtracts';
 
 /**
  * This page displays the details of a course for a Teacher
