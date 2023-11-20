@@ -6,7 +6,6 @@ import JournalTimeline from '../../views/Journal/JournalTimeline';
 import ButtonGroup from "@mui/material/ButtonGroup";
 import {JournalCadence} from "../../models";
 import {useState} from "react";
-import {getIcon} from "../../utils/functions/getIcon";
 import {useTheme} from "../../theme/useTheme";
 
 const JournalPage = () => {
@@ -22,13 +21,11 @@ const JournalPage = () => {
     <Page title="Thoughtify Journal">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          icon={getIcon('carbon:book')}
+          icon={'carbon:book'}
           heading="Journal"
-          subHeading={"View your Thoughts in an AI-Generated Journal format at the cadence of your choice."}
-          // action={"View your Thoughts in an AI-Generated Journal format at the cadence of your choice."}
+          subHeading={"View your Thoughts in an AI-Generated Journal format at the cadence of your choosing."}
           action={
             <Box
-              // alignItems={"center"}
               display="flex"
               justifyContent="left"
             >
@@ -52,11 +49,6 @@ const JournalPage = () => {
                 }
               </ButtonGroup>
             </Box>
-          }
-          links={
-            [
-              // {name: 'Home', href: 'journal'},
-            ]
           }
         />
         <Grid container spacing={3}>

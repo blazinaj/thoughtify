@@ -16,7 +16,7 @@ HeaderBreadcrumbs.propTypes = {
   sx: PropTypes.object
 };
 
-export default function HeaderBreadcrumbs({ icon, links, action, heading, subHeading, moreLink = '' || [], sx, ...other }) {
+export default function HeaderBreadcrumbs({ icon, links = [], action, heading, subHeading, moreLink = '' || [], sx, ...other }) {
   return (
     <Box sx={{ mb: 5, ...sx }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -28,12 +28,12 @@ export default function HeaderBreadcrumbs({ icon, links, action, heading, subHea
               justifyContent={"bottom"}
               sx={{
                 marginRight: "0.5em",
-                marginTop: "0.25em",
+                paddingTop: "0.5em",
               }}
             >
               {
                 icon && (
-                  getIcon('carbon:book')
+                  getIcon(icon)
                 )
               }
             </Box>

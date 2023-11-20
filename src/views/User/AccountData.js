@@ -38,9 +38,9 @@ export default function AccountData() {
         <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
           <Button
             onClick={() => {
-              localStorage.clear();
-              enqueueSnackbar('Local Data Cleared', { variant: 'success' });
-              DataStore.clear();
+              DataStore.clear().then(() => {
+                enqueueSnackbar('Local Data Cleared', { variant: 'success' });
+              })
             }}
           >
             Clear Local Data

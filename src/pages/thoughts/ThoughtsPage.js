@@ -19,11 +19,8 @@ const ThoughtsPage = () => {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Thoughts"
-          links={
-            [
-              // {name: 'Home', href: 'thoughts'},
-            ]
-          }
+          subHeading={"Collect your Thoughts and extract Insights"}
+          icon={'mingcute:thought-line'}
         />
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>

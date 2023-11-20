@@ -31,8 +31,6 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
     const thoughts = await DataStore.query(Thought);
     const journalEntries = await DataStore.query(JournalEntry, (entry) => entry.cadence.eq(cadence));
 
-    console.log({journalEntries})
-
     const timeline = await createJournalTimeline(thoughts, cadence);
 
     for (const group of timeline) {
@@ -61,17 +59,17 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
         // if foundJournal is today, and if if there are new thoughts since the last journal entry, then update the journal entry
 
         if (checkDate(new Date(foundJournal.date), new Date(), cadence)) {
-          console.log('found journal entry for today, updating it in case there are new thoughts..')
-          const journalEntry = await handleJournalEntryCompletion({
-            thoughts,
-            cadence,
-          })
-
-          await DataStore.save(
-            JournalEntry.copyOf(foundJournal, entry => {
-              entry.entry = journalEntry;
-            })
-          )
+          // console.log('found journal entry for today, updating it in case there are new thoughts..')
+          // const journalEntry = await handleJournalEntryCompletion({
+          //   thoughts,
+          //   cadence,
+          // })
+          //
+          // await DataStore.save(
+          //   JournalEntry.copyOf(foundJournal, entry => {
+          //     entry.entry = journalEntry;
+          //   })
+          // )
         }
       }
       else {
@@ -100,7 +98,7 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
   }, [cadence]);
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return <LoadingScreen sx={{marginTop: "15vh"}} />;
   }
 
   return (
@@ -130,18 +128,3 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
     </Timeline>
   );
 }
-
-const SkeletonLoader = () => {
-  return (
-    <Timeline>
-      <TimelineItem>
-        <TimelineOppositeContent color="textSecondary">Loading...</TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>Loading...</TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  );
-};
