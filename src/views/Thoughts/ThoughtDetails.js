@@ -1,7 +1,7 @@
 import Card from '../../utils/components/Card';
 import {sentenceCase} from 'change-case';
 import {Masonry} from '@mui/lab';
-import {ThoughtExtractChip} from "./ThoughtExtracts";
+import {ThoughtExtractAttributeChip} from "./ThoughtExtracts/components/ThoughtExtractAttributeChip";
 
 /**
  * Similar thoughts
@@ -52,10 +52,10 @@ export const ThoughtDetails = ({ item }) => {
               >
                 {Array.isArray(value) ? (
                   value.map((chip) => {
-                    return <ThoughtExtractChip value={chip} type={sentenceCase(key)} thought={item} />
+                    return <ThoughtExtractAttributeChip value={chip} type={sentenceCase(key)} thought={item} />
                   })
                 ) : (
-                  <ThoughtExtractChip value={value} type={sentenceCase(key)} thought={item} />
+                  <ThoughtExtractAttributeChip value={value} type={sentenceCase(key)} thought={item} />
                 )}
               </Masonry>
             </Card>
