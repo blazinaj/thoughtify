@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "*")
   next()
@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 /**********************
  * Thoughts *
  **********************/
-app.post('/thoughts/generateThoughtExtract', function(req, res) {
+app.post('/thoughts/generateThoughtExtract', (req, res) => {
   console.log(req);
 
   const thought = req.body.thought;
@@ -53,11 +53,11 @@ app.post('/thoughts/generateThoughtExtract', function(req, res) {
   // res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 
-app.listen(3000, function() {
+app.listen(3000, () => {
     console.log("App started")
 });
 
 // Export the app object. When executing the application local this does nothing. However,
 // to port it to AWS Lambda we will create a wrapper around that will load the app from
 // this file
-module.exports = app
+export default app;
