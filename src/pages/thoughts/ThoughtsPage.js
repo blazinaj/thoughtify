@@ -4,7 +4,7 @@ import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
 import { ThoughtInput } from '../../views/Thoughts/ThoughtInput';
 import { ThoughtGallery } from '../../views/Thoughts/ThoughtGallery';
-import { ThoughtExtracts } from '../../views/Thoughts/ThoughtExtracts';
+import { ThoughtExtracts } from '../../views/Thoughts/ThoughtExtracts/components/ThoughtExtracts';
 
 /**
  * This page displays the details of a course for a Teacher
@@ -19,11 +19,8 @@ const ThoughtsPage = () => {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Thoughts"
-          links={
-            [
-              // {name: 'Home', href: 'thoughts'},
-            ]
-          }
+          subHeading={"Collect your Thoughts and extract Insights"}
+          icon={'mingcute:thought-line'}
         />
         <Grid container spacing={3}>
           <Grid item xs={12} lg={12}>

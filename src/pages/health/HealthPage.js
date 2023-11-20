@@ -12,7 +12,9 @@ const JournalPage = () => {
     <Page title="Thoughtify Health">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
+          icon={'ri:health-book-line'}
           heading="Health"
+          subHeading={"View your Health-related Thoughts as an AI-Generated Health Report."}
           links={
             [
               // {name: 'Home', href: 'journal'},

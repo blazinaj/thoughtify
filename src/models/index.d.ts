@@ -2,42 +2,123 @@ import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
 
+export enum JournalCadence {
+  DAILY = "DAILY",
+  WEEKLY = "WEEKLY",
+  MONTHLY = "MONTHLY",
+  YEARLY = "YEARLY"
+}
+
 export enum NotificationType {
   MESSAGE = "MESSAGE"
 }
 
+export enum SubscriptionStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE"
+}
+
+export enum SubscriptionTier {
+  FREE = "FREE",
+  PREMIUM = "PREMIUM"
+}
 
 
-type EagerThought = {
+
+type EagerBiography = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Thought, 'id'>;
+    identifier: ManagedIdentifier<Biography, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly input?: string | null;
-  readonly output?: string | null;
-  readonly extract?: string | null;
+  readonly date?: string | null;
+  readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
+  readonly entry?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-type LazyThought = {
+type LazyBiography = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Thought, 'id'>;
+    identifier: ManagedIdentifier<Biography, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly input?: string | null;
-  readonly output?: string | null;
-  readonly extract?: string | null;
+  readonly date?: string | null;
+  readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
+  readonly entry?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-export declare type Thought = LazyLoading extends LazyLoadingDisabled ? EagerThought : LazyThought
+export declare type Biography = LazyLoading extends LazyLoadingDisabled ? EagerBiography : LazyBiography
 
-export declare const Thought: (new (init: ModelInit<Thought>) => Thought) & {
-  copyOf(source: Thought, mutator: (draft: MutableModel<Thought>) => MutableModel<Thought> | void): Thought;
+export declare const Biography: (new (init: ModelInit<Biography>) => Biography) & {
+  copyOf(source: Biography, mutator: (draft: MutableModel<Biography>) => MutableModel<Biography> | void): Biography;
+}
+
+type EagerHealthReport = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<HealthReport, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
+  readonly report?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyHealthReport = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<HealthReport, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
+  readonly report?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type HealthReport = LazyLoading extends LazyLoadingDisabled ? EagerHealthReport : LazyHealthReport
+
+export declare const HealthReport: (new (init: ModelInit<HealthReport>) => HealthReport) & {
+  copyOf(source: HealthReport, mutator: (draft: MutableModel<HealthReport>) => MutableModel<HealthReport> | void): HealthReport;
+}
+
+type EagerJournalEntry = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<JournalEntry, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
+  readonly entry?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyJournalEntry = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<JournalEntry, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
+  readonly entry?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type JournalEntry = LazyLoading extends LazyLoadingDisabled ? EagerJournalEntry : LazyJournalEntry
+
+export declare const JournalEntry: (new (init: ModelInit<JournalEntry>) => JournalEntry) & {
+  copyOf(source: JournalEntry, mutator: (draft: MutableModel<JournalEntry>) => MutableModel<JournalEntry> | void): JournalEntry;
 }
 
 type EagerNotification = {
@@ -78,6 +159,72 @@ export declare type Notification = LazyLoading extends LazyLoadingDisabled ? Eag
 
 export declare const Notification: (new (init: ModelInit<Notification>) => Notification) & {
   copyOf(source: Notification, mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void): Notification;
+}
+
+type EagerSubscriptionPlan = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SubscriptionPlan, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly subscriptionTier?: SubscriptionTier | keyof typeof SubscriptionTier | null;
+  readonly status?: SubscriptionStatus | keyof typeof SubscriptionStatus | null;
+  readonly squareSubscriptionID?: string | null;
+  readonly owner?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazySubscriptionPlan = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SubscriptionPlan, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly subscriptionTier?: SubscriptionTier | keyof typeof SubscriptionTier | null;
+  readonly status?: SubscriptionStatus | keyof typeof SubscriptionStatus | null;
+  readonly squareSubscriptionID?: string | null;
+  readonly owner?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type SubscriptionPlan = LazyLoading extends LazyLoadingDisabled ? EagerSubscriptionPlan : LazySubscriptionPlan
+
+export declare const SubscriptionPlan: (new (init: ModelInit<SubscriptionPlan>) => SubscriptionPlan) & {
+  copyOf(source: SubscriptionPlan, mutator: (draft: MutableModel<SubscriptionPlan>) => MutableModel<SubscriptionPlan> | void): SubscriptionPlan;
+}
+
+type EagerThought = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Thought, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly input?: string | null;
+  readonly output?: string | null;
+  readonly extract?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyThought = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Thought, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly input?: string | null;
+  readonly output?: string | null;
+  readonly extract?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Thought = LazyLoading extends LazyLoadingDisabled ? EagerThought : LazyThought
+
+export declare const Thought: (new (init: ModelInit<Thought>) => Thought) & {
+  copyOf(source: Thought, mutator: (draft: MutableModel<Thought>) => MutableModel<Thought> | void): Thought;
 }
 
 type EagerUser = {

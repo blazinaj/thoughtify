@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import bellFill from '@iconify/icons-eva/bell-fill';
 import roundReceipt from '@iconify/icons-ic/round-receipt';
 import roundAccountBox from '@iconify/icons-ic/round-account-box';
+import baselineFolder from '@iconify/icons-ic/baseline-folder';
 // material
 import { Box, Stack, Tab, Tabs } from '@mui/material';
 // redux
@@ -15,6 +16,7 @@ import { getAddressBook, getCards, getInvoices, getNotifications, getProfile } f
 import { AccountBilling, AccountGeneral, AccountNotifications } from '../../demo/components/_dashboard/user/account';
 import AccountDelete from './AccountDelete';
 import AccountChangePassword from './AccountChangePassword';
+import AccountData from "./AccountData";
 
 // ----------------------------------------------------------------------
 
@@ -48,8 +50,13 @@ export const UserAccount = () => {
     // },
     {
       value: 'change-password',
-      icon: <Icon icon={bellFill} width={20} height={20} />,
+      icon: <Icon icon={"carbon:password"} width={20} height={20} />,
       component: <AccountChangePassword />
+    },
+    {
+      value: 'data',
+      icon: <Icon icon={baselineFolder} width={20} height={20} />,
+      component: <AccountData />
     },
     {
       value: 'delete-account',

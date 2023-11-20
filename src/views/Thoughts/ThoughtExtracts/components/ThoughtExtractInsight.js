@@ -1,12 +1,12 @@
 import {DataStore} from "@aws-amplify/datastore";
-import {Thought} from "../../models";
+import {Thought} from "../../../../models";
 import * as React from "react";
 import {useEffect, useState} from "react";
-import {handleCompletion} from "../../utils/openai/functions/generate";
-import LoadingScreen from "../../demo/components/LoadingScreen";
+import {handleCompletion} from "../../../../utils/openai/functions/generate";
+import LoadingScreen from "../../../../demo/components/LoadingScreen";
 import Grid from "@mui/material/Grid";
 import {Masonry} from "@mui/lab";
-import Card from "../../utils/components/Card";
+import Card from "../../../../utils/components/Card";
 import {sentenceCase} from "change-case";
 import {Typography} from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
@@ -16,7 +16,7 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
-import {ThoughtExtractChip} from "./ThoughtExtracts";
+import {ThoughtExtractAttributeChip} from "./ThoughtExtractAttributeChip";
 
 /**
  * Displays Insight from an extract value from a Thought, for instance a Person, Project, Reminder, or Emotion
@@ -73,15 +73,12 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
   }
 
   useEffect(() => {
-
     setIsLoading(true);
     getThoughtExtractInsight().then((res) => {
       setInsight(res);
       setIsLoading(false);
     });
-
   }, [])
-
 
   if (isLoading) {
     return (
@@ -90,9 +87,7 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
   }
 
   return (
-
     <div>
-
       <Grid container spacing={2}>
 
         <Grid
@@ -192,12 +187,12 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
                       .map((item) => {
                         return (
                           <Grid item>
-                            <ThoughtExtractChip type={sentenceCase(key)} value={item} />
+                            <ThoughtExtractAttributeChip type={sentenceCase(key)} value={item} />
                           </Grid>
                         );
                       })
                     ) : (
-                      <ThoughtExtractChip type={sentenceCase(key)} value={value} />
+                      <ThoughtExtractAttributeChip type={sentenceCase(key)} value={value} />
                     )}
                   </Grid>
                 </Card>
@@ -209,7 +204,6 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
       </Grid>
 
     </div>
-
   )
 
 }

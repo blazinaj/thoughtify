@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 });
 
 export default function Card({
+  avatar,
   title,
   subTitle,
   children,
@@ -44,6 +45,7 @@ export default function Card({
   formButtonText = <Add />,
   formModalTitle,
   formModalSubTitle,
+  formModalButton,
   className
 }) {
   const classes = useStyles();
@@ -53,10 +55,11 @@ export default function Card({
   return (
     <MUICard className={`classes.root ${className || ''}`} variant="outlined" style={style}>
       <CardHeader
+        avatar={avatar}
         action={
           <ButtonGroup>
             {formComponent && (
-              <ModalButton buttonText={formButtonText} title={formModalTitle} subTitle={formModalSubTitle}>
+              <ModalButton buttonText={formButtonText} title={formModalTitle} subTitle={formModalSubTitle} button={formModalButton}>
                 {React.cloneElement(formComponent)}
               </ModalButton>
             )}

@@ -13,9 +13,8 @@ import {
   SelectField,
   TextField,
 } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { SubscriptionPlan } from "../models";
-import { fetchByPath, validateField } from "./utils";
+import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 export default function SubscriptionPlanCreateForm(props) {
   const {
@@ -30,8 +29,6 @@ export default function SubscriptionPlanCreateForm(props) {
   } = props;
   const initialValues = {
     subscriptionTier: "",
-    startDate: "",
-    endDate: "",
     status: "",
     squareSubscriptionID: "",
     owner: "",
@@ -39,8 +36,6 @@ export default function SubscriptionPlanCreateForm(props) {
   const [subscriptionTier, setSubscriptionTier] = React.useState(
     initialValues.subscriptionTier
   );
-  const [startDate, setStartDate] = React.useState(initialValues.startDate);
-  const [endDate, setEndDate] = React.useState(initialValues.endDate);
   const [status, setStatus] = React.useState(initialValues.status);
   const [squareSubscriptionID, setSquareSubscriptionID] = React.useState(
     initialValues.squareSubscriptionID
@@ -49,8 +44,6 @@ export default function SubscriptionPlanCreateForm(props) {
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setSubscriptionTier(initialValues.subscriptionTier);
-    setStartDate(initialValues.startDate);
-    setEndDate(initialValues.endDate);
     setStatus(initialValues.status);
     setSquareSubscriptionID(initialValues.squareSubscriptionID);
     setOwner(initialValues.owner);
@@ -58,8 +51,6 @@ export default function SubscriptionPlanCreateForm(props) {
   };
   const validations = {
     subscriptionTier: [],
-    startDate: [],
-    endDate: [],
     status: [],
     squareSubscriptionID: [],
     owner: [],
@@ -81,23 +72,6 @@ export default function SubscriptionPlanCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-  };
   return (
     <Grid
       as="form"
@@ -108,8 +82,6 @@ export default function SubscriptionPlanCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           subscriptionTier,
-          startDate,
-          endDate,
           status,
           squareSubscriptionID,
           owner,
@@ -168,8 +140,6 @@ export default function SubscriptionPlanCreateForm(props) {
           if (onChange) {
             const modelFields = {
               subscriptionTier: value,
-              startDate,
-              endDate,
               status,
               squareSubscriptionID,
               owner,
@@ -193,78 +163,11 @@ export default function SubscriptionPlanCreateForm(props) {
           {...getOverrideProps(overrides, "subscriptionTieroption0")}
         ></option>
         <option
-          children="Student"
-          value="STUDENT"
+          children="Premium"
+          value="PREMIUM"
           {...getOverrideProps(overrides, "subscriptionTieroption1")}
         ></option>
-        <option
-          children="Teacher"
-          value="TEACHER"
-          {...getOverrideProps(overrides, "subscriptionTieroption2")}
-        ></option>
       </SelectField>
-      <TextField
-        label="Start date"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={startDate && convertToLocal(new Date(startDate))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              subscriptionTier,
-              startDate: value,
-              endDate,
-              status,
-              squareSubscriptionID,
-              owner,
-            };
-            const result = onChange(modelFields);
-            value = result?.startDate ?? value;
-          }
-          if (errors.startDate?.hasError) {
-            runValidationTasks("startDate", value);
-          }
-          setStartDate(value);
-        }}
-        onBlur={() => runValidationTasks("startDate", startDate)}
-        errorMessage={errors.startDate?.errorMessage}
-        hasError={errors.startDate?.hasError}
-        {...getOverrideProps(overrides, "startDate")}
-      ></TextField>
-      <TextField
-        label="End date"
-        isRequired={false}
-        isReadOnly={false}
-        type="datetime-local"
-        value={endDate && convertToLocal(new Date(endDate))}
-        onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-          if (onChange) {
-            const modelFields = {
-              subscriptionTier,
-              startDate,
-              endDate: value,
-              status,
-              squareSubscriptionID,
-              owner,
-            };
-            const result = onChange(modelFields);
-            value = result?.endDate ?? value;
-          }
-          if (errors.endDate?.hasError) {
-            runValidationTasks("endDate", value);
-          }
-          setEndDate(value);
-        }}
-        onBlur={() => runValidationTasks("endDate", endDate)}
-        errorMessage={errors.endDate?.errorMessage}
-        hasError={errors.endDate?.hasError}
-        {...getOverrideProps(overrides, "endDate")}
-      ></TextField>
       <SelectField
         label="Status"
         placeholder="Please select an option"
@@ -275,8 +178,6 @@ export default function SubscriptionPlanCreateForm(props) {
           if (onChange) {
             const modelFields = {
               subscriptionTier,
-              startDate,
-              endDate,
               status: value,
               squareSubscriptionID,
               owner,
@@ -315,8 +216,6 @@ export default function SubscriptionPlanCreateForm(props) {
           if (onChange) {
             const modelFields = {
               subscriptionTier,
-              startDate,
-              endDate,
               status,
               squareSubscriptionID: value,
               owner,
@@ -346,8 +245,6 @@ export default function SubscriptionPlanCreateForm(props) {
           if (onChange) {
             const modelFields = {
               subscriptionTier,
-              startDate,
-              endDate,
               status,
               squareSubscriptionID,
               owner: value,
