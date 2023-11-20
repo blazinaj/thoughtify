@@ -63,6 +63,11 @@
     }
   },
   "function": {
+    "api": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "subscriptionPlan": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -70,6 +75,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_api_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "api"
+        }
+      ]
+    },
+    "AMPLIFY_function_api_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "api"
+        }
+      ]
+    },
     "AMPLIFY_function_subscriptionPlan_accessToken": {
       "usedBy": [
         {
