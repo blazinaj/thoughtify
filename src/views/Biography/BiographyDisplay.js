@@ -6,6 +6,7 @@ import Card from '../../utils/components/Card';
 import LoadingScreen from '../../demo/components/LoadingScreen';
 import {DataStore} from "@aws-amplify/datastore";
 import {differenceInDays} from "date-fns";
+import {useUserContext} from "../../contexts/UserContext";
 
 export const BiographyDisplay = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,8 +24,6 @@ export const BiographyDisplay = () => {
       return false;
     }
     const sortedBiography = biographies.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    console.log({sortedBiography})
 
     const lastBiographyDate = sortedBiography[0]?.date;
     const today = new Date();
@@ -55,8 +54,6 @@ export const BiographyDisplay = () => {
     const biographies = await DataStore.query(Biography);
 
     const isUpToDate = isBiographyUpToDate({biographies, cadence: JournalCadence.DAILY});
-
-    console.log({isUpToDate, biographies})
 
     if (isUpToDate) {
       // eslint-disable-next-line consistent-return
@@ -101,6 +98,8 @@ export const BiographyDisplay = () => {
 
   const [bio, setBio] = useState(null);
 
+  const {user} = useUserContext();
+
   useEffect(() => {
     if (!bio) {
       setIsLoading(true);
@@ -119,7 +118,9 @@ export const BiographyDisplay = () => {
   }
 
   return (
-    <Card>
+    <Card
+      subTitle={`${new Date().toLocaleDateString()}`}
+    >
       {bio?.pages?.map((page) => {
         return (
           <>
