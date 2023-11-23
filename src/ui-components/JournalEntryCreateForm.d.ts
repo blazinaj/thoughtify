@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -25,11 +25,13 @@ export declare type JournalEntryCreateFormInputValues = {
     date?: string;
     cadence?: string;
     entry?: string;
+    isLoading?: boolean;
 };
 export declare type JournalEntryCreateFormValidationValues = {
     date?: ValidationFunction<string>;
     cadence?: ValidationFunction<string>;
     entry?: ValidationFunction<string>;
+    isLoading?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type JournalEntryCreateFormOverridesProps = {
@@ -37,6 +39,7 @@ export declare type JournalEntryCreateFormOverridesProps = {
     date?: PrimitiveOverrideProps<TextFieldProps>;
     cadence?: PrimitiveOverrideProps<SelectFieldProps>;
     entry?: PrimitiveOverrideProps<TextFieldProps>;
+    isLoading?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type JournalEntryCreateFormProps = React.PropsWithChildren<{
     overrides?: JournalEntryCreateFormOverridesProps | undefined | null;

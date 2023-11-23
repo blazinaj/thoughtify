@@ -1,10 +1,8 @@
 import Page from '../../utils/components/Page';
-import { Container, Grid } from '@mui/material';
+import {Container} from '@mui/material';
 import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import { ThoughtInput } from '../../views/Thoughts/ThoughtInput';
-import { ThoughtGallery } from '../../views/Thoughts/ThoughtGallery';
-import { ThoughtExtracts } from '../../views/Thoughts/ThoughtExtracts/components/ThoughtExtracts';
+import Thoughts from "../../views/Thoughts/Thoughts";
 
 /**
  * This page displays the details of a course for a Teacher
@@ -22,19 +20,7 @@ const ThoughtsPage = () => {
           subHeading={"Collect your Thoughts and extract Insights"}
           icon={'mingcute:thought-line'}
         />
-        <Grid container spacing={3}>
-          <Grid item xs={12} lg={12}>
-            <ThoughtInput />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-            <ThoughtGallery />
-          </Grid>
-
-          <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-            <ThoughtExtracts />
-          </Grid>
-        </Grid>
+        <Thoughts/>
       </Container>
     </Page>
   );

@@ -29,10 +29,12 @@ export default function ThoughtUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
+    date: "",
     input: "",
     output: "",
     extract: "",
   };
+  const [date, setDate] = React.useState(initialValues.date);
   const [input, setInput] = React.useState(initialValues.input);
   const [output, setOutput] = React.useState(initialValues.output);
   const [extract, setExtract] = React.useState(initialValues.extract);
@@ -41,6 +43,7 @@ export default function ThoughtUpdateForm(props) {
     const cleanValues = thoughtRecord
       ? { ...initialValues, ...thoughtRecord }
       : initialValues;
+    setDate(cleanValues.date);
     setInput(cleanValues.input);
     setOutput(cleanValues.output);
     setExtract(
@@ -62,6 +65,7 @@ export default function ThoughtUpdateForm(props) {
   }, [idProp, thoughtModelProp]);
   React.useEffect(resetStateValues, [thoughtRecord]);
   const validations = {
+    date: [],
     input: [],
     output: [],
     extract: [{ type: "JSON" }],
@@ -83,6 +87,23 @@ export default function ThoughtUpdateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -92,6 +113,7 @@ export default function ThoughtUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
+          date,
           input,
           output,
           extract,
@@ -142,6 +164,35 @@ export default function ThoughtUpdateForm(props) {
       {...rest}
     >
       <TextField
+        label="Date"
+        isRequired={false}
+        isReadOnly={false}
+        type="datetime-local"
+        value={date && convertToLocal(new Date(date))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              date: value,
+              input,
+              output,
+              extract,
+            };
+            const result = onChange(modelFields);
+            value = result?.date ?? value;
+          }
+          if (errors.date?.hasError) {
+            runValidationTasks("date", value);
+          }
+          setDate(value);
+        }}
+        onBlur={() => runValidationTasks("date", date)}
+        errorMessage={errors.date?.errorMessage}
+        hasError={errors.date?.hasError}
+        {...getOverrideProps(overrides, "date")}
+      ></TextField>
+      <TextField
         label="Input"
         isRequired={false}
         isReadOnly={false}
@@ -150,6 +201,7 @@ export default function ThoughtUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              date,
               input: value,
               output,
               extract,
@@ -176,6 +228,7 @@ export default function ThoughtUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              date,
               input,
               output: value,
               extract,
@@ -202,6 +255,7 @@ export default function ThoughtUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              date,
               input,
               output,
               extract: value,

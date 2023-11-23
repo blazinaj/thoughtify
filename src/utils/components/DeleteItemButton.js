@@ -6,6 +6,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { deleteItem } from '../functions/deleteItem';
+import {Button, Typography} from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import {sentenceCase} from "change-case";
 
 /**
  * A button that allows the user to delete an item from the database
@@ -19,11 +22,25 @@ import { deleteItem } from '../functions/deleteItem';
  */
 export const DeleteItemButton = ({ item, model, onBeforeDelete, onAfterDelete }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
-    onBeforeDelete && onBeforeDelete(item);
-    await deleteItem(model, item);
-    onAfterDelete && onAfterDelete(item);
+    setIsDeleting(true);
+    if (onBeforeDelete) {
+      await onBeforeDelete(item);
+    }
+
+    if (model && item) {
+      await deleteItem(model, item);
+    }
+
+    setIsDeleting(false);
+
+    if (onAfterDelete) {
+      await onAfterDelete(item);
+    }
+
+    setDialogOpen(false);
   };
 
   return (
@@ -35,20 +52,26 @@ export const DeleteItemButton = ({ item, model, onBeforeDelete, onAfterDelete })
         fullWidth
         maxWidth="md"
       >
-        <DialogTitle id="form-dialog-title">Deleting an Item</DialogTitle>
+        <DialogTitle id="form-dialog-title">Are you sure you want to delete this {sentenceCase(model.name || "Item")}?</DialogTitle>
         <DialogContent>
-          <DialogContentText>...</DialogContentText>
+          {
+            isDeleting && (
+              <Typography>
+                Deleting...
+              </Typography>
+            )
+          }
         </DialogContent>
-        {/* <DialogActions> */}
-        {/*  <Button onClick={cancel} color="primary"> */}
-        {/*    Cancel */}
-        {/*  </Button> */}
-        {/*  <Button onClick={submit} color="primary"> */}
-        {/*    Submit */}
-        {/*  </Button> */}
-        {/* </DialogActions> */}
+         <DialogActions>
+          <Button onClick={() => setDialogOpen(false)} color="error">
+            No
+          </Button>
+          <Button onClick={async () => handleDelete()} color="success" disabled={isDeleting}>
+            Yes
+          </Button>
+         </DialogActions>
       </Dialog>
-      <IconButton aria-label="delete" onClick={() => handleDelete()} size="large">
+      <IconButton aria-label="delete" onClick={() => setDialogOpen(true)} size="large">
         <Delete />
       </IconButton>
     </>

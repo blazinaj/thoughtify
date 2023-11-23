@@ -3,7 +3,15 @@ import { Thought } from '../../models';
 import { ThoughtDetails } from './ThoughtDetails';
 import { Stack, Typography } from '@mui/material';
 
-export const ThoughtGallery = () => {
+export const ThoughtGallery = ({journalEntry}) => {
+
+  const getPredicate = () => {
+    if (journalEntry?.id) {
+      return (item) => item.journalEntries.journalEntry.id.eq(journalEntry.id)
+    }
+    return undefined
+  }
+
   const accordion = useDataAccordion({
     model: Thought,
     typename: 'Thought',
@@ -15,8 +23,10 @@ export const ThoughtGallery = () => {
       );
     },
     detailsComponent: <ThoughtDetails />,
-    sortFunction: (a, b) => b?.createdAt?.localeCompare(a?.createdAt)
+    sortFunction: (a, b) => (b?.date || b?.createdAt)?.localeCompare(a?.date || a?.createdAt),
+    predicate: getPredicate(),
+    enableSubscription: true,
   });
 
-  return <div>{accordion.display}</div>;
+  return <div style={{borderRadius: "16px"}}>{accordion.display}</div>;
 };

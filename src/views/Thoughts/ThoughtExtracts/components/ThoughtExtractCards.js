@@ -27,7 +27,7 @@ export const ThoughtExtractCards = ({extract}) => {
             title={sentenceCase(attribute)}
             key={attribute}
             sx={{
-              display: !value || value?.length < 1 ? 'none' : undefined
+              display: (!value || (Array.isArray(value) && value?.length < 1)) ? 'none' : undefined
             }}
           >
             <ThoughtExtractAttributeChips

@@ -4,6 +4,8 @@ import { IconButton, Input, InputAdornment, Stack } from '@mui/material';
 import { Icon } from '@iconify/react';
 import micFill from '@iconify/icons-eva/mic-fill';
 import roundSend from '@iconify/icons-ic/round-send';
+import {FileUploader} from "@aws-amplify/ui-react";
+import {useForm} from "../../utils/hooks/useForm";
 
 const RootStyle = styled('div')(({ theme }) => ({
   minHeight: 56,
@@ -19,7 +21,7 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit, ...other }) {
+export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit, showDateSelector = false, dateConfig = {}, ...other }) {
   const fileInputRef = useRef(null);
   const [message, setMessage] = useState('');
 
@@ -37,13 +39,26 @@ export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit,
     }
   };
 
+  const form = useForm({
+    fieldConfig: {
+      date: {
+        inputType: "date",
+        dateConfig,
+        defaultValue: dateConfig.defaultValue,
+      }
+    },
+    disableResetButton: true,
+    disableSubmitButton: true,
+  })
+
   const handleSend = async () => {
     if (!message) {
       return '';
     }
     if (onSubmit) {
       onSubmit({
-        input: message
+        input: message,
+        date: showDateSelector ? new Date(form.input.date).toISOString() : new Date().toISOString(),
       });
     }
     return setMessage('');
@@ -71,11 +86,59 @@ export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit,
         sx={{ height: '100%' }}
       />
 
+      {
+        showDateSelector && (
+              form.display
+          )
+      }
+
       <IconButton color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
         <Icon icon={roundSend} width={24} height={24} />
       </IconButton>
 
-      <input type="file" ref={fileInputRef} style={{ display: 'none' }} />
+      {/*<input type="file" ref={fileInputRef}*/}
+      {/*       // style={{ display: 'none' }}*/}
+      {/*/>*/}
     </RootStyle>
   );
+}
+
+const FileUploaderComponent = ({ onUpload }) => {
+  /**
+   * Uploads files to S3 and updates the lesson with the new images
+   * @param key
+   * @returns {Promise<void>}
+   */
+  const onFileUploadSuccess = async ({key}) => {
+
+    const bucketKey = `public/lesson-images/${key}`;
+
+    // const original = await details.query(Lesson,  id)
+    //
+    // await details.save(Lesson.copyOf(original, updated => {
+    //     updated.images = [
+    //       ...(Array.isArray(original?.images) ? original?.images : []),
+    //       {
+    //         url: bucketKey,
+    //       }
+    //     ]
+    //   }
+    // ))
+  }
+
+  const onFileUploadError = (error) => {
+    console.error(error)
+  }
+
+  return (
+    <FileUploader
+      acceptedFileTypes={['image/*']}
+      accessLevel="private"
+      hasMultipleFiles
+      isResumable
+      showImages
+      onSuccess={async (...input) => onFileUploadSuccess(...input)}
+      onError={onFileUploadError}
+    />
+  )
 }

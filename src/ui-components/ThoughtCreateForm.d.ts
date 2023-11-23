@@ -22,11 +22,13 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type ThoughtCreateFormInputValues = {
+    date?: string;
     input?: string;
     output?: string;
     extract?: string;
 };
 export declare type ThoughtCreateFormValidationValues = {
+    date?: ValidationFunction<string>;
     input?: ValidationFunction<string>;
     output?: ValidationFunction<string>;
     extract?: ValidationFunction<string>;
@@ -34,6 +36,7 @@ export declare type ThoughtCreateFormValidationValues = {
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ThoughtCreateFormOverridesProps = {
     ThoughtCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    date?: PrimitiveOverrideProps<TextFieldProps>;
     input?: PrimitiveOverrideProps<TextFieldProps>;
     output?: PrimitiveOverrideProps<TextFieldProps>;
     extract?: PrimitiveOverrideProps<TextAreaFieldProps>;

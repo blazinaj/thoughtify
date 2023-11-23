@@ -11,6 +11,7 @@ import {
   Flex,
   Grid,
   SelectField,
+  SwitchField,
   TextField,
 } from "@aws-amplify/ui-react";
 import { JournalEntry } from "../models";
@@ -31,21 +32,25 @@ export default function JournalEntryCreateForm(props) {
     date: "",
     cadence: "",
     entry: "",
+    isLoading: false,
   };
   const [date, setDate] = React.useState(initialValues.date);
   const [cadence, setCadence] = React.useState(initialValues.cadence);
   const [entry, setEntry] = React.useState(initialValues.entry);
+  const [isLoading, setIsLoading] = React.useState(initialValues.isLoading);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDate(initialValues.date);
     setCadence(initialValues.cadence);
     setEntry(initialValues.entry);
+    setIsLoading(initialValues.isLoading);
     setErrors({});
   };
   const validations = {
     date: [],
     cadence: [],
     entry: [],
+    isLoading: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -93,6 +98,7 @@ export default function JournalEntryCreateForm(props) {
           date,
           cadence,
           entry,
+          isLoading,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -152,6 +158,7 @@ export default function JournalEntryCreateForm(props) {
               date: value,
               cadence,
               entry,
+              isLoading,
             };
             const result = onChange(modelFields);
             value = result?.date ?? value;
@@ -178,6 +185,7 @@ export default function JournalEntryCreateForm(props) {
               date,
               cadence: value,
               entry,
+              isLoading,
             };
             const result = onChange(modelFields);
             value = result?.cadence ?? value;
@@ -225,6 +233,7 @@ export default function JournalEntryCreateForm(props) {
               date,
               cadence,
               entry: value,
+              isLoading,
             };
             const result = onChange(modelFields);
             value = result?.entry ?? value;
@@ -239,6 +248,33 @@ export default function JournalEntryCreateForm(props) {
         hasError={errors.entry?.hasError}
         {...getOverrideProps(overrides, "entry")}
       ></TextField>
+      <SwitchField
+        label="Is loading"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isLoading}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              date,
+              cadence,
+              entry,
+              isLoading: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.isLoading ?? value;
+          }
+          if (errors.isLoading?.hasError) {
+            runValidationTasks("isLoading", value);
+          }
+          setIsLoading(value);
+        }}
+        onBlur={() => runValidationTasks("isLoading", isLoading)}
+        errorMessage={errors.isLoading?.errorMessage}
+        hasError={errors.isLoading?.hasError}
+        {...getOverrideProps(overrides, "isLoading")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

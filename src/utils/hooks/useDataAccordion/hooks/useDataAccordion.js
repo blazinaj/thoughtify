@@ -44,7 +44,8 @@ export const useDataAccordion = ({
   handleIcon,
   titleField = 'name',
   subTitleField = 'description',
-  sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField])
+  sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField]),
+  items: itemsInit
 }) => {
   const classes = useStyles();
 
@@ -54,7 +55,8 @@ export const useDataAccordion = ({
     onAfterQuery,
     predicate,
     filter,
-    typename
+    typename,
+    items: itemsInit,
   });
 
   const display = (

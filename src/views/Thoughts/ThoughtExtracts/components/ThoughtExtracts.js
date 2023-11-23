@@ -9,7 +9,14 @@ import {ThoughtExtractCards} from "./ThoughtExtractCards";
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtExtracts = () => {
+export const ThoughtExtracts = ({journalEntry}) => {
+
+  const getPredicate = () => {
+    if (journalEntry?.id) {
+      return (item) => item?.journalEntries?.journalEntry.id.eq(journalEntry?.id)
+    }
+    return undefined
+  }
 
   /**
    * Fetches a list of Thoughts from the database, and subscribes to updates automatically
@@ -17,7 +24,8 @@ export const ThoughtExtracts = () => {
    */
   const thoughtDatastore = useDatastore({
     model: Thought,
-    enableSubscription: true
+    enableSubscription: true,
+    predicate: getPredicate(),
   });
 
   /**

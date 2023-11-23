@@ -35,7 +35,7 @@ export const Health = () => {
       
       ${thoughts
         .map((thought) => {
-          return `${thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
+          return `${thought?.date || thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
         })
         .join('\n')}
       
@@ -63,7 +63,7 @@ export const Health = () => {
 
   const getLatestHealthReport = ({healthReports}) => {
     const sortedHealthReports = healthReports.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
+      return new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt);
     });
 
     return sortedHealthReports[0];
