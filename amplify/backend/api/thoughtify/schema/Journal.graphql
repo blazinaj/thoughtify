@@ -4,6 +4,7 @@ type JournalEntry @model @auth(rules: [{allow: owner}]) {
     cadence: JournalCadence
     entry: String
     thoughts: [Thought] @manyToMany(relationName: "JournalEntryThoughts")
+    isLoading: Boolean
 }
 
 enum JournalCadence {
