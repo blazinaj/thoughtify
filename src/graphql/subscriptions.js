@@ -131,6 +131,12 @@ export const onCreateJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -151,6 +157,12 @@ export const onUpdateJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -171,6 +183,12 @@ export const onDeleteJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -317,9 +335,15 @@ export const onCreateThought = /* GraphQL */ `
   ) {
     onCreateThought(filter: $filter, owner: $owner) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -337,9 +361,15 @@ export const onUpdateThought = /* GraphQL */ `
   ) {
     onUpdateThought(filter: $filter, owner: $owner) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -357,9 +387,15 @@ export const onDeleteThought = /* GraphQL */ `
   ) {
     onDeleteThought(filter: $filter, owner: $owner) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -389,6 +425,7 @@ export const onCreateUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
@@ -417,6 +454,7 @@ export const onUpdateUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
@@ -445,11 +483,153 @@ export const onDeleteUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateJournalEntryThoughts = /* GraphQL */ `
+  subscription OnCreateJournalEntryThoughts(
+    $filter: ModelSubscriptionJournalEntryThoughtsFilterInput
+    $owner: String
+  ) {
+    onCreateJournalEntryThoughts(filter: $filter, owner: $owner) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateJournalEntryThoughts = /* GraphQL */ `
+  subscription OnUpdateJournalEntryThoughts(
+    $filter: ModelSubscriptionJournalEntryThoughtsFilterInput
+    $owner: String
+  ) {
+    onUpdateJournalEntryThoughts(filter: $filter, owner: $owner) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteJournalEntryThoughts = /* GraphQL */ `
+  subscription OnDeleteJournalEntryThoughts(
+    $filter: ModelSubscriptionJournalEntryThoughtsFilterInput
+    $owner: String
+  ) {
+    onDeleteJournalEntryThoughts(filter: $filter, owner: $owner) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
       __typename
     }
   }

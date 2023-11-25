@@ -632,6 +632,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "showOnboarding": {
+                    "name": "showOnboarding",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -809,5 +816,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "3c6ce6207d3e925cfd3c2a8405828b4b"
+    "version": "4f1d5e61db577596082e7ba1452bfc69"
 };

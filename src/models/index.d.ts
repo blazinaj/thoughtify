@@ -249,6 +249,7 @@ type EagerUser = {
   readonly profileImage?: string | null;
   readonly cognitoSub?: string | null;
   readonly owner?: string | null;
+  readonly showOnboarding?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -267,6 +268,7 @@ type LazyUser = {
   readonly profileImage?: string | null;
   readonly cognitoSub?: string | null;
   readonly owner?: string | null;
+  readonly showOnboarding?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -158,6 +158,12 @@ export const getJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -180,6 +186,7 @@ export const listJournalEntries = /* GraphQL */ `
         date
         cadence
         entry
+        isLoading
         createdAt
         updatedAt
         _version
@@ -212,6 +219,7 @@ export const syncJournalEntries = /* GraphQL */ `
         date
         cadence
         entry
+        isLoading
         createdAt
         updatedAt
         _version
@@ -430,9 +438,15 @@ export const getThought = /* GraphQL */ `
   query GetThought($id: ID!) {
     getThought(id: $id) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -452,6 +466,7 @@ export const listThoughts = /* GraphQL */ `
     listThoughts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        date
         input
         output
         extract
@@ -484,6 +499,7 @@ export const syncThoughts = /* GraphQL */ `
     ) {
       items {
         id
+        date
         input
         output
         extract
@@ -517,6 +533,7 @@ export const getUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
@@ -542,6 +559,7 @@ export const listUsers = /* GraphQL */ `
         profileImage
         cognitoSub
         owner
+        showOnboarding
         createdAt
         updatedAt
         _version
@@ -577,11 +595,182 @@ export const syncUsers = /* GraphQL */ `
         profileImage
         cognitoSub
         owner
+        showOnboarding
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getJournalEntryThoughts = /* GraphQL */ `
+  query GetJournalEntryThoughts($id: ID!) {
+    getJournalEntryThoughts(id: $id) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listJournalEntryThoughts = /* GraphQL */ `
+  query ListJournalEntryThoughts(
+    $filter: ModelJournalEntryThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJournalEntryThoughts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        journalEntryId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncJournalEntryThoughts = /* GraphQL */ `
+  query SyncJournalEntryThoughts(
+    $filter: ModelJournalEntryThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncJournalEntryThoughts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        journalEntryId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const journalEntryThoughtsByJournalEntryId = /* GraphQL */ `
+  query JournalEntryThoughtsByJournalEntryId(
+    $journalEntryId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelJournalEntryThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    journalEntryThoughtsByJournalEntryId(
+      journalEntryId: $journalEntryId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        journalEntryId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const journalEntryThoughtsByThoughtId = /* GraphQL */ `
+  query JournalEntryThoughtsByThoughtId(
+    $thoughtId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelJournalEntryThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    journalEntryThoughtsByThoughtId(
+      thoughtId: $thoughtId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        journalEntryId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
         __typename
       }
       nextToken
