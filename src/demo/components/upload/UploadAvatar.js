@@ -64,7 +64,7 @@ UploadAvatar.propTypes = {
   sx: PropTypes.object
 };
 
-export default function UploadAvatar({ error, file, caption, sx, ...other }) {
+export default function UploadAvatar({ error, file, caption, sx, disabled, ...other }) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     multiple: false,
     ...other
@@ -113,7 +113,8 @@ export default function UploadAvatar({ error, file, caption, sx, ...other }) {
             })
           }}
         >
-          <input {...getInputProps()} />
+          {/*Disabling image input until custom profile images are supported*/}
+          {/*/!*<input {...getInputProps()} />*!/ */}
 
           {file && (
             <Box
@@ -124,20 +125,20 @@ export default function UploadAvatar({ error, file, caption, sx, ...other }) {
             />
           )}
 
-          <PlaceholderStyle
-            className="placeholder"
-            sx={{
-              ...(file && {
-                opacity: 0,
-                color: 'common.white',
-                bgcolor: 'grey.900',
-                '&:hover': { opacity: 0.72 }
-              })
-            }}
-          >
-            <Box component={Icon} icon={roundAddAPhoto} sx={{ width: 24, height: 24, mb: 1 }} />
-            <Typography variant="caption">{file ? 'Update photo' : 'Upload photo'}</Typography>
-          </PlaceholderStyle>
+          {/*<PlaceholderStyle*/}
+          {/*  className="placeholder"*/}
+          {/*  sx={{*/}
+          {/*    ...(file && {*/}
+          {/*      opacity: 0,*/}
+          {/*      color: 'common.white',*/}
+          {/*      bgcolor: 'grey.900',*/}
+          {/*      // '&:hover': { opacity: 0.72 } // until custom profile images are supported*/}
+          {/*    })*/}
+          {/*  }}*/}
+          {/*>*/}
+            {/*<Box component={Icon} icon={roundAddAPhoto} sx={{ width: 24, height: 24, mb: 1 }} />*/}
+            {/*<Typography variant="caption">{file ? 'Update photo' : 'Upload photo'}</Typography>*/}
+          {/*</PlaceholderStyle>*/}
         </DropZoneStyle>
       </RootStyle>
 

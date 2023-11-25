@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
 export enum JournalCadence {
   DAILY = "DAILY",
@@ -98,6 +98,8 @@ type EagerJournalEntry = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly entry?: string | null;
+  readonly thoughts?: (JournalEntryThoughts | null)[] | null;
+  readonly isLoading?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -111,6 +113,8 @@ type LazyJournalEntry = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly entry?: string | null;
+  readonly thoughts: AsyncCollection<JournalEntryThoughts>;
+  readonly isLoading?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -201,9 +205,11 @@ type EagerThought = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly date?: string | null;
   readonly input?: string | null;
   readonly output?: string | null;
   readonly extract?: string | null;
+  readonly journalEntries?: (JournalEntryThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -214,9 +220,11 @@ type LazyThought = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly date?: string | null;
   readonly input?: string | null;
   readonly output?: string | null;
   readonly extract?: string | null;
+  readonly journalEntries: AsyncCollection<JournalEntryThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -267,4 +275,38 @@ export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser :
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
+
+type EagerJournalEntryThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<JournalEntryThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly journalEntryId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly journalEntry: JournalEntry;
+  readonly thought: Thought;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyJournalEntryThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<JournalEntryThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly journalEntryId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly journalEntry: AsyncItem<JournalEntry>;
+  readonly thought: AsyncItem<Thought>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type JournalEntryThoughts = LazyLoading extends LazyLoadingDisabled ? EagerJournalEntryThoughts : LazyJournalEntryThoughts
+
+export declare const JournalEntryThoughts: (new (init: ModelInit<JournalEntryThoughts>) => JournalEntryThoughts) & {
+  copyOf(source: JournalEntryThoughts, mutator: (draft: MutableModel<JournalEntryThoughts>) => MutableModel<JournalEntryThoughts> | void): JournalEntryThoughts;
 }

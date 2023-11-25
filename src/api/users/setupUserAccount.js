@@ -5,12 +5,11 @@ export const setupUserAccount = async ({ cognitoUser, userData }) => {
   console.log('Setting up a new User Account for the Cognito User', { cognitoUser, userData });
 
   const username = cognitoUser?.username;
-  const cognitoSub = cognitoUser?.attributes.sub;
-  const firstName = cognitoUser?.attributes.given_name;
-  const lastName = cognitoUser?.attributes.family_name;
-  const email = cognitoUser?.attributes.email;
-  const phone = cognitoUser?.attributes.phone_number;
-  const profileImage = cognitoUser?.attributes.profileImage;
+  const firstName = cognitoUser?.attributes?.given_name || userData?.firstName;
+  const lastName = cognitoUser?.attributes?.family_name || userData?.lastName;
+  const email = cognitoUser?.attributes?.email;
+  const phone = cognitoUser?.attributes?.phone_number;
+  const profileImage = cognitoUser?.attributes?.picture;
 
   console.log('Creating a new User Object');
 
@@ -22,7 +21,8 @@ export const setupUserAccount = async ({ cognitoUser, userData }) => {
       email,
       phone,
       profileImage,
-      bio: userData.bio
+      bio: userData.bio,
+        showOnboarding: true,
     })
   );
 

@@ -16,7 +16,7 @@ import { handleCompletion } from '../../utils/openai/functions/generate'
       
       ${thoughts
         .map((thought) => {
-          return `${thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
+          return `${thought.date || thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
         })
         .join('\n')}
       

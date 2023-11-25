@@ -41,7 +41,7 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
       
       ${thoughts
         .map((thought) => {
-          return `${thought.createdAt} - ${thought?.extract ? JSON.stringify(thought.extract) : thought.input}`;
+          return `${thought?.date || thought.createdAt} - ${thought?.extract ? JSON.stringify(thought.extract) : thought.input}`;
         })
         .join('\n')}
       
@@ -82,12 +82,16 @@ export const ThoughtExtractInsight = ({thought, type, value: _value}) => {
 
   if (isLoading) {
     return (
-      <LoadingScreen />
+      <LoadingScreen style={{
+        minHeight: "25vh"
+      }} />
     )
   }
 
   return (
-    <div>
+    <div
+
+    >
       <Grid container spacing={2}>
 
         <Grid

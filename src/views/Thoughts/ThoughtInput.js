@@ -1,7 +1,8 @@
-import {Thought} from '../../models';
+import {JournalEntryThoughts, Thought} from '../../models';
 import {DataStore} from '@aws-amplify/datastore';
 import ThoughtInputField from './ThoughtInputField';
 import {generateThoughtExtract} from "../../api/thoughts/generateThoughtExtract";
+import {getWeek} from "date-fns";
 
 /**
  * Input Field for Thoughts.
@@ -12,7 +13,7 @@ import {generateThoughtExtract} from "../../api/thoughts/generateThoughtExtract"
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtInput = () => {
+export const ThoughtInput = ({journalEntry}) => {
 
   const onSubmit = async (input) => {
     console.log('saving thought', input);
@@ -21,6 +22,16 @@ export const ThoughtInput = () => {
         ...input
       })
     );
+
+    if (journalEntry?.id) {
+      console.log({journalEntry, newThought})
+      await DataStore.save(
+        new JournalEntryThoughts({
+          journalEntryId: journalEntry.id,
+          thoughtId: newThought.id
+        })
+      )
+    }
 
     const extract = await generateThoughtExtract(newThought);
 
@@ -31,5 +42,40 @@ export const ThoughtInput = () => {
     );
   };
 
-  return <ThoughtInputField onSubmit={onSubmit} />;
+  const getDates = (date, cadence) => {
+    const minDate = new Date(date);
+    const maxDate = new Date(date);
+    switch (cadence) {
+      case 'DAILY':
+        break;
+      case 'WEEKLY':
+        // first day of the week
+        minDate.setDate(minDate.getDate() - getWeek(minDate).day);
+        break;
+      case 'MONTHLY':
+        // first of the month
+        minDate.setDate(1);
+        break;
+      case 'YEARLY':
+        // first of the year
+        minDate.setMonth(0);
+        minDate.setDate(1);
+        break;
+      default:
+        break;
+    }
+    return {
+        minDate,
+        maxDate
+    };
+  }
+
+  return <ThoughtInputField
+      onSubmit={onSubmit}
+      showDateSelector={!!journalEntry}
+      dateConfig={{
+        ...getDates(journalEntry?.date, journalEntry?.cadence),
+        defaultValue: new Date(journalEntry?.date)
+      }}
+  />;
 };

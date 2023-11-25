@@ -6,11 +6,11 @@ export const formatDate = (dateParam, groupBy = JournalCadence.DAILY) => {
   let date = new Date(dateParam);
 
   if (groupBy === JournalCadence.DAILY) {
-    date = new Date(dateParam).toLocaleDateString();
+    date = new Date(dateParam).toLocaleDateString('default', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   } else if (groupBy === JournalCadence.WEEKLY) {
     date = `${startOfWeek(new Date(dateParam)).toLocaleDateString()} - ${endOfWeek(new Date(dateParam)).toLocaleDateString()}`
   } else if (groupBy === JournalCadence.MONTHLY) {
-    date = new Date(dateParam).toLocaleString('default', { month: 'long' });
+    date = new Date(dateParam).toLocaleString('default', { month: 'long', year: 'numeric' });
   } else if (groupBy === JournalCadence.YEARLY) {
     date = new Date(dateParam).getFullYear();
   }
@@ -25,16 +25,16 @@ export const createJournalTimeline = async (thoughts, groupBy = JournalCadence.D
   // const thoughts = await DataStore.query(Thought);
   const groups = [];
   thoughts.forEach((thought) => {
-    let date = new Date(thought.createdAt);
+    let date = new Date(thought?.date || thought.createdAt);
 
     if (groupBy === JournalCadence.DAILY) {
-      date = new Date(thought.createdAt).toLocaleDateString();
+      date = new Date(thought?.date || thought.createdAt).toLocaleDateString();
     } else if (groupBy === JournalCadence.WEEKLY) {
-      date = `${startOfWeek(new Date(thought.createdAt))} - ${endOfWeek(new Date(thought.createdAt))}`
+      date = `${startOfWeek(new Date(thought?.date || thought.createdAt))} - ${endOfWeek(new Date(thought?.date || thought.createdAt))}`
     } else if (groupBy === JournalCadence.MONTHLY) {
-      date = new Date(thought.createdAt).toLocaleString('default', { month: 'long' });
+      date = new Date(thought?.date || thought.createdAt).toLocaleString('default', { month: 'long' });
     } else if (groupBy === JournalCadence.YEARLY) {
-      date = new Date(thought.createdAt).getFullYear();
+      date = new Date(thought?.date || thought.createdAt).getFullYear();
     }
 
     let group = groups.find((group) => {
@@ -42,7 +42,7 @@ export const createJournalTimeline = async (thoughts, groupBy = JournalCadence.D
     });
     if (!group) {
       group = {
-        date: new Date(thought.createdAt),
+        date: new Date(thought?.date || thought.createdAt),
         formattedDate: date,
         thoughts: []
       };

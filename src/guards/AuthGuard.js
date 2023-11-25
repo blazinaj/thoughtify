@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import { UserContextProvider } from '../contexts/UserContext';
-import { styled } from '@mui/material/styles';
-import { CognitoContextProvider } from '../contexts/CognitoContext';
+import {useState} from 'react';
+import {Navigate, useLocation} from 'react-router-dom';
+import {withAuthenticator} from '@aws-amplify/ui-react';
+import {styled} from '@mui/material/styles';
 // ----------------------------------------------------------------------
 
 /**
@@ -28,11 +26,7 @@ const AuthGuard = ({ children, isPassedToWithAuthenticator, signOut, user }) => 
     return <Navigate to={requestedLocation} />;
   }
 
-  return (
-    <CognitoContextProvider>
-      <UserContextProvider>{children}</UserContextProvider>
-    </CognitoContextProvider>
-  );
+  return children
 };
 
 /**

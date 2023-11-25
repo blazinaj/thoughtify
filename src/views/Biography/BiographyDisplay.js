@@ -67,7 +67,7 @@ export const BiographyDisplay = () => {
       
       ${thoughts
         .map((thought) => {
-          return `${thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
+          return `${thought?.date || thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
         })
       .join('\n')}
       

@@ -1,6 +1,8 @@
 type Thought @model @auth(rules: [{allow: owner}]) {
     id: ID!
+    date: AWSDateTime
     input: String
     output: String
     extract: AWSJSON
+    journalEntries: [JournalEntry] @manyToMany(relationName: "JournalEntryThoughts")
 }

@@ -189,6 +189,29 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "thoughts": {
+                    "name": "thoughts",
+                    "isArray": true,
+                    "type": {
+                        "model": "JournalEntryThoughts"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "journalEntry"
+                        ]
+                    }
+                },
+                "isLoading": {
+                    "name": "isLoading",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -445,6 +468,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "input": {
                     "name": "input",
                     "isArray": false,
@@ -465,6 +495,22 @@ export const schema = {
                     "type": "AWSJSON",
                     "isRequired": false,
                     "attributes": []
+                },
+                "journalEntries": {
+                    "name": "journalEntries",
+                    "isArray": true,
+                    "type": {
+                        "model": "JournalEntryThoughts"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "thought"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -630,6 +676,104 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "JournalEntryThoughts": {
+            "name": "JournalEntryThoughts",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "journalEntryId": {
+                    "name": "journalEntryId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "thoughtId": {
+                    "name": "thoughtId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "journalEntry": {
+                    "name": "journalEntry",
+                    "isArray": false,
+                    "type": {
+                        "model": "JournalEntry"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "journalEntryId"
+                        ]
+                    }
+                },
+                "thought": {
+                    "name": "thought",
+                    "isArray": false,
+                    "type": {
+                        "model": "Thought"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "thoughtId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "JournalEntryThoughts",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byJournalEntry",
+                        "fields": [
+                            "journalEntryId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byThought",
+                        "fields": [
+                            "thoughtId"
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {
@@ -665,5 +809,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "05a95472931e9afb4d6ac3609be37f8a"
+    "version": "3c6ce6207d3e925cfd3c2a8405828b4b"
 };

@@ -46,14 +46,16 @@ export default function Card({
   formModalTitle,
   formModalSubTitle,
   formModalButton,
-  className
+  className,
+  actions = [],
+  sx= {},
 }) {
   const classes = useStyles();
 
   const navigate = useNavigate();
 
   return (
-    <MUICard className={`classes.root ${className || ''}`} variant="outlined" style={style}>
+    <MUICard className={`classes.root ${className || ''}`} variant="outlined" style={style} sx={sx}>
       <CardHeader
         avatar={avatar}
         action={
@@ -68,6 +70,12 @@ export default function Card({
                 <Refresh />
               </IconButton>
             )}
+            {actions?.map((action) =>
+              React.cloneElement(
+                action,
+              )
+            )}
+
           </ButtonGroup>
         }
         title={title}
