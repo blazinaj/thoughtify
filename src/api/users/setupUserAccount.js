@@ -21,7 +21,8 @@ export const setupUserAccount = async ({ cognitoUser, userData }) => {
       email,
       phone,
       profileImage,
-      bio: userData.bio
+      bio: userData.bio,
+        showOnboarding: true,
     })
   );
 

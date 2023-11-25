@@ -63,7 +63,7 @@ export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit,
     }
     return setMessage('');
   };
-
+  
   return (
     <RootStyle {...other}>
       <Input

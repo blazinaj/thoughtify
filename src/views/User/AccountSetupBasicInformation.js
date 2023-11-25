@@ -18,6 +18,11 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
         label: 'Tell us a little about yourself',
         tooltip: 'This will be displayed on your profile page and will be used by the AI to tailor your experience'
       },
+      showOnboarding: {
+        defaultValue: userData.showOnboarding || true,
+        label: 'Show Onboarding',
+        tooltip: 'Start a helpful onboarding experience when you log in'
+      }
     },
     disableSubmitButton: true
   });

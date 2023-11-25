@@ -10,7 +10,7 @@ export const formatDate = (dateParam, groupBy = JournalCadence.DAILY) => {
   } else if (groupBy === JournalCadence.WEEKLY) {
     date = `${startOfWeek(new Date(dateParam)).toLocaleDateString()} - ${endOfWeek(new Date(dateParam)).toLocaleDateString()}`
   } else if (groupBy === JournalCadence.MONTHLY) {
-    date = new Date(dateParam).toLocaleString('default', { month: 'long' });
+    date = new Date(dateParam).toLocaleString('default', { month: 'long', year: 'numeric' });
   } else if (groupBy === JournalCadence.YEARLY) {
     date = new Date(dateParam).getFullYear();
   }

@@ -31,7 +31,8 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
 
   const journalEntryDataStore = useDatastore({
     model: JournalEntry,
-    predicate: (j) => j.cadence.eq(cadence)
+    predicate: (j) => j.cadence.eq(cadence),
+    enableSubscription: true,
   })
 
   console.log('journalEntryDataStore', journalEntryDataStore.items)
@@ -108,12 +109,20 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
           continue;
         }
 
-        console.log('found journal entry for today, updating it in case there are new thoughts..')
+        console.log('found new thoughts for journal entry for today, updating the journal entry..');
+
+        enqueueSnackbar(`Found ${newThoughts.length} new thoughts for Journal Entry: ${formatDate(foundJournal?.date, cadence)}, updating the journal entry..`, {
+          variant: "info"
+        })
 
         const journalEntry = await handleJournalEntryCompletion({
           thoughts: newThoughts,
           cadence,
-          journalEntry: foundJournal.entry
+          journalEntry: foundJournal.entry,
+          date: formatDate(
+              new Date(foundJournal.date),
+              cadence
+          )
         })
 
         const promises = [];
@@ -139,6 +148,10 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
       else {
         console.log('no journal entry found for today, creating one..')
 
+        enqueueSnackbar(`Found ${currentThoughts.length} new thoughts for Journal Entry: ${formatDate(group.date, cadence)}, updating the journal entry..`, {
+          variant: "info"
+        })
+
         let newJournalEntry = await DataStore.save(
           new JournalEntry({
             date: new Date(group.date).toISOString(),
@@ -148,7 +161,11 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
         )
 
         const journalEntryCompletion = await handleJournalEntryCompletion({
-          thoughts: currentThoughts
+          thoughts: currentThoughts,
+          date: formatDate(
+            new Date(group.date),
+            cadence
+          )
         })
 
         newJournalEntry = await DataStore.save(

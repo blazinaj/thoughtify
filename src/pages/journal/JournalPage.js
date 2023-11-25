@@ -11,7 +11,7 @@ import {useTheme} from "../../theme/useTheme";
 const JournalPage = () => {
   const { themeStretch } = useSettings();
 
-  const [cadence, setCadence] = useState(JournalCadence.DAILY);
+  const [cadence, setCadence] = useState(JournalCadence.DAILY || "DAILY");
 
   const {theme} = useTheme();
 
@@ -31,6 +31,7 @@ const JournalPage = () => {
             >
               <ButtonGroup
                 orientation={smallToMid ? "vertical" : "horizontal"}
+                size={"small"}
               >
                 {
                   Object.values(JournalCadence).map((cadenceEnum) => {
@@ -41,6 +42,7 @@ const JournalPage = () => {
                           setCadence(cadenceEnum);
                         }}
                         variant={cadence === cadenceEnum ? 'contained' : 'outlined'}
+                        size={"small"}
                       >
                         {cadenceEnum}
                       </Button>
