@@ -40,7 +40,8 @@ export default function AccountGeneral() {
       city: user?.city,
       zipCode: user?.zipCode,
       about: user?.about,
-      isPublic: user?.isPublic
+      isPublic: user?.isPublic,
+      bio: user?.bio?.[0]?.answer
     },
 
     validationSchema: UpdateUserSchema,
@@ -83,37 +84,31 @@ export default function AccountGeneral() {
             <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
               <UploadAvatar
                 accept="image/*"
-                file={values.photoURL}
+                file={user?.profileImage}
                 maxSize={3145728}
                 onDrop={handleDrop}
                 error={Boolean(touched.photoURL && errors.photoURL)}
-                caption={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary'
-                    }}
-                  >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
-                  </Typography>
-                }
+                disabled={true} // until custom profile images are supported
+                // caption={
+                //   <Typography
+                //     variant="caption"
+                //     sx={{
+                //       mt: 2,
+                //       mx: 'auto',
+                //       display: 'block',
+                //       textAlign: 'center',
+                //       color: 'text.secondary'
+                //     }}
+                //   >
+                //     Allowed *.jpeg, *.jpg, *.png, *.gif
+                //     <br /> max size of {fData(3145728)}
+                //   </Typography>
+                // }
               />
 
               <FormHelperText error sx={{ px: 2, textAlign: 'center' }}>
                 {touched.photoURL && errors.photoURL}
               </FormHelperText>
-
-              <FormControlLabel
-                control={<Switch {...getFieldProps('isPublic')} color="primary" />}
-                labelPlacement="start"
-                label="Public Profile"
-                sx={{ mt: 5 }}
-              />
             </Card>
           </Grid>
 
@@ -121,23 +116,24 @@ export default function AccountGeneral() {
             <Card sx={{ p: 3 }}>
               <Stack spacing={{ xs: 2, md: 3 }}>
                 <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
-                  <TextField fullWidth label="First Name" {...getFieldProps('firstName')} />
-                  <TextField fullWidth label="Last Name" {...getFieldProps('lastName')} />
+                  <TextField fullWidth disabled label="First Name" {...getFieldProps('firstName')} />
+                  <TextField fullWidth disabled label="Last Name" {...getFieldProps('lastName')} />
                 </Stack>
 
                 <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
-                  <TextField fullWidth label="Phone Number" {...getFieldProps('phoneNumber')} />
+                  <TextField fullWidth disabled label="Phone Number" {...getFieldProps('phoneNumber')} />
                   <TextField fullWidth disabled label="Email Address" {...getFieldProps('email')} />
                 </Stack>
 
-                <TextField {...getFieldProps('about')} fullWidth multiline minRows={4} maxRows={4} label="About" />
+                <TextField {...getFieldProps('bio')} disabled fullWidth multiline minRows={4} maxRows={4} label="About" />
               </Stack>
 
-              <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                  Save Changes
-                </LoadingButton>
-              </Box>
+              {/*Disabled until user can edit their own attributes*/}
+              {/*<Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>*/}
+              {/*  <LoadingButton type="submit" variant="contained" loading={isSubmitting}>*/}
+              {/*    Save Changes*/}
+              {/*  </LoadingButton>*/}
+              {/*</Box>*/}
             </Card>
           </Grid>
         </Grid>

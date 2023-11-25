@@ -75,7 +75,12 @@ export const AccountSetup = ({ setupUserAccount, cognitoUser, onComplete }) => {
 
   const [userData, setUserData] = useState({
     bio: '',
-    interests: []
+    interests: [],
+    firstName: cognitoUser?.attributes?.firstName || cognitoUser?.attributes?.given_name,
+    lastName: cognitoUser?.attributes?.lastName || cognitoUser?.attributes?.family_name,
+    email: cognitoUser?.attributes?.email,
+    phone: cognitoUser?.attributes?.phone_number,
+    profileImage: cognitoUser?.attributes?.picture
   });
 
   const isComplete = activeStep === STEPS.length;

@@ -30,6 +30,11 @@ export const handleJournalEntryCompletion = async ({thoughts, cadence = JournalE
       return thought?.extract?.summary || thought?.input;
     })
     .join('\n')}
+    
+    Respond with the following tone: neutral, factual.
+    
+    Journal Entry: 
+    
   `;
   }
 

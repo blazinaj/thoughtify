@@ -19,13 +19,23 @@ import { AccountSettings } from '@aws-amplify/ui-react';
 export default function AccountChangePassword() {
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar } = useSnackbar();
-  const { user = {}, onChangePassword } = useUserContext();
+  const { user = {}, cognitoUser, onChangePassword } = useUserContext();
 
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
         <Card sx={{ py: 10, px: 3, textAlign: 'center' }}>
-          <AccountSettings.ChangePassword onSuccess={onChangePassword} />
+          {
+            // only show password change if there are no Federated Identities
+            !cognitoUser?.attributes?.identities ? (
+                  <AccountSettings.ChangePassword onSuccess={onChangePassword} />
+
+              ) : (
+                  <Typography variant="h7" sx={{ mb: 5 }}>
+                    You are logged in with a Federated Identity. Please contact your administrator to change your password.
+                  </Typography>
+            )
+          }
         </Card>
       </Grid>
     </Grid>

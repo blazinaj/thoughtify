@@ -17,6 +17,7 @@ import MyAvatar from '../../demo/components/MyAvatar';
 import MenuPopover from '../../demo/components/MenuPopover';
 import { Auth } from '@aws-amplify/auth';
 import { DataStore } from '@aws-amplify/datastore';
+import {useUserContext} from "../../contexts/UserContext";
 
 // ----------------------------------------------------------------------
 
@@ -57,7 +58,7 @@ export default function AccountPopover() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const isMountedRef = useIsMountedRef();
-  const { user, logout } = useAuth();
+  const { user, logout } = useUserContext();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -114,7 +115,7 @@ export default function AccountPopover() {
       <MenuPopover open={open} onClose={handleClose} anchorEl={anchorRef.current} sx={{ width: 220 }}>
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {user?.displayName}
+            {user?.firstName} {user?.lastName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {user?.email}

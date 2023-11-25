@@ -143,7 +143,7 @@ export default function JournalTimeline({cadence = 'DAILY'}) {
           new JournalEntry({
             date: new Date(group.date).toISOString(),
             cadence,
-            isLoading: true,
+            // isLoading: true,
           })
         )
 

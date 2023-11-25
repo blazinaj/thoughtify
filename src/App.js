@@ -10,6 +10,7 @@ import useLocales from './utils/hooks/useLocales';
 import { ThemeProvider } from './contexts/ThemeProvider';
 import { SettingsProvider } from './contexts/SettingsContext';
 import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
+import {UserContextProvider} from "./contexts/UserContext";
 // ----------------------------------------------------------------------
 
 /**
@@ -30,21 +31,25 @@ const App = () => {
   const { currentLang } = useLocales();
 
   return (
-    <SettingsProvider>
-      <CollapseDrawerProvider>
-        <ThemeProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={currentLang}>
-            <RtlLayoutContext>
-              <NotistackProvider>
-                <Settings />
-                <ScrollToTop />
-                <Viewport />
-              </NotistackProvider>
-            </RtlLayoutContext>
-          </LocalizationProvider>
-        </ThemeProvider>
-      </CollapseDrawerProvider>
-    </SettingsProvider>
+
+      <ThemeProvider>
+      <UserContextProvider>
+        <SettingsProvider>
+          <CollapseDrawerProvider>
+              <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={currentLang}>
+                <RtlLayoutContext>
+                  <NotistackProvider>
+                    <Settings />
+                    <ScrollToTop />
+                    <Viewport />
+                  </NotistackProvider>
+                </RtlLayoutContext>
+              </LocalizationProvider>
+          </CollapseDrawerProvider>
+        </SettingsProvider>
+      </UserContextProvider>
+
+      </ThemeProvider>
   );
 };
 

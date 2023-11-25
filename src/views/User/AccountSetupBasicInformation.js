@@ -13,23 +13,11 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
         defaultValue: userData.lastName || '',
         label: 'Last Name',
       },
-      'Tell us a little about yourself': {
-        defaultValue: userData['Tell us a little about yourself'],
+      'bio': {
+        defaultValue: userData.bio || '',
         label: 'Tell us a little about yourself',
         tooltip: 'This will be displayed on your profile page and will be used by the AI to tailor your experience'
       },
-      'What is your preferred learning style?': {
-        defaultValue: userData['What is your preferred learning style?'],
-        label: 'What is your preferred learning style?'
-      },
-      'Do you prefer to learn in shorter bursts or longer sessions?': {
-        defaultValue: userData['Do you prefer to learn in short bursts or long sessions?'],
-        label: 'Do you prefer to learn in short bursts or long sessions?'
-      },
-      'What are your feelings around the use of Emojis? 🤔': {
-        defaultValue: userData['What are your feelings around the use of Emojis? 🤔'],
-        label: 'What are your feelings around the use of Emojis? 🤔'
-      }
     },
     disableSubmitButton: true
   });
@@ -38,7 +26,7 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
     <Grid container spacing={3}>
       <Grid item xs={12} md={12}>
         <Card sx={{ mb: 3, pb: 2 }}>
-          <CardHeader title={<Typography variant="h6">Personality Profile</Typography>} sx={{ mb: 3 }} />
+          <CardHeader title={<Typography variant="h6">Profile</Typography>} sx={{ mb: 3 }} />
 
           <CardContent>{form.display}</CardContent>
         </Card>
@@ -53,7 +41,14 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
           onClick={() => {
             setUserData((d) => ({
               ...d,
-              bio: Object.entries(form.input).map(([question, answer]) => ({ question, answer }))
+              firstName: form?.input?.firstName,
+              lastName: form?.input?.lastName,
+              bio: [
+                {
+                  question: "generalInformation",
+                  answer: form?.input?.bio
+                }
+              ]
             }));
             setActiveStep((curr) => curr + 1);
           }}
