@@ -43,7 +43,6 @@ export const useForm = ({
   submitFunction,
   disableCancelOnSubmit,
   disableSubmitButton = false,
-  disableResetButton = false,
   disableResetFunction = false,
   onChange,
   fields: fieldsInit, // if an array of fields is passed in, it will only use those fields. if no array, it shows all available fields

@@ -7,7 +7,7 @@ import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { useNavigate } from 'react-router-dom';
 // material
 import { Button, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
-import { signUp } from '../../../../views/Login/functions/signUp';
+// import { signUp } from '../../../../views/Login/functions/signUp';
 
 // ----------------------------------------------------------------------
 
@@ -31,10 +31,10 @@ export default function RegisterForm() {
   };
 
   const onSubmit = ({ email, firstName, lastName, password }) => {
-    signUp(email, password, email).then((stuff) => {
-      console.log(stuff);
-      onSignUpSuccess(stuff);
-    });
+    // signUp(email, password, email).then((stuff) => {
+    //   console.log(stuff);
+    //   onSignUpSuccess(stuff);
+    // });
   };
 
   const formik = useFormik({

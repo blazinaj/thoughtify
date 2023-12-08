@@ -2,7 +2,7 @@ import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
 import {Container, Grid} from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import {BiographyDisplay} from "../../views/Biography/BiographyDisplay";
+import {BiographyDisplay} from "./components/BiographyDisplay";
 // import {BiographyDisplay} from '../../views/BiographyDisplay/BiographyDisplay';
 
 const BiographyPage = () => {

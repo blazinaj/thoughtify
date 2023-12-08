@@ -73,6 +73,7 @@ export default function Router() {
         ),
         children: [
           { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
+          { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
           { path: 'journal', element: <JournalPage /> },
           { path: 'biography', element: <BiographyPage /> },
           { path: 'user/*', element: <UserAccountPage /> },
@@ -103,6 +104,7 @@ export default function Router() {
 
 // IMPORT COMPONENTS
 const ThoughtsPage = Loadable(lazy(() => import('./thoughts/ThoughtsPage')));
+const ThoughtDetailsPage = Loadable(lazy(() => import('./thoughts/ThoughtDetailsPage')));
 const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
 const HealthPage = Loadable(lazy(() => import('./health/HealthPage')));

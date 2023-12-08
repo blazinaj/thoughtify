@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 
 import { darken, lighten, styled } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import { Autocomplete, Box, InputAdornment, TextField, Typography } from '@mui/material';
 import SearchNotFound from '../../demo/components/SearchNotFound';
 import { Icon } from '@iconify/react';
@@ -13,6 +13,7 @@ import { Thought } from '../../models';
 import { useDatastore } from '../../utils/hooks/useDatastore';
 import Fuse from 'fuse.js';
 import useLocalStorage from '../../utils/hooks/useLocalStorage';
+import {useDebounce} from "../../utils/hooks/useDebounce";
 
 const RootStyle = styled('div')(({ theme }) => ({
   '& .MuiAutocomplete-root': {
@@ -56,7 +57,8 @@ const RootStyle = styled('div')(({ theme }) => ({
  */
 export const ApplicationSearchbar = ({ sx, handleClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
   const [recentSearches, setRecentSearches] = useLocalStorage('thoughtify-application-searchbar-recents', []);
 
@@ -64,33 +66,66 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
     model: Thought
   });
 
-  useEffect(() => {
-    if (searchQuery === '') {
-      setSearchResults([...recentSearches.map((item) => ({ item: { ...item, recentSearch: true, type: 'thought' } }))]);
-    }
-  }, [searchQuery]);
+  // useEffect(() => {
+  //   if (searchQuery === '') {
+  //     setSearchResults([...recentSearches.map((item) => ({ ...item, recentSearch: true, type: 'thought' } ))]);
+  //   }
+  // }, [searchQuery]);
 
   const linkTo = (id) => `thoughts/${id}`;
+
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
+  const searchResults = useMemo(() => {
+
+    if (debouncedSearchQuery === '') {
+        return recentSearches.map((item) => ({ ...item, recentSearch: true, type: 'thought' }));
+    }
+
+    if (debouncedSearchQuery) {
+      const fuse = new Fuse(thoughtDatastore.items, {
+        keys: ['input', 'description', 'extract.people', 'extract.projects', 'extract.categories', 'extract.emotions', 'extract.reminders'],
+        includeScore: true
+      });
+
+      const categories = ['people', 'projects', 'categories', 'emotions', 'reminders'];
+
+      const orSearch = {
+        $or: [
+          {
+            input: debouncedSearchQuery,
+          },
+          {
+            extract: debouncedSearchQuery
+          }
+        ]
+      }
+
+      const results = fuse.search(orSearch);
+      const thoughtResults = results.map((result) => {
+        const { item, score } = result;
+        return {
+
+          ...item,
+          score,
+          type: 'thought',
+          recentSearch: false
+
+        };
+      });
+      console.log('thoughtResults', thoughtResults)
+      setLoading(false)
+      return thoughtResults || [];
+    }
+
+    return [];
+  }, [debouncedSearchQuery, thoughtDatastore.items]);
 
   const handleChangeSearch = async (event) => {
     try {
       const { value } = event.target;
       setSearchQuery(value);
-
-      const options = {
-        includeScore: true,
-        keys: ['input']
-      };
-
-      const fuse = new Fuse(thoughtDatastore.items, options);
-
-      const result = fuse.search(value);
-
-      if (value) {
-        setSearchResults(result);
-      } else {
-        setSearchResults([]);
-      }
+      setLoading(true)
     } catch (error) {
       console.error(error);
     }
@@ -110,7 +145,7 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
       return newRecentSearches;
     });
 
-    setSearchResults([]);
+    // setSearchResults([]);
     setSearchQuery('');
     handleClose && handleClose();
     navigate(route || linkTo(item.id));
@@ -134,12 +169,12 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
         disablePortal
         autoFocus
         popupIcon={null}
-        options={searchResults.map((r) => r.item)}
+        options={searchResults}
         groupBy={(option) => option.recentSearch}
         disableCloseOnSelect
         onInputChange={handleChangeSearch}
-        getOptionLabel={(post) => post?.name}
-        noOptionsText={<SearchNotFound searchQuery={searchQuery} onClickSearchResult={onClickSearchResult} />}
+        getOptionLabel={(thought) => thought?.input || JSON.stringify(thought)}
+        noOptionsText={loading ? "Loading Search Results" : <SearchNotFound searchQuery={searchQuery} onClickSearchResult={onClickSearchResult} />}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -167,16 +202,17 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
             }}
           />
         )}
-        renderOption={(props, lesson, { inputValue }) => {
-          const { name } = lesson;
-          const matches = match(name, inputValue);
-          const parts = parse(name, matches);
+        renderOption={(props, thought, { inputValue }) => {
+
+          const { input } = thought;
+          const matches = match(input, inputValue);
+          const parts = parse(input, matches);
           return (
             <li {...props}>
               <Box
                 style={{ height: '100%', width: '100%' }}
                 onClick={() => {
-                  onClickSearchResult(lesson);
+                  onClickSearchResult(thought);
                 }}
               >
                 {parts.map((part, index) => (

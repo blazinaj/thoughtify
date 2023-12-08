@@ -35,30 +35,18 @@ const Dropdown = ({
   isValid,
   isInvalid,
   onChange,
-  label
+  label,
+    value,
 }) => {
-  const { data: initialData, fields, width, showClearButton } = dropdownConfig;
-
-  const [ref, setRef] = useState('');
-
-  const getInitialData = () => {
-    if (initialData) {
-      const arr = [];
-      initialData.forEach(({ text, value }) => {
-        arr.push({ text, value: JSON.stringify(value) });
-      });
-      return arr;
-    }
-    return [];
-  };
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    setData([...getInitialData()]);
-  }, [initialData]);
 
   const [id] = useState(generateId());
+
+  const selected = React.useMemo(
+      () => {
+        return dropdownConfig.options.find(({id}) => id === value)?.id
+      },
+      [value]
+  );
 
   return (
     <>
@@ -67,41 +55,12 @@ const Dropdown = ({
         options={dropdownConfig.options}
         getOptionLabel={(option) => option.text}
         style={{ width: 300 }}
+        value={selected}
+        inputValue={selected}
         renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
-        onChange={(e) => onChange(dropdownConfig.options.find(({ text }) => text === e.target.textContent))}
+        onChange={(e) => onChange(dropdownConfig.options.find(({ text }) => text === e.target.textContent).id)}
+        size={"small"}
       />
-      {/*
-
-          TODO: refactor from syncfusion to material ui
-
-      */}
-      {/* <DropDownListComponent */}
-      {/*  id={"custom_dropdown" + id} */}
-      {/*  ref={(r) => setRef(r)} */}
-      {/*  filtering={(args => onDropdownFiltering(args, data))} */}
-      {/*  popupHeight="250px" */}
-      {/*  fields={fields || {text: "text", value: "value"}} */}
-      {/*  allowFiltering={true} */}
-      {/*  dataSource={data || []} */}
-      {/*  readonly={disabled} */}
-      {/*  placeholder={placeholder || "Select an item.."} */}
-      {/*  index={(!isNullOrUndefined(defaultValue) && data && Array.isArray(data)) ? data.findIndex((item) => item.value === JSON.stringify(defaultValue)) : undefined} */}
-      {/*  change={({itemData}) => { */}
-      {/*    !isNullOrUndefined(itemData?.value) ? onChange(JSON.parse(itemData.value)) : onChange(undefined) */}
-      {/*  }} */}
-      {/*  data-testid={"useForm-dropdown-input-" + fieldName} */}
-      {/*  width={width} */}
-      {/* /> */}
-      {/* { */}
-      {/*  showClearButton && */}
-      {/*  <Button */}
-      {/*    size="sm" */}
-      {/*    color={"ghost-secondary"} */}
-      {/*    className="btn-pill float-right" */}
-      {/*    style={{boxShadow: "none"}} */}
-      {/*    onClick={() => setRef((r) => r.value = null) */}
-      {/*    }>Clear</Button> */}
-      {/* } */}
     </>
   );
 };

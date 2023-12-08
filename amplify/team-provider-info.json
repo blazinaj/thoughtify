@@ -18,7 +18,7 @@
       "function": {
         "subscriptionPlan": {
           "deploymentBucketName": "amplify-thoughtify-staging-02929-deployment",
-          "s3Key": "amplify-builds/subscriptionPlan-69597634366366426d76-build.zip",
+          "s3Key": "amplify-builds/subscriptionPlan-79786746494e55364b49-build.zip",
           "locationId": "L05SBNPVKGB6B",
           "accessToken": "EAAAENYmVk9cmk3W0EsuQqNBbINP70vV6TljGjzoU5NPirrQH4zpB608nwyIwQRG",
           "planVariantIdMonthly": "NMHPQPCRFTHCETTQTLVSENUI",
@@ -29,7 +29,7 @@
         },
         "api": {
           "deploymentBucketName": "amplify-thoughtify-staging-02929-deployment",
-          "s3Key": "amplify-builds/api-576e444d3345434e784a-build.zip"
+          "s3Key": "amplify-builds/api-656252345a324d477755-build.zip"
         }
       },
       "api": {
