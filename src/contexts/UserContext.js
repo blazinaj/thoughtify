@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useState} from 'react';
-import {AccountSetup} from '../views/User/AccountSetup';
+import {AccountSetupPage} from '../pages/user/AccountSetupPage';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {setupUserAccount} from '../api/users/setupUserAccount';
 import {DataStore} from '@aws-amplify/datastore';
@@ -159,7 +159,7 @@ const UserContextProvider = ({ children }) => {
       }}
     >
       {showAccountSetup ? (
-        <AccountSetup
+        <AccountSetupPage
           cognitoUser={cognitoUser}
           setupUserAccount={setupUserAccount}
           onComplete={onAccountSetupComplete}

@@ -1,7 +1,7 @@
 import Page from '../../demo/components/Page';
 import { Container } from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import { UserAccount } from '../../views/User/UserAccount';
+import { UserAccount } from './components/UserAccount';
 import useSettings from '../../utils/hooks/useSettings';
 
 /**

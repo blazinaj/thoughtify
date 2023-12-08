@@ -66,6 +66,7 @@ type EagerHealthReport = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly report?: string | null;
+  readonly thoughts?: (HealthReportThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -79,6 +80,7 @@ type LazyHealthReport = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly report?: string | null;
+  readonly thoughts: AsyncCollection<HealthReportThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -210,6 +212,7 @@ type EagerThought = {
   readonly output?: string | null;
   readonly extract?: string | null;
   readonly journalEntries?: (JournalEntryThoughts | null)[] | null;
+  readonly healthReports?: (HealthReportThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -225,6 +228,7 @@ type LazyThought = {
   readonly output?: string | null;
   readonly extract?: string | null;
   readonly journalEntries: AsyncCollection<JournalEntryThoughts>;
+  readonly healthReports: AsyncCollection<HealthReportThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -249,6 +253,7 @@ type EagerUser = {
   readonly profileImage?: string | null;
   readonly cognitoSub?: string | null;
   readonly owner?: string | null;
+  readonly showOnboarding?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -267,6 +272,7 @@ type LazyUser = {
   readonly profileImage?: string | null;
   readonly cognitoSub?: string | null;
   readonly owner?: string | null;
+  readonly showOnboarding?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -275,6 +281,40 @@ export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser :
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
+
+type EagerHealthReportThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<HealthReportThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly healthReportId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly healthReport: HealthReport;
+  readonly thought: Thought;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyHealthReportThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<HealthReportThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly healthReportId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly healthReport: AsyncItem<HealthReport>;
+  readonly thought: AsyncItem<Thought>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type HealthReportThoughts = LazyLoading extends LazyLoadingDisabled ? EagerHealthReportThoughts : LazyHealthReportThoughts
+
+export declare const HealthReportThoughts: (new (init: ModelInit<HealthReportThoughts>) => HealthReportThoughts) & {
+  copyOf(source: HealthReportThoughts, mutator: (draft: MutableModel<HealthReportThoughts>) => MutableModel<HealthReportThoughts> | void): HealthReportThoughts;
 }
 
 type EagerJournalEntryThoughts = {

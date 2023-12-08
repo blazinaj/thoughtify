@@ -12,7 +12,7 @@ import {TextField} from "@mui/material";
  * @returns {JSX.Element}
  * @constructor
  */
-const DatePicker = ({ onChange, defaultValue, value = defaultValue, dateConfig, fieldName }) => (
+const DatePicker = ({ onChange, defaultValue, value = defaultValue, dateConfig = {}, fieldName }) => (
 
 
   <div data-testid={`custom_input_date${fieldName}`}>
@@ -36,6 +36,7 @@ const DatePicker = ({ onChange, defaultValue, value = defaultValue, dateConfig, 
                   onChange && onChange(date)
               }}
               renderInput={(inputProps) => <TextField {...inputProps} variant="outlined" />}
+              {...dateConfig}
 
           />
       </LocalizationProvider>

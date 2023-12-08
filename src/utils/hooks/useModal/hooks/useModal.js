@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import { DefaultModalButton } from '../components/DefaultModalButton';
-import { useGUID } from '../../useGUID';
+import {DefaultModalButton} from '../components/DefaultModalButton';
+import {useGUID} from '../../useGUID';
 import CloseIcon from "@mui/icons-material/Close";
-import {Box, Button, IconButton, Typography} from "@mui/material";
+import {Box, IconButton} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import {getIcon} from "../../../functions/getIcon";
+import {useBreakpoints} from "../../../../theme/useBreakpoints";
 
 export const useModal = ({
   title,
@@ -26,6 +26,8 @@ export const useModal = ({
 
   const [id] = useGUID();
 
+  const {isSmall} = useBreakpoints()
+
   const modal = (
     <Dialog
       id={id}
@@ -34,6 +36,7 @@ export const useModal = ({
       aria-labelledby="form-dialog-title"
       fullWidth
       maxWidth="lg"
+      fullScreen={isSmall}
     >
       <AppBar sx={{ position: 'relative', paddingBottom: "1em" }}>
         {

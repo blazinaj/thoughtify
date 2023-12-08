@@ -3,4 +3,5 @@ type HealthReport @model @auth(rules: [{allow: owner}]) {
     date: AWSDateTime
     cadence: JournalCadence
     report: AWSJSON
+    thoughts: [Thought] @manyToMany(relationName: "HealthReportThoughts")
 }

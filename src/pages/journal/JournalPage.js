@@ -2,7 +2,7 @@ import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
 import {Box, Button, Container, Grid, useMediaQuery} from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import JournalTimeline from '../../views/Journal/JournalTimeline';
+import JournalTimeline from './components/JournalTimeline';
 import ButtonGroup from "@mui/material/ButtonGroup";
 import {JournalCadence} from "../../models";
 import {useState} from "react";

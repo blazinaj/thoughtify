@@ -2,7 +2,7 @@ import Page from '../../utils/components/Page';
 import {Container} from '@mui/material';
 import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import Thoughts from "../../views/Thoughts/Thoughts";
+import Thoughts from "./components/Thoughts";
 
 /**
  * This page displays the details of a course for a Teacher

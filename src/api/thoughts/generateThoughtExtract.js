@@ -3,7 +3,7 @@ import {Thought} from "../../models";
 import {handleCompletion} from "../../utils/openai/functions/generate";
 
 /**
- * Similar thoughts
+ * Related thoughts
  * Emotions
  * People
  * Projects
@@ -26,8 +26,7 @@ export const generateThoughtExtract = async (newThought) => {
     
       Analyze this person's new thought and extract the following:
       
-      summary
-      similar_thoughts
+      related_thoughts
       emotions
       people
       projects

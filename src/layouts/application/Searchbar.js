@@ -7,6 +7,7 @@ import { ClickAwayListener, Grid, Slide } from '@mui/material';
 import { MIconButton } from '../../demo/components/@material-extend';
 import { alpha } from '@mui/material/styles';
 import { ApplicationSearchbar } from './ApplicationSearchbar';
+import {ThoughtExtracts} from "../../pages/thoughts/components/ThoughtExtracts/components/ThoughtExtracts";
 // import {Scrollbar} from "../";
 // components
 
@@ -70,7 +71,7 @@ export default function Searchbar() {
                 }
               }}
             >
-              <Grid item xs={12} sm={12} md={8} lg={8} order={{ xs: 2, sm: 2, md: 1, lg: 1 }}>
+              <Grid item xs={12} sm={12} md={12} lg={12} order={{ xs: 2, sm: 2, md: 1, lg: 1 }}>
                 <ApplicationSearchbar handleClose={handleClose} />
               </Grid>
             </Grid>

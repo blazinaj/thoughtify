@@ -131,6 +131,12 @@ export const createJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -151,6 +157,12 @@ export const updateJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -171,6 +183,12 @@ export const deleteJournalEntry = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
+      isLoading
       createdAt
       updatedAt
       _version
@@ -317,9 +335,15 @@ export const createThought = /* GraphQL */ `
   ) {
     createThought(input: $input, condition: $condition) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -337,9 +361,15 @@ export const updateThought = /* GraphQL */ `
   ) {
     updateThought(input: $input, condition: $condition) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -357,9 +387,15 @@ export const deleteThought = /* GraphQL */ `
   ) {
     deleteThought(input: $input, condition: $condition) {
       id
+      date
       input
       output
       extract
+      journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -389,6 +425,7 @@ export const createUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
@@ -417,6 +454,7 @@ export const updateUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
@@ -445,11 +483,153 @@ export const deleteUser = /* GraphQL */ `
       profileImage
       cognitoSub
       owner
+      showOnboarding
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createJournalEntryThoughts = /* GraphQL */ `
+  mutation CreateJournalEntryThoughts(
+    $input: CreateJournalEntryThoughtsInput!
+    $condition: ModelJournalEntryThoughtsConditionInput
+  ) {
+    createJournalEntryThoughts(input: $input, condition: $condition) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateJournalEntryThoughts = /* GraphQL */ `
+  mutation UpdateJournalEntryThoughts(
+    $input: UpdateJournalEntryThoughtsInput!
+    $condition: ModelJournalEntryThoughtsConditionInput
+  ) {
+    updateJournalEntryThoughts(input: $input, condition: $condition) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteJournalEntryThoughts = /* GraphQL */ `
+  mutation DeleteJournalEntryThoughts(
+    $input: DeleteJournalEntryThoughtsInput!
+    $condition: ModelJournalEntryThoughtsConditionInput
+  ) {
+    deleteJournalEntryThoughts(input: $input, condition: $condition) {
+      id
+      journalEntryId
+      thoughtId
+      journalEntry {
+        id
+        date
+        cadence
+        entry
+        isLoading
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
       __typename
     }
   }

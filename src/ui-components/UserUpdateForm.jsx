@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SwitchField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { User } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
@@ -30,6 +36,7 @@ export default function UserUpdateForm(props) {
     profileImage: "",
     cognitoSub: "",
     owner: "",
+    showOnboarding: false,
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
@@ -40,6 +47,9 @@ export default function UserUpdateForm(props) {
   );
   const [cognitoSub, setCognitoSub] = React.useState(initialValues.cognitoSub);
   const [owner, setOwner] = React.useState(initialValues.owner);
+  const [showOnboarding, setShowOnboarding] = React.useState(
+    initialValues.showOnboarding
+  );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = userRecord
@@ -52,6 +62,7 @@ export default function UserUpdateForm(props) {
     setProfileImage(cleanValues.profileImage);
     setCognitoSub(cleanValues.cognitoSub);
     setOwner(cleanValues.owner);
+    setShowOnboarding(cleanValues.showOnboarding);
     setErrors({});
   };
   const [userRecord, setUserRecord] = React.useState(userModelProp);
@@ -73,6 +84,7 @@ export default function UserUpdateForm(props) {
     profileImage: [],
     cognitoSub: [],
     owner: [],
+    showOnboarding: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -107,6 +119,7 @@ export default function UserUpdateForm(props) {
           profileImage,
           cognitoSub,
           owner,
+          showOnboarding,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -169,6 +182,7 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.firstName ?? value;
@@ -199,6 +213,7 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.lastName ?? value;
@@ -229,6 +244,7 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -260,6 +276,7 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -290,6 +307,7 @@ export default function UserUpdateForm(props) {
               profileImage: value,
               cognitoSub,
               owner,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.profileImage ?? value;
@@ -320,6 +338,7 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub: value,
               owner,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.cognitoSub ?? value;
@@ -350,6 +369,7 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner: value,
+              showOnboarding,
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
@@ -364,6 +384,37 @@ export default function UserUpdateForm(props) {
         hasError={errors.owner?.hasError}
         {...getOverrideProps(overrides, "owner")}
       ></TextField>
+      <SwitchField
+        label="Show onboarding"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={showOnboarding}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              firstName,
+              lastName,
+              email,
+              phone,
+              profileImage,
+              cognitoSub,
+              owner,
+              showOnboarding: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.showOnboarding ?? value;
+          }
+          if (errors.showOnboarding?.hasError) {
+            runValidationTasks("showOnboarding", value);
+          }
+          setShowOnboarding(value);
+        }}
+        onBlur={() => runValidationTasks("showOnboarding", showOnboarding)}
+        errorMessage={errors.showOnboarding?.errorMessage}
+        hasError={errors.showOnboarding?.hasError}
+        {...getOverrideProps(overrides, "showOnboarding")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

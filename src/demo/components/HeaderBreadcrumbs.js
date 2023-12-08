@@ -22,21 +22,26 @@ export default function HeaderBreadcrumbs({ icon, links = [], action, heading, s
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h4" gutterBottom>
-            <Box
-              component="flex"
-              alignContent={"bottom"}
-              justifyContent={"bottom"}
-              sx={{
-                marginRight: "0.5em",
-                paddingTop: "0.5em",
-              }}
-            >
               {
-                icon && (
-                  getIcon(icon)
-                )
+                  icon && (
+                      <Box
+                          component="flex"
+                          alignContent={"bottom"}
+                          justifyContent={"bottom"}
+                          sx={{
+                              marginRight: "0.5em",
+                              paddingTop: "0.5em",
+                          }}
+                      >
+                          {
+                              icon && (
+                                  getIcon(icon)
+                              )
+                          }
+                      </Box>
+                  )
               }
-            </Box>
+
             {heading}
           </Typography>
           {
@@ -49,7 +54,7 @@ export default function HeaderBreadcrumbs({ icon, links = [], action, heading, s
           <MBreadcrumbs links={links} {...other} />
         </Box>
 
-        {action && <Box sx={{ flexShrink: 0 }}>{action}</Box>}
+        {action && <Box sx={{ flexShrink: 0}}>{action}</Box>}
       </Box>
 
       <Box sx={{ mt: 2 }}>

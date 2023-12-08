@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: '80%',
+    flexBasis: '75%',
     flexShrink: 0
   },
   secondaryHeading: {
@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
   dateHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
-    flexBasis: '20%',
+    flexBasis: '25%',
     alignSelf: 'flex-end',
     marginLeft: 'auto'
   },
