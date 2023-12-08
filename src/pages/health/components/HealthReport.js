@@ -1,4 +1,4 @@
-import {JournalCadence, Thought, HealthReport as HealthReportModel} from '../../../models';
+import {JournalCadence, Thought, HealthReport as HealthReportModel, HealthReportThoughts} from '../../../models';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {sentenceCase} from 'change-case';
@@ -91,9 +91,7 @@ export const HealthReport = ({selectedHealthReport}) => {
     if (isUpToDate) {
       const latestHealthReport = getLatestHealthReport({healthReports});
 
-      console.log(latestHealthReport)
-
-      const healthReportThoughts = await latestHealthReport.thoughts.toArray();
+      const healthReportThoughts = await DataStore.query(Thought, t => t.healthReports.healthReport.id.eq(latestHealthReport.id));
 
       // check if there are any new thoughts since this health report was last updated
         const newThoughts = thoughts.filter((thought) => {
@@ -113,7 +111,7 @@ export const HealthReport = ({selectedHealthReport}) => {
 
           for (const category of HEALTH_CATEGORIES) {
 
-            const promise = generateHealthCategoryReport({category, thoughts});
+            const promise = generateHealthCategoryReport({category, thoughts: [...healthReportThoughts, ...newThoughts]});
 
             categoryPromises.push(promise);
           }
@@ -133,13 +131,21 @@ export const HealthReport = ({selectedHealthReport}) => {
             }
           }
 
-          const updatedReport = DataStore.save(HealthReportModel.copyOf(latestHealthReport, (updated) => {
+          const updatedReport = await DataStore.save(HealthReportModel.copyOf(latestHealthReport, (updated) => {
             updated.report = JSON.stringify(health);
           }))
 
+          for (const thought of newThoughts) {
+            await DataStore.save(
+              new HealthReportThoughts({
+                healthReportId: updatedReport.id,
+                thoughtId: thought.id
+              })
+            )
+          }
+
+
           return updatedReport.report;
-
-
 
         }
 
@@ -148,8 +154,6 @@ export const HealthReport = ({selectedHealthReport}) => {
     }
 
     // generate new health report for today
-    
-
     enqueueSnackbar(`Generating new health report for Today}`, {
       variant: 'info'
     });
@@ -167,7 +171,6 @@ export const HealthReport = ({selectedHealthReport}) => {
     const promiseResults = await Promise.allSettled(categoryPromises);
 
     for (const result of promiseResults) {
-      console.log({result})
       if (result.status === 'fulfilled') {
         const {value} = result;
         health[value.category] = value.description;
@@ -179,15 +182,22 @@ export const HealthReport = ({selectedHealthReport}) => {
       }
     }
 
-    DataStore.save(new HealthReportModel({
+    const newHealthReport = await DataStore.save(new HealthReportModel({
       date: new Date().toISOString(),
       cadence: JournalCadence.DAILY,
       report: JSON.stringify(health)
     }))
 
-    return health;
-    
+    for (const thought of thoughts) {
+      await DataStore.save(
+        new HealthReportThoughts({
+          healthReportId: newHealthReport.id,
+          thoughtId: thought.id
+        })
+      )
+    }
 
+    return newHealthReport.report;
 
   };
 

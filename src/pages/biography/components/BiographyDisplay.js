@@ -105,6 +105,7 @@ export const BiographyDisplay = () => {
       setIsLoading(true);
       getBiography()
         .then((res) => {
+          console.log({res})
           setBio(res);
         })
         .finally(() => {
@@ -121,7 +122,7 @@ export const BiographyDisplay = () => {
     <Card
       subTitle={`${new Date().toLocaleDateString()}`}
     >
-      {bio?.pages?.map((page) => {
+      {Object.entries(bio)?.map(([pageNumber, page]) => {
         return (
           <>
             <div className="demoPage">

@@ -47,19 +47,19 @@ const HealthPage = () => {
           icon={'ri:health-book-line'}
           heading="Health Report"
           subHeading={"View your Health-related Thoughts as an AI-Generated Health Report."}
-          action={
-              <Box
-                sx={{
-                    // width: "40%"
-                }}
-              >
-                  <HealthReportDatePicker
-                      healthReports={healthReportDatastore.items.map((healthReport) => {
-                            return  dayjs(healthReport.date || healthReport.createdAt)
-                      })}
-                  />
-              </Box>
-          }
+          // action={
+          //     <Box
+          //       sx={{
+          //           // width: "40%"
+          //       }}
+          //     >
+          //         <HealthReportDatePicker
+          //             healthReports={healthReportDatastore.items.map((healthReport) => {
+          //                   return  dayjs(healthReport.date || healthReport.createdAt)
+          //             })}
+          //         />
+          //     </Box>
+          // }
           links={
             [
               // {name: 'Home', href: 'journal'},

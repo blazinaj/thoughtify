@@ -111,6 +111,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "thoughts": {
+                    "name": "thoughts",
+                    "isArray": true,
+                    "type": {
+                        "model": "HealthReportThoughts"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "healthReport"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -512,6 +528,22 @@ export const schema = {
                         ]
                     }
                 },
+                "healthReports": {
+                    "name": "healthReports",
+                    "isArray": true,
+                    "type": {
+                        "model": "HealthReportThoughts"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "thought"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -684,6 +716,104 @@ export const schema = {
                 }
             ]
         },
+        "HealthReportThoughts": {
+            "name": "HealthReportThoughts",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "healthReportId": {
+                    "name": "healthReportId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "thoughtId": {
+                    "name": "thoughtId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "healthReport": {
+                    "name": "healthReport",
+                    "isArray": false,
+                    "type": {
+                        "model": "HealthReport"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "healthReportId"
+                        ]
+                    }
+                },
+                "thought": {
+                    "name": "thought",
+                    "isArray": false,
+                    "type": {
+                        "model": "Thought"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "thoughtId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "HealthReportThoughts",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byHealthReport",
+                        "fields": [
+                            "healthReportId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byThought",
+                        "fields": [
+                            "thoughtId"
+                        ]
+                    }
+                }
+            ]
+        },
         "JournalEntryThoughts": {
             "name": "JournalEntryThoughts",
             "fields": {
@@ -816,5 +946,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "4f1d5e61db577596082e7ba1452bfc69"
+    "version": "caa1792d0ea86bd48999c37ff3203786"
 };

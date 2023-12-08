@@ -1,6 +1,7 @@
 import {handleCompletion} from "../../../utils/openai/functions/generate";
 
-export const generateHealthCategoryReport = async ({category, thoughts, existingCategory}) => {
+export const generateHealthCategoryReport = async ({category, thoughts}) => {
+
   const prompt = `
       Generate a health report for the ${category} health category based on the following user's thoughts:
       
@@ -17,7 +18,7 @@ export const generateHealthCategoryReport = async ({category, thoughts, existing
         "description": "...",
       }
       
-      Output the health report as a health category. Javascript parseable JSON object.
+      Output the health report as a health category. First person. Javascript parseable JSON object.
       
     `;
 
