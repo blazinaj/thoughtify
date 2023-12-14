@@ -45,7 +45,8 @@ export const useDataAccordion = ({
   titleField = 'name',
   subTitleField = 'description',
   sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField]),
-  items: itemsInit
+  items: itemsInit,
+    accordionStyle = {}
 }) => {
   const classes = useStyles();
 
@@ -96,6 +97,7 @@ export const useDataAccordion = ({
           typename={typename}
           titleField={titleField}
           subTitleField={subTitleField}
+          accordionStyle={accordionStyle}
         />
       ))}
     </div>

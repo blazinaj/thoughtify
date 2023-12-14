@@ -26,7 +26,7 @@ export const generateThoughtExtract = async (newThought) => {
     
       Analyze this person's new thought and extract the following:
       
-      related_thoughts
+      overallTone // positive, negative, neutral
       emotions
       people
       projects
