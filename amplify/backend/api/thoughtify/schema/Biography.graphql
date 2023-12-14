@@ -3,4 +3,5 @@ type Biography @model @auth(rules: [{allow: owner}]) {
     date: AWSDateTime
     cadence: JournalCadence
     entry: String
+    thoughts: [Thought] @manyToMany(relationName: "BiographyThoughts")
 }
