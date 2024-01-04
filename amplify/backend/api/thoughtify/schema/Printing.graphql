@@ -1,0 +1,90 @@
+## From here on, 3D printing schema for printers, models, prints, costs, etc
+
+type Printer @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    model: String
+    serialNumber: String
+    purchaseDate: AWSDate
+    purchasePrice: Float
+    purchaseCurrency: String
+    purchaseLocation: String
+    purchaseLink: String
+    purchaseNotes: String
+    prints: [Print] @hasMany
+}
+
+enum PrinterStatus {
+    IDLE
+    OFFLINE
+    PRINTING
+    PAUSED
+    ERROR
+    UPDATING
+}
+
+type PrintModel @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    modelLink: String
+    modelNotes: String
+    prints: [Print] @hasMany
+    estimatedPrintTime: Float
+    estimatedVolume: Float
+    estimatedCost: Float
+    estimatedWeight: Float
+    printSizeX: Float
+    printSizeY: Float
+    printSizeZ: Float
+    filamentType: String
+}
+
+type Print @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    model: PrintModel @belongsTo
+    printer: Printer @belongsTo
+    printDateTime: AWSDateTime
+    printCost: Float
+    printCostCurrency: String
+    printCostNotes: String
+    printNotes: String
+    printPhotos: [String]
+    filament: Filament @belongsTo
+    status: PrintStatus
+    startTime: AWSDateTime
+    endTime: AWSDateTime
+}
+
+enum PrintStatus {
+    PREPARING
+    PRINTING
+    PAUSED
+    CANCELLED
+    ERROR
+    FINISHED
+}
+
+type Filament @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    color: String
+    weight: Float
+    weightUnit: String
+    cost: Float
+    costCurrency: String
+    costPerWeight: Float
+    costPerWeightCurrency: String
+    costNotes: String
+    purchaseDate: AWSDate
+    purchasePrice: Float
+    purchaseCurrency: String
+    purchaseLocation: String
+    purchaseLink: String
+    purchaseNotes: String
+    prints: [Print] @hasMany
+}
+

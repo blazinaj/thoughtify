@@ -11,6 +11,11 @@ export const onCreateBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -31,6 +36,11 @@ export const onUpdateBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -51,6 +61,11 @@ export const onDeleteBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -71,6 +86,11 @@ export const onCreateHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -91,6 +111,11 @@ export const onUpdateHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -111,6 +136,11 @@ export const onDeleteHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -268,6 +298,609 @@ export const onDeleteNotification = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePrinter = /* GraphQL */ `
+  subscription OnCreatePrinter(
+    $filter: ModelSubscriptionPrinterFilterInput
+    $owner: String
+  ) {
+    onCreatePrinter(filter: $filter, owner: $owner) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdatePrinter = /* GraphQL */ `
+  subscription OnUpdatePrinter(
+    $filter: ModelSubscriptionPrinterFilterInput
+    $owner: String
+  ) {
+    onUpdatePrinter(filter: $filter, owner: $owner) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeletePrinter = /* GraphQL */ `
+  subscription OnDeletePrinter(
+    $filter: ModelSubscriptionPrinterFilterInput
+    $owner: String
+  ) {
+    onDeletePrinter(filter: $filter, owner: $owner) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreatePrintModel = /* GraphQL */ `
+  subscription OnCreatePrintModel(
+    $filter: ModelSubscriptionPrintModelFilterInput
+    $owner: String
+  ) {
+    onCreatePrintModel(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdatePrintModel = /* GraphQL */ `
+  subscription OnUpdatePrintModel(
+    $filter: ModelSubscriptionPrintModelFilterInput
+    $owner: String
+  ) {
+    onUpdatePrintModel(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeletePrintModel = /* GraphQL */ `
+  subscription OnDeletePrintModel(
+    $filter: ModelSubscriptionPrintModelFilterInput
+    $owner: String
+  ) {
+    onDeletePrintModel(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreatePrint = /* GraphQL */ `
+  subscription OnCreatePrint(
+    $filter: ModelSubscriptionPrintFilterInput
+    $owner: String
+  ) {
+    onCreatePrint(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdatePrint = /* GraphQL */ `
+  subscription OnUpdatePrint(
+    $filter: ModelSubscriptionPrintFilterInput
+    $owner: String
+  ) {
+    onUpdatePrint(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeletePrint = /* GraphQL */ `
+  subscription OnDeletePrint(
+    $filter: ModelSubscriptionPrintFilterInput
+    $owner: String
+  ) {
+    onDeletePrint(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateFilament = /* GraphQL */ `
+  subscription OnCreateFilament(
+    $filter: ModelSubscriptionFilamentFilterInput
+    $owner: String
+  ) {
+    onCreateFilament(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateFilament = /* GraphQL */ `
+  subscription OnUpdateFilament(
+    $filter: ModelSubscriptionFilamentFilterInput
+    $owner: String
+  ) {
+    onUpdateFilament(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteFilament = /* GraphQL */ `
+  subscription OnDeleteFilament(
+    $filter: ModelSubscriptionFilamentFilterInput
+    $owner: String
+  ) {
+    onDeleteFilament(filter: $filter, owner: $owner) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
 export const onCreateSubscriptionPlan = /* GraphQL */ `
   subscription OnCreateSubscriptionPlan(
     $filter: ModelSubscriptionSubscriptionPlanFilterInput
@@ -344,6 +977,16 @@ export const onCreateThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -370,6 +1013,16 @@ export const onUpdateThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -392,6 +1045,16 @@ export const onDeleteThought = /* GraphQL */ `
       output
       extract
       journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
         nextToken
         startedAt
         __typename
@@ -489,6 +1152,282 @@ export const onDeleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateBiographyThoughts = /* GraphQL */ `
+  subscription OnCreateBiographyThoughts(
+    $filter: ModelSubscriptionBiographyThoughtsFilterInput
+    $owner: String
+  ) {
+    onCreateBiographyThoughts(filter: $filter, owner: $owner) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateBiographyThoughts = /* GraphQL */ `
+  subscription OnUpdateBiographyThoughts(
+    $filter: ModelSubscriptionBiographyThoughtsFilterInput
+    $owner: String
+  ) {
+    onUpdateBiographyThoughts(filter: $filter, owner: $owner) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteBiographyThoughts = /* GraphQL */ `
+  subscription OnDeleteBiographyThoughts(
+    $filter: ModelSubscriptionBiographyThoughtsFilterInput
+    $owner: String
+  ) {
+    onDeleteBiographyThoughts(filter: $filter, owner: $owner) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateHealthReportThoughts = /* GraphQL */ `
+  subscription OnCreateHealthReportThoughts(
+    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
+    $owner: String
+  ) {
+    onCreateHealthReportThoughts(filter: $filter, owner: $owner) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateHealthReportThoughts = /* GraphQL */ `
+  subscription OnUpdateHealthReportThoughts(
+    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
+    $owner: String
+  ) {
+    onUpdateHealthReportThoughts(filter: $filter, owner: $owner) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteHealthReportThoughts = /* GraphQL */ `
+  subscription OnDeleteHealthReportThoughts(
+    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
+    $owner: String
+  ) {
+    onDeleteHealthReportThoughts(filter: $filter, owner: $owner) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
       __typename
     }
   }

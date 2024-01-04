@@ -13,6 +13,24 @@ export enum NotificationType {
   MESSAGE = "MESSAGE"
 }
 
+export enum PrinterStatus {
+  IDLE = "IDLE",
+  OFFLINE = "OFFLINE",
+  PRINTING = "PRINTING",
+  PAUSED = "PAUSED",
+  ERROR = "ERROR",
+  UPDATING = "UPDATING"
+}
+
+export enum PrintStatus {
+  PREPARING = "PREPARING",
+  PRINTING = "PRINTING",
+  PAUSED = "PAUSED",
+  CANCELLED = "CANCELLED",
+  ERROR = "ERROR",
+  FINISHED = "FINISHED"
+}
+
 export enum SubscriptionStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE"
@@ -34,6 +52,7 @@ type EagerBiography = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly entry?: string | null;
+  readonly thoughts?: (BiographyThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -47,6 +66,7 @@ type LazyBiography = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly entry?: string | null;
+  readonly thoughts: AsyncCollection<BiographyThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -167,6 +187,224 @@ export declare const Notification: (new (init: ModelInit<Notification>) => Notif
   copyOf(source: Notification, mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void): Notification;
 }
 
+type EagerPrinter = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Printer, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly model?: string | null;
+  readonly serialNumber?: string | null;
+  readonly purchaseDate?: string | null;
+  readonly purchasePrice?: number | null;
+  readonly purchaseCurrency?: string | null;
+  readonly purchaseLocation?: string | null;
+  readonly purchaseLink?: string | null;
+  readonly purchaseNotes?: string | null;
+  readonly prints?: (Print | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPrinter = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Printer, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly model?: string | null;
+  readonly serialNumber?: string | null;
+  readonly purchaseDate?: string | null;
+  readonly purchasePrice?: number | null;
+  readonly purchaseCurrency?: string | null;
+  readonly purchaseLocation?: string | null;
+  readonly purchaseLink?: string | null;
+  readonly purchaseNotes?: string | null;
+  readonly prints: AsyncCollection<Print>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Printer = LazyLoading extends LazyLoadingDisabled ? EagerPrinter : LazyPrinter
+
+export declare const Printer: (new (init: ModelInit<Printer>) => Printer) & {
+  copyOf(source: Printer, mutator: (draft: MutableModel<Printer>) => MutableModel<Printer> | void): Printer;
+}
+
+type EagerPrintModel = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<PrintModel, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly modelLink?: string | null;
+  readonly modelNotes?: string | null;
+  readonly prints?: (Print | null)[] | null;
+  readonly estimatedPrintTime?: number | null;
+  readonly estimatedVolume?: number | null;
+  readonly estimatedCost?: number | null;
+  readonly estimatedWeight?: number | null;
+  readonly printSizeX?: number | null;
+  readonly printSizeY?: number | null;
+  readonly printSizeZ?: number | null;
+  readonly filamentType?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPrintModel = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<PrintModel, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly modelLink?: string | null;
+  readonly modelNotes?: string | null;
+  readonly prints: AsyncCollection<Print>;
+  readonly estimatedPrintTime?: number | null;
+  readonly estimatedVolume?: number | null;
+  readonly estimatedCost?: number | null;
+  readonly estimatedWeight?: number | null;
+  readonly printSizeX?: number | null;
+  readonly printSizeY?: number | null;
+  readonly printSizeZ?: number | null;
+  readonly filamentType?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type PrintModel = LazyLoading extends LazyLoadingDisabled ? EagerPrintModel : LazyPrintModel
+
+export declare const PrintModel: (new (init: ModelInit<PrintModel>) => PrintModel) & {
+  copyOf(source: PrintModel, mutator: (draft: MutableModel<PrintModel>) => MutableModel<PrintModel> | void): PrintModel;
+}
+
+type EagerPrint = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Print, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly model?: PrintModel | null;
+  readonly printer?: Printer | null;
+  readonly printDateTime?: string | null;
+  readonly printCost?: number | null;
+  readonly printCostCurrency?: string | null;
+  readonly printCostNotes?: string | null;
+  readonly printNotes?: string | null;
+  readonly printPhotos?: (string | null)[] | null;
+  readonly filament?: Filament | null;
+  readonly status?: PrintStatus | keyof typeof PrintStatus | null;
+  readonly startTime?: string | null;
+  readonly endTime?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly printerPrintsId?: string | null;
+  readonly printModelPrintsId?: string | null;
+  readonly filamentPrintsId?: string | null;
+}
+
+type LazyPrint = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Print, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly model: AsyncItem<PrintModel | undefined>;
+  readonly printer: AsyncItem<Printer | undefined>;
+  readonly printDateTime?: string | null;
+  readonly printCost?: number | null;
+  readonly printCostCurrency?: string | null;
+  readonly printCostNotes?: string | null;
+  readonly printNotes?: string | null;
+  readonly printPhotos?: (string | null)[] | null;
+  readonly filament: AsyncItem<Filament | undefined>;
+  readonly status?: PrintStatus | keyof typeof PrintStatus | null;
+  readonly startTime?: string | null;
+  readonly endTime?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly printerPrintsId?: string | null;
+  readonly printModelPrintsId?: string | null;
+  readonly filamentPrintsId?: string | null;
+}
+
+export declare type Print = LazyLoading extends LazyLoadingDisabled ? EagerPrint : LazyPrint
+
+export declare const Print: (new (init: ModelInit<Print>) => Print) & {
+  copyOf(source: Print, mutator: (draft: MutableModel<Print>) => MutableModel<Print> | void): Print;
+}
+
+type EagerFilament = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Filament, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly color?: string | null;
+  readonly weight?: number | null;
+  readonly weightUnit?: string | null;
+  readonly cost?: number | null;
+  readonly costCurrency?: string | null;
+  readonly costPerWeight?: number | null;
+  readonly costPerWeightCurrency?: string | null;
+  readonly costNotes?: string | null;
+  readonly purchaseDate?: string | null;
+  readonly purchasePrice?: number | null;
+  readonly purchaseCurrency?: string | null;
+  readonly purchaseLocation?: string | null;
+  readonly purchaseLink?: string | null;
+  readonly purchaseNotes?: string | null;
+  readonly prints?: (Print | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyFilament = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Filament, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly color?: string | null;
+  readonly weight?: number | null;
+  readonly weightUnit?: string | null;
+  readonly cost?: number | null;
+  readonly costCurrency?: string | null;
+  readonly costPerWeight?: number | null;
+  readonly costPerWeightCurrency?: string | null;
+  readonly costNotes?: string | null;
+  readonly purchaseDate?: string | null;
+  readonly purchasePrice?: number | null;
+  readonly purchaseCurrency?: string | null;
+  readonly purchaseLocation?: string | null;
+  readonly purchaseLink?: string | null;
+  readonly purchaseNotes?: string | null;
+  readonly prints: AsyncCollection<Print>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Filament = LazyLoading extends LazyLoadingDisabled ? EagerFilament : LazyFilament
+
+export declare const Filament: (new (init: ModelInit<Filament>) => Filament) & {
+  copyOf(source: Filament, mutator: (draft: MutableModel<Filament>) => MutableModel<Filament> | void): Filament;
+}
+
 type EagerSubscriptionPlan = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<SubscriptionPlan, 'id'>;
@@ -213,6 +451,7 @@ type EagerThought = {
   readonly extract?: string | null;
   readonly journalEntries?: (JournalEntryThoughts | null)[] | null;
   readonly healthReports?: (HealthReportThoughts | null)[] | null;
+  readonly biographies?: (BiographyThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -229,6 +468,7 @@ type LazyThought = {
   readonly extract?: string | null;
   readonly journalEntries: AsyncCollection<JournalEntryThoughts>;
   readonly healthReports: AsyncCollection<HealthReportThoughts>;
+  readonly biographies: AsyncCollection<BiographyThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -281,6 +521,40 @@ export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser :
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
+
+type EagerBiographyThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<BiographyThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly biographyId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly biography: Biography;
+  readonly thought: Thought;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyBiographyThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<BiographyThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly biographyId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly biography: AsyncItem<Biography>;
+  readonly thought: AsyncItem<Thought>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type BiographyThoughts = LazyLoading extends LazyLoadingDisabled ? EagerBiographyThoughts : LazyBiographyThoughts
+
+export declare const BiographyThoughts: (new (init: ModelInit<BiographyThoughts>) => BiographyThoughts) & {
+  copyOf(source: BiographyThoughts, mutator: (draft: MutableModel<BiographyThoughts>) => MutableModel<BiographyThoughts> | void): BiographyThoughts;
 }
 
 type EagerHealthReportThoughts = {

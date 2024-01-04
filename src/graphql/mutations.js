@@ -11,6 +11,11 @@ export const createBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -31,6 +36,11 @@ export const updateBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -51,6 +61,11 @@ export const deleteBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -71,6 +86,11 @@ export const createHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -91,6 +111,11 @@ export const updateHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -111,6 +136,11 @@ export const deleteHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -268,6 +298,609 @@ export const deleteNotification = /* GraphQL */ `
     }
   }
 `;
+export const createPrinter = /* GraphQL */ `
+  mutation CreatePrinter(
+    $input: CreatePrinterInput!
+    $condition: ModelPrinterConditionInput
+  ) {
+    createPrinter(input: $input, condition: $condition) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updatePrinter = /* GraphQL */ `
+  mutation UpdatePrinter(
+    $input: UpdatePrinterInput!
+    $condition: ModelPrinterConditionInput
+  ) {
+    updatePrinter(input: $input, condition: $condition) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deletePrinter = /* GraphQL */ `
+  mutation DeletePrinter(
+    $input: DeletePrinterInput!
+    $condition: ModelPrinterConditionInput
+  ) {
+    deletePrinter(input: $input, condition: $condition) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const createPrintModel = /* GraphQL */ `
+  mutation CreatePrintModel(
+    $input: CreatePrintModelInput!
+    $condition: ModelPrintModelConditionInput
+  ) {
+    createPrintModel(input: $input, condition: $condition) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updatePrintModel = /* GraphQL */ `
+  mutation UpdatePrintModel(
+    $input: UpdatePrintModelInput!
+    $condition: ModelPrintModelConditionInput
+  ) {
+    updatePrintModel(input: $input, condition: $condition) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deletePrintModel = /* GraphQL */ `
+  mutation DeletePrintModel(
+    $input: DeletePrintModelInput!
+    $condition: ModelPrintModelConditionInput
+  ) {
+    deletePrintModel(input: $input, condition: $condition) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const createPrint = /* GraphQL */ `
+  mutation CreatePrint(
+    $input: CreatePrintInput!
+    $condition: ModelPrintConditionInput
+  ) {
+    createPrint(input: $input, condition: $condition) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const updatePrint = /* GraphQL */ `
+  mutation UpdatePrint(
+    $input: UpdatePrintInput!
+    $condition: ModelPrintConditionInput
+  ) {
+    updatePrint(input: $input, condition: $condition) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const deletePrint = /* GraphQL */ `
+  mutation DeletePrint(
+    $input: DeletePrintInput!
+    $condition: ModelPrintConditionInput
+  ) {
+    deletePrint(input: $input, condition: $condition) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const createFilament = /* GraphQL */ `
+  mutation CreateFilament(
+    $input: CreateFilamentInput!
+    $condition: ModelFilamentConditionInput
+  ) {
+    createFilament(input: $input, condition: $condition) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateFilament = /* GraphQL */ `
+  mutation UpdateFilament(
+    $input: UpdateFilamentInput!
+    $condition: ModelFilamentConditionInput
+  ) {
+    updateFilament(input: $input, condition: $condition) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteFilament = /* GraphQL */ `
+  mutation DeleteFilament(
+    $input: DeleteFilamentInput!
+    $condition: ModelFilamentConditionInput
+  ) {
+    deleteFilament(input: $input, condition: $condition) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
 export const createSubscriptionPlan = /* GraphQL */ `
   mutation CreateSubscriptionPlan(
     $input: CreateSubscriptionPlanInput!
@@ -344,6 +977,16 @@ export const createThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -370,6 +1013,16 @@ export const updateThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -392,6 +1045,16 @@ export const deleteThought = /* GraphQL */ `
       output
       extract
       journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
         nextToken
         startedAt
         __typename
@@ -489,6 +1152,282 @@ export const deleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createBiographyThoughts = /* GraphQL */ `
+  mutation CreateBiographyThoughts(
+    $input: CreateBiographyThoughtsInput!
+    $condition: ModelBiographyThoughtsConditionInput
+  ) {
+    createBiographyThoughts(input: $input, condition: $condition) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateBiographyThoughts = /* GraphQL */ `
+  mutation UpdateBiographyThoughts(
+    $input: UpdateBiographyThoughtsInput!
+    $condition: ModelBiographyThoughtsConditionInput
+  ) {
+    updateBiographyThoughts(input: $input, condition: $condition) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteBiographyThoughts = /* GraphQL */ `
+  mutation DeleteBiographyThoughts(
+    $input: DeleteBiographyThoughtsInput!
+    $condition: ModelBiographyThoughtsConditionInput
+  ) {
+    deleteBiographyThoughts(input: $input, condition: $condition) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const createHealthReportThoughts = /* GraphQL */ `
+  mutation CreateHealthReportThoughts(
+    $input: CreateHealthReportThoughtsInput!
+    $condition: ModelHealthReportThoughtsConditionInput
+  ) {
+    createHealthReportThoughts(input: $input, condition: $condition) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateHealthReportThoughts = /* GraphQL */ `
+  mutation UpdateHealthReportThoughts(
+    $input: UpdateHealthReportThoughtsInput!
+    $condition: ModelHealthReportThoughtsConditionInput
+  ) {
+    updateHealthReportThoughts(input: $input, condition: $condition) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteHealthReportThoughts = /* GraphQL */ `
+  mutation DeleteHealthReportThoughts(
+    $input: DeleteHealthReportThoughtsInput!
+    $condition: ModelHealthReportThoughtsConditionInput
+  ) {
+    deleteHealthReportThoughts(input: $input, condition: $condition) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
       __typename
     }
   }

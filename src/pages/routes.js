@@ -77,7 +77,14 @@ export default function Router() {
           { path: 'journal', element: <JournalPage /> },
           { path: 'biography', element: <BiographyPage /> },
           { path: 'user/*', element: <UserAccountPage /> },
-          { path: 'health', element: <HealthPage /> }
+          { path: 'health', element: <HealthPage /> },
+            { path: 'printers', element: <PrintersPage /> },
+            { path: 'printers/:id', element: <PrinterDetailsPage />},
+            { path: 'printers/:printerId/prints/:id', element: <PrintDetailsPage />},
+            { path: 'print-models', element: <PrintModelsPage /> },
+            { path: 'print-models/:id', element: <PrintModelDetailsPage />},
+            { path: 'prints', element: <PrintPage /> },
+            { path: 'prints/:id', element: <PrintDetailsPage />},
         ]
       },
 
@@ -109,6 +116,12 @@ const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
 const HealthPage = Loadable(lazy(() => import('./health/HealthPage')));
 const UserAccountPage = Loadable(lazy(() => import('./user/UserAccountPage')));
+const PrintersPage = Loadable(lazy(() => import('./prints/PrintersPage')));
+const PrinterDetailsPage = Loadable(lazy(() => import('./prints/PrinterDetailsPage')));
+const PrintModelsPage = Loadable(lazy(() => import('./prints/PrintModelsPage')));
+const PrintModelDetailsPage = Loadable(lazy(() => import('./prints/PrintModelDetailsPage')));
+const PrintPage = Loadable(lazy(() => import('./prints/PrintPage')));
+const PrintDetailsPage = Loadable(lazy(() => import('./prints/PrintDetailsPage')));
 
 // Main
 const LandingPage = Loadable(lazy(() => import('./marketing/LandingPage')));

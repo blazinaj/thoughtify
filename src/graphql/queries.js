@@ -8,6 +8,11 @@ export const getBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -83,6 +88,11 @@ export const getHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -355,6 +365,505 @@ export const notificationsByUserID = /* GraphQL */ `
     }
   }
 `;
+export const getPrinter = /* GraphQL */ `
+  query GetPrinter($id: ID!) {
+    getPrinter(id: $id) {
+      id
+      name
+      model
+      serialNumber
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listPrinters = /* GraphQL */ `
+  query ListPrinters(
+    $filter: ModelPrinterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrinters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncPrinters = /* GraphQL */ `
+  query SyncPrinters(
+    $filter: ModelPrinterFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPrinters(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getPrintModel = /* GraphQL */ `
+  query GetPrintModel($id: ID!) {
+    getPrintModel(id: $id) {
+      id
+      name
+      description
+      modelLink
+      modelNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      estimatedPrintTime
+      estimatedVolume
+      estimatedCost
+      estimatedWeight
+      printSizeX
+      printSizeY
+      printSizeZ
+      filamentType
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listPrintModels = /* GraphQL */ `
+  query ListPrintModels(
+    $filter: ModelPrintModelFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrintModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncPrintModels = /* GraphQL */ `
+  query SyncPrintModels(
+    $filter: ModelPrintModelFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPrintModels(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getPrint = /* GraphQL */ `
+  query GetPrint($id: ID!) {
+    getPrint(id: $id) {
+      id
+      name
+      description
+      model {
+        id
+        name
+        description
+        modelLink
+        modelNotes
+        estimatedPrintTime
+        estimatedVolume
+        estimatedCost
+        estimatedWeight
+        printSizeX
+        printSizeY
+        printSizeZ
+        filamentType
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printer {
+        id
+        name
+        model
+        serialNumber
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      printDateTime
+      printCost
+      printCostCurrency
+      printCostNotes
+      printNotes
+      printPhotos
+      filament {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      status
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      printerPrintsId
+      printModelPrintsId
+      filamentPrintsId
+      owner
+      __typename
+    }
+  }
+`;
+export const listPrints = /* GraphQL */ `
+  query ListPrints(
+    $filter: ModelPrintFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrints(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        printDateTime
+        printCost
+        printCostCurrency
+        printCostNotes
+        printNotes
+        printPhotos
+        status
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        printerPrintsId
+        printModelPrintsId
+        filamentPrintsId
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncPrints = /* GraphQL */ `
+  query SyncPrints(
+    $filter: ModelPrintFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPrints(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        description
+        printDateTime
+        printCost
+        printCostCurrency
+        printCostNotes
+        printNotes
+        printPhotos
+        status
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        printerPrintsId
+        printModelPrintsId
+        filamentPrintsId
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getFilament = /* GraphQL */ `
+  query GetFilament($id: ID!) {
+    getFilament(id: $id) {
+      id
+      name
+      description
+      color
+      weight
+      weightUnit
+      cost
+      costCurrency
+      costPerWeight
+      costPerWeightCurrency
+      costNotes
+      purchaseDate
+      purchasePrice
+      purchaseCurrency
+      purchaseLocation
+      purchaseLink
+      purchaseNotes
+      prints {
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listFilaments = /* GraphQL */ `
+  query ListFilaments(
+    $filter: ModelFilamentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFilaments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncFilaments = /* GraphQL */ `
+  query SyncFilaments(
+    $filter: ModelFilamentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncFilaments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        description
+        color
+        weight
+        weightUnit
+        cost
+        costCurrency
+        costPerWeight
+        costPerWeightCurrency
+        costNotes
+        purchaseDate
+        purchasePrice
+        purchaseCurrency
+        purchaseLocation
+        purchaseLink
+        purchaseNotes
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
 export const getSubscriptionPlan = /* GraphQL */ `
   query GetSubscriptionPlan($id: ID!) {
     getSubscriptionPlan(id: $id) {
@@ -443,6 +952,16 @@ export const getThought = /* GraphQL */ `
       output
       extract
       journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
         nextToken
         startedAt
         __typename
@@ -601,6 +1120,344 @@ export const syncUsers = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getBiographyThoughts = /* GraphQL */ `
+  query GetBiographyThoughts($id: ID!) {
+    getBiographyThoughts(id: $id) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listBiographyThoughts = /* GraphQL */ `
+  query ListBiographyThoughts(
+    $filter: ModelBiographyThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBiographyThoughts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        biographyId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncBiographyThoughts = /* GraphQL */ `
+  query SyncBiographyThoughts(
+    $filter: ModelBiographyThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBiographyThoughts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        biographyId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const biographyThoughtsByBiographyId = /* GraphQL */ `
+  query BiographyThoughtsByBiographyId(
+    $biographyId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelBiographyThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    biographyThoughtsByBiographyId(
+      biographyId: $biographyId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        biographyId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const biographyThoughtsByThoughtId = /* GraphQL */ `
+  query BiographyThoughtsByThoughtId(
+    $thoughtId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelBiographyThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    biographyThoughtsByThoughtId(
+      thoughtId: $thoughtId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        biographyId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getHealthReportThoughts = /* GraphQL */ `
+  query GetHealthReportThoughts($id: ID!) {
+    getHealthReportThoughts(id: $id) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listHealthReportThoughts = /* GraphQL */ `
+  query ListHealthReportThoughts(
+    $filter: ModelHealthReportThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHealthReportThoughts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        healthReportId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncHealthReportThoughts = /* GraphQL */ `
+  query SyncHealthReportThoughts(
+    $filter: ModelHealthReportThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncHealthReportThoughts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        healthReportId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const healthReportThoughtsByHealthReportId = /* GraphQL */ `
+  query HealthReportThoughtsByHealthReportId(
+    $healthReportId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelHealthReportThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    healthReportThoughtsByHealthReportId(
+      healthReportId: $healthReportId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        healthReportId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const healthReportThoughtsByThoughtId = /* GraphQL */ `
+  query HealthReportThoughtsByThoughtId(
+    $thoughtId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelHealthReportThoughtsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    healthReportThoughtsByThoughtId(
+      thoughtId: $thoughtId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        healthReportId
+        thoughtId
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
         __typename
       }
       nextToken
