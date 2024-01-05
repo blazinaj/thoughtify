@@ -83,6 +83,7 @@ export default function Router() {
             { path: 'printers/:printerId/prints/:id', element: <PrintDetailsPage />},
             { path: 'print-models', element: <PrintModelsPage /> },
             { path: 'print-models/:id', element: <PrintModelDetailsPage />},
+            { path: 'print-models/:printModelId/prints/:id', element: <PrintDetailsPage />},
             { path: 'prints', element: <PrintPage /> },
             { path: 'prints/:id', element: <PrintDetailsPage />},
         ]

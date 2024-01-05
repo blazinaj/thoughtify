@@ -117,6 +117,7 @@ const CustomInput = ({
               input,
               setInput,
               item: input,
+              itemId:input?.id,
               value: input[fieldName],
               // onChange,
               onChangeCallback: onChange,

@@ -1,8 +1,9 @@
 import {useForm} from "../../../utils/hooks/useForm";
-import {Print} from "../../../models";
+import {Print, PrintModel} from "../../../models";
 import {useEffect} from "react";
+import {LinkedItemButton} from "../../../utils/components/LinkedItem";
 
-export const PrintForm = ({printer, printModel}) => {
+export const PrintForm = ({item, printer, printModel}) => {
     const fieldConfig = {
         name: {
             label: "Name",
@@ -14,6 +15,16 @@ export const PrintForm = ({printer, printModel}) => {
         printModel: {
             label: "3D Model",
             defaultValue: printModel?.id,
+            inputType: "custom",
+            customConfig: {
+                component: (
+                    <LinkedItemButton
+                        model={PrintModel}
+                        route={"/print-models"}
+                        linkedItemIdField={"printModelId"}
+                    />
+                )
+            }
         },
         printer: {
             label: "Printer",
@@ -26,10 +37,11 @@ export const PrintForm = ({printer, printModel}) => {
         endTime: {
             label: "End Time",
             inputType: "date"
-        }
+        },
     }
 
     const form = useForm({
+        item,
         model: Print,
         fieldConfig,
         updateInputFunction: (input) => {

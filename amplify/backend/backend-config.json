@@ -172,5 +172,12 @@
       "providerPlugin": "awscloudformation",
       "service": "Transcribe"
     }
+  },
+  "storage": {
+    "3dmodels": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

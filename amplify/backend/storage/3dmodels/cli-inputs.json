@@ -1,0 +1,14 @@
+{
+  "resourceName": "3dmodels",
+  "policyUUID": "e97ecba9",
+  "bucketName": "thoughtify3dmodels",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

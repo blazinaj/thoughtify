@@ -8,9 +8,24 @@ export const PrinterForm = () => {
         fieldConfig: {
             name: {
                 label: "Name",
-                type: "text",
-                required: true,
             },
+            status: {
+                label: "Status",
+            },
+            printModel: {
+                label: "3D Model",
+            },
+            printer: {
+                label: "Printer",
+            },
+            startTime: {
+                label: "Start Time",
+                inputType: "date"
+            },
+            endTime: {
+                label: "End Time",
+                inputType: "date"
+            }
         }
     })
 

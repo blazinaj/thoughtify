@@ -39,5 +39,11 @@ export type AmplifyDependentResourcesAttributes = {
       "language": "string",
       "region": "string"
     }
+  },
+  "storage": {
+    "3dmodels": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

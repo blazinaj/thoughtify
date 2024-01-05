@@ -37,6 +37,9 @@
       },
       "predictions": {
         "transcription": {}
+      },
+      "storage": {
+        "3dmodels": {}
       }
     }
   }

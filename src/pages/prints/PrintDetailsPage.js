@@ -4,7 +4,7 @@ import Page from "../../utils/components/Page";
 import {Container} from "@mui/material";
 import HeaderBreadcrumbs from "../../demo/components/HeaderBreadcrumbs";
 import {useDatastore} from "../../utils/hooks/useDatastore";
-import {PrintModel} from "../../models";
+import {Print, PrintModel} from "../../models";
 import {PrintDetails} from "./components/PrintDetails";
 
 const PrintDetailsPage = () => {
@@ -13,8 +13,8 @@ const PrintDetailsPage = () => {
     const {id, printerId} = useParams();
 
     const datastore = useDatastore({
-        model: PrintModel,
-        typename: "3D Model",
+        model: Print,
+        typename: "3D Print",
         itemId: id,
         enableSubscription: true,
     })

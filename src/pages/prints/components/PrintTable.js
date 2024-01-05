@@ -1,5 +1,5 @@
 import {useDataTable} from "../../../utils/hooks/useDataTable";
-import {PrintModel} from "../../../models";
+import {Print, PrintModel} from "../../../models";
 import {PrintModelDetails} from "./PrintModelDetails";
 import {useDataCard} from "../../../utils/hooks/useDataCard";
 import {PrintForm} from "./PrintForm";
@@ -30,7 +30,7 @@ export const PrintTable = ({printer, printModel}) => {
       return `/printers/${printer.id}/prints/`
     }
     if (printModel) {
-      return `/print-model/:printModelId/:id${printModel.id}`
+      return `/print-models/${printModel.id}/prints/`
     }
     return `/prints/`
   }
@@ -38,19 +38,30 @@ export const PrintTable = ({printer, printModel}) => {
   const columns = [
     {
         field: 'name',
-      width: 300
+        headerName: 'Name',
+      flex: 1,
     },
     {
       field: 'status',
-        width: 300
+      headerName: 'Status',
+        width: 150
+    },
+    {
+      field: "startTime",
+        headerName: "Start Time",
+      type: "date",
+    },
+    {
+        field: "endTime",
+        headerName: "End Time",
+        type: "date",
     }
   ]
 
 
 
   const table = useDataCard({
-    model: PrintModel,
-    detailsComponent: <PrintModelDetails/>,
+    model: Print,
     predicate: getPredicate(),
     columns,
     title: "Prints",
