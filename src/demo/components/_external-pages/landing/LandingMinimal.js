@@ -22,11 +22,6 @@ const CARDS = [
     icon: '/static/icons/ic_design.svg',
     title: 'Explore your thoughts',
     description: 'Automatically generate Journals, Biographys, Health Reports, and more.'
-  },
-  {
-    icon: '/static/icons/love-camera.svg',
-    title: 'Share your thoughts',
-    description: 'Connect with friends and share your thoughts with them in a private and secure way.'
   }
 ];
 

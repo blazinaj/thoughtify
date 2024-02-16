@@ -24,7 +24,7 @@ const SOCIALS = [
 
 const LINKS = [
   {
-    headline: 'Edify',
+    headline: 'Thoughtify',
     children: [
       // { name: 'About us', href: PATH_PAGE.about },
       { name: 'Contact us', href: PATH_PAGE.contact }
@@ -41,7 +41,7 @@ const LINKS = [
   {
     headline: 'Contact',
     children: [
-      { name: 'support@edify.mobi', href: '#' },
+      { name: 'support@cloudify.mobi', href: '#' },
       { name: 'USA', href: '#' }
     ]
   }
@@ -71,21 +71,21 @@ export default function MainFooter() {
           </Grid>
           <Grid item xs={8} md={3}>
             <Typography variant="body2" sx={{ pr: { md: 5 } }}>
-              The AI-Powered Learning Platform
+              AI-powered Journaling
             </Typography>
 
-            <Stack
-              spacing={1.5}
-              direction="row"
-              justifyContent={{ xs: 'center', md: 'flex-start' }}
-              sx={{ mt: 5, mb: { xs: 5, md: 0 } }}
-            >
-              {SOCIALS.map((social) => (
-                <IconButton key={social.name} color="primary" sx={{ p: 1 }} size="large">
-                  <Icon icon={social.icon} width={16} height={16} />
-                </IconButton>
-              ))}
-            </Stack>
+            {/*<Stack*/}
+            {/*  spacing={1.5}*/}
+            {/*  direction="row"*/}
+            {/*  justifyContent={{ xs: 'center', md: 'flex-start' }}*/}
+            {/*  sx={{ mt: 5, mb: { xs: 5, md: 0 } }}*/}
+            {/*>*/}
+            {/*  {SOCIALS.map((social) => (*/}
+            {/*    <IconButton key={social.name} color="primary" sx={{ p: 1 }} size="large">*/}
+            {/*      <Icon icon={social.icon} width={16} height={16} />*/}
+            {/*    </IconButton>*/}
+            {/*  ))}*/}
+            {/*</Stack>*/}
           </Grid>
 
           <Grid item xs={12} md={7}>
