@@ -342,7 +342,7 @@ export default function Privacy() {
         <h1>Contact Us</h1>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
-          <li>By email: privacy@edify.mobi</li>
+          <li>By email: support@cloudify.mobi</li>
         </ul>
       </Container>
     </RootStyle>

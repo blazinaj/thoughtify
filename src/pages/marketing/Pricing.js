@@ -68,34 +68,34 @@ export default function Pricing() {
     <RootStyle title="Edify - Pricing">
       <Container maxWidth="lg" sx={{ my: 10 }}>
         <Typography variant="h3" align="center" paragraph>
-          Flexible plans for your needs
+          Thoughtify Pricing
         </Typography>
         <Typography align="center" sx={{ color: 'text.secondary' }}>
-          Choose your plan and unlock advanced features and deep insights to grow intellectually.
+          Thoughtify is currently in an alpha concept phase. It is free to try out and use, but this may change at any time.
         </Typography>
 
-        <Box sx={{ my: 5 }}>
-          <Stack direction="row" alignItems="center" justifyContent="flex-end">
-            <Typography variant="overline" sx={{ mr: 1.5 }}>
-              MONTHLY
-            </Typography>
-            <Switch />
-            <Typography variant="overline" sx={{ ml: 1.5 }}>
-              YEARLY (save 10%)
-            </Typography>
-          </Stack>
-          <Typography variant="caption" align="right" sx={{ color: 'text.secondary', display: 'block' }}>
-            * Plus applicable taxes
-          </Typography>
-        </Box>
+        {/*<Box sx={{ my: 5 }}>*/}
+        {/*  <Stack direction="row" alignItems="center" justifyContent="flex-end">*/}
+        {/*    <Typography variant="overline" sx={{ mr: 1.5 }}>*/}
+        {/*      MONTHLY*/}
+        {/*    </Typography>*/}
+        {/*    <Switch />*/}
+        {/*    <Typography variant="overline" sx={{ ml: 1.5 }}>*/}
+        {/*      YEARLY (save 10%)*/}
+        {/*    </Typography>*/}
+        {/*  </Stack>*/}
+        {/*  <Typography variant="caption" align="right" sx={{ color: 'text.secondary', display: 'block' }}>*/}
+        {/*    * Plus applicable taxes*/}
+        {/*  </Typography>*/}
+        {/*</Box>*/}
 
-        <Grid container spacing={3}>
-          {PLANS.map((card, index) => (
-            <Grid item xs={12} md={4} key={card.subscription}>
-              <PricingPlanCard card={card} index={index} />
-            </Grid>
-          ))}
-        </Grid>
+        {/*<Grid container spacing={3}>*/}
+        {/*  {PLANS.map((card, index) => (*/}
+        {/*    <Grid item xs={12} md={4} key={card.subscription}>*/}
+        {/*      <PricingPlanCard card={card} index={index} />*/}
+        {/*    </Grid>*/}
+        {/*  ))}*/}
+        {/*</Grid>*/}
       </Container>
     </RootStyle>
   );

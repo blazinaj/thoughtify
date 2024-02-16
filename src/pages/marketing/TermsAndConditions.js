@@ -141,8 +141,7 @@ export const TermsContent = () => {
       <p>
         Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers
         under any provision of this Terms and Your exclusive remedy for all of the foregoing shall be limited to the
-        amount actually paid by You through the Service or 100 USD if You haven't purchased anything through the
-        Service.
+        amount actually paid by You through the Service.
       </p>
       <p>
         To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for
@@ -240,7 +239,7 @@ export const TermsContent = () => {
       <h1>Contact Us</h1>
       <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
       <ul>
-        <li>By email: support@edify.mobi</li>
+        <li>By email: support@cloudify.mobi</li>
       </ul>
     </div>
   );

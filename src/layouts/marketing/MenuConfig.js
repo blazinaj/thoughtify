@@ -40,7 +40,7 @@ const menuConfig = [
       },
       {
         subheader: 'Dashboard',
-        items: [{ title: 'Dashboard', path: '/learn/dashboard' }]
+        items: [{ title: 'Dashboard', path: '/thoughts' }]
       }
     ]
   }
