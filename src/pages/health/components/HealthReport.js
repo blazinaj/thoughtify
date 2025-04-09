@@ -1,17 +1,17 @@
-import {JournalCadence, Thought, HealthReport as HealthReportModel, HealthReportThoughts} from '../../../models';
+import { JournalCadence, Thought, HealthReport as HealthReportModel, HealthReportThoughts } from '../../../models';
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {sentenceCase} from 'change-case';
+import { useEffect, useState } from 'react';
+import { sentenceCase } from 'change-case';
 import Card from '../../../utils/components/Card';
-import {Masonry} from '@mui/lab';
-import {DataStore} from '@aws-amplify/datastore';
+import { Masonry } from '@mui/lab';
+import { DataStore } from '@aws-amplify/datastore';
 import LoadingScreen from '../../../demo/components/LoadingScreen';
-import {getIcon} from "@iconify/react";
-import {Box} from "@mui/material";
-import {differenceInDays} from "date-fns";
-import {useSnackbar} from "notistack";
-import {HealthCategoryStatusButton} from "./HealthCategoryStatusButton";
-import {generateHealthCategoryReport} from "../functions/generateHealthCategoryReport";
+import { getIcon } from '@iconify/react';
+import { Box } from '@mui/material';
+import { differenceInDays } from 'date-fns';
+import { useSnackbar } from 'notistack';
+import { HealthCategoryStatusButton } from './HealthCategoryStatusButton';
+import { generateHealthCategoryReport } from '../functions/generateHealthCategoryReport';
 
 /**
  * Displays a Health Report for a user
@@ -19,8 +19,7 @@ import {generateHealthCategoryReport} from "../functions/generateHealthCategoryR
  * @returns {Element}
  * @constructor
  */
-export const HealthReport = ({selectedHealthReport}) => {
-
+export const HealthReport = ({ selectedHealthReport }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -36,15 +35,15 @@ export const HealthReport = ({selectedHealthReport}) => {
     'spiritual_health'
   ];
 
-  const getLatestHealthReport = ({healthReports}) => {
+  const getLatestHealthReport = ({ healthReports }) => {
     const sortedHealthReports = healthReports.sort((a, b) => {
       return new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt);
     });
 
     return sortedHealthReports[0];
-  }
+  };
 
-  const isHealthReportUpToDate = async ({healthReports, cadence}) => {
+  const isHealthReportUpToDate = async ({ healthReports, cadence }) => {
     if (!healthReports?.length) {
       return false;
     }
@@ -52,7 +51,7 @@ export const HealthReport = ({selectedHealthReport}) => {
     if (healthReports.length < 1) {
       return false;
     }
-    const latestHealthReport = getLatestHealthReport({healthReports});
+    const latestHealthReport = getLatestHealthReport({ healthReports });
 
     const today = new Date();
 
@@ -77,80 +76,78 @@ export const HealthReport = ({selectedHealthReport}) => {
     }
 
     return false;
-
-
-  }
+  };
 
   const fetchHealthReport = async () => {
-
     const thoughts = await DataStore.query(Thought);
     const healthReports = await DataStore.query(HealthReportModel);
-    
-    const isUpToDate = await isHealthReportUpToDate({healthReports, cadence: JournalCadence.DAILY});
+
+    const isUpToDate = await isHealthReportUpToDate({ healthReports, cadence: JournalCadence.DAILY });
 
     if (isUpToDate) {
-      const latestHealthReport = getLatestHealthReport({healthReports});
+      const latestHealthReport = getLatestHealthReport({ healthReports });
 
-      const healthReportThoughts = await DataStore.query(Thought, t => t.healthReports.healthReport.id.eq(latestHealthReport.id));
+      const healthReportThoughts = await DataStore.query(Thought, (t) =>
+        t.healthReports.healthReport.id.eq(latestHealthReport.id)
+      );
 
       // check if there are any new thoughts since this health report was last updated
-        const newThoughts = thoughts.filter((thought) => {
-            return !healthReportThoughts.find((healthReportThought) => healthReportThought.id === thought.id);
+      const newThoughts = thoughts.filter((thought) => {
+        return !healthReportThoughts.find((healthReportThought) => healthReportThought.id === thought.id);
+      });
+
+      if (newThoughts.length) {
+        enqueueSnackbar(`Updating health report with ${newThoughts.length} new thoughts`, {
+          variant: 'info'
         });
+        // update this health report with new thoughts
 
-        if (newThoughts.length) {
+        const health = {};
 
-          enqueueSnackbar(`Updating health report with ${newThoughts.length} new thoughts`, {
-            variant: 'info'
-          })
-          // update this health report with new thoughts
+        const categoryPromises = [];
 
-          const health = {};
+        for (const category of HEALTH_CATEGORIES) {
+          const promise = generateHealthCategoryReport({
+            category,
+            thoughts: [...healthReportThoughts, ...newThoughts]
+          });
 
-          const categoryPromises = [];
-
-          for (const category of HEALTH_CATEGORIES) {
-
-            const promise = generateHealthCategoryReport({category, thoughts: [...healthReportThoughts, ...newThoughts]});
-
-            categoryPromises.push(promise);
-          }
-
-          const promiseResults = await Promise.allSettled(categoryPromises);
-
-          for (const result of promiseResults) {
-            console.log({result})
-            if (result.status === 'fulfilled') {
-              const {value} = result;
-              health[value.category] = value.description;
-            }
-            else {
-              enqueueSnackbar(`Error generating health report: ${result.reason}`, {
-                variant: 'error'
-              })
-            }
-          }
-
-          const updatedReport = await DataStore.save(HealthReportModel.copyOf(latestHealthReport, (updated) => {
-            updated.report = JSON.stringify(health);
-          }))
-
-          for (const thought of newThoughts) {
-            await DataStore.save(
-              new HealthReportThoughts({
-                healthReportId: updatedReport.id,
-                thoughtId: thought.id
-              })
-            )
-          }
-
-
-          return updatedReport.report;
-
+          categoryPromises.push(promise);
         }
 
-        return latestHealthReport.report;
+        const promiseResults = await Promise.allSettled(categoryPromises);
 
+        for (const result of promiseResults) {
+          console.log({ result });
+          if (result.status === 'fulfilled') {
+            const { value } = result;
+            health[value.category] = value.description;
+          } else {
+            enqueueSnackbar(`Error generating health report: ${result.reason}`, {
+              variant: 'error'
+            });
+          }
+        }
+
+        const updatedReport = await DataStore.save(
+          HealthReportModel.copyOf(latestHealthReport, (updated) => {
+            updated.report = JSON.stringify(health);
+          })
+        );
+
+        for (const thought of newThoughts) {
+          await DataStore.save(
+            new HealthReportThoughts({
+              healthReportId: updatedReport.id,
+              thoughtId: thought.id
+            })
+          );
+        }
+
+        return updatedReport.report;
+      }
+
+      return latestHealthReport.report;
     }
 
     // generate new health report for today
@@ -163,7 +160,7 @@ export const HealthReport = ({selectedHealthReport}) => {
     const categoryPromises = [];
 
     for (const category of HEALTH_CATEGORIES) {
-      const promise = generateHealthCategoryReport({category, thoughts});
+      const promise = generateHealthCategoryReport({ category, thoughts });
 
       categoryPromises.push(promise);
     }
@@ -172,21 +169,22 @@ export const HealthReport = ({selectedHealthReport}) => {
 
     for (const result of promiseResults) {
       if (result.status === 'fulfilled') {
-        const {value} = result;
+        const { value } = result;
         health[value.category] = value.description;
-      }
-      else {
+      } else {
         enqueueSnackbar(`Error generating health report: ${result.reason}`, {
           variant: 'error'
-        })
+        });
       }
     }
 
-    const newHealthReport = await DataStore.save(new HealthReportModel({
-      date: new Date().toISOString(),
-      cadence: JournalCadence.DAILY,
-      report: JSON.stringify(health)
-    }))
+    const newHealthReport = await DataStore.save(
+      new HealthReportModel({
+        date: new Date().toISOString(),
+        cadence: JournalCadence.DAILY,
+        report: JSON.stringify(health)
+      })
+    );
 
     for (const thought of thoughts) {
       await DataStore.save(
@@ -194,11 +192,10 @@ export const HealthReport = ({selectedHealthReport}) => {
           healthReportId: newHealthReport.id,
           thoughtId: thought.id
         })
-      )
+      );
     }
 
     return newHealthReport.report;
-
   };
 
   useEffect(() => {
@@ -215,7 +212,7 @@ export const HealthReport = ({selectedHealthReport}) => {
   }, []);
 
   if (isLoading) {
-    return <LoadingScreen sx={{marginTop: "15vh"}}  />;
+    return <LoadingScreen sx={{ marginTop: '15vh' }} />;
   }
 
   return (
@@ -236,21 +233,9 @@ export const HealthReport = ({selectedHealthReport}) => {
               key={category}
               avatar={getIcon(getExtractAttributeIcon(category))}
               title={sentenceCase(category)}
-              formComponent={
-                <Box>
-                  {
-                    attributes.description
-                  }
-                </Box>
-              }
-              formModalButton={
-                <HealthCategoryStatusButton
-                  status={attributes?.overall_status}
-                />
-              }
-              formModalTitle={
-                `${sentenceCase(category)}: ${attributes?.overall_status}`
-              }
+              formComponent={<Box>{attributes.description}</Box>}
+              formModalButton={<HealthCategoryStatusButton status={attributes?.overall_status} />}
+              formModalTitle={`${sentenceCase(category)}: ${attributes?.overall_status}`}
             >
               {attributes?.description}
             </Card>
@@ -296,5 +281,4 @@ const getExtractAttributeIcon = (attribute) => {
     default:
       return 'carbon:tag';
   }
-
-}
+};

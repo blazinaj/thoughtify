@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -17,20 +17,12 @@ import {
   ScrollView,
   Text,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
-import {
-  TutorMemory,
-  User as User0,
-  OpenAIChatResponse,
-  Tutor,
-} from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
+import { TutorMemory, User as User0, OpenAIChatResponse, Tutor } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -44,15 +36,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -68,12 +60,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -88,18 +75,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -110,17 +96,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -178,7 +164,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -199,23 +185,19 @@ export default function TutorMemoryUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    content: "",
+    content: '',
     User: undefined,
     tutorID: undefined,
     OpenAIChatResponses: [],
-    owner: "",
-    tutorAIResponse: "",
+    owner: '',
+    tutorAIResponse: ''
   };
   const [content, setContent] = React.useState(initialValues.content);
   const [User, setUser] = React.useState(initialValues.User);
   const [tutorID, setTutorID] = React.useState(initialValues.tutorID);
-  const [OpenAIChatResponses, setOpenAIChatResponses] = React.useState(
-    initialValues.OpenAIChatResponses
-  );
+  const [OpenAIChatResponses, setOpenAIChatResponses] = React.useState(initialValues.OpenAIChatResponses);
   const [owner, setOwner] = React.useState(initialValues.owner);
-  const [tutorAIResponse, setTutorAIResponse] = React.useState(
-    initialValues.tutorAIResponse
-  );
+  const [tutorAIResponse, setTutorAIResponse] = React.useState(initialValues.tutorAIResponse);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = tutorMemoryRecord
@@ -224,115 +206,86 @@ export default function TutorMemoryUpdateForm(props) {
           ...tutorMemoryRecord,
           User,
           tutorID,
-          OpenAIChatResponses: linkedOpenAIChatResponses,
+          OpenAIChatResponses: linkedOpenAIChatResponses
         }
       : initialValues;
     setContent(cleanValues.content);
     setUser(cleanValues.User);
     setCurrentUserValue(undefined);
-    setCurrentUserDisplayValue("");
+    setCurrentUserDisplayValue('');
     setTutorID(cleanValues.tutorID);
     setCurrentTutorIDValue(undefined);
-    setCurrentTutorIDDisplayValue("");
+    setCurrentTutorIDDisplayValue('');
     setOpenAIChatResponses(cleanValues.OpenAIChatResponses ?? []);
     setCurrentOpenAIChatResponsesValue(undefined);
-    setCurrentOpenAIChatResponsesDisplayValue("");
+    setCurrentOpenAIChatResponsesDisplayValue('');
     setOwner(cleanValues.owner);
     setTutorAIResponse(cleanValues.tutorAIResponse);
     setErrors({});
   };
-  const [tutorMemoryRecord, setTutorMemoryRecord] =
-    React.useState(tutorMemoryModelProp);
-  const [linkedOpenAIChatResponses, setLinkedOpenAIChatResponses] =
-    React.useState([]);
+  const [tutorMemoryRecord, setTutorMemoryRecord] = React.useState(tutorMemoryModelProp);
+  const [linkedOpenAIChatResponses, setLinkedOpenAIChatResponses] = React.useState([]);
   const canUnlinkOpenAIChatResponses = false;
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(TutorMemory, idProp)
-        : tutorMemoryModelProp;
+      const record = idProp ? await DataStore.query(TutorMemory, idProp) : tutorMemoryModelProp;
       setTutorMemoryRecord(record);
       const UserRecord = record ? await record.User : undefined;
       setUser(UserRecord);
       const tutorIDRecord = record ? await record.tutorID : undefined;
       setTutorID(tutorIDRecord);
-      const linkedOpenAIChatResponses = record
-        ? await record.OpenAIChatResponses.toArray()
-        : [];
+      const linkedOpenAIChatResponses = record ? await record.OpenAIChatResponses.toArray() : [];
       setLinkedOpenAIChatResponses(linkedOpenAIChatResponses);
     };
     queryData();
   }, [idProp, tutorMemoryModelProp]);
-  React.useEffect(resetStateValues, [
-    tutorMemoryRecord,
-    User,
-    tutorID,
-    linkedOpenAIChatResponses,
-  ]);
-  const [currentUserDisplayValue, setCurrentUserDisplayValue] =
-    React.useState("");
+  React.useEffect(resetStateValues, [tutorMemoryRecord, User, tutorID, linkedOpenAIChatResponses]);
+  const [currentUserDisplayValue, setCurrentUserDisplayValue] = React.useState('');
   const [currentUserValue, setCurrentUserValue] = React.useState(undefined);
   const UserRef = React.createRef();
-  const [currentTutorIDDisplayValue, setCurrentTutorIDDisplayValue] =
-    React.useState("");
-  const [currentTutorIDValue, setCurrentTutorIDValue] =
-    React.useState(undefined);
+  const [currentTutorIDDisplayValue, setCurrentTutorIDDisplayValue] = React.useState('');
+  const [currentTutorIDValue, setCurrentTutorIDValue] = React.useState(undefined);
   const tutorIDRef = React.createRef();
-  const [
-    currentOpenAIChatResponsesDisplayValue,
-    setCurrentOpenAIChatResponsesDisplayValue,
-  ] = React.useState("");
-  const [currentOpenAIChatResponsesValue, setCurrentOpenAIChatResponsesValue] =
-    React.useState(undefined);
+  const [currentOpenAIChatResponsesDisplayValue, setCurrentOpenAIChatResponsesDisplayValue] = React.useState('');
+  const [currentOpenAIChatResponsesValue, setCurrentOpenAIChatResponsesValue] = React.useState(undefined);
   const OpenAIChatResponsesRef = React.createRef();
   const getIDValue = {
     User: (r) => JSON.stringify({ id: r?.id }),
-    OpenAIChatResponses: (r) => JSON.stringify({ id: r?.id }),
+    OpenAIChatResponses: (r) => JSON.stringify({ id: r?.id })
   };
-  const UserIdSet = new Set(
-    Array.isArray(User)
-      ? User.map((r) => getIDValue.User?.(r))
-      : getIDValue.User?.(User)
-  );
+  const UserIdSet = new Set(Array.isArray(User) ? User.map((r) => getIDValue.User?.(r)) : getIDValue.User?.(User));
   const OpenAIChatResponsesIdSet = new Set(
     Array.isArray(OpenAIChatResponses)
       ? OpenAIChatResponses.map((r) => getIDValue.OpenAIChatResponses?.(r))
       : getIDValue.OpenAIChatResponses?.(OpenAIChatResponses)
   );
   const userRecords = useDataStoreBinding({
-    type: "collection",
-    model: User0,
+    type: 'collection',
+    model: User0
   }).items;
   const tutorRecords = useDataStoreBinding({
-    type: "collection",
-    model: Tutor,
+    type: 'collection',
+    model: Tutor
   }).items;
   const openAIChatResponseRecords = useDataStoreBinding({
-    type: "collection",
-    model: OpenAIChatResponse,
+    type: 'collection',
+    model: OpenAIChatResponse
   }).items;
   const getDisplayValue = {
-    User: (r) => `${r?.firstName ? r?.firstName + " - " : ""}${r?.id}`,
-    tutorID: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    OpenAIChatResponses: (r) => `${r?.role ? r?.role + " - " : ""}${r?.id}`,
+    User: (r) => `${r?.firstName ? r?.firstName + ' - ' : ''}${r?.id}`,
+    tutorID: (r) => `${r?.name ? r?.name + ' - ' : ''}${r?.id}`,
+    OpenAIChatResponses: (r) => `${r?.role ? r?.role + ' - ' : ''}${r?.id}`
   };
   const validations = {
     content: [],
     User: [],
-    tutorID: [{ type: "Required" }],
+    tutorID: [{ type: 'Required' }],
     OpenAIChatResponses: [],
     owner: [],
-    tutorAIResponse: [],
+    tutorAIResponse: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -355,29 +308,17 @@ export default function TutorMemoryUpdateForm(props) {
           tutorID,
           OpenAIChatResponses,
           owner,
-          tutorAIResponse,
+          tutorAIResponse
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(
-                    fieldName,
-                    item,
-                    getDisplayValue[fieldName]
-                  )
-                )
+                ...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item, getDisplayValue[fieldName]))
               );
               return promises;
             }
-            promises.push(
-              runValidationTasks(
-                fieldName,
-                modelFields[fieldName],
-                getDisplayValue[fieldName]
-              )
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName], getDisplayValue[fieldName]));
             return promises;
           }, [])
         );
@@ -389,7 +330,7 @@ export default function TutorMemoryUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -398,27 +339,17 @@ export default function TutorMemoryUpdateForm(props) {
           const openAIChatResponsesToUnLink = [];
           const openAIChatResponsesSet = new Set();
           const linkedOpenAIChatResponsesSet = new Set();
-          OpenAIChatResponses.forEach((r) =>
-            openAIChatResponsesSet.add(getIDValue.OpenAIChatResponses?.(r))
-          );
+          OpenAIChatResponses.forEach((r) => openAIChatResponsesSet.add(getIDValue.OpenAIChatResponses?.(r)));
           linkedOpenAIChatResponses.forEach((r) =>
-            linkedOpenAIChatResponsesSet.add(
-              getIDValue.OpenAIChatResponses?.(r)
-            )
+            linkedOpenAIChatResponsesSet.add(getIDValue.OpenAIChatResponses?.(r))
           );
           linkedOpenAIChatResponses.forEach((r) => {
-            if (
-              !openAIChatResponsesSet.has(getIDValue.OpenAIChatResponses?.(r))
-            ) {
+            if (!openAIChatResponsesSet.has(getIDValue.OpenAIChatResponses?.(r))) {
               openAIChatResponsesToUnLink.push(r);
             }
           });
           OpenAIChatResponses.forEach((r) => {
-            if (
-              !linkedOpenAIChatResponsesSet.has(
-                getIDValue.OpenAIChatResponses?.(r)
-              )
-            ) {
+            if (!linkedOpenAIChatResponsesSet.has(getIDValue.OpenAIChatResponses?.(r))) {
               openAIChatResponsesToLink.push(r);
             }
           });
@@ -450,7 +381,7 @@ export default function TutorMemoryUpdateForm(props) {
             User: modelFields.User,
             tutorID: modelFields.tutorID,
             owner: modelFields.owner,
-            tutorAIResponse: modelFields.tutorAIResponse,
+            tutorAIResponse: modelFields.tutorAIResponse
           };
           promises.push(
             DataStore.save(
@@ -472,7 +403,7 @@ export default function TutorMemoryUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "TutorMemoryUpdateForm")}
+      {...getOverrideProps(overrides, 'TutorMemoryUpdateForm')}
       {...rest}
     >
       <TextField
@@ -489,20 +420,20 @@ export default function TutorMemoryUpdateForm(props) {
               tutorID,
               OpenAIChatResponses,
               owner,
-              tutorAIResponse,
+              tutorAIResponse
             };
             const result = onChange(modelFields);
             value = result?.content ?? value;
           }
           if (errors.content?.hasError) {
-            runValidationTasks("content", value);
+            runValidationTasks('content', value);
           }
           setContent(value);
         }}
-        onBlur={() => runValidationTasks("content", content)}
+        onBlur={() => runValidationTasks('content', content)}
         errorMessage={errors.content?.errorMessage}
         hasError={errors.content?.hasError}
-        {...getOverrideProps(overrides, "content")}
+        {...getOverrideProps(overrides, 'content')}
       ></TextField>
       <ArrayField
         lengthLimit={1}
@@ -515,30 +446,28 @@ export default function TutorMemoryUpdateForm(props) {
               tutorID,
               OpenAIChatResponses,
               owner,
-              tutorAIResponse,
+              tutorAIResponse
             };
             const result = onChange(modelFields);
             value = result?.User ?? value;
           }
           setUser(value);
           setCurrentUserValue(undefined);
-          setCurrentUserDisplayValue("");
+          setCurrentUserDisplayValue('');
         }}
         currentFieldValue={currentUserValue}
-        label={"User"}
+        label={'User'}
         items={User ? [User] : []}
         hasError={errors?.User?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("User", currentUserValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('User', currentUserValue)}
         errorMessage={errors?.User?.errorMessage}
         getBadgeText={getDisplayValue.User}
         setFieldValue={(model) => {
-          setCurrentUserDisplayValue(model ? getDisplayValue.User(model) : "");
+          setCurrentUserDisplayValue(model ? getDisplayValue.User(model) : '');
           setCurrentUserValue(model);
         }}
         inputFieldRef={UserRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="User"
@@ -550,37 +479,33 @@ export default function TutorMemoryUpdateForm(props) {
             .filter((r) => !UserIdSet.has(getIDValue.User?.(r)))
             .map((r) => ({
               id: getIDValue.User?.(r),
-              label: getDisplayValue.User?.(r),
+              label: getDisplayValue.User?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentUserValue(
-              userRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              userRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentUserDisplayValue(label);
-            runValidationTasks("User", label);
+            runValidationTasks('User', label);
           }}
           onClear={() => {
-            setCurrentUserDisplayValue("");
+            setCurrentUserDisplayValue('');
           }}
           defaultValue={User}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.User?.hasError) {
-              runValidationTasks("User", value);
+              runValidationTasks('User', value);
             }
             setCurrentUserDisplayValue(value);
             setCurrentUserValue(undefined);
           }}
-          onBlur={() => runValidationTasks("User", currentUserDisplayValue)}
+          onBlur={() => runValidationTasks('User', currentUserDisplayValue)}
           errorMessage={errors.User?.errorMessage}
           hasError={errors.User?.hasError}
           ref={UserRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "User")}
+          {...getOverrideProps(overrides, 'User')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -594,7 +519,7 @@ export default function TutorMemoryUpdateForm(props) {
               tutorID: value,
               OpenAIChatResponses,
               owner,
-              tutorAIResponse,
+              tutorAIResponse
             };
             const result = onChange(modelFields);
             value = result?.tutorID ?? value;
@@ -603,30 +528,18 @@ export default function TutorMemoryUpdateForm(props) {
           setCurrentTutorIDValue(undefined);
         }}
         currentFieldValue={currentTutorIDValue}
-        label={"Tutor id"}
+        label={'Tutor id'}
         items={tutorID ? [tutorID] : []}
         hasError={errors?.tutorID?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("tutorID", currentTutorIDValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('tutorID', currentTutorIDValue)}
         errorMessage={errors?.tutorID?.errorMessage}
-        getBadgeText={(value) =>
-          value
-            ? getDisplayValue.tutorID(tutorRecords.find((r) => r.id === value))
-            : ""
-        }
+        getBadgeText={(value) => (value ? getDisplayValue.tutorID(tutorRecords.find((r) => r.id === value)) : '')}
         setFieldValue={(value) => {
-          setCurrentTutorIDDisplayValue(
-            value
-              ? getDisplayValue.tutorID(
-                  tutorRecords.find((r) => r.id === value)
-                )
-              : ""
-          );
+          setCurrentTutorIDDisplayValue(value ? getDisplayValue.tutorID(tutorRecords.find((r) => r.id === value)) : '');
           setCurrentTutorIDValue(value);
         }}
         inputFieldRef={tutorIDRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Tutor id"
@@ -635,37 +548,34 @@ export default function TutorMemoryUpdateForm(props) {
           placeholder="Search Tutor"
           value={currentTutorIDDisplayValue}
           options={tutorRecords
-            .filter(
-              (r, i, arr) =>
-                arr.findIndex((member) => member?.id === r?.id) === i
-            )
+            .filter((r, i, arr) => arr.findIndex((member) => member?.id === r?.id) === i)
             .map((r) => ({
               id: r?.id,
-              label: getDisplayValue.tutorID?.(r),
+              label: getDisplayValue.tutorID?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentTutorIDValue(id);
             setCurrentTutorIDDisplayValue(label);
-            runValidationTasks("tutorID", label);
+            runValidationTasks('tutorID', label);
           }}
           onClear={() => {
-            setCurrentTutorIDDisplayValue("");
+            setCurrentTutorIDDisplayValue('');
           }}
           defaultValue={tutorID}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.tutorID?.hasError) {
-              runValidationTasks("tutorID", value);
+              runValidationTasks('tutorID', value);
             }
             setCurrentTutorIDDisplayValue(value);
             setCurrentTutorIDValue(undefined);
           }}
-          onBlur={() => runValidationTasks("tutorID", currentTutorIDValue)}
+          onBlur={() => runValidationTasks('tutorID', currentTutorIDValue)}
           errorMessage={errors.tutorID?.errorMessage}
           hasError={errors.tutorID?.hasError}
           ref={tutorIDRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "tutorID")}
+          {...getOverrideProps(overrides, 'tutorID')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -678,35 +588,30 @@ export default function TutorMemoryUpdateForm(props) {
               tutorID,
               OpenAIChatResponses: values,
               owner,
-              tutorAIResponse,
+              tutorAIResponse
             };
             const result = onChange(modelFields);
             values = result?.OpenAIChatResponses ?? values;
           }
           setOpenAIChatResponses(values);
           setCurrentOpenAIChatResponsesValue(undefined);
-          setCurrentOpenAIChatResponsesDisplayValue("");
+          setCurrentOpenAIChatResponsesDisplayValue('');
         }}
         currentFieldValue={currentOpenAIChatResponsesValue}
-        label={"Open ai chat responses"}
+        label={'Open ai chat responses'}
         items={OpenAIChatResponses}
         hasError={errors?.OpenAIChatResponses?.hasError}
         runValidationTasks={async () =>
-          await runValidationTasks(
-            "OpenAIChatResponses",
-            currentOpenAIChatResponsesValue
-          )
+          await runValidationTasks('OpenAIChatResponses', currentOpenAIChatResponsesValue)
         }
         errorMessage={errors?.OpenAIChatResponses?.errorMessage}
         getBadgeText={getDisplayValue.OpenAIChatResponses}
         setFieldValue={(model) => {
-          setCurrentOpenAIChatResponsesDisplayValue(
-            model ? getDisplayValue.OpenAIChatResponses(model) : ""
-          );
+          setCurrentOpenAIChatResponsesDisplayValue(model ? getDisplayValue.OpenAIChatResponses(model) : '');
           setCurrentOpenAIChatResponsesValue(model);
         }}
         inputFieldRef={OpenAIChatResponsesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Open ai chat responses"
@@ -715,49 +620,37 @@ export default function TutorMemoryUpdateForm(props) {
           placeholder="Search OpenAIChatResponse"
           value={currentOpenAIChatResponsesDisplayValue}
           options={openAIChatResponseRecords
-            .filter(
-              (r) =>
-                !OpenAIChatResponsesIdSet.has(
-                  getIDValue.OpenAIChatResponses?.(r)
-                )
-            )
+            .filter((r) => !OpenAIChatResponsesIdSet.has(getIDValue.OpenAIChatResponses?.(r)))
             .map((r) => ({
               id: getIDValue.OpenAIChatResponses?.(r),
-              label: getDisplayValue.OpenAIChatResponses?.(r),
+              label: getDisplayValue.OpenAIChatResponses?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentOpenAIChatResponsesValue(
               openAIChatResponseRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
+                Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value)
               )
             );
             setCurrentOpenAIChatResponsesDisplayValue(label);
-            runValidationTasks("OpenAIChatResponses", label);
+            runValidationTasks('OpenAIChatResponses', label);
           }}
           onClear={() => {
-            setCurrentOpenAIChatResponsesDisplayValue("");
+            setCurrentOpenAIChatResponsesDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.OpenAIChatResponses?.hasError) {
-              runValidationTasks("OpenAIChatResponses", value);
+              runValidationTasks('OpenAIChatResponses', value);
             }
             setCurrentOpenAIChatResponsesDisplayValue(value);
             setCurrentOpenAIChatResponsesValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks(
-              "OpenAIChatResponses",
-              currentOpenAIChatResponsesDisplayValue
-            )
-          }
+          onBlur={() => runValidationTasks('OpenAIChatResponses', currentOpenAIChatResponsesDisplayValue)}
           errorMessage={errors.OpenAIChatResponses?.errorMessage}
           hasError={errors.OpenAIChatResponses?.hasError}
           ref={OpenAIChatResponsesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "OpenAIChatResponses")}
+          {...getOverrideProps(overrides, 'OpenAIChatResponses')}
         ></Autocomplete>
       </ArrayField>
       <TextField
@@ -774,20 +667,20 @@ export default function TutorMemoryUpdateForm(props) {
               tutorID,
               OpenAIChatResponses,
               owner: value,
-              tutorAIResponse,
+              tutorAIResponse
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
       <TextField
         label="Tutor ai response"
@@ -803,25 +696,22 @@ export default function TutorMemoryUpdateForm(props) {
               tutorID,
               OpenAIChatResponses,
               owner,
-              tutorAIResponse: value,
+              tutorAIResponse: value
             };
             const result = onChange(modelFields);
             value = result?.tutorAIResponse ?? value;
           }
           if (errors.tutorAIResponse?.hasError) {
-            runValidationTasks("tutorAIResponse", value);
+            runValidationTasks('tutorAIResponse', value);
           }
           setTutorAIResponse(value);
         }}
-        onBlur={() => runValidationTasks("tutorAIResponse", tutorAIResponse)}
+        onBlur={() => runValidationTasks('tutorAIResponse', tutorAIResponse)}
         errorMessage={errors.tutorAIResponse?.errorMessage}
         hasError={errors.tutorAIResponse?.hasError}
-        {...getOverrideProps(overrides, "tutorAIResponse")}
+        {...getOverrideProps(overrides, 'tutorAIResponse')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -830,21 +720,15 @@ export default function TutorMemoryUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || tutorMemoryModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || tutorMemoryModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || tutorMemoryModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

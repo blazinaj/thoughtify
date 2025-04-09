@@ -1,8 +1,7 @@
-import {Button} from "@mui/material";
-import * as React from "react";
+import { Button } from '@mui/material';
+import * as React from 'react';
 
-export const HealthCategoryStatusButton = ({status, ...props}) => {
-
+export const HealthCategoryStatusButton = ({ status, ...props }) => {
   const getStatus = (status) => {
     switch (status) {
       case 'good':
@@ -16,15 +15,11 @@ export const HealthCategoryStatusButton = ({status, ...props}) => {
       default:
         return 'info';
     }
-  }
+  };
 
   return (
-    <Button
-      variant={'contained'}
-      color={getStatus(status)}
-      {...props}
-    >
+    <Button variant={'contained'} color={getStatus(status)} {...props}>
       {status}
     </Button>
   );
-}
+};

@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Flex, Text } from '@aws-amplify/ui-react';
 export default function Features4x1(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function Features4x1(props) {
       position="relative"
       padding="40px 140px 40px 140px"
       backgroundColor="rgba(239,240,240,1)"
-      {...getOverrideProps(overrides, "Features4x1")}
+      {...getOverrideProps(overrides, 'Features4x1')}
       {...rest}
     >
       <Flex
@@ -35,7 +35,7 @@ export default function Features4x1(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 136")}
+        {...getOverrideProps(overrides, 'Frame 136')}
       >
         <Flex
           gap="16px"
@@ -50,7 +50,7 @@ export default function Features4x1(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 139")}
+          {...getOverrideProps(overrides, 'Frame 139')}
         >
           <Text
             fontFamily="Inter"
@@ -72,7 +72,7 @@ export default function Features4x1(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Feature A"
-            {...getOverrideProps(overrides, "Feature A")}
+            {...getOverrideProps(overrides, 'Feature A')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -96,7 +96,7 @@ export default function Features4x1(props) {
             children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud."
             {...getOverrideProps(
               overrides,
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766581"
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766581'
             )}
           ></Text>
         </Flex>
@@ -113,7 +113,7 @@ export default function Features4x1(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 140")}
+          {...getOverrideProps(overrides, 'Frame 140')}
         >
           <Text
             fontFamily="Inter"
@@ -135,7 +135,7 @@ export default function Features4x1(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Feature B"
-            {...getOverrideProps(overrides, "Feature B")}
+            {...getOverrideProps(overrides, 'Feature B')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -159,7 +159,7 @@ export default function Features4x1(props) {
             children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud."
             {...getOverrideProps(
               overrides,
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766584"
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766584'
             )}
           ></Text>
         </Flex>
@@ -176,7 +176,7 @@ export default function Features4x1(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 141")}
+          {...getOverrideProps(overrides, 'Frame 141')}
         >
           <Text
             fontFamily="Inter"
@@ -198,7 +198,7 @@ export default function Features4x1(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Feature C"
-            {...getOverrideProps(overrides, "Feature C")}
+            {...getOverrideProps(overrides, 'Feature C')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -222,7 +222,7 @@ export default function Features4x1(props) {
             children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud."
             {...getOverrideProps(
               overrides,
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766587"
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766587'
             )}
           ></Text>
         </Flex>
@@ -239,7 +239,7 @@ export default function Features4x1(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 142")}
+          {...getOverrideProps(overrides, 'Frame 142')}
         >
           <Text
             fontFamily="Inter"
@@ -261,7 +261,7 @@ export default function Features4x1(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Feature D"
-            {...getOverrideProps(overrides, "Feature D")}
+            {...getOverrideProps(overrides, 'Feature D')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -285,7 +285,7 @@ export default function Features4x1(props) {
             children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud."
             {...getOverrideProps(
               overrides,
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766590"
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.29766590'
             )}
           ></Text>
         </Flex>

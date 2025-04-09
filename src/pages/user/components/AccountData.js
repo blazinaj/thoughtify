@@ -24,7 +24,7 @@ import { fData } from '../../../utils/formatNumber';
 //
 import { useUserContext } from '../../../contexts/UserContext';
 import { AccountSettings } from '@aws-amplify/ui-react';
-import {DataStore}   from "@aws-amplify/datastore";
+import { DataStore } from '@aws-amplify/datastore';
 // ----------------------------------------------------------------------
 
 export default function AccountData() {
@@ -40,7 +40,7 @@ export default function AccountData() {
             onClick={() => {
               DataStore.clear().then(() => {
                 enqueueSnackbar('Local Data Cleared', { variant: 'success' });
-              })
+              });
             }}
           >
             Clear Local Data

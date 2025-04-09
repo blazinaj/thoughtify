@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Flex, Image, Text } from '@aws-amplify/ui-react';
 export default function TallCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function TallCard(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "TallCard")}
+      {...getOverrideProps(overrides, 'TallCard')}
       {...rest}
     >
       <Image
@@ -36,7 +36,7 @@ export default function TallCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
+        {...getOverrideProps(overrides, 'image')}
       ></Image>
       <Flex
         gap="8px"
@@ -49,7 +49,7 @@ export default function TallCard(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 8px 0px 8px"
-        {...getOverrideProps(overrides, "Text Grouping")}
+        {...getOverrideProps(overrides, 'Text Grouping')}
       >
         <Text
           fontFamily="Inter"
@@ -72,7 +72,7 @@ export default function TallCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="Classic Long Sleeve T-Shirt"
-          {...getOverrideProps(overrides, "Classic Long Sleeve T-Shirt")}
+          {...getOverrideProps(overrides, 'Classic Long Sleeve T-Shirt')}
         ></Text>
         <Text
           fontFamily="Inter"
@@ -94,7 +94,7 @@ export default function TallCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="$99"
-          {...getOverrideProps(overrides, "$99")}
+          {...getOverrideProps(overrides, '$99')}
         ></Text>
       </Flex>
     </Flex>

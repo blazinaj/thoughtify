@@ -1,17 +1,17 @@
 import * as Yup from 'yup';
-import {useSnackbar} from 'notistack';
-import {useCallback} from 'react';
-import {Form, FormikProvider, useFormik} from 'formik';
+import { useSnackbar } from 'notistack';
+import { useCallback } from 'react';
+import { Form, FormikProvider, useFormik } from 'formik';
 // material
-import {Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField} from '@mui/material';
+import { Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField } from '@mui/material';
 // hooks
 import useIsMountedRef from '../../../utils/hooks/useIsMountedRef';
-import {UploadAvatar} from '../../../demo/components/upload';
+import { UploadAvatar } from '../../../demo/components/upload';
 // utils
 //
-import {useUserContext} from '../../../contexts/UserContext';
-import {DataStore} from '@aws-amplify/datastore';
-import {User} from '../../../models';
+import { useUserContext } from '../../../contexts/UserContext';
+import { DataStore } from '@aws-amplify/datastore';
+import { User } from '../../../models';
 
 // ----------------------------------------------------------------------
 
@@ -125,29 +125,37 @@ export default function AccountGeneral() {
                   <TextField fullWidth disabled label="Email Address" {...getFieldProps('email')} />
                 </Stack>
 
-                <TextField {...getFieldProps('bio')} disabled fullWidth multiline minRows={4} maxRows={4} label="About" />
+                <TextField
+                  {...getFieldProps('bio')}
+                  disabled
+                  fullWidth
+                  multiline
+                  minRows={4}
+                  maxRows={4}
+                  label="About"
+                />
 
                 <FormControlLabel
-                    control={<Switch {...getFieldProps('showOnboarding')}
-                        value={user?.showOnboarding}
-                                     onClick={() => {
-                                       console.log({user})
-                                       DataStore.query(
-                                             User,
-                                                user.id
-                                       ).then(currentUser => {
-                                         DataStore.save(
-                                             User.copyOf(currentUser, updated => {
-                                               updated.showOnboarding = !user.showOnboarding;
-                                             })
-                                         )
-                                       })
-
-                                     }}
-                                     color="primary" />}
-                    labelPlacement="start"
-                    label="Show Onboarding Tour"
-                    sx={{ mt: 5 }}
+                  control={
+                    <Switch
+                      {...getFieldProps('showOnboarding')}
+                      value={user?.showOnboarding}
+                      onClick={() => {
+                        console.log({ user });
+                        DataStore.query(User, user.id).then((currentUser) => {
+                          DataStore.save(
+                            User.copyOf(currentUser, (updated) => {
+                              updated.showOnboarding = !user.showOnboarding;
+                            })
+                          );
+                        });
+                      }}
+                      color="primary"
+                    />
+                  }
+                  labelPlacement="start"
+                  label="Show Onboarding Tour"
+                  sx={{ mt: 5 }}
                 />
               </Stack>
 

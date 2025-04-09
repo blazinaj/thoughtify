@@ -1,22 +1,21 @@
-import {useDatastore} from '../../../../../utils/hooks/useDatastore';
-import {Thought} from '../../../../../models';
-import {Masonry} from '@mui/lab';
-import {useThoughtExtractData} from "../hooks/useThoughtExtractData";
-import {ThoughtExtractCards} from "./ThoughtExtractCards";
+import { useDatastore } from '../../../../../utils/hooks/useDatastore';
+import { Thought } from '../../../../../models';
+import { Masonry } from '@mui/lab';
+import { useThoughtExtractData } from '../hooks/useThoughtExtractData';
+import { ThoughtExtractCards } from './ThoughtExtractCards';
 
 /**
  * Displays a list of Thought Extract Attribute cards from all of the user's thoughts
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtExtracts = ({journalEntry}) => {
-
+export const ThoughtExtracts = ({ journalEntry }) => {
   const getPredicate = () => {
     if (journalEntry?.id) {
-      return (item) => item?.journalEntries?.journalEntry.id.eq(journalEntry?.id)
+      return (item) => item?.journalEntries?.journalEntry.id.eq(journalEntry?.id);
     }
-    return undefined
-  }
+    return undefined;
+  };
 
   /**
    * Fetches a list of Thoughts from the database, and subscribes to updates automatically
@@ -25,15 +24,15 @@ export const ThoughtExtracts = ({journalEntry}) => {
   const thoughtDatastore = useDatastore({
     model: Thought,
     enableSubscription: true,
-    predicate: getPredicate(),
+    predicate: getPredicate()
   });
 
   /**
    * Extracts is an object with attributes as keys and values as arrays of values
    */
-  const {extract} = useThoughtExtractData({
+  const { extract } = useThoughtExtractData({
     thoughts: thoughtDatastore.items
-  })
+  });
 
   return (
     <Masonry
@@ -48,9 +47,7 @@ export const ThoughtExtracts = ({journalEntry}) => {
       }}
       sx={{ width: 'auto' }}
     >
-      <ThoughtExtractCards
-        extract={extract}
-      />
+      <ThoughtExtractCards extract={extract} />
     </Masonry>
   );
 };

@@ -1,7 +1,7 @@
-import {useState} from 'react';
-import {Navigate, useLocation} from 'react-router-dom';
-import {withAuthenticator} from '@aws-amplify/ui-react';
-import {styled} from '@mui/material/styles';
+import { useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { styled } from '@mui/material/styles';
 // ----------------------------------------------------------------------
 
 /**
@@ -26,7 +26,7 @@ const AuthGuard = ({ children, isPassedToWithAuthenticator, signOut, user }) => 
     return <Navigate to={requestedLocation} />;
   }
 
-  return children
+  return children;
 };
 
 /**

@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Image, Rating, Text } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Button, Flex, Image, Rating, Text } from '@aws-amplify/ui-react';
 export default function ActionCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function ActionCard(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "ActionCard")}
+      {...getOverrideProps(overrides, 'ActionCard')}
       {...rest}
     >
       <Image
@@ -36,7 +36,7 @@ export default function ActionCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
+        {...getOverrideProps(overrides, 'image')}
       ></Image>
       <Flex
         gap="16px"
@@ -49,7 +49,7 @@ export default function ActionCard(props) {
         alignSelf="stretch"
         position="relative"
         padding="16px 16px 16px 16px"
-        {...getOverrideProps(overrides, "Card Area")}
+        {...getOverrideProps(overrides, 'Card Area')}
       >
         <Flex
           gap="8px"
@@ -62,7 +62,7 @@ export default function ActionCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Main Text")}
+          {...getOverrideProps(overrides, 'Main Text')}
         >
           <Text
             fontFamily="Inter"
@@ -84,7 +84,7 @@ export default function ActionCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Classic Long Sleeve T-Shirt"
-            {...getOverrideProps(overrides, "Classic Long Sleeve T-Shirt")}
+            {...getOverrideProps(overrides, 'Classic Long Sleeve T-Shirt')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -107,15 +107,10 @@ export default function ActionCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Information about this product"
-            {...getOverrideProps(overrides, "Information about this product")}
+            {...getOverrideProps(overrides, 'Information about this product')}
           ></Text>
         </Flex>
-        <Rating
-          width="174px"
-          shrink="0"
-          size="default"
-          {...getOverrideProps(overrides, "Rating")}
-        ></Rating>
+        <Rating width="174px" shrink="0" size="default" {...getOverrideProps(overrides, 'Rating')}></Rating>
         <Text
           fontFamily="Inter"
           fontSize="20px"
@@ -136,7 +131,7 @@ export default function ActionCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="$99 USD"
-          {...getOverrideProps(overrides, "$99 USD")}
+          {...getOverrideProps(overrides, '$99 USD')}
         ></Text>
         <Button
           shrink="0"
@@ -145,7 +140,7 @@ export default function ActionCard(props) {
           isDisabled={false}
           variation="primary"
           children="Primary Button"
-          {...getOverrideProps(overrides, "Button")}
+          {...getOverrideProps(overrides, 'Button')}
         ></Button>
       </Flex>
     </Flex>

@@ -5,18 +5,11 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SelectField,
-  TextAreaField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { HealthReport } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, SelectField, TextAreaField, TextField } from '@aws-amplify/ui-react';
+import { HealthReport } from '../models';
+import { fetchByPath, getOverrideProps, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function HealthReportUpdateForm(props) {
   const {
     id: idProp,
@@ -30,35 +23,29 @@ export default function HealthReportUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    date: "",
-    cadence: "",
-    report: "",
+    date: '',
+    cadence: '',
+    report: ''
   };
   const [date, setDate] = React.useState(initialValues.date);
   const [cadence, setCadence] = React.useState(initialValues.cadence);
   const [report, setReport] = React.useState(initialValues.report);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = healthReportRecord
-      ? { ...initialValues, ...healthReportRecord }
-      : initialValues;
+    const cleanValues = healthReportRecord ? { ...initialValues, ...healthReportRecord } : initialValues;
     setDate(cleanValues.date);
     setCadence(cleanValues.cadence);
     setReport(
-      typeof cleanValues.report === "string" || cleanValues.report === null
+      typeof cleanValues.report === 'string' || cleanValues.report === null
         ? cleanValues.report
         : JSON.stringify(cleanValues.report)
     );
     setErrors({});
   };
-  const [healthReportRecord, setHealthReportRecord] = React.useState(
-    healthReportModelProp
-  );
+  const [healthReportRecord, setHealthReportRecord] = React.useState(healthReportModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(HealthReport, idProp)
-        : healthReportModelProp;
+      const record = idProp ? await DataStore.query(HealthReport, idProp) : healthReportModelProp;
       setHealthReportRecord(record);
     };
     queryData();
@@ -67,17 +54,10 @@ export default function HealthReportUpdateForm(props) {
   const validations = {
     date: [],
     cadence: [],
-    report: [{ type: "JSON" }],
+    report: [{ type: 'JSON' }]
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -87,15 +67,15 @@ export default function HealthReportUpdateForm(props) {
     return validationResponse;
   };
   const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
+    const df = new Intl.DateTimeFormat('default', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      calendar: 'iso8601',
+      numberingSystem: 'latn',
+      hourCycle: 'h23'
     });
     const parts = df.formatToParts(date).reduce((acc, part) => {
       acc[part.type] = part.value;
@@ -114,21 +94,15 @@ export default function HealthReportUpdateForm(props) {
         let modelFields = {
           date,
           cadence,
-          report,
+          report
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -140,7 +114,7 @@ export default function HealthReportUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -158,7 +132,7 @@ export default function HealthReportUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "HealthReportUpdateForm")}
+      {...getOverrideProps(overrides, 'HealthReportUpdateForm')}
       {...rest}
     >
       <TextField
@@ -168,26 +142,25 @@ export default function HealthReportUpdateForm(props) {
         type="datetime-local"
         value={date && convertToLocal(new Date(date))}
         onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          let value = e.target.value === '' ? '' : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
               date: value,
               cadence,
-              report,
+              report
             };
             const result = onChange(modelFields);
             value = result?.date ?? value;
           }
           if (errors.date?.hasError) {
-            runValidationTasks("date", value);
+            runValidationTasks('date', value);
           }
           setDate(value);
         }}
-        onBlur={() => runValidationTasks("date", date)}
+        onBlur={() => runValidationTasks('date', date)}
         errorMessage={errors.date?.errorMessage}
         hasError={errors.date?.hasError}
-        {...getOverrideProps(overrides, "date")}
+        {...getOverrideProps(overrides, 'date')}
       ></TextField>
       <SelectField
         label="Cadence"
@@ -200,41 +173,25 @@ export default function HealthReportUpdateForm(props) {
             const modelFields = {
               date,
               cadence: value,
-              report,
+              report
             };
             const result = onChange(modelFields);
             value = result?.cadence ?? value;
           }
           if (errors.cadence?.hasError) {
-            runValidationTasks("cadence", value);
+            runValidationTasks('cadence', value);
           }
           setCadence(value);
         }}
-        onBlur={() => runValidationTasks("cadence", cadence)}
+        onBlur={() => runValidationTasks('cadence', cadence)}
         errorMessage={errors.cadence?.errorMessage}
         hasError={errors.cadence?.hasError}
-        {...getOverrideProps(overrides, "cadence")}
+        {...getOverrideProps(overrides, 'cadence')}
       >
-        <option
-          children="Daily"
-          value="DAILY"
-          {...getOverrideProps(overrides, "cadenceoption0")}
-        ></option>
-        <option
-          children="Weekly"
-          value="WEEKLY"
-          {...getOverrideProps(overrides, "cadenceoption1")}
-        ></option>
-        <option
-          children="Monthly"
-          value="MONTHLY"
-          {...getOverrideProps(overrides, "cadenceoption2")}
-        ></option>
-        <option
-          children="Yearly"
-          value="YEARLY"
-          {...getOverrideProps(overrides, "cadenceoption3")}
-        ></option>
+        <option children="Daily" value="DAILY" {...getOverrideProps(overrides, 'cadenceoption0')}></option>
+        <option children="Weekly" value="WEEKLY" {...getOverrideProps(overrides, 'cadenceoption1')}></option>
+        <option children="Monthly" value="MONTHLY" {...getOverrideProps(overrides, 'cadenceoption2')}></option>
+        <option children="Yearly" value="YEARLY" {...getOverrideProps(overrides, 'cadenceoption3')}></option>
       </SelectField>
       <TextAreaField
         label="Report"
@@ -247,25 +204,22 @@ export default function HealthReportUpdateForm(props) {
             const modelFields = {
               date,
               cadence,
-              report: value,
+              report: value
             };
             const result = onChange(modelFields);
             value = result?.report ?? value;
           }
           if (errors.report?.hasError) {
-            runValidationTasks("report", value);
+            runValidationTasks('report', value);
           }
           setReport(value);
         }}
-        onBlur={() => runValidationTasks("report", report)}
+        onBlur={() => runValidationTasks('report', report)}
         errorMessage={errors.report?.errorMessage}
         hasError={errors.report?.hasError}
-        {...getOverrideProps(overrides, "report")}
+        {...getOverrideProps(overrides, 'report')}
       ></TextAreaField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -274,21 +228,15 @@ export default function HealthReportUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || healthReportModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || healthReportModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || healthReportModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

@@ -1,34 +1,33 @@
-import {handleCompletion} from "../../../utils/openai/functions/generate";
-import {JournalEntry} from "../../../models";
+import { handleCompletion } from '../../../utils/openai/functions/generate';
+import { JournalEntry } from '../../../models';
 
-export const handleJournalEntryCompletion = async (
-    {
-      thoughts,
-      cadence = JournalEntry.DAILY || "DAILY",
-      journalEntry,
-      tone = "neutral, factual",
-        date,
-    }) => {
-  console.log('handling journal entry completion')
+export const handleJournalEntryCompletion = async ({
+  thoughts,
+  cadence = JournalEntry.DAILY || 'DAILY',
+  journalEntry,
+  tone = 'neutral, factual',
+  date
+}) => {
+  console.log('handling journal entry completion');
 
   let prompt;
 
   const monthlyPrompt = `
     This is a monthly journal entry for the month of: ${date}. Write it as if you are summarizing your thoughts for the month.
-  `
+  `;
 
-    const weeklyPrompt = `
+  const weeklyPrompt = `
     This is a weekly journal entry for the week of: ${date}. Write it as if you are summarizing your thoughts for the week.
     
-    `
+    `;
 
-    const dailyPrompt = `
+  const dailyPrompt = `
     This is a daily journal entry for the day of: ${date}. Write it as if you are summarizing your thoughts for the day.
-    `
+    `;
 
   const annualPrompt = `
     This is an annual journal entry for the year of: ${date}. Write it as if you are summarizing your thoughts for the year.
-  `
+  `;
 
   const getCadencePrompt = (cadence) => {
     switch (cadence) {
@@ -43,7 +42,7 @@ export const handleJournalEntryCompletion = async (
       default:
         return dailyPrompt;
     }
-  }
+  };
 
   if (journalEntry) {
     prompt = `
@@ -57,8 +56,7 @@ export const handleJournalEntryCompletion = async (
         .map((thought) => {
           return thought?.extract?.summary || thought?.input;
         })
-        .join('\n')
-      }
+        .join('\n')}
       
       Tone: ${tone}
       
@@ -66,18 +64,17 @@ export const handleJournalEntryCompletion = async (
       
       Journal Entry:
       
-    `
-  }
-  else {
+    `;
+  } else {
     prompt = `
     ${getCadencePrompt(cadence)}
     Generate a ${cadence} journal entry which summarizes the following thoughts:
     
     ${thoughts
-    .map((thought) => {
-      return thought?.extract?.summary || thought?.input;
-    })
-    .join('\n')}
+      .map((thought) => {
+        return thought?.extract?.summary || thought?.input;
+      })
+      .join('\n')}
     
     Tone: ${tone}
     
@@ -92,8 +89,8 @@ export const handleJournalEntryCompletion = async (
     [JournalEntry.DAILY]: 101,
     [JournalEntry.WEEKLY]: 102,
     [JournalEntry.MONTHLY]: 103,
-    [JournalEntry.YEARLY]: 104,
-  }
+    [JournalEntry.YEARLY]: 104
+  };
 
   const completion = await handleCompletion({
     prompt,
@@ -102,4 +99,4 @@ export const handleJournalEntryCompletion = async (
   });
 
   return completion;
-}
+};

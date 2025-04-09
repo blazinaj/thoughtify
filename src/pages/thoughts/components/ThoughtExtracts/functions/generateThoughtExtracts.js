@@ -8,12 +8,10 @@
  * @param {string[]} [attributes] - optional array of attributes to pull out of the extract
  * @returns {Promise<{}>}
  */
-export const generateThoughtExtracts = async (
-  {
-    thoughts,
-    attributes = ['emotions', 'people', 'projects', 'categories', 'reminders', 'questions'],
-  }) => {
-
+export const generateThoughtExtracts = async ({
+  thoughts,
+  attributes = ['emotions', 'people', 'projects', 'categories', 'reminders', 'questions']
+}) => {
   if (!thoughts) {
     return {};
   }

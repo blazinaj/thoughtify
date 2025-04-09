@@ -1,7 +1,7 @@
-import {createJournalTimeline} from "./createJournalTimeline";
-import {handleCompletion} from "../../../utils/openai/functions/generate";
+import { createJournalTimeline } from './createJournalTimeline';
+import { handleCompletion } from '../../../utils/openai/functions/generate';
 
-export const generateJournalEntry = async ({thoughts, journalEntry}) => {
+export const generateJournalEntry = async ({ thoughts, journalEntry }) => {
   // for each grouping of thoughts, use completion to create a 'Journal Entry'
   const fetchJournal = async () => {
     const timeline = await createJournalTimeline('day');
@@ -14,10 +14,10 @@ export const generateJournalEntry = async ({thoughts, journalEntry}) => {
         Generate a journal entry using the following thoughts:
         
         ${thoughts
-      .map((thought) => {
-        return thought?.extract?.summary || thought?.input;
-      })
-      .join('\n')}
+          .map((thought) => {
+            return thought?.extract?.summary || thought?.input;
+          })
+          .join('\n')}
       `;
       const completion = await handleCompletion({
         prompt,
@@ -35,4 +35,4 @@ export const generateJournalEntry = async ({thoughts, journalEntry}) => {
   };
 
   return await fetchJournal();
-}
+};

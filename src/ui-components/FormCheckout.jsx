@@ -5,17 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Badge,
-  Button,
-  Divider,
-  Flex,
-  Text,
-  TextField,
-} from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Badge, Button, Divider, Flex, Text, TextField } from '@aws-amplify/ui-react';
+import MyIcon from './MyIcon';
 export default function FormCheckout(props) {
   const { overrides, ...rest } = props;
   return (
@@ -28,7 +21,7 @@ export default function FormCheckout(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "FormCheckout")}
+      {...getOverrideProps(overrides, 'FormCheckout')}
       {...rest}
     >
       <Flex
@@ -44,7 +37,7 @@ export default function FormCheckout(props) {
         position="relative"
         padding="32px 0px 32px 0px"
         backgroundColor="rgba(255,255,255,1)"
-        {...getOverrideProps(overrides, "Frame 411")}
+        {...getOverrideProps(overrides, 'Frame 411')}
       >
         <Flex
           gap="32px"
@@ -58,7 +51,7 @@ export default function FormCheckout(props) {
           basis="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 31329767006")}
+          {...getOverrideProps(overrides, 'Frame 31329767006')}
         >
           <Flex
             gap="24px"
@@ -71,7 +64,7 @@ export default function FormCheckout(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 32px 0px 32px"
-            {...getOverrideProps(overrides, "Frame 406")}
+            {...getOverrideProps(overrides, 'Frame 406')}
           >
             <Text
               fontFamily="Inter"
@@ -92,7 +85,7 @@ export default function FormCheckout(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Info"
-              {...getOverrideProps(overrides, "Info")}
+              {...getOverrideProps(overrides, 'Info')}
             ></Text>
             <TextField
               label="Name"
@@ -104,7 +97,7 @@ export default function FormCheckout(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              {...getOverrideProps(overrides, "TextField29767009")}
+              {...getOverrideProps(overrides, 'TextField29767009')}
             ></TextField>
             <TextField
               label="Title"
@@ -116,7 +109,7 @@ export default function FormCheckout(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              {...getOverrideProps(overrides, "TextField29767010")}
+              {...getOverrideProps(overrides, 'TextField29767010')}
             ></TextField>
           </Flex>
           <Divider
@@ -125,7 +118,7 @@ export default function FormCheckout(props) {
             alignSelf="stretch"
             size="small"
             orientation="horizontal"
-            {...getOverrideProps(overrides, "Divider29767011")}
+            {...getOverrideProps(overrides, 'Divider29767011')}
           ></Divider>
           <Flex
             gap="24px"
@@ -138,7 +131,7 @@ export default function FormCheckout(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 32px 0px 32px"
-            {...getOverrideProps(overrides, "Frame 409")}
+            {...getOverrideProps(overrides, 'Frame 409')}
           >
             <Text
               fontFamily="Inter"
@@ -159,7 +152,7 @@ export default function FormCheckout(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Shipping"
-              {...getOverrideProps(overrides, "Shipping29767013")}
+              {...getOverrideProps(overrides, 'Shipping29767013')}
             ></Text>
             <TextField
               label="Street address"
@@ -171,7 +164,7 @@ export default function FormCheckout(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              {...getOverrideProps(overrides, "TextField29767014")}
+              {...getOverrideProps(overrides, 'TextField29767014')}
             ></TextField>
             <TextField
               label="Zip code"
@@ -183,7 +176,7 @@ export default function FormCheckout(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              {...getOverrideProps(overrides, "TextField29767015")}
+              {...getOverrideProps(overrides, 'TextField29767015')}
             ></TextField>
             <TextField
               label="Country"
@@ -195,7 +188,7 @@ export default function FormCheckout(props) {
               isDisabled={false}
               labelHidden={false}
               variation="default"
-              {...getOverrideProps(overrides, "TextField29792893")}
+              {...getOverrideProps(overrides, 'TextField29792893')}
             ></TextField>
           </Flex>
         </Flex>
@@ -211,7 +204,7 @@ export default function FormCheckout(props) {
         position="relative"
         padding="24px 24px 24px 24px"
         backgroundColor="rgba(255,255,255,1)"
-        {...getOverrideProps(overrides, "Frame 412")}
+        {...getOverrideProps(overrides, 'Frame 412')}
       >
         <Badge
           shrink="0"
@@ -219,7 +212,7 @@ export default function FormCheckout(props) {
           size="default"
           variation="success"
           children="Discount - 10% off"
-          {...getOverrideProps(overrides, "Badge")}
+          {...getOverrideProps(overrides, 'Badge')}
         ></Badge>
         <Flex
           gap="128px"
@@ -232,7 +225,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 31329767067")}
+          {...getOverrideProps(overrides, 'Frame 31329767067')}
         >
           <MyIcon
             width="24px"
@@ -246,7 +239,7 @@ export default function FormCheckout(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             type="shopping_bag"
-            {...getOverrideProps(overrides, "MyIcon")}
+            {...getOverrideProps(overrides, 'MyIcon')}
           ></MyIcon>
           <Text
             fontFamily="Inter"
@@ -267,7 +260,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Cart (2)"
-            {...getOverrideProps(overrides, "Cart (2)")}
+            {...getOverrideProps(overrides, 'Cart (2)')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -288,7 +281,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$101.70"
-            {...getOverrideProps(overrides, "$101.70")}
+            {...getOverrideProps(overrides, '$101.70')}
           ></Text>
         </Flex>
         <Divider
@@ -297,7 +290,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29767040")}
+          {...getOverrideProps(overrides, 'Divider29767040')}
         ></Divider>
         <Flex
           gap="262px"
@@ -310,7 +303,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 316")}
+          {...getOverrideProps(overrides, 'Frame 316')}
         >
           <Text
             fontFamily="Inter"
@@ -332,7 +325,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Subtotal"
-            {...getOverrideProps(overrides, "Subtotal")}
+            {...getOverrideProps(overrides, 'Subtotal')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -354,7 +347,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$320.00"
-            {...getOverrideProps(overrides, "$320.00")}
+            {...getOverrideProps(overrides, '$320.00')}
           ></Text>
         </Flex>
         <Flex
@@ -368,7 +361,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 317")}
+          {...getOverrideProps(overrides, 'Frame 317')}
         >
           <Text
             fontFamily="Inter"
@@ -390,7 +383,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Shipping"
-            {...getOverrideProps(overrides, "Shipping29767056")}
+            {...getOverrideProps(overrides, 'Shipping29767056')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -412,7 +405,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$15.00"
-            {...getOverrideProps(overrides, "$15.00")}
+            {...getOverrideProps(overrides, '$15.00')}
           ></Text>
         </Flex>
         <Flex
@@ -426,7 +419,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 318")}
+          {...getOverrideProps(overrides, 'Frame 318')}
         >
           <Text
             fontFamily="Inter"
@@ -448,7 +441,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Taxes"
-            {...getOverrideProps(overrides, "Taxes")}
+            {...getOverrideProps(overrides, 'Taxes')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -470,7 +463,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$26.80"
-            {...getOverrideProps(overrides, "$26.80")}
+            {...getOverrideProps(overrides, '$26.80')}
           ></Text>
         </Flex>
         <Divider
@@ -479,7 +472,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29767061")}
+          {...getOverrideProps(overrides, 'Divider29767061')}
         ></Divider>
         <Flex
           gap="290px"
@@ -492,7 +485,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 319")}
+          {...getOverrideProps(overrides, 'Frame 319')}
         >
           <Text
             fontFamily="Inter"
@@ -513,7 +506,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Total"
-            {...getOverrideProps(overrides, "Total")}
+            {...getOverrideProps(overrides, 'Total')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -534,7 +527,7 @@ export default function FormCheckout(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$361.80"
-            {...getOverrideProps(overrides, "$361.80")}
+            {...getOverrideProps(overrides, '$361.80')}
           ></Text>
         </Flex>
         <Divider
@@ -543,7 +536,7 @@ export default function FormCheckout(props) {
           alignSelf="stretch"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29767065")}
+          {...getOverrideProps(overrides, 'Divider29767065')}
         ></Divider>
         <Button
           shrink="0"
@@ -552,7 +545,7 @@ export default function FormCheckout(props) {
           isDisabled={false}
           variation="primary"
           children="Place Order"
-          {...getOverrideProps(overrides, "Button")}
+          {...getOverrideProps(overrides, 'Button')}
         ></Button>
       </Flex>
     </Flex>

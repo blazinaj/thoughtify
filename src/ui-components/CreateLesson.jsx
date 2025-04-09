@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -19,12 +19,9 @@ import {
   Text,
   TextAreaField,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
 import {
   Lesson,
   Tutor as Tutor0,
@@ -36,10 +33,10 @@ import {
   LessonCategory,
   LessonPlan,
   LessonLessonLabel,
-  LessonLessonCategory,
-} from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  LessonLessonCategory
+} from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -53,15 +50,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -77,12 +74,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -97,18 +89,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -119,17 +110,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -187,7 +178,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -196,47 +187,34 @@ function ArrayField({
   );
 }
 export default function CreateLesson(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    name: "",
-    description: "",
-    updoot: "",
-    downdoot: "",
-    price: "",
+    name: '',
+    description: '',
+    updoot: '',
+    downdoot: '',
+    price: '',
     learningObjectives: [],
     images: [],
-    owner: "",
-    visibility: "",
+    owner: '',
+    visibility: '',
     Tutor: undefined,
-    job: "",
+    job: '',
     course: undefined,
-    teacherID: "",
+    teacherID: '',
     lessonplanID: undefined,
     LessonReviews: [],
     LessonNodes: [],
     Enrollments: [],
     LessonLabels: [],
-    LessonCategories: [],
+    LessonCategories: []
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [description, setDescription] = React.useState(
-    initialValues.description
-  );
+  const [description, setDescription] = React.useState(initialValues.description);
   const [updoot, setUpdoot] = React.useState(initialValues.updoot);
   const [downdoot, setDowndoot] = React.useState(initialValues.downdoot);
   const [price, setPrice] = React.useState(initialValues.price);
-  const [learningObjectives, setLearningObjectives] = React.useState(
-    initialValues.learningObjectives
-  );
+  const [learningObjectives, setLearningObjectives] = React.useState(initialValues.learningObjectives);
   const [images, setImages] = React.useState(initialValues.images);
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [visibility, setVisibility] = React.useState(initialValues.visibility);
@@ -244,24 +222,12 @@ export default function CreateLesson(props) {
   const [job, setJob] = React.useState(initialValues.job);
   const [course, setCourse] = React.useState(initialValues.course);
   const [teacherID, setTeacherID] = React.useState(initialValues.teacherID);
-  const [lessonplanID, setLessonplanID] = React.useState(
-    initialValues.lessonplanID
-  );
-  const [LessonReviews, setLessonReviews] = React.useState(
-    initialValues.LessonReviews
-  );
-  const [LessonNodes, setLessonNodes] = React.useState(
-    initialValues.LessonNodes
-  );
-  const [Enrollments, setEnrollments] = React.useState(
-    initialValues.Enrollments
-  );
-  const [LessonLabels, setLessonLabels] = React.useState(
-    initialValues.LessonLabels
-  );
-  const [LessonCategories, setLessonCategories] = React.useState(
-    initialValues.LessonCategories
-  );
+  const [lessonplanID, setLessonplanID] = React.useState(initialValues.lessonplanID);
+  const [LessonReviews, setLessonReviews] = React.useState(initialValues.LessonReviews);
+  const [LessonNodes, setLessonNodes] = React.useState(initialValues.LessonNodes);
+  const [Enrollments, setEnrollments] = React.useState(initialValues.Enrollments);
+  const [LessonLabels, setLessonLabels] = React.useState(initialValues.LessonLabels);
+  const [LessonCategories, setLessonCategories] = React.useState(initialValues.LessonCategories);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
@@ -270,85 +236,66 @@ export default function CreateLesson(props) {
     setDowndoot(initialValues.downdoot);
     setPrice(initialValues.price);
     setLearningObjectives(initialValues.learningObjectives);
-    setCurrentLearningObjectivesValue("");
+    setCurrentLearningObjectivesValue('');
     setImages(initialValues.images);
-    setCurrentImagesValue("");
+    setCurrentImagesValue('');
     setOwner(initialValues.owner);
     setVisibility(initialValues.visibility);
     setTutor(initialValues.Tutor);
     setCurrentTutorValue(undefined);
-    setCurrentTutorDisplayValue("");
+    setCurrentTutorDisplayValue('');
     setJob(initialValues.job);
     setCourse(initialValues.course);
     setCurrentCourseValue(undefined);
-    setCurrentCourseDisplayValue("");
+    setCurrentCourseDisplayValue('');
     setTeacherID(initialValues.teacherID);
     setLessonplanID(initialValues.lessonplanID);
     setCurrentLessonplanIDValue(undefined);
-    setCurrentLessonplanIDDisplayValue("");
+    setCurrentLessonplanIDDisplayValue('');
     setLessonReviews(initialValues.LessonReviews);
     setCurrentLessonReviewsValue(undefined);
-    setCurrentLessonReviewsDisplayValue("");
+    setCurrentLessonReviewsDisplayValue('');
     setLessonNodes(initialValues.LessonNodes);
     setCurrentLessonNodesValue(undefined);
-    setCurrentLessonNodesDisplayValue("");
+    setCurrentLessonNodesDisplayValue('');
     setEnrollments(initialValues.Enrollments);
     setCurrentEnrollmentsValue(undefined);
-    setCurrentEnrollmentsDisplayValue("");
+    setCurrentEnrollmentsDisplayValue('');
     setLessonLabels(initialValues.LessonLabels);
     setCurrentLessonLabelsValue(undefined);
-    setCurrentLessonLabelsDisplayValue("");
+    setCurrentLessonLabelsDisplayValue('');
     setLessonCategories(initialValues.LessonCategories);
     setCurrentLessonCategoriesValue(undefined);
-    setCurrentLessonCategoriesDisplayValue("");
+    setCurrentLessonCategoriesDisplayValue('');
     setErrors({});
   };
-  const [currentLearningObjectivesValue, setCurrentLearningObjectivesValue] =
-    React.useState("");
+  const [currentLearningObjectivesValue, setCurrentLearningObjectivesValue] = React.useState('');
   const learningObjectivesRef = React.createRef();
-  const [currentImagesValue, setCurrentImagesValue] = React.useState("");
+  const [currentImagesValue, setCurrentImagesValue] = React.useState('');
   const imagesRef = React.createRef();
-  const [currentTutorDisplayValue, setCurrentTutorDisplayValue] =
-    React.useState("");
+  const [currentTutorDisplayValue, setCurrentTutorDisplayValue] = React.useState('');
   const [currentTutorValue, setCurrentTutorValue] = React.useState(undefined);
   const TutorRef = React.createRef();
-  const [currentCourseDisplayValue, setCurrentCourseDisplayValue] =
-    React.useState("");
+  const [currentCourseDisplayValue, setCurrentCourseDisplayValue] = React.useState('');
   const [currentCourseValue, setCurrentCourseValue] = React.useState(undefined);
   const courseRef = React.createRef();
-  const [currentLessonplanIDDisplayValue, setCurrentLessonplanIDDisplayValue] =
-    React.useState("");
-  const [currentLessonplanIDValue, setCurrentLessonplanIDValue] =
-    React.useState(undefined);
+  const [currentLessonplanIDDisplayValue, setCurrentLessonplanIDDisplayValue] = React.useState('');
+  const [currentLessonplanIDValue, setCurrentLessonplanIDValue] = React.useState(undefined);
   const lessonplanIDRef = React.createRef();
-  const [
-    currentLessonReviewsDisplayValue,
-    setCurrentLessonReviewsDisplayValue,
-  ] = React.useState("");
-  const [currentLessonReviewsValue, setCurrentLessonReviewsValue] =
-    React.useState(undefined);
+  const [currentLessonReviewsDisplayValue, setCurrentLessonReviewsDisplayValue] = React.useState('');
+  const [currentLessonReviewsValue, setCurrentLessonReviewsValue] = React.useState(undefined);
   const LessonReviewsRef = React.createRef();
-  const [currentLessonNodesDisplayValue, setCurrentLessonNodesDisplayValue] =
-    React.useState("");
-  const [currentLessonNodesValue, setCurrentLessonNodesValue] =
-    React.useState(undefined);
+  const [currentLessonNodesDisplayValue, setCurrentLessonNodesDisplayValue] = React.useState('');
+  const [currentLessonNodesValue, setCurrentLessonNodesValue] = React.useState(undefined);
   const LessonNodesRef = React.createRef();
-  const [currentEnrollmentsDisplayValue, setCurrentEnrollmentsDisplayValue] =
-    React.useState("");
-  const [currentEnrollmentsValue, setCurrentEnrollmentsValue] =
-    React.useState(undefined);
+  const [currentEnrollmentsDisplayValue, setCurrentEnrollmentsDisplayValue] = React.useState('');
+  const [currentEnrollmentsValue, setCurrentEnrollmentsValue] = React.useState(undefined);
   const EnrollmentsRef = React.createRef();
-  const [currentLessonLabelsDisplayValue, setCurrentLessonLabelsDisplayValue] =
-    React.useState("");
-  const [currentLessonLabelsValue, setCurrentLessonLabelsValue] =
-    React.useState(undefined);
+  const [currentLessonLabelsDisplayValue, setCurrentLessonLabelsDisplayValue] = React.useState('');
+  const [currentLessonLabelsValue, setCurrentLessonLabelsValue] = React.useState(undefined);
   const LessonLabelsRef = React.createRef();
-  const [
-    currentLessonCategoriesDisplayValue,
-    setCurrentLessonCategoriesDisplayValue,
-  ] = React.useState("");
-  const [currentLessonCategoriesValue, setCurrentLessonCategoriesValue] =
-    React.useState(undefined);
+  const [currentLessonCategoriesDisplayValue, setCurrentLessonCategoriesDisplayValue] = React.useState('');
+  const [currentLessonCategoriesValue, setCurrentLessonCategoriesValue] = React.useState(undefined);
   const LessonCategoriesRef = React.createRef();
   const getIDValue = {
     Tutor: (r) => JSON.stringify({ id: r?.id }),
@@ -357,17 +304,13 @@ export default function CreateLesson(props) {
     LessonNodes: (r) => JSON.stringify({ id: r?.id }),
     Enrollments: (r) => JSON.stringify({ id: r?.id }),
     LessonLabels: (r) => JSON.stringify({ id: r?.id }),
-    LessonCategories: (r) => JSON.stringify({ id: r?.id }),
+    LessonCategories: (r) => JSON.stringify({ id: r?.id })
   };
   const TutorIdSet = new Set(
-    Array.isArray(Tutor)
-      ? Tutor.map((r) => getIDValue.Tutor?.(r))
-      : getIDValue.Tutor?.(Tutor)
+    Array.isArray(Tutor) ? Tutor.map((r) => getIDValue.Tutor?.(r)) : getIDValue.Tutor?.(Tutor)
   );
   const courseIdSet = new Set(
-    Array.isArray(course)
-      ? course.map((r) => getIDValue.course?.(r))
-      : getIDValue.course?.(course)
+    Array.isArray(course) ? course.map((r) => getIDValue.course?.(r)) : getIDValue.course?.(course)
   );
   const LessonReviewsIdSet = new Set(
     Array.isArray(LessonReviews)
@@ -395,59 +338,59 @@ export default function CreateLesson(props) {
       : getIDValue.LessonCategories?.(LessonCategories)
   );
   const tutorRecords = useDataStoreBinding({
-    type: "collection",
-    model: Tutor0,
+    type: 'collection',
+    model: Tutor0
   }).items;
   const courseRecords = useDataStoreBinding({
-    type: "collection",
-    model: Course,
+    type: 'collection',
+    model: Course
   }).items;
   const lessonPlanRecords = useDataStoreBinding({
-    type: "collection",
-    model: LessonPlan,
+    type: 'collection',
+    model: LessonPlan
   }).items;
   const lessonReviewRecords = useDataStoreBinding({
-    type: "collection",
-    model: LessonReview,
+    type: 'collection',
+    model: LessonReview
   }).items;
   const lessonNodeRecords = useDataStoreBinding({
-    type: "collection",
-    model: LessonNode,
+    type: 'collection',
+    model: LessonNode
   }).items;
   const enrollmentRecords = useDataStoreBinding({
-    type: "collection",
-    model: Enrollment,
+    type: 'collection',
+    model: Enrollment
   }).items;
   const lessonLabelRecords = useDataStoreBinding({
-    type: "collection",
-    model: LessonLabel,
+    type: 'collection',
+    model: LessonLabel
   }).items;
   const lessonCategoryRecords = useDataStoreBinding({
-    type: "collection",
-    model: LessonCategory,
+    type: 'collection',
+    model: LessonCategory
   }).items;
   const getDisplayValue = {
-    Tutor: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
-    course: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
-    lessonplanID: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    LessonReviews: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
-    LessonNodes: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
-    Enrollments: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
-    LessonLabels: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    LessonCategories: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
+    Tutor: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`,
+    course: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`,
+    lessonplanID: (r) => `${r?.name ? r?.name + ' - ' : ''}${r?.id}`,
+    LessonReviews: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`,
+    LessonNodes: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`,
+    Enrollments: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`,
+    LessonLabels: (r) => `${r?.name ? r?.name + ' - ' : ''}${r?.id}`,
+    LessonCategories: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`
   };
   const validations = {
-    name: [{ type: "Required" }],
+    name: [{ type: 'Required' }],
     description: [],
     updoot: [],
     downdoot: [],
     price: [],
-    learningObjectives: [{ type: "JSON" }],
-    images: [{ type: "JSON" }],
+    learningObjectives: [{ type: 'JSON' }],
+    images: [{ type: 'JSON' }],
     owner: [],
     visibility: [],
     Tutor: [],
-    job: [{ type: "JSON" }],
+    job: [{ type: 'JSON' }],
     course: [],
     teacherID: [],
     lessonplanID: [],
@@ -455,17 +398,10 @@ export default function CreateLesson(props) {
     LessonNodes: [],
     Enrollments: [],
     LessonLabels: [],
-    LessonCategories: [],
+    LessonCategories: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -501,29 +437,17 @@ export default function CreateLesson(props) {
           LessonNodes,
           Enrollments,
           LessonLabels,
-          LessonCategories,
+          LessonCategories
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(
-                    fieldName,
-                    item,
-                    getDisplayValue[fieldName]
-                  )
-                )
+                ...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item, getDisplayValue[fieldName]))
               );
               return promises;
             }
-            promises.push(
-              runValidationTasks(
-                fieldName,
-                modelFields[fieldName],
-                getDisplayValue[fieldName]
-              )
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName], getDisplayValue[fieldName]));
             return promises;
           }, [])
         );
@@ -535,7 +459,7 @@ export default function CreateLesson(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -551,13 +475,9 @@ export default function CreateLesson(props) {
             course: modelFields.course,
             teacherID: modelFields.teacherID,
             lessonplanID: modelFields.lessonplanID,
-            learningObjectives: modelFields.learningObjectives.map((s) =>
-              JSON.parse(s)
-            ),
+            learningObjectives: modelFields.learningObjectives.map((s) => JSON.parse(s)),
             images: modelFields.images.map((s) => JSON.parse(s)),
-            job: modelFields.job
-              ? JSON.parse(modelFields.job)
-              : modelFields.job,
+            job: modelFields.job ? JSON.parse(modelFields.job) : modelFields.job
           };
           const lesson = await DataStore.save(new Lesson(modelFieldsToSave));
           const promises = [];
@@ -603,7 +523,7 @@ export default function CreateLesson(props) {
                 DataStore.save(
                   new LessonLessonLabel({
                     lesson,
-                    lessonLabel,
+                    lessonLabel
                   })
                 )
               );
@@ -616,7 +536,7 @@ export default function CreateLesson(props) {
                 DataStore.save(
                   new LessonLessonCategory({
                     lesson,
-                    lessonCategory,
+                    lessonCategory
                   })
                 )
               );
@@ -636,7 +556,7 @@ export default function CreateLesson(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "CreateLesson")}
+      {...getOverrideProps(overrides, 'CreateLesson')}
       {...rest}
     >
       <TextField
@@ -666,20 +586,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
           }
           if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+            runValidationTasks('name', value);
           }
           setName(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
+        onBlur={() => runValidationTasks('name', name)}
         errorMessage={errors.name?.errorMessage}
         hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
+        {...getOverrideProps(overrides, 'name')}
       ></TextField>
       <TextField
         label="Description"
@@ -708,20 +628,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
           }
           if (errors.description?.hasError) {
-            runValidationTasks("description", value);
+            runValidationTasks('description', value);
           }
           setDescription(value);
         }}
-        onBlur={() => runValidationTasks("description", description)}
+        onBlur={() => runValidationTasks('description', description)}
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
-        {...getOverrideProps(overrides, "description")}
+        {...getOverrideProps(overrides, 'description')}
       ></TextField>
       <TextField
         label="Updoot"
@@ -731,9 +651,7 @@ export default function CreateLesson(props) {
         step="any"
         value={updoot}
         onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
+          let value = isNaN(parseInt(e.target.value)) ? e.target.value : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
               name,
@@ -754,20 +672,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.updoot ?? value;
           }
           if (errors.updoot?.hasError) {
-            runValidationTasks("updoot", value);
+            runValidationTasks('updoot', value);
           }
           setUpdoot(value);
         }}
-        onBlur={() => runValidationTasks("updoot", updoot)}
+        onBlur={() => runValidationTasks('updoot', updoot)}
         errorMessage={errors.updoot?.errorMessage}
         hasError={errors.updoot?.hasError}
-        {...getOverrideProps(overrides, "updoot")}
+        {...getOverrideProps(overrides, 'updoot')}
       ></TextField>
       <TextField
         label="Downdoot"
@@ -777,9 +695,7 @@ export default function CreateLesson(props) {
         step="any"
         value={downdoot}
         onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
+          let value = isNaN(parseInt(e.target.value)) ? e.target.value : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
               name,
@@ -800,20 +716,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.downdoot ?? value;
           }
           if (errors.downdoot?.hasError) {
-            runValidationTasks("downdoot", value);
+            runValidationTasks('downdoot', value);
           }
           setDowndoot(value);
         }}
-        onBlur={() => runValidationTasks("downdoot", downdoot)}
+        onBlur={() => runValidationTasks('downdoot', downdoot)}
         errorMessage={errors.downdoot?.errorMessage}
         hasError={errors.downdoot?.hasError}
-        {...getOverrideProps(overrides, "downdoot")}
+        {...getOverrideProps(overrides, 'downdoot')}
       ></TextField>
       <TextField
         label="Price"
@@ -823,9 +739,7 @@ export default function CreateLesson(props) {
         step="any"
         value={price}
         onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
+          let value = isNaN(parseFloat(e.target.value)) ? e.target.value : parseFloat(e.target.value);
           if (onChange) {
             const modelFields = {
               name,
@@ -846,20 +760,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.price ?? value;
           }
           if (errors.price?.hasError) {
-            runValidationTasks("price", value);
+            runValidationTasks('price', value);
           }
           setPrice(value);
         }}
-        onBlur={() => runValidationTasks("price", price)}
+        onBlur={() => runValidationTasks('price', price)}
         errorMessage={errors.price?.errorMessage}
         hasError={errors.price?.hasError}
-        {...getOverrideProps(overrides, "price")}
+        {...getOverrideProps(overrides, 'price')}
       ></TextField>
       <ArrayField
         onChange={async (items) => {
@@ -884,28 +798,23 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             values = result?.learningObjectives ?? values;
           }
           setLearningObjectives(values);
-          setCurrentLearningObjectivesValue("");
+          setCurrentLearningObjectivesValue('');
         }}
         currentFieldValue={currentLearningObjectivesValue}
-        label={"Learning objectives"}
+        label={'Learning objectives'}
         items={learningObjectives}
         hasError={errors?.learningObjectives?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks(
-            "learningObjectives",
-            currentLearningObjectivesValue
-          )
-        }
+        runValidationTasks={async () => await runValidationTasks('learningObjectives', currentLearningObjectivesValue)}
         errorMessage={errors?.learningObjectives?.errorMessage}
         setFieldValue={setCurrentLearningObjectivesValue}
         inputFieldRef={learningObjectivesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <TextAreaField
           label="Learning objectives"
@@ -915,21 +824,16 @@ export default function CreateLesson(props) {
           onChange={(e) => {
             let { value } = e.target;
             if (errors.learningObjectives?.hasError) {
-              runValidationTasks("learningObjectives", value);
+              runValidationTasks('learningObjectives', value);
             }
             setCurrentLearningObjectivesValue(value);
           }}
-          onBlur={() =>
-            runValidationTasks(
-              "learningObjectives",
-              currentLearningObjectivesValue
-            )
-          }
+          onBlur={() => runValidationTasks('learningObjectives', currentLearningObjectivesValue)}
           errorMessage={errors.learningObjectives?.errorMessage}
           hasError={errors.learningObjectives?.hasError}
           ref={learningObjectivesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "learningObjectives")}
+          {...getOverrideProps(overrides, 'learningObjectives')}
         ></TextAreaField>
       </ArrayField>
       <ArrayField
@@ -955,25 +859,23 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             values = result?.images ?? values;
           }
           setImages(values);
-          setCurrentImagesValue("");
+          setCurrentImagesValue('');
         }}
         currentFieldValue={currentImagesValue}
-        label={"Images"}
+        label={'Images'}
         items={images}
         hasError={errors?.images?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("images", currentImagesValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('images', currentImagesValue)}
         errorMessage={errors?.images?.errorMessage}
         setFieldValue={setCurrentImagesValue}
         inputFieldRef={imagesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <TextAreaField
           label="Images"
@@ -983,16 +885,16 @@ export default function CreateLesson(props) {
           onChange={(e) => {
             let { value } = e.target;
             if (errors.images?.hasError) {
-              runValidationTasks("images", value);
+              runValidationTasks('images', value);
             }
             setCurrentImagesValue(value);
           }}
-          onBlur={() => runValidationTasks("images", currentImagesValue)}
+          onBlur={() => runValidationTasks('images', currentImagesValue)}
           errorMessage={errors.images?.errorMessage}
           hasError={errors.images?.hasError}
           ref={imagesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "images")}
+          {...getOverrideProps(overrides, 'images')}
         ></TextAreaField>
       </ArrayField>
       <TextField
@@ -1022,20 +924,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
       <SelectField
         label="Visibility"
@@ -1064,31 +966,23 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.visibility ?? value;
           }
           if (errors.visibility?.hasError) {
-            runValidationTasks("visibility", value);
+            runValidationTasks('visibility', value);
           }
           setVisibility(value);
         }}
-        onBlur={() => runValidationTasks("visibility", visibility)}
+        onBlur={() => runValidationTasks('visibility', visibility)}
         errorMessage={errors.visibility?.errorMessage}
         hasError={errors.visibility?.hasError}
-        {...getOverrideProps(overrides, "visibility")}
+        {...getOverrideProps(overrides, 'visibility')}
       >
-        <option
-          children="Public"
-          value="public"
-          {...getOverrideProps(overrides, "visibilityoption0")}
-        ></option>
-        <option
-          children="Private"
-          value="private"
-          {...getOverrideProps(overrides, "visibilityoption1")}
-        ></option>
+        <option children="Public" value="public" {...getOverrideProps(overrides, 'visibilityoption0')}></option>
+        <option children="Private" value="private" {...getOverrideProps(overrides, 'visibilityoption1')}></option>
       </SelectField>
       <ArrayField
         lengthLimit={1}
@@ -1114,32 +1008,28 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.Tutor ?? value;
           }
           setTutor(value);
           setCurrentTutorValue(undefined);
-          setCurrentTutorDisplayValue("");
+          setCurrentTutorDisplayValue('');
         }}
         currentFieldValue={currentTutorValue}
-        label={"Tutor"}
+        label={'Tutor'}
         items={Tutor ? [Tutor] : []}
         hasError={errors?.Tutor?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("Tutor", currentTutorValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('Tutor', currentTutorValue)}
         errorMessage={errors?.Tutor?.errorMessage}
         getBadgeText={getDisplayValue.Tutor}
         setFieldValue={(model) => {
-          setCurrentTutorDisplayValue(
-            model ? getDisplayValue.Tutor(model) : ""
-          );
+          setCurrentTutorDisplayValue(model ? getDisplayValue.Tutor(model) : '');
           setCurrentTutorValue(model);
         }}
         inputFieldRef={TutorRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Tutor"
@@ -1151,36 +1041,32 @@ export default function CreateLesson(props) {
             .filter((r) => !TutorIdSet.has(getIDValue.Tutor?.(r)))
             .map((r) => ({
               id: getIDValue.Tutor?.(r),
-              label: getDisplayValue.Tutor?.(r),
+              label: getDisplayValue.Tutor?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentTutorValue(
-              tutorRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              tutorRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentTutorDisplayValue(label);
-            runValidationTasks("Tutor", label);
+            runValidationTasks('Tutor', label);
           }}
           onClear={() => {
-            setCurrentTutorDisplayValue("");
+            setCurrentTutorDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.Tutor?.hasError) {
-              runValidationTasks("Tutor", value);
+              runValidationTasks('Tutor', value);
             }
             setCurrentTutorDisplayValue(value);
             setCurrentTutorValue(undefined);
           }}
-          onBlur={() => runValidationTasks("Tutor", currentTutorDisplayValue)}
+          onBlur={() => runValidationTasks('Tutor', currentTutorDisplayValue)}
           errorMessage={errors.Tutor?.errorMessage}
           hasError={errors.Tutor?.hasError}
           ref={TutorRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "Tutor")}
+          {...getOverrideProps(overrides, 'Tutor')}
         ></Autocomplete>
       </ArrayField>
       <TextAreaField
@@ -1209,20 +1095,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.job ?? value;
           }
           if (errors.job?.hasError) {
-            runValidationTasks("job", value);
+            runValidationTasks('job', value);
           }
           setJob(value);
         }}
-        onBlur={() => runValidationTasks("job", job)}
+        onBlur={() => runValidationTasks('job', job)}
         errorMessage={errors.job?.errorMessage}
         hasError={errors.job?.hasError}
-        {...getOverrideProps(overrides, "job")}
+        {...getOverrideProps(overrides, 'job')}
       ></TextAreaField>
       <ArrayField
         lengthLimit={1}
@@ -1248,32 +1134,28 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.course ?? value;
           }
           setCourse(value);
           setCurrentCourseValue(undefined);
-          setCurrentCourseDisplayValue("");
+          setCurrentCourseDisplayValue('');
         }}
         currentFieldValue={currentCourseValue}
-        label={"Course"}
+        label={'Course'}
         items={course ? [course] : []}
         hasError={errors?.course?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("course", currentCourseValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('course', currentCourseValue)}
         errorMessage={errors?.course?.errorMessage}
         getBadgeText={getDisplayValue.course}
         setFieldValue={(model) => {
-          setCurrentCourseDisplayValue(
-            model ? getDisplayValue.course(model) : ""
-          );
+          setCurrentCourseDisplayValue(model ? getDisplayValue.course(model) : '');
           setCurrentCourseValue(model);
         }}
         inputFieldRef={courseRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Course"
@@ -1285,36 +1167,32 @@ export default function CreateLesson(props) {
             .filter((r) => !courseIdSet.has(getIDValue.course?.(r)))
             .map((r) => ({
               id: getIDValue.course?.(r),
-              label: getDisplayValue.course?.(r),
+              label: getDisplayValue.course?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentCourseValue(
-              courseRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              courseRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentCourseDisplayValue(label);
-            runValidationTasks("course", label);
+            runValidationTasks('course', label);
           }}
           onClear={() => {
-            setCurrentCourseDisplayValue("");
+            setCurrentCourseDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.course?.hasError) {
-              runValidationTasks("course", value);
+              runValidationTasks('course', value);
             }
             setCurrentCourseDisplayValue(value);
             setCurrentCourseValue(undefined);
           }}
-          onBlur={() => runValidationTasks("course", currentCourseDisplayValue)}
+          onBlur={() => runValidationTasks('course', currentCourseDisplayValue)}
           errorMessage={errors.course?.errorMessage}
           hasError={errors.course?.hasError}
           ref={courseRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "course")}
+          {...getOverrideProps(overrides, 'course')}
         ></Autocomplete>
       </ArrayField>
       <TextField
@@ -1344,20 +1222,20 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.teacherID ?? value;
           }
           if (errors.teacherID?.hasError) {
-            runValidationTasks("teacherID", value);
+            runValidationTasks('teacherID', value);
           }
           setTeacherID(value);
         }}
-        onBlur={() => runValidationTasks("teacherID", teacherID)}
+        onBlur={() => runValidationTasks('teacherID', teacherID)}
         errorMessage={errors.teacherID?.errorMessage}
         hasError={errors.teacherID?.hasError}
-        {...getOverrideProps(overrides, "teacherID")}
+        {...getOverrideProps(overrides, 'teacherID')}
       ></TextField>
       <ArrayField
         lengthLimit={1}
@@ -1383,7 +1261,7 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             value = result?.lessonplanID ?? value;
@@ -1392,32 +1270,22 @@ export default function CreateLesson(props) {
           setCurrentLessonplanIDValue(undefined);
         }}
         currentFieldValue={currentLessonplanIDValue}
-        label={"Lessonplan id"}
+        label={'Lessonplan id'}
         items={lessonplanID ? [lessonplanID] : []}
         hasError={errors?.lessonplanID?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("lessonplanID", currentLessonplanIDValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('lessonplanID', currentLessonplanIDValue)}
         errorMessage={errors?.lessonplanID?.errorMessage}
         getBadgeText={(value) =>
-          value
-            ? getDisplayValue.lessonplanID(
-                lessonPlanRecords.find((r) => r.id === value)
-              )
-            : ""
+          value ? getDisplayValue.lessonplanID(lessonPlanRecords.find((r) => r.id === value)) : ''
         }
         setFieldValue={(value) => {
           setCurrentLessonplanIDDisplayValue(
-            value
-              ? getDisplayValue.lessonplanID(
-                  lessonPlanRecords.find((r) => r.id === value)
-                )
-              : ""
+            value ? getDisplayValue.lessonplanID(lessonPlanRecords.find((r) => r.id === value)) : ''
           );
           setCurrentLessonplanIDValue(value);
         }}
         inputFieldRef={lessonplanIDRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Lessonplan id"
@@ -1426,38 +1294,33 @@ export default function CreateLesson(props) {
           placeholder="Search LessonPlan"
           value={currentLessonplanIDDisplayValue}
           options={lessonPlanRecords
-            .filter(
-              (r, i, arr) =>
-                arr.findIndex((member) => member?.id === r?.id) === i
-            )
+            .filter((r, i, arr) => arr.findIndex((member) => member?.id === r?.id) === i)
             .map((r) => ({
               id: r?.id,
-              label: getDisplayValue.lessonplanID?.(r),
+              label: getDisplayValue.lessonplanID?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentLessonplanIDValue(id);
             setCurrentLessonplanIDDisplayValue(label);
-            runValidationTasks("lessonplanID", label);
+            runValidationTasks('lessonplanID', label);
           }}
           onClear={() => {
-            setCurrentLessonplanIDDisplayValue("");
+            setCurrentLessonplanIDDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.lessonplanID?.hasError) {
-              runValidationTasks("lessonplanID", value);
+              runValidationTasks('lessonplanID', value);
             }
             setCurrentLessonplanIDDisplayValue(value);
             setCurrentLessonplanIDValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("lessonplanID", currentLessonplanIDValue)
-          }
+          onBlur={() => runValidationTasks('lessonplanID', currentLessonplanIDValue)}
           errorMessage={errors.lessonplanID?.errorMessage}
           hasError={errors.lessonplanID?.hasError}
           ref={lessonplanIDRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "lessonplanID")}
+          {...getOverrideProps(overrides, 'lessonplanID')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -1483,32 +1346,28 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             values = result?.LessonReviews ?? values;
           }
           setLessonReviews(values);
           setCurrentLessonReviewsValue(undefined);
-          setCurrentLessonReviewsDisplayValue("");
+          setCurrentLessonReviewsDisplayValue('');
         }}
         currentFieldValue={currentLessonReviewsValue}
-        label={"Lesson reviews"}
+        label={'Lesson reviews'}
         items={LessonReviews}
         hasError={errors?.LessonReviews?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("LessonReviews", currentLessonReviewsValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('LessonReviews', currentLessonReviewsValue)}
         errorMessage={errors?.LessonReviews?.errorMessage}
         getBadgeText={getDisplayValue.LessonReviews}
         setFieldValue={(model) => {
-          setCurrentLessonReviewsDisplayValue(
-            model ? getDisplayValue.LessonReviews(model) : ""
-          );
+          setCurrentLessonReviewsDisplayValue(model ? getDisplayValue.LessonReviews(model) : '');
           setCurrentLessonReviewsValue(model);
         }}
         inputFieldRef={LessonReviewsRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Lesson reviews"
@@ -1517,46 +1376,35 @@ export default function CreateLesson(props) {
           placeholder="Search LessonReview"
           value={currentLessonReviewsDisplayValue}
           options={lessonReviewRecords
-            .filter(
-              (r) => !LessonReviewsIdSet.has(getIDValue.LessonReviews?.(r))
-            )
+            .filter((r) => !LessonReviewsIdSet.has(getIDValue.LessonReviews?.(r)))
             .map((r) => ({
               id: getIDValue.LessonReviews?.(r),
-              label: getDisplayValue.LessonReviews?.(r),
+              label: getDisplayValue.LessonReviews?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentLessonReviewsValue(
-              lessonReviewRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              lessonReviewRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentLessonReviewsDisplayValue(label);
-            runValidationTasks("LessonReviews", label);
+            runValidationTasks('LessonReviews', label);
           }}
           onClear={() => {
-            setCurrentLessonReviewsDisplayValue("");
+            setCurrentLessonReviewsDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.LessonReviews?.hasError) {
-              runValidationTasks("LessonReviews", value);
+              runValidationTasks('LessonReviews', value);
             }
             setCurrentLessonReviewsDisplayValue(value);
             setCurrentLessonReviewsValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks(
-              "LessonReviews",
-              currentLessonReviewsDisplayValue
-            )
-          }
+          onBlur={() => runValidationTasks('LessonReviews', currentLessonReviewsDisplayValue)}
           errorMessage={errors.LessonReviews?.errorMessage}
           hasError={errors.LessonReviews?.hasError}
           ref={LessonReviewsRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "LessonReviews")}
+          {...getOverrideProps(overrides, 'LessonReviews')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -1582,32 +1430,28 @@ export default function CreateLesson(props) {
               LessonNodes: values,
               Enrollments,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             values = result?.LessonNodes ?? values;
           }
           setLessonNodes(values);
           setCurrentLessonNodesValue(undefined);
-          setCurrentLessonNodesDisplayValue("");
+          setCurrentLessonNodesDisplayValue('');
         }}
         currentFieldValue={currentLessonNodesValue}
-        label={"Lesson nodes"}
+        label={'Lesson nodes'}
         items={LessonNodes}
         hasError={errors?.LessonNodes?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("LessonNodes", currentLessonNodesValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('LessonNodes', currentLessonNodesValue)}
         errorMessage={errors?.LessonNodes?.errorMessage}
         getBadgeText={getDisplayValue.LessonNodes}
         setFieldValue={(model) => {
-          setCurrentLessonNodesDisplayValue(
-            model ? getDisplayValue.LessonNodes(model) : ""
-          );
+          setCurrentLessonNodesDisplayValue(model ? getDisplayValue.LessonNodes(model) : '');
           setCurrentLessonNodesValue(model);
         }}
         inputFieldRef={LessonNodesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Lesson nodes"
@@ -1619,38 +1463,32 @@ export default function CreateLesson(props) {
             .filter((r) => !LessonNodesIdSet.has(getIDValue.LessonNodes?.(r)))
             .map((r) => ({
               id: getIDValue.LessonNodes?.(r),
-              label: getDisplayValue.LessonNodes?.(r),
+              label: getDisplayValue.LessonNodes?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentLessonNodesValue(
-              lessonNodeRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              lessonNodeRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentLessonNodesDisplayValue(label);
-            runValidationTasks("LessonNodes", label);
+            runValidationTasks('LessonNodes', label);
           }}
           onClear={() => {
-            setCurrentLessonNodesDisplayValue("");
+            setCurrentLessonNodesDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.LessonNodes?.hasError) {
-              runValidationTasks("LessonNodes", value);
+              runValidationTasks('LessonNodes', value);
             }
             setCurrentLessonNodesDisplayValue(value);
             setCurrentLessonNodesValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("LessonNodes", currentLessonNodesDisplayValue)
-          }
+          onBlur={() => runValidationTasks('LessonNodes', currentLessonNodesDisplayValue)}
           errorMessage={errors.LessonNodes?.errorMessage}
           hasError={errors.LessonNodes?.hasError}
           ref={LessonNodesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "LessonNodes")}
+          {...getOverrideProps(overrides, 'LessonNodes')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -1676,32 +1514,28 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments: values,
               LessonLabels,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             values = result?.Enrollments ?? values;
           }
           setEnrollments(values);
           setCurrentEnrollmentsValue(undefined);
-          setCurrentEnrollmentsDisplayValue("");
+          setCurrentEnrollmentsDisplayValue('');
         }}
         currentFieldValue={currentEnrollmentsValue}
-        label={"Enrollments"}
+        label={'Enrollments'}
         items={Enrollments}
         hasError={errors?.Enrollments?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("Enrollments", currentEnrollmentsValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('Enrollments', currentEnrollmentsValue)}
         errorMessage={errors?.Enrollments?.errorMessage}
         getBadgeText={getDisplayValue.Enrollments}
         setFieldValue={(model) => {
-          setCurrentEnrollmentsDisplayValue(
-            model ? getDisplayValue.Enrollments(model) : ""
-          );
+          setCurrentEnrollmentsDisplayValue(model ? getDisplayValue.Enrollments(model) : '');
           setCurrentEnrollmentsValue(model);
         }}
         inputFieldRef={EnrollmentsRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Enrollments"
@@ -1713,38 +1547,32 @@ export default function CreateLesson(props) {
             .filter((r) => !EnrollmentsIdSet.has(getIDValue.Enrollments?.(r)))
             .map((r) => ({
               id: getIDValue.Enrollments?.(r),
-              label: getDisplayValue.Enrollments?.(r),
+              label: getDisplayValue.Enrollments?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentEnrollmentsValue(
-              enrollmentRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              enrollmentRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentEnrollmentsDisplayValue(label);
-            runValidationTasks("Enrollments", label);
+            runValidationTasks('Enrollments', label);
           }}
           onClear={() => {
-            setCurrentEnrollmentsDisplayValue("");
+            setCurrentEnrollmentsDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.Enrollments?.hasError) {
-              runValidationTasks("Enrollments", value);
+              runValidationTasks('Enrollments', value);
             }
             setCurrentEnrollmentsDisplayValue(value);
             setCurrentEnrollmentsValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("Enrollments", currentEnrollmentsDisplayValue)
-          }
+          onBlur={() => runValidationTasks('Enrollments', currentEnrollmentsDisplayValue)}
           errorMessage={errors.Enrollments?.errorMessage}
           hasError={errors.Enrollments?.hasError}
           ref={EnrollmentsRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "Enrollments")}
+          {...getOverrideProps(overrides, 'Enrollments')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -1770,32 +1598,28 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels: values,
-              LessonCategories,
+              LessonCategories
             };
             const result = onChange(modelFields);
             values = result?.LessonLabels ?? values;
           }
           setLessonLabels(values);
           setCurrentLessonLabelsValue(undefined);
-          setCurrentLessonLabelsDisplayValue("");
+          setCurrentLessonLabelsDisplayValue('');
         }}
         currentFieldValue={currentLessonLabelsValue}
-        label={"Lesson labels"}
+        label={'Lesson labels'}
         items={LessonLabels}
         hasError={errors?.LessonLabels?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("LessonLabels", currentLessonLabelsValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('LessonLabels', currentLessonLabelsValue)}
         errorMessage={errors?.LessonLabels?.errorMessage}
         getBadgeText={getDisplayValue.LessonLabels}
         setFieldValue={(model) => {
-          setCurrentLessonLabelsDisplayValue(
-            model ? getDisplayValue.LessonLabels(model) : ""
-          );
+          setCurrentLessonLabelsDisplayValue(model ? getDisplayValue.LessonLabels(model) : '');
           setCurrentLessonLabelsValue(model);
         }}
         inputFieldRef={LessonLabelsRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Lesson labels"
@@ -1807,38 +1631,32 @@ export default function CreateLesson(props) {
             .filter((r) => !LessonLabelsIdSet.has(getIDValue.LessonLabels?.(r)))
             .map((r) => ({
               id: getIDValue.LessonLabels?.(r),
-              label: getDisplayValue.LessonLabels?.(r),
+              label: getDisplayValue.LessonLabels?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentLessonLabelsValue(
-              lessonLabelRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              lessonLabelRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentLessonLabelsDisplayValue(label);
-            runValidationTasks("LessonLabels", label);
+            runValidationTasks('LessonLabels', label);
           }}
           onClear={() => {
-            setCurrentLessonLabelsDisplayValue("");
+            setCurrentLessonLabelsDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.LessonLabels?.hasError) {
-              runValidationTasks("LessonLabels", value);
+              runValidationTasks('LessonLabels', value);
             }
             setCurrentLessonLabelsDisplayValue(value);
             setCurrentLessonLabelsValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("LessonLabels", currentLessonLabelsDisplayValue)
-          }
+          onBlur={() => runValidationTasks('LessonLabels', currentLessonLabelsDisplayValue)}
           errorMessage={errors.LessonLabels?.errorMessage}
           hasError={errors.LessonLabels?.hasError}
           ref={LessonLabelsRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "LessonLabels")}
+          {...getOverrideProps(overrides, 'LessonLabels')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -1864,35 +1682,28 @@ export default function CreateLesson(props) {
               LessonNodes,
               Enrollments,
               LessonLabels,
-              LessonCategories: values,
+              LessonCategories: values
             };
             const result = onChange(modelFields);
             values = result?.LessonCategories ?? values;
           }
           setLessonCategories(values);
           setCurrentLessonCategoriesValue(undefined);
-          setCurrentLessonCategoriesDisplayValue("");
+          setCurrentLessonCategoriesDisplayValue('');
         }}
         currentFieldValue={currentLessonCategoriesValue}
-        label={"Lesson categories"}
+        label={'Lesson categories'}
         items={LessonCategories}
         hasError={errors?.LessonCategories?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks(
-            "LessonCategories",
-            currentLessonCategoriesValue
-          )
-        }
+        runValidationTasks={async () => await runValidationTasks('LessonCategories', currentLessonCategoriesValue)}
         errorMessage={errors?.LessonCategories?.errorMessage}
         getBadgeText={getDisplayValue.LessonCategories}
         setFieldValue={(model) => {
-          setCurrentLessonCategoriesDisplayValue(
-            model ? getDisplayValue.LessonCategories(model) : ""
-          );
+          setCurrentLessonCategoriesDisplayValue(model ? getDisplayValue.LessonCategories(model) : '');
           setCurrentLessonCategoriesValue(model);
         }}
         inputFieldRef={LessonCategoriesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Lesson categories"
@@ -1901,53 +1712,40 @@ export default function CreateLesson(props) {
           placeholder="Search LessonCategory"
           value={currentLessonCategoriesDisplayValue}
           options={lessonCategoryRecords
-            .filter(
-              (r) =>
-                !LessonCategoriesIdSet.has(getIDValue.LessonCategories?.(r))
-            )
+            .filter((r) => !LessonCategoriesIdSet.has(getIDValue.LessonCategories?.(r)))
             .map((r) => ({
               id: getIDValue.LessonCategories?.(r),
-              label: getDisplayValue.LessonCategories?.(r),
+              label: getDisplayValue.LessonCategories?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentLessonCategoriesValue(
               lessonCategoryRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
+                Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value)
               )
             );
             setCurrentLessonCategoriesDisplayValue(label);
-            runValidationTasks("LessonCategories", label);
+            runValidationTasks('LessonCategories', label);
           }}
           onClear={() => {
-            setCurrentLessonCategoriesDisplayValue("");
+            setCurrentLessonCategoriesDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.LessonCategories?.hasError) {
-              runValidationTasks("LessonCategories", value);
+              runValidationTasks('LessonCategories', value);
             }
             setCurrentLessonCategoriesDisplayValue(value);
             setCurrentLessonCategoriesValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks(
-              "LessonCategories",
-              currentLessonCategoriesDisplayValue
-            )
-          }
+          onBlur={() => runValidationTasks('LessonCategories', currentLessonCategoriesDisplayValue)}
           errorMessage={errors.LessonCategories?.errorMessage}
           hasError={errors.LessonCategories?.hasError}
           ref={LessonCategoriesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "LessonCategories")}
+          {...getOverrideProps(overrides, 'LessonCategories')}
         ></Autocomplete>
       </ArrayField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -1955,18 +1753,15 @@ export default function CreateLesson(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 
 import { darken, lighten, styled } from '@mui/material/styles';
-import {useEffect, useMemo, useState} from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Autocomplete, Box, InputAdornment, TextField, Typography } from '@mui/material';
 import SearchNotFound from '../../demo/components/SearchNotFound';
 import { Icon } from '@iconify/react';
@@ -13,7 +13,7 @@ import { Thought } from '../../models';
 import { useDatastore } from '../../utils/hooks/useDatastore';
 import Fuse from 'fuse.js';
 import useLocalStorage from '../../utils/hooks/useLocalStorage';
-import {useDebounce} from "../../utils/hooks/useDebounce";
+import { useDebounce } from '../../utils/hooks/useDebounce';
 
 const RootStyle = styled('div')(({ theme }) => ({
   '& .MuiAutocomplete-root': {
@@ -77,14 +77,21 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   const searchResults = useMemo(() => {
-
     if (debouncedSearchQuery === '') {
-        return recentSearches.map((item) => ({ ...item, recentSearch: true, type: 'thought' }));
+      return recentSearches.map((item) => ({ ...item, recentSearch: true, type: 'thought' }));
     }
 
     if (debouncedSearchQuery) {
       const fuse = new Fuse(thoughtDatastore.items, {
-        keys: ['input', 'description', 'extract.people', 'extract.projects', 'extract.categories', 'extract.emotions', 'extract.reminders'],
+        keys: [
+          'input',
+          'description',
+          'extract.people',
+          'extract.projects',
+          'extract.categories',
+          'extract.emotions',
+          'extract.reminders'
+        ],
         includeScore: true
       });
 
@@ -93,28 +100,26 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
       const orSearch = {
         $or: [
           {
-            input: debouncedSearchQuery,
+            input: debouncedSearchQuery
           },
           {
             extract: debouncedSearchQuery
           }
         ]
-      }
+      };
 
       const results = fuse.search(orSearch);
       const thoughtResults = results.map((result) => {
         const { item, score } = result;
         return {
-
           ...item,
           score,
           type: 'thought',
           recentSearch: false
-
         };
       });
-      console.log('thoughtResults', thoughtResults)
-      setLoading(false)
+      console.log('thoughtResults', thoughtResults);
+      setLoading(false);
       return thoughtResults || [];
     }
 
@@ -125,7 +130,7 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
     try {
       const { value } = event.target;
       setSearchQuery(value);
-      setLoading(true)
+      setLoading(true);
     } catch (error) {
       console.error(error);
     }
@@ -174,7 +179,13 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
         disableCloseOnSelect
         onInputChange={handleChangeSearch}
         getOptionLabel={(thought) => thought?.input || JSON.stringify(thought)}
-        noOptionsText={loading ? "Loading Search Results" : <SearchNotFound searchQuery={searchQuery} onClickSearchResult={onClickSearchResult} />}
+        noOptionsText={
+          loading ? (
+            'Loading Search Results'
+          ) : (
+            <SearchNotFound searchQuery={searchQuery} onClickSearchResult={onClickSearchResult} />
+          )
+        }
         renderInput={(params) => (
           <TextField
             {...params}
@@ -203,7 +214,6 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
           />
         )}
         renderOption={(props, thought, { inputValue }) => {
-
           const { input } = thought;
           const matches = match(input, inputValue);
           const parts = parse(input, matches);

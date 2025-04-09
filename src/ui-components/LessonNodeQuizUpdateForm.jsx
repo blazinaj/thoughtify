@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Badge,
   Button,
@@ -18,12 +18,12 @@ import {
   Text,
   TextAreaField,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { LessonNodeQuiz } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { LessonNodeQuiz } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -37,15 +37,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -61,12 +61,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -81,18 +76,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -103,17 +97,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -171,7 +165,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -192,10 +186,10 @@ export default function LessonNodeQuizUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    progress: "",
-    status: "",
+    progress: '',
+    status: '',
     questions: [],
-    owner: "",
+    owner: ''
   };
   const [progress, setProgress] = React.useState(initialValues.progress);
   const [status, setStatus] = React.useState(initialValues.status);
@@ -203,50 +197,33 @@ export default function LessonNodeQuizUpdateForm(props) {
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = lessonNodeQuizRecord
-      ? { ...initialValues, ...lessonNodeQuizRecord }
-      : initialValues;
+    const cleanValues = lessonNodeQuizRecord ? { ...initialValues, ...lessonNodeQuizRecord } : initialValues;
     setProgress(cleanValues.progress);
     setStatus(cleanValues.status);
-    setQuestions(
-      cleanValues.questions?.map((item) =>
-        typeof item === "string" ? item : JSON.stringify(item)
-      ) ?? []
-    );
-    setCurrentQuestionsValue("");
+    setQuestions(cleanValues.questions?.map((item) => (typeof item === 'string' ? item : JSON.stringify(item))) ?? []);
+    setCurrentQuestionsValue('');
     setOwner(cleanValues.owner);
     setErrors({});
   };
-  const [lessonNodeQuizRecord, setLessonNodeQuizRecord] = React.useState(
-    lessonNodeQuizModelProp
-  );
+  const [lessonNodeQuizRecord, setLessonNodeQuizRecord] = React.useState(lessonNodeQuizModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(LessonNodeQuiz, idProp)
-        : lessonNodeQuizModelProp;
+      const record = idProp ? await DataStore.query(LessonNodeQuiz, idProp) : lessonNodeQuizModelProp;
       setLessonNodeQuizRecord(record);
     };
     queryData();
   }, [idProp, lessonNodeQuizModelProp]);
   React.useEffect(resetStateValues, [lessonNodeQuizRecord]);
-  const [currentQuestionsValue, setCurrentQuestionsValue] = React.useState("");
+  const [currentQuestionsValue, setCurrentQuestionsValue] = React.useState('');
   const questionsRef = React.createRef();
   const validations = {
     progress: [],
     status: [],
-    questions: [{ type: "JSON" }],
-    owner: [],
+    questions: [{ type: 'JSON' }],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -267,21 +244,15 @@ export default function LessonNodeQuizUpdateForm(props) {
           progress,
           status,
           questions,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -293,7 +264,7 @@ export default function LessonNodeQuizUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -301,7 +272,7 @@ export default function LessonNodeQuizUpdateForm(props) {
             progress: modelFields.progress,
             status: modelFields.status,
             owner: modelFields.owner,
-            questions: modelFields.questions.map((s) => JSON.parse(s)),
+            questions: modelFields.questions.map((s) => JSON.parse(s))
           };
           await DataStore.save(
             LessonNodeQuiz.copyOf(lessonNodeQuizRecord, (updated) => {
@@ -317,7 +288,7 @@ export default function LessonNodeQuizUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "LessonNodeQuizUpdateForm")}
+      {...getOverrideProps(overrides, 'LessonNodeQuizUpdateForm')}
       {...rest}
     >
       <TextField
@@ -328,28 +299,26 @@ export default function LessonNodeQuizUpdateForm(props) {
         step="any"
         value={progress}
         onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
+          let value = isNaN(parseFloat(e.target.value)) ? e.target.value : parseFloat(e.target.value);
           if (onChange) {
             const modelFields = {
               progress: value,
               status,
               questions,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.progress ?? value;
           }
           if (errors.progress?.hasError) {
-            runValidationTasks("progress", value);
+            runValidationTasks('progress', value);
           }
           setProgress(value);
         }}
-        onBlur={() => runValidationTasks("progress", progress)}
+        onBlur={() => runValidationTasks('progress', progress)}
         errorMessage={errors.progress?.errorMessage}
         hasError={errors.progress?.hasError}
-        {...getOverrideProps(overrides, "progress")}
+        {...getOverrideProps(overrides, 'progress')}
       ></TextField>
       <SelectField
         label="Status"
@@ -363,41 +332,25 @@ export default function LessonNodeQuizUpdateForm(props) {
               progress,
               status: value,
               questions,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.status ?? value;
           }
           if (errors.status?.hasError) {
-            runValidationTasks("status", value);
+            runValidationTasks('status', value);
           }
           setStatus(value);
         }}
-        onBlur={() => runValidationTasks("status", status)}
+        onBlur={() => runValidationTasks('status', status)}
         errorMessage={errors.status?.errorMessage}
         hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        {...getOverrideProps(overrides, 'status')}
       >
-        <option
-          children="Not started"
-          value="NOT_STARTED"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="In progress"
-          value="IN_PROGRESS"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
-        <option
-          children="Pass"
-          value="PASS"
-          {...getOverrideProps(overrides, "statusoption2")}
-        ></option>
-        <option
-          children="Fail"
-          value="FAIL"
-          {...getOverrideProps(overrides, "statusoption3")}
-        ></option>
+        <option children="Not started" value="NOT_STARTED" {...getOverrideProps(overrides, 'statusoption0')}></option>
+        <option children="In progress" value="IN_PROGRESS" {...getOverrideProps(overrides, 'statusoption1')}></option>
+        <option children="Pass" value="PASS" {...getOverrideProps(overrides, 'statusoption2')}></option>
+        <option children="Fail" value="FAIL" {...getOverrideProps(overrides, 'statusoption3')}></option>
       </SelectField>
       <ArrayField
         onChange={async (items) => {
@@ -407,25 +360,23 @@ export default function LessonNodeQuizUpdateForm(props) {
               progress,
               status,
               questions: values,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             values = result?.questions ?? values;
           }
           setQuestions(values);
-          setCurrentQuestionsValue("");
+          setCurrentQuestionsValue('');
         }}
         currentFieldValue={currentQuestionsValue}
-        label={"Questions"}
+        label={'Questions'}
         items={questions}
         hasError={errors?.questions?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("questions", currentQuestionsValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('questions', currentQuestionsValue)}
         errorMessage={errors?.questions?.errorMessage}
         setFieldValue={setCurrentQuestionsValue}
         inputFieldRef={questionsRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <TextAreaField
           label="Questions"
@@ -435,16 +386,16 @@ export default function LessonNodeQuizUpdateForm(props) {
           onChange={(e) => {
             let { value } = e.target;
             if (errors.questions?.hasError) {
-              runValidationTasks("questions", value);
+              runValidationTasks('questions', value);
             }
             setCurrentQuestionsValue(value);
           }}
-          onBlur={() => runValidationTasks("questions", currentQuestionsValue)}
+          onBlur={() => runValidationTasks('questions', currentQuestionsValue)}
           errorMessage={errors.questions?.errorMessage}
           hasError={errors.questions?.hasError}
           ref={questionsRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "questions")}
+          {...getOverrideProps(overrides, 'questions')}
         ></TextAreaField>
       </ArrayField>
       <TextField
@@ -459,25 +410,22 @@ export default function LessonNodeQuizUpdateForm(props) {
               progress,
               status,
               questions,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -486,21 +434,15 @@ export default function LessonNodeQuizUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || lessonNodeQuizModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || lessonNodeQuizModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || lessonNodeQuizModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

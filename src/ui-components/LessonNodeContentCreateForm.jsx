@@ -5,27 +5,18 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { LessonNodeContent } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, TextField } from '@aws-amplify/ui-react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { LessonNodeContent } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function LessonNodeContentCreateForm(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    text: "",
-    video: "",
-    owner: "",
+    text: '',
+    video: '',
+    owner: ''
   };
   const [text, setText] = React.useState(initialValues.text);
   const [video, setVideo] = React.useState(initialValues.video);
@@ -40,17 +31,10 @@ export default function LessonNodeContentCreateForm(props) {
   const validations = {
     text: [],
     video: [],
-    owner: [],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -70,21 +54,15 @@ export default function LessonNodeContentCreateForm(props) {
         let modelFields = {
           text,
           video,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -96,7 +74,7 @@ export default function LessonNodeContentCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -113,7 +91,7 @@ export default function LessonNodeContentCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "LessonNodeContentCreateForm")}
+      {...getOverrideProps(overrides, 'LessonNodeContentCreateForm')}
       {...rest}
     >
       <TextField
@@ -127,20 +105,20 @@ export default function LessonNodeContentCreateForm(props) {
             const modelFields = {
               text: value,
               video,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.text ?? value;
           }
           if (errors.text?.hasError) {
-            runValidationTasks("text", value);
+            runValidationTasks('text', value);
           }
           setText(value);
         }}
-        onBlur={() => runValidationTasks("text", text)}
+        onBlur={() => runValidationTasks('text', text)}
         errorMessage={errors.text?.errorMessage}
         hasError={errors.text?.hasError}
-        {...getOverrideProps(overrides, "text")}
+        {...getOverrideProps(overrides, 'text')}
       ></TextField>
       <TextField
         label="Video"
@@ -153,20 +131,20 @@ export default function LessonNodeContentCreateForm(props) {
             const modelFields = {
               text,
               video: value,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.video ?? value;
           }
           if (errors.video?.hasError) {
-            runValidationTasks("video", value);
+            runValidationTasks('video', value);
           }
           setVideo(value);
         }}
-        onBlur={() => runValidationTasks("video", video)}
+        onBlur={() => runValidationTasks('video', video)}
         errorMessage={errors.video?.errorMessage}
         hasError={errors.video?.hasError}
-        {...getOverrideProps(overrides, "video")}
+        {...getOverrideProps(overrides, 'video')}
       ></TextField>
       <TextField
         label="Owner"
@@ -179,25 +157,22 @@ export default function LessonNodeContentCreateForm(props) {
             const modelFields = {
               text,
               video,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -205,18 +180,15 @@ export default function LessonNodeContentCreateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

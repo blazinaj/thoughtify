@@ -1,15 +1,14 @@
-import {handleCompletion} from "../../../utils/openai/functions/generate";
+import { handleCompletion } from '../../../utils/openai/functions/generate';
 
-export const generateHealthCategoryReport = async ({category, thoughts}) => {
-
+export const generateHealthCategoryReport = async ({ category, thoughts }) => {
   const prompt = `
       Generate a health report for the ${category} health category based on the following user's thoughts:
       
       ${thoughts
-  .map((thought) => {
-    return `${thought?.date || thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
-  })
-  .join('\n')}
+        .map((thought) => {
+          return `${thought?.date || thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
+        })
+        .join('\n')}
       
       Example:
       
@@ -31,4 +30,4 @@ export const generateHealthCategoryReport = async ({category, thoughts}) => {
     category,
     description: JSON.parse(completion)[category]
   };
-}
+};

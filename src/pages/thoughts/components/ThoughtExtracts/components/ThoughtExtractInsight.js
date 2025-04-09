@@ -1,11 +1,11 @@
-import * as React from "react";
-import {useEffect, useState} from "react";
-import LoadingScreen from "../../../../../demo/components/LoadingScreen";
-import Grid from "@mui/material/Grid";
-import {Typography} from "@mui/material";
-import {generateThoughtExtractInsight} from "../../../../../api/thoughts/generateThoughtExtractInsight";
-import {ThoughtExtractTimeline} from "./ThoughtExtractTimeline";
-import {ThoughtExtractAttributes} from "./ThoughtExtractAttributes";
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import LoadingScreen from '../../../../../demo/components/LoadingScreen';
+import Grid from '@mui/material/Grid';
+import { Typography } from '@mui/material';
+import { generateThoughtExtractInsight } from '../../../../../api/thoughts/generateThoughtExtractInsight';
+import { ThoughtExtractTimeline } from './ThoughtExtractTimeline';
+import { ThoughtExtractAttributes } from './ThoughtExtractAttributes';
 
 /**
  * Displays Insight from an extract value from a Thought, for instance a Person, Project, Reminder, or Emotion
@@ -14,8 +14,7 @@ import {ThoughtExtractAttributes} from "./ThoughtExtractAttributes";
  * @param {string} value - the value of the insight e.g. "bob", "project 1"
  * @constructor
  */
-export const ThoughtExtractInsight = ({type, value}) => {
-
+export const ThoughtExtractInsight = ({ type, value }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [insight, setInsight] = useState(null);
@@ -24,48 +23,45 @@ export const ThoughtExtractInsight = ({type, value}) => {
 
   useEffect(() => {
     setIsLoading(true);
-    generateThoughtExtractInsight(type, value).then((res) => {
-      setInsight(res);
-      setIsLoading(false);
-    }).catch((err) => {
+    generateThoughtExtractInsight(type, value)
+      .then((res) => {
+        setInsight(res);
+        setIsLoading(false);
+      })
+      .catch((err) => {
         console.error(err);
         setIsLoading(false);
         setError(err);
-    });
-  }, [])
+      });
+  }, []);
 
   if (isLoading) {
     return (
-      <LoadingScreen style={{
-        minHeight: "25vh"
-      }} />
-    )
+      <LoadingScreen
+        style={{
+          minHeight: '25vh'
+        }}
+      />
+    );
   }
 
-    if (error) {
-        return (
-            <Typography
-            variant={'h6'}
-            sx={{
-                marginBottom: 2
-            }}
-            >
-            Error: {error.message}
-            </Typography>
-        )
-    }
+  if (error) {
+    return (
+      <Typography
+        variant={'h6'}
+        sx={{
+          marginBottom: 2
+        }}
+      >
+        Error: {error.message}
+      </Typography>
+    );
+  }
 
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={6}
-          xl={6}
-        >
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
           <Typography
             variant={'h6'}
             sx={{
@@ -75,18 +71,9 @@ export const ThoughtExtractInsight = ({type, value}) => {
             Timeline
           </Typography>
           <ThoughtExtractTimeline insight={insight} />
-
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={6}
-          xl={6}
-        >
-
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
           <Typography
             variant={'h6'}
             sx={{
@@ -98,10 +85,7 @@ export const ThoughtExtractInsight = ({type, value}) => {
 
           <ThoughtExtractAttributes insight={insight} value={value} />
         </Grid>
-
       </Grid>
-
     </div>
-  )
-
-}
+  );
+};

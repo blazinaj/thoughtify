@@ -7,7 +7,7 @@ import { ClickAwayListener, Grid, Slide } from '@mui/material';
 import { MIconButton } from '../../demo/components/@material-extend';
 import { alpha } from '@mui/material/styles';
 import { ApplicationSearchbar } from './ApplicationSearchbar';
-import {ThoughtExtracts} from "../../pages/thoughts/components/ThoughtExtracts/components/ThoughtExtracts";
+import { ThoughtExtracts } from '../../pages/thoughts/components/ThoughtExtracts/components/ThoughtExtracts';
 // import {Scrollbar} from "../";
 // components
 

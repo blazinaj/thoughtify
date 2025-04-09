@@ -5,15 +5,15 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
   const form = useForm({
     item: userData,
     fieldConfig: {
-      'firstName': {
+      firstName: {
         defaultValue: userData.firstName || '',
-        label: 'First Name',
+        label: 'First Name'
       },
-      'lastName': {
+      lastName: {
         defaultValue: userData.lastName || '',
-        label: 'Last Name',
+        label: 'Last Name'
       },
-      'bio': {
+      bio: {
         defaultValue: userData.bio || '',
         label: 'Tell us a little about yourself',
         tooltip: 'This will be displayed on your profile page and will be used by the AI to tailor your experience'
@@ -22,7 +22,7 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
         defaultValue: userData.showOnboarding || true,
         label: 'Show Onboarding',
         tooltip: 'Start a helpful onboarding experience when you log in',
-        inputType: "switch"
+        inputType: 'switch'
       }
     },
     disableSubmitButton: true
@@ -51,7 +51,7 @@ export const AccountSetupBasicInformation = ({ userData, setUserData, setActiveS
               lastName: form?.input?.lastName,
               bio: [
                 {
-                  question: "generalInformation",
+                  question: 'generalInformation',
                   answer: form?.input?.bio
                 }
               ]

@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Flex, Image, Text } from '@aws-amplify/ui-react';
+import MyIcon from './MyIcon';
 export default function SocialPost(props) {
   const { overrides, ...rest } = props;
   return (
@@ -22,7 +22,7 @@ export default function SocialPost(props) {
       position="relative"
       padding="24px 24px 24px 24px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "SocialPost")}
+      {...getOverrideProps(overrides, 'SocialPost')}
       {...rest}
     >
       <Flex
@@ -36,7 +36,7 @@ export default function SocialPost(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Body")}
+        {...getOverrideProps(overrides, 'Body')}
       >
         <Flex
           gap="16px"
@@ -50,7 +50,7 @@ export default function SocialPost(props) {
           basis="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Text")}
+          {...getOverrideProps(overrides, 'Text')}
         >
           <Flex
             gap="16px"
@@ -63,7 +63,7 @@ export default function SocialPost(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Headline")}
+            {...getOverrideProps(overrides, 'Headline')}
           >
             <Text
               fontFamily="Inter"
@@ -87,7 +87,7 @@ export default function SocialPost(props) {
               children="New Amplify Studio gives designers the ability to export UI to React code"
               {...getOverrideProps(
                 overrides,
-                "New Amplify Studio gives designers the ability to export UI to React code"
+                'New Amplify Studio gives designers the ability to export UI to React code'
               )}
             ></Text>
             <Flex
@@ -101,7 +101,7 @@ export default function SocialPost(props) {
               alignSelf="stretch"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Frame")}
+              {...getOverrideProps(overrides, 'Frame')}
             >
               <Text
                 fontFamily="Inter"
@@ -123,7 +123,7 @@ export default function SocialPost(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children="Nikhil S"
-                {...getOverrideProps(overrides, "Nikhil S")}
+                {...getOverrideProps(overrides, 'Nikhil S')}
               ></Text>
               <Text
                 fontFamily="Inter"
@@ -145,7 +145,7 @@ export default function SocialPost(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children="2nd December 2021"
-                {...getOverrideProps(overrides, "2nd December 2021")}
+                {...getOverrideProps(overrides, '2nd December 2021')}
               ></Text>
             </Flex>
           </Flex>
@@ -160,7 +160,7 @@ export default function SocialPost(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Article")}
+            {...getOverrideProps(overrides, 'Article')}
           >
             <MyIcon
               width="24px"
@@ -174,7 +174,7 @@ export default function SocialPost(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               type="arrow-right"
-              {...getOverrideProps(overrides, "MyIcon29766860")}
+              {...getOverrideProps(overrides, 'MyIcon29766860')}
             ></MyIcon>
             <Text
               fontFamily="Inter"
@@ -199,7 +199,7 @@ export default function SocialPost(props) {
               children="AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user."
               {...getOverrideProps(
                 overrides,
-                "AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user."
+                'AWS Amplify Studio is a visual development environment for building full-stack web and mobile apps that grows with your business. Studio builds on existing backend building capabilities in AWS Amplify, allowing you to build your UI faster with a set of ready-to-use UI components that are editable in Figma. With Studio, you can quickly build an entire web app, front-to-back, with minimal coding, while still maintaining full control over your app design and behavior through code. Ship faster, scale effortlessly, and delight every user.'
               )}
             ></Text>
           </Flex>
@@ -213,7 +213,7 @@ export default function SocialPost(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Share29766862")}
+            {...getOverrideProps(overrides, 'Share29766862')}
           >
             <Text
               fontFamily="Inter"
@@ -235,7 +235,7 @@ export default function SocialPost(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Share"
-              {...getOverrideProps(overrides, "Share29766863")}
+              {...getOverrideProps(overrides, 'Share29766863')}
             ></Text>
             <MyIcon
               width="24px"
@@ -249,7 +249,7 @@ export default function SocialPost(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               type="bookmark_border"
-              {...getOverrideProps(overrides, "MyIcon29766864")}
+              {...getOverrideProps(overrides, 'MyIcon29766864')}
             ></MyIcon>
             <MyIcon
               width="24px"
@@ -263,7 +263,7 @@ export default function SocialPost(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               type="share"
-              {...getOverrideProps(overrides, "MyIcon29766865")}
+              {...getOverrideProps(overrides, 'MyIcon29766865')}
             ></MyIcon>
             <MyIcon
               width="24px"
@@ -277,7 +277,7 @@ export default function SocialPost(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               type="more_vert"
-              {...getOverrideProps(overrides, "MyIcon29766866")}
+              {...getOverrideProps(overrides, 'MyIcon29766866')}
             ></MyIcon>
           </Flex>
         </Flex>
@@ -293,7 +293,7 @@ export default function SocialPost(props) {
           borderRadius="16px"
           padding="0px 0px 0px 0px"
           objectFit="cover"
-          {...getOverrideProps(overrides, "image")}
+          {...getOverrideProps(overrides, 'image')}
         ></Image>
       </Flex>
       <Flex
@@ -307,7 +307,7 @@ export default function SocialPost(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Read more29766868")}
+        {...getOverrideProps(overrides, 'Read more29766868')}
       >
         <MyIcon
           width="24px"
@@ -321,7 +321,7 @@ export default function SocialPost(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           type="arrow-right"
-          {...getOverrideProps(overrides, "MyIcon29766869")}
+          {...getOverrideProps(overrides, 'MyIcon29766869')}
         ></MyIcon>
         <Text
           fontFamily="Inter"
@@ -346,7 +346,7 @@ export default function SocialPost(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="Read more"
-          {...getOverrideProps(overrides, "Read more29766870")}
+          {...getOverrideProps(overrides, 'Read more29766870')}
         ></Text>
       </Flex>
     </Flex>

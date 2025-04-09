@@ -5,17 +5,11 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SwitchField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { User } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, SwitchField, TextField } from '@aws-amplify/ui-react';
+import { User } from '../models';
+import { fetchByPath, getOverrideProps, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function UserUpdateForm(props) {
   const {
     id: idProp,
@@ -29,32 +23,26 @@ export default function UserUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    profileImage: "",
-    cognitoSub: "",
-    owner: "",
-    showOnboarding: false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    profileImage: '',
+    cognitoSub: '',
+    owner: '',
+    showOnboarding: false
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
   const [email, setEmail] = React.useState(initialValues.email);
   const [phone, setPhone] = React.useState(initialValues.phone);
-  const [profileImage, setProfileImage] = React.useState(
-    initialValues.profileImage
-  );
+  const [profileImage, setProfileImage] = React.useState(initialValues.profileImage);
   const [cognitoSub, setCognitoSub] = React.useState(initialValues.cognitoSub);
   const [owner, setOwner] = React.useState(initialValues.owner);
-  const [showOnboarding, setShowOnboarding] = React.useState(
-    initialValues.showOnboarding
-  );
+  const [showOnboarding, setShowOnboarding] = React.useState(initialValues.showOnboarding);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = userRecord
-      ? { ...initialValues, ...userRecord }
-      : initialValues;
+    const cleanValues = userRecord ? { ...initialValues, ...userRecord } : initialValues;
     setFirstName(cleanValues.firstName);
     setLastName(cleanValues.lastName);
     setEmail(cleanValues.email);
@@ -68,9 +56,7 @@ export default function UserUpdateForm(props) {
   const [userRecord, setUserRecord] = React.useState(userModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(User, idProp)
-        : userModelProp;
+      const record = idProp ? await DataStore.query(User, idProp) : userModelProp;
       setUserRecord(record);
     };
     queryData();
@@ -79,22 +65,15 @@ export default function UserUpdateForm(props) {
   const validations = {
     firstName: [],
     lastName: [],
-    email: [{ type: "Email" }],
-    phone: [{ type: "Phone" }],
+    email: [{ type: 'Email' }],
+    phone: [{ type: 'Phone' }],
     profileImage: [],
     cognitoSub: [],
     owner: [],
-    showOnboarding: [],
+    showOnboarding: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -119,21 +98,15 @@ export default function UserUpdateForm(props) {
           profileImage,
           cognitoSub,
           owner,
-          showOnboarding,
+          showOnboarding
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -145,7 +118,7 @@ export default function UserUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -163,7 +136,7 @@ export default function UserUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "UserUpdateForm")}
+      {...getOverrideProps(overrides, 'UserUpdateForm')}
       {...rest}
     >
       <TextField
@@ -182,20 +155,20 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.firstName ?? value;
           }
           if (errors.firstName?.hasError) {
-            runValidationTasks("firstName", value);
+            runValidationTasks('firstName', value);
           }
           setFirstName(value);
         }}
-        onBlur={() => runValidationTasks("firstName", firstName)}
+        onBlur={() => runValidationTasks('firstName', firstName)}
         errorMessage={errors.firstName?.errorMessage}
         hasError={errors.firstName?.hasError}
-        {...getOverrideProps(overrides, "firstName")}
+        {...getOverrideProps(overrides, 'firstName')}
       ></TextField>
       <TextField
         label="Last name"
@@ -213,20 +186,20 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.lastName ?? value;
           }
           if (errors.lastName?.hasError) {
-            runValidationTasks("lastName", value);
+            runValidationTasks('lastName', value);
           }
           setLastName(value);
         }}
-        onBlur={() => runValidationTasks("lastName", lastName)}
+        onBlur={() => runValidationTasks('lastName', lastName)}
         errorMessage={errors.lastName?.errorMessage}
         hasError={errors.lastName?.hasError}
-        {...getOverrideProps(overrides, "lastName")}
+        {...getOverrideProps(overrides, 'lastName')}
       ></TextField>
       <TextField
         label="Email"
@@ -244,20 +217,20 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
           }
           if (errors.email?.hasError) {
-            runValidationTasks("email", value);
+            runValidationTasks('email', value);
           }
           setEmail(value);
         }}
-        onBlur={() => runValidationTasks("email", email)}
+        onBlur={() => runValidationTasks('email', email)}
         errorMessage={errors.email?.errorMessage}
         hasError={errors.email?.hasError}
-        {...getOverrideProps(overrides, "email")}
+        {...getOverrideProps(overrides, 'email')}
       ></TextField>
       <TextField
         label="Phone"
@@ -276,20 +249,20 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
           }
           if (errors.phone?.hasError) {
-            runValidationTasks("phone", value);
+            runValidationTasks('phone', value);
           }
           setPhone(value);
         }}
-        onBlur={() => runValidationTasks("phone", phone)}
+        onBlur={() => runValidationTasks('phone', phone)}
         errorMessage={errors.phone?.errorMessage}
         hasError={errors.phone?.hasError}
-        {...getOverrideProps(overrides, "phone")}
+        {...getOverrideProps(overrides, 'phone')}
       ></TextField>
       <TextField
         label="Profile image"
@@ -307,20 +280,20 @@ export default function UserUpdateForm(props) {
               profileImage: value,
               cognitoSub,
               owner,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.profileImage ?? value;
           }
           if (errors.profileImage?.hasError) {
-            runValidationTasks("profileImage", value);
+            runValidationTasks('profileImage', value);
           }
           setProfileImage(value);
         }}
-        onBlur={() => runValidationTasks("profileImage", profileImage)}
+        onBlur={() => runValidationTasks('profileImage', profileImage)}
         errorMessage={errors.profileImage?.errorMessage}
         hasError={errors.profileImage?.hasError}
-        {...getOverrideProps(overrides, "profileImage")}
+        {...getOverrideProps(overrides, 'profileImage')}
       ></TextField>
       <TextField
         label="Cognito sub"
@@ -338,20 +311,20 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub: value,
               owner,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.cognitoSub ?? value;
           }
           if (errors.cognitoSub?.hasError) {
-            runValidationTasks("cognitoSub", value);
+            runValidationTasks('cognitoSub', value);
           }
           setCognitoSub(value);
         }}
-        onBlur={() => runValidationTasks("cognitoSub", cognitoSub)}
+        onBlur={() => runValidationTasks('cognitoSub', cognitoSub)}
         errorMessage={errors.cognitoSub?.errorMessage}
         hasError={errors.cognitoSub?.hasError}
-        {...getOverrideProps(overrides, "cognitoSub")}
+        {...getOverrideProps(overrides, 'cognitoSub')}
       ></TextField>
       <TextField
         label="Owner"
@@ -369,20 +342,20 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner: value,
-              showOnboarding,
+              showOnboarding
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
       <SwitchField
         label="Show onboarding"
@@ -400,25 +373,22 @@ export default function UserUpdateForm(props) {
               profileImage,
               cognitoSub,
               owner,
-              showOnboarding: value,
+              showOnboarding: value
             };
             const result = onChange(modelFields);
             value = result?.showOnboarding ?? value;
           }
           if (errors.showOnboarding?.hasError) {
-            runValidationTasks("showOnboarding", value);
+            runValidationTasks('showOnboarding', value);
           }
           setShowOnboarding(value);
         }}
-        onBlur={() => runValidationTasks("showOnboarding", showOnboarding)}
+        onBlur={() => runValidationTasks('showOnboarding', showOnboarding)}
         errorMessage={errors.showOnboarding?.errorMessage}
         hasError={errors.showOnboarding?.hasError}
-        {...getOverrideProps(overrides, "showOnboarding")}
+        {...getOverrideProps(overrides, 'showOnboarding')}
       ></SwitchField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -427,21 +397,15 @@ export default function UserUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || userModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || userModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || userModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

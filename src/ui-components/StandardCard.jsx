@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Flex, Image, Text } from '@aws-amplify/ui-react';
 export default function StandardCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function StandardCard(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "StandardCard")}
+      {...getOverrideProps(overrides, 'StandardCard')}
       {...rest}
     >
       <Image
@@ -36,7 +36,7 @@ export default function StandardCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
+        {...getOverrideProps(overrides, 'image')}
       ></Image>
       <Flex
         gap="16px"
@@ -49,7 +49,7 @@ export default function StandardCard(props) {
         alignSelf="stretch"
         position="relative"
         padding="16px 16px 16px 16px"
-        {...getOverrideProps(overrides, "Card Area")}
+        {...getOverrideProps(overrides, 'Card Area')}
       >
         <Flex
           gap="8px"
@@ -62,7 +62,7 @@ export default function StandardCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Text Group")}
+          {...getOverrideProps(overrides, 'Text Group')}
         >
           <Text
             fontFamily="Inter"
@@ -84,7 +84,7 @@ export default function StandardCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$99 USD"
-            {...getOverrideProps(overrides, "$99 USD")}
+            {...getOverrideProps(overrides, '$99 USD')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -107,7 +107,7 @@ export default function StandardCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="4bds 3 ba 2,530 sqft - Active"
-            {...getOverrideProps(overrides, "4bds 3 ba 2,530 sqft - Active")}
+            {...getOverrideProps(overrides, '4bds 3 ba 2,530 sqft - Active')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -129,7 +129,7 @@ export default function StandardCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="832 34th Ave, Seattle, WA 98122"
-            {...getOverrideProps(overrides, "832 34th Ave, Seattle, WA 98122")}
+            {...getOverrideProps(overrides, '832 34th Ave, Seattle, WA 98122')}
           ></Text>
         </Flex>
       </Flex>

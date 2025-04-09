@@ -5,32 +5,17 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SelectField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { Biography } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, SelectField, TextField } from '@aws-amplify/ui-react';
+import { Biography } from '../models';
+import { fetchByPath, getOverrideProps, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function BiographyCreateForm(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    date: "",
-    cadence: "",
-    entry: "",
+    date: '',
+    cadence: '',
+    entry: ''
   };
   const [date, setDate] = React.useState(initialValues.date);
   const [cadence, setCadence] = React.useState(initialValues.cadence);
@@ -45,17 +30,10 @@ export default function BiographyCreateForm(props) {
   const validations = {
     date: [],
     cadence: [],
-    entry: [],
+    entry: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -65,15 +43,15 @@ export default function BiographyCreateForm(props) {
     return validationResponse;
   };
   const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
+    const df = new Intl.DateTimeFormat('default', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      calendar: 'iso8601',
+      numberingSystem: 'latn',
+      hourCycle: 'h23'
     });
     const parts = df.formatToParts(date).reduce((acc, part) => {
       acc[part.type] = part.value;
@@ -92,21 +70,15 @@ export default function BiographyCreateForm(props) {
         let modelFields = {
           date,
           cadence,
-          entry,
+          entry
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -118,7 +90,7 @@ export default function BiographyCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -135,7 +107,7 @@ export default function BiographyCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "BiographyCreateForm")}
+      {...getOverrideProps(overrides, 'BiographyCreateForm')}
       {...rest}
     >
       <TextField
@@ -145,26 +117,25 @@ export default function BiographyCreateForm(props) {
         type="datetime-local"
         value={date && convertToLocal(new Date(date))}
         onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          let value = e.target.value === '' ? '' : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
               date: value,
               cadence,
-              entry,
+              entry
             };
             const result = onChange(modelFields);
             value = result?.date ?? value;
           }
           if (errors.date?.hasError) {
-            runValidationTasks("date", value);
+            runValidationTasks('date', value);
           }
           setDate(value);
         }}
-        onBlur={() => runValidationTasks("date", date)}
+        onBlur={() => runValidationTasks('date', date)}
         errorMessage={errors.date?.errorMessage}
         hasError={errors.date?.hasError}
-        {...getOverrideProps(overrides, "date")}
+        {...getOverrideProps(overrides, 'date')}
       ></TextField>
       <SelectField
         label="Cadence"
@@ -177,41 +148,25 @@ export default function BiographyCreateForm(props) {
             const modelFields = {
               date,
               cadence: value,
-              entry,
+              entry
             };
             const result = onChange(modelFields);
             value = result?.cadence ?? value;
           }
           if (errors.cadence?.hasError) {
-            runValidationTasks("cadence", value);
+            runValidationTasks('cadence', value);
           }
           setCadence(value);
         }}
-        onBlur={() => runValidationTasks("cadence", cadence)}
+        onBlur={() => runValidationTasks('cadence', cadence)}
         errorMessage={errors.cadence?.errorMessage}
         hasError={errors.cadence?.hasError}
-        {...getOverrideProps(overrides, "cadence")}
+        {...getOverrideProps(overrides, 'cadence')}
       >
-        <option
-          children="Daily"
-          value="DAILY"
-          {...getOverrideProps(overrides, "cadenceoption0")}
-        ></option>
-        <option
-          children="Weekly"
-          value="WEEKLY"
-          {...getOverrideProps(overrides, "cadenceoption1")}
-        ></option>
-        <option
-          children="Monthly"
-          value="MONTHLY"
-          {...getOverrideProps(overrides, "cadenceoption2")}
-        ></option>
-        <option
-          children="Yearly"
-          value="YEARLY"
-          {...getOverrideProps(overrides, "cadenceoption3")}
-        ></option>
+        <option children="Daily" value="DAILY" {...getOverrideProps(overrides, 'cadenceoption0')}></option>
+        <option children="Weekly" value="WEEKLY" {...getOverrideProps(overrides, 'cadenceoption1')}></option>
+        <option children="Monthly" value="MONTHLY" {...getOverrideProps(overrides, 'cadenceoption2')}></option>
+        <option children="Yearly" value="YEARLY" {...getOverrideProps(overrides, 'cadenceoption3')}></option>
       </SelectField>
       <TextField
         label="Entry"
@@ -224,25 +179,22 @@ export default function BiographyCreateForm(props) {
             const modelFields = {
               date,
               cadence,
-              entry: value,
+              entry: value
             };
             const result = onChange(modelFields);
             value = result?.entry ?? value;
           }
           if (errors.entry?.hasError) {
-            runValidationTasks("entry", value);
+            runValidationTasks('entry', value);
           }
           setEntry(value);
         }}
-        onBlur={() => runValidationTasks("entry", entry)}
+        onBlur={() => runValidationTasks('entry', entry)}
         errorMessage={errors.entry?.errorMessage}
         hasError={errors.entry?.hasError}
-        {...getOverrideProps(overrides, "entry")}
+        {...getOverrideProps(overrides, 'entry')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -250,18 +202,15 @@ export default function BiographyCreateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

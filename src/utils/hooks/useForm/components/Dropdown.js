@@ -36,17 +36,13 @@ const Dropdown = ({
   isInvalid,
   onChange,
   label,
-    value,
+  value
 }) => {
-
   const [id] = useState(generateId());
 
-  const selected = React.useMemo(
-      () => {
-        return dropdownConfig.options.find(({id}) => id === value)?.id
-      },
-      [value]
-  );
+  const selected = React.useMemo(() => {
+    return dropdownConfig.options.find(({ id }) => id === value)?.id;
+  }, [value]);
 
   return (
     <>
@@ -59,7 +55,7 @@ const Dropdown = ({
         inputValue={selected}
         renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
         onChange={(e) => onChange(dropdownConfig.options.find(({ text }) => text === e.target.textContent).id)}
-        size={"small"}
+        size={'small'}
       />
     </>
   );

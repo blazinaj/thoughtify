@@ -22,9 +22,12 @@ const DataAccordionItem = ({
   titleField = 'name',
   subTitleField = 'description',
   dateField = 'createdAt',
-                               accordionStyle = {}
+  accordionStyle = {}
 }) => (
-  <Accordion TransitionProps={{ unmountOnExit: true }} sx={typeof(accordionStyle) === 'function' ? accordionStyle(item) : accordionStyle}>
+  <Accordion
+    TransitionProps={{ unmountOnExit: true }}
+    sx={typeof accordionStyle === 'function' ? accordionStyle(item) : accordionStyle}
+  >
     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel3a-content" id={`panel3a-header${item?.id}`}>
       {handleIcon && <span style={{ marginRight: '1em' }}>{handleIcon(item)}</span>}
       <Typography className={classes.heading}>{handleTitle(item, titleField)}</Typography>

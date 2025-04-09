@@ -5,18 +5,12 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SwitchField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Task } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, SwitchField, TextField } from '@aws-amplify/ui-react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Task } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function TaskUpdateForm(props) {
   const {
     id: idProp,
@@ -30,10 +24,10 @@ export default function TaskUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: "",
+    name: '',
     isComplete: false,
-    userID: "",
-    owner: "",
+    userID: '',
+    owner: ''
   };
   const [name, setName] = React.useState(initialValues.name);
   const [isComplete, setIsComplete] = React.useState(initialValues.isComplete);
@@ -41,9 +35,7 @@ export default function TaskUpdateForm(props) {
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = taskRecord
-      ? { ...initialValues, ...taskRecord }
-      : initialValues;
+    const cleanValues = taskRecord ? { ...initialValues, ...taskRecord } : initialValues;
     setName(cleanValues.name);
     setIsComplete(cleanValues.isComplete);
     setUserID(cleanValues.userID);
@@ -53,9 +45,7 @@ export default function TaskUpdateForm(props) {
   const [taskRecord, setTaskRecord] = React.useState(taskModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(Task, idProp)
-        : taskModelProp;
+      const record = idProp ? await DataStore.query(Task, idProp) : taskModelProp;
       setTaskRecord(record);
     };
     queryData();
@@ -64,18 +54,11 @@ export default function TaskUpdateForm(props) {
   const validations = {
     name: [],
     isComplete: [],
-    userID: [{ type: "Required" }],
-    owner: [],
+    userID: [{ type: 'Required' }],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -96,21 +79,15 @@ export default function TaskUpdateForm(props) {
           name,
           isComplete,
           userID,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -122,7 +99,7 @@ export default function TaskUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -140,7 +117,7 @@ export default function TaskUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "TaskUpdateForm")}
+      {...getOverrideProps(overrides, 'TaskUpdateForm')}
       {...rest}
     >
       <TextField
@@ -155,20 +132,20 @@ export default function TaskUpdateForm(props) {
               name: value,
               isComplete,
               userID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
           }
           if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+            runValidationTasks('name', value);
           }
           setName(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
+        onBlur={() => runValidationTasks('name', name)}
         errorMessage={errors.name?.errorMessage}
         hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
+        {...getOverrideProps(overrides, 'name')}
       ></TextField>
       <SwitchField
         label="Is complete"
@@ -182,20 +159,20 @@ export default function TaskUpdateForm(props) {
               name,
               isComplete: value,
               userID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.isComplete ?? value;
           }
           if (errors.isComplete?.hasError) {
-            runValidationTasks("isComplete", value);
+            runValidationTasks('isComplete', value);
           }
           setIsComplete(value);
         }}
-        onBlur={() => runValidationTasks("isComplete", isComplete)}
+        onBlur={() => runValidationTasks('isComplete', isComplete)}
         errorMessage={errors.isComplete?.errorMessage}
         hasError={errors.isComplete?.hasError}
-        {...getOverrideProps(overrides, "isComplete")}
+        {...getOverrideProps(overrides, 'isComplete')}
       ></SwitchField>
       <TextField
         label="User id"
@@ -209,20 +186,20 @@ export default function TaskUpdateForm(props) {
               name,
               isComplete,
               userID: value,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.userID ?? value;
           }
           if (errors.userID?.hasError) {
-            runValidationTasks("userID", value);
+            runValidationTasks('userID', value);
           }
           setUserID(value);
         }}
-        onBlur={() => runValidationTasks("userID", userID)}
+        onBlur={() => runValidationTasks('userID', userID)}
         errorMessage={errors.userID?.errorMessage}
         hasError={errors.userID?.hasError}
-        {...getOverrideProps(overrides, "userID")}
+        {...getOverrideProps(overrides, 'userID')}
       ></TextField>
       <TextField
         label="Owner"
@@ -236,25 +213,22 @@ export default function TaskUpdateForm(props) {
               name,
               isComplete,
               userID,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -263,21 +237,15 @@ export default function TaskUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || taskModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || taskModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || taskModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

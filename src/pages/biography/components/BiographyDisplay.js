@@ -1,25 +1,23 @@
-import {Biography, JournalCadence, Thought} from '../../../models';
+import { Biography, JournalCadence, Thought } from '../../../models';
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {handleCompletion} from '../../../utils/openai/functions/generate';
+import { useEffect, useState } from 'react';
+import { handleCompletion } from '../../../utils/openai/functions/generate';
 import Card from '../../../utils/components/Card';
 import LoadingScreen from '../../../demo/components/LoadingScreen';
-import {DataStore} from "@aws-amplify/datastore";
-import {differenceInDays} from "date-fns";
-import {useUserContext} from "../../../contexts/UserContext";
+import { DataStore } from '@aws-amplify/datastore';
+import { differenceInDays } from 'date-fns';
+import { useUserContext } from '../../../contexts/UserContext';
 
 export const BiographyDisplay = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const getLatestBiography = ({biographies}) => {
-
+  const getLatestBiography = ({ biographies }) => {
     const sortedBiography = biographies.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     return sortedBiography[0];
+  };
 
-  }
-
-  const isBiographyUpToDate = ({biographies, cadence, thoughts}) => {
+  const isBiographyUpToDate = ({ biographies, cadence, thoughts }) => {
     if (!biographies || biographies.length < 1) {
       return false;
     }
@@ -45,22 +43,21 @@ export const BiographyDisplay = () => {
     if (cadence === JournalCadence.YEARLY) {
       return difference <= 365;
     }
-  }
+  };
 
   // uses thoughts to create a biography
   // biography is a collection of pages
   const getBiography = async () => {
-
     const biographies = await DataStore.query(Biography);
 
-    const isUpToDate = isBiographyUpToDate({biographies, cadence: JournalCadence.DAILY});
+    const isUpToDate = isBiographyUpToDate({ biographies, cadence: JournalCadence.DAILY });
 
     if (isUpToDate) {
       // eslint-disable-next-line consistent-return
-      return JSON.parse(getLatestBiography({biographies}).entry);
+      return JSON.parse(getLatestBiography({ biographies }).entry);
     }
 
-    const thoughts = await DataStore.query(Thought)
+    const thoughts = await DataStore.query(Thought);
 
     const prompt = `
       Generate a biography based on the following user's thoughts:
@@ -69,7 +66,7 @@ export const BiographyDisplay = () => {
         .map((thought) => {
           return `${thought?.date || thought.createdAt} - ${thought?.extract?.summary || thought.input}`;
         })
-      .join('\n')}
+        .join('\n')}
       
       Output the biography as a collection of pages. Javascript parseable JSON array of strings.
      
@@ -85,27 +82,26 @@ export const BiographyDisplay = () => {
     const parsedBiography = JSON.parse(completion);
 
     await DataStore.save(
-
       new Biography({
         date: new Date().toISOString(),
         entry: completion,
         cadence: JournalCadence.DAILY
       })
-    )
+    );
 
     return parsedBiography;
   };
 
   const [bio, setBio] = useState(null);
 
-  const {user} = useUserContext();
+  const { user } = useUserContext();
 
   useEffect(() => {
     if (!bio) {
       setIsLoading(true);
       getBiography()
         .then((res) => {
-          console.log({res})
+          console.log({ res });
           setBio(res);
         })
         .finally(() => {
@@ -115,20 +111,16 @@ export const BiographyDisplay = () => {
   }, []);
 
   if (isLoading) {
-    return <LoadingScreen  sx={{marginTop: "15vh"}}  />;
+    return <LoadingScreen sx={{ marginTop: '15vh' }} />;
   }
 
   return (
-    <Card
-      subTitle={`${new Date().toLocaleDateString()}`}
-    >
+    <Card subTitle={`${new Date().toLocaleDateString()}`}>
       {Object.entries(bio)?.map(([pageNumber, page]) => {
         return (
           <>
-            <div className="demoPage">
-              {page}
-            </div>
-            <hr  style={{ marginBottom: '1em', marginTop: '1em' }} />
+            <div className="demoPage">{page}</div>
+            <hr style={{ marginBottom: '1em', marginTop: '1em' }} />
           </>
         );
       })}

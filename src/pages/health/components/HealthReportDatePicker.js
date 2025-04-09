@@ -8,117 +8,103 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers';
 
 function AutocompleteField(props) {
-    const {
-        label,
-        disabled,
-        readOnly,
-        id,
-        value,
-        onChange,
-        InputProps: { ref, startAdornment, endAdornment } = {},
-        inputProps,
-        options = [],
-    } = props;
+  const {
+    label,
+    disabled,
+    readOnly,
+    id,
+    value,
+    onChange,
+    InputProps: { ref, startAdornment, endAdornment } = {},
+    inputProps,
+    options = []
+  } = props;
 
-    const mergeAdornments = (...adornments) => {
-        const nonNullAdornments = adornments.filter((el) => el != null);
-        if (nonNullAdornments.length === 0) {
-            return null;
-        }
+  const mergeAdornments = (...adornments) => {
+    const nonNullAdornments = adornments.filter((el) => el != null);
+    if (nonNullAdornments.length === 0) {
+      return null;
+    }
 
-        if (nonNullAdornments.length === 1) {
-            return nonNullAdornments[0];
-        }
-
-        return (
-            <Stack direction="row">
-                {nonNullAdornments.map((adornment, index) => (
-                    <React.Fragment key={index}>{adornment}</React.Fragment>
-                ))}
-            </Stack>
-        );
-    };
+    if (nonNullAdornments.length === 1) {
+      return nonNullAdornments[0];
+    }
 
     return (
-        <Autocomplete
-            id={id}
-            options={options}
-            disabled={disabled}
-            readOnly={readOnly}
-            ref={ref}
-            sx={{ minWidth: 250 }}
-
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label={label}
-                    inputProps={{ ...params.inputProps, ...inputProps }}
-                    /* eslint-disable-next-line react/jsx-no-duplicate-props */
-                    InputProps={{
-                        ...params.InputProps,
-                        startAdornment: mergeAdornments(
-                            startAdornment,
-                            params.InputProps.startAdornment,
-                        ),
-                        endAdornment: mergeAdornments(
-                            endAdornment,
-                            params.InputProps.endAdornment,
-                        ),
-                    }}
-                />
-            )}
-            getOptionLabel={(option) => {
-                if (!dayjs.isDayjs(option)) {
-                    return '';
-                }
-
-                return option.format('MM / DD / YYYY');
-            }}
-            value={value}
-            onChange={(_, newValue) => {
-                onChange?.(newValue, { validationError: null });
-            }}
-            isOptionEqualToValue={(option, valueToCheck) =>
-                option.toISOString() === valueToCheck.toISOString()
-            }
-        />
+      <Stack direction="row">
+        {nonNullAdornments.map((adornment, index) => (
+          <React.Fragment key={index}>{adornment}</React.Fragment>
+        ))}
+      </Stack>
     );
+  };
+
+  return (
+    <Autocomplete
+      id={id}
+      options={options}
+      disabled={disabled}
+      readOnly={readOnly}
+      ref={ref}
+      sx={{ minWidth: 250 }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={label}
+          inputProps={{ ...params.inputProps, ...inputProps }}
+          /* eslint-disable-next-line react/jsx-no-duplicate-props */
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: mergeAdornments(startAdornment, params.InputProps.startAdornment),
+            endAdornment: mergeAdornments(endAdornment, params.InputProps.endAdornment)
+          }}
+        />
+      )}
+      getOptionLabel={(option) => {
+        if (!dayjs.isDayjs(option)) {
+          return '';
+        }
+
+        return option.format('MM / DD / YYYY');
+      }}
+      value={value}
+      onChange={(_, newValue) => {
+        onChange?.(newValue, { validationError: null });
+      }}
+      isOptionEqualToValue={(option, valueToCheck) => option.toISOString() === valueToCheck.toISOString()}
+    />
+  );
 }
 
 function AutocompleteDatePicker(props) {
-    const { options = [], ...other } = props;
+  const { options = [], ...other } = props;
 
-    const optionsLookup = React.useMemo(
-        () =>
-            options.reduce((acc, option) => {
-                acc[option.toISOString()] = true;
-                return acc;
-            }, {}),
-        [options],
-    );
+  const optionsLookup = React.useMemo(
+    () =>
+      options.reduce((acc, option) => {
+        acc[option.toISOString()] = true;
+        return acc;
+      }, {}),
+    [options]
+  );
 
-    return (
-        <DatePicker
-            slots={{ field: AutocompleteField, ...props.slots }}
-            slotProps={{ field: { options } }}
-            shouldDisableDate={(date) => !optionsLookup[date.startOf('day').toISOString()]}
-            renderInput={(params) => (
-                <AutocompleteField {...params} />
-            )}
-            {...other}
-        />
-    );
+  return (
+    <DatePicker
+      slots={{ field: AutocompleteField, ...props.slots }}
+      slotProps={{ field: { options } }}
+      shouldDisableDate={(date) => !optionsLookup[date.startOf('day').toISOString()]}
+      renderInput={(params) => <AutocompleteField {...params} />}
+      {...other}
+    />
+  );
 }
 
 const today = dayjs().startOf('day');
 
-export default function PickerWithAutocompleteField({healthReports = []}) {
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <AutocompleteDatePicker
-                label="Pick a date"
-                options={healthReports}
-            />
-        </LocalizationProvider>
-    );
+export default function PickerWithAutocompleteField({ healthReports = [] }) {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <AutocompleteDatePicker label="Pick a date" options={healthReports} />
+    </LocalizationProvider>
+  );
 }

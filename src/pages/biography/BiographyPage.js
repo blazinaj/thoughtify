@@ -1,8 +1,8 @@
 import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
-import {Container, Grid} from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import {BiographyDisplay} from "./components/BiographyDisplay";
+import { BiographyDisplay } from './components/BiographyDisplay';
 // import {BiographyDisplay} from '../../views/BiographyDisplay/BiographyDisplay';
 
 const BiographyPage = () => {
@@ -13,7 +13,7 @@ const BiographyPage = () => {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Biography"
-          subHeading={"View your Thoughts as an AI-Generated Biography."}
+          subHeading={'View your Thoughts as an AI-Generated Biography.'}
           icon={'prime:book'}
         />
         <Grid container spacing={3}>

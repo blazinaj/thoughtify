@@ -4,32 +4,36 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-import * as React from "react";
-import { AutocompleteProps, GridProps } from "@aws-amplify/ui-react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { LessonNodeLink, LessonNode } from "../models";
+import * as React from 'react';
+import { AutocompleteProps, GridProps } from '@aws-amplify/ui-react';
+import { EscapeHatchProps } from '@aws-amplify/ui-react/internal';
+import { LessonNodeLink, LessonNode } from '../models';
 export declare type ValidationResponse = {
-    hasError: boolean;
-    errorMessage?: string;
+  hasError: boolean;
+  errorMessage?: string;
 };
-export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
+export declare type ValidationFunction<T> = (
+  value: T,
+  validationResponse: ValidationResponse
+) => ValidationResponse | Promise<ValidationResponse>;
 export declare type LessonNodeLinkUpdateFormInputValues = {
-    toLessonNode?: LessonNode;
-    fromLessonNode?: LessonNode;
+  toLessonNode?: LessonNode;
+  fromLessonNode?: LessonNode;
 };
 export declare type LessonNodeLinkUpdateFormValidationValues = {
-    toLessonNode?: ValidationFunction<LessonNode>;
-    fromLessonNode?: ValidationFunction<LessonNode>;
+  toLessonNode?: ValidationFunction<LessonNode>;
+  fromLessonNode?: ValidationFunction<LessonNode>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type LessonNodeLinkUpdateFormOverridesProps = {
-    LessonNodeLinkUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    toLessonNode?: PrimitiveOverrideProps<AutocompleteProps>;
-    fromLessonNode?: PrimitiveOverrideProps<AutocompleteProps>;
+  LessonNodeLinkUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+  toLessonNode?: PrimitiveOverrideProps<AutocompleteProps>;
+  fromLessonNode?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
-export declare type LessonNodeLinkUpdateFormProps = React.PropsWithChildren<{
+export declare type LessonNodeLinkUpdateFormProps = React.PropsWithChildren<
+  {
     overrides?: LessonNodeLinkUpdateFormOverridesProps | undefined | null;
-} & {
+  } & {
     id?: string;
     lessonNodeLink?: LessonNodeLink;
     onSubmit?: (fields: LessonNodeLinkUpdateFormInputValues) => LessonNodeLinkUpdateFormInputValues;
@@ -37,5 +41,6 @@ export declare type LessonNodeLinkUpdateFormProps = React.PropsWithChildren<{
     onError?: (fields: LessonNodeLinkUpdateFormInputValues, errorMessage: string) => void;
     onChange?: (fields: LessonNodeLinkUpdateFormInputValues) => LessonNodeLinkUpdateFormInputValues;
     onValidate?: LessonNodeLinkUpdateFormValidationValues;
-} & React.CSSProperties>;
+  } & React.CSSProperties
+>;
 export default function LessonNodeLinkUpdateForm(props: LessonNodeLinkUpdateFormProps): React.ReactElement;

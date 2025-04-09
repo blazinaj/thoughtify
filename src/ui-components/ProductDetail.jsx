@@ -5,16 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Button,
-  Divider,
-  Flex,
-  Image,
-  Rating,
-  Text,
-} from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Button, Divider, Flex, Image, Rating, Text } from '@aws-amplify/ui-react';
 export default function ProductDetail(props) {
   const { overrides, ...rest } = props;
   return (
@@ -27,7 +20,7 @@ export default function ProductDetail(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "ProductDetail")}
+      {...getOverrideProps(overrides, 'ProductDetail')}
       {...rest}
     >
       <Flex
@@ -42,7 +35,7 @@ export default function ProductDetail(props) {
         basis="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 401")}
+        {...getOverrideProps(overrides, 'Frame 401')}
       >
         <Image
           width="unset"
@@ -56,7 +49,7 @@ export default function ProductDetail(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           objectFit="cover"
-          {...getOverrideProps(overrides, "image")}
+          {...getOverrideProps(overrides, 'image')}
         ></Image>
         <Flex
           gap="32px"
@@ -69,7 +62,7 @@ export default function ProductDetail(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 6")}
+          {...getOverrideProps(overrides, 'Frame 6')}
         >
           <Flex
             gap="8px"
@@ -82,7 +75,7 @@ export default function ProductDetail(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 729766954")}
+            {...getOverrideProps(overrides, 'Frame 729766954')}
           >
             <Text
               fontFamily="Inter"
@@ -104,7 +97,7 @@ export default function ProductDetail(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Basic Tee 6-Pack"
-              {...getOverrideProps(overrides, "Basic Tee 6-Pack")}
+              {...getOverrideProps(overrides, 'Basic Tee 6-Pack')}
             ></Text>
             <Text
               fontFamily="Inter"
@@ -129,7 +122,7 @@ export default function ProductDetail(props) {
               children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in voluptate velit esse cillum dolore eu fugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in voluptate velit esse cillum dolore eu fugiat."
               {...getOverrideProps(
                 overrides,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in voluptate velit esse cillum dolore eu fugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in voluptate velit esse cillum dolore eu fugiat."
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in voluptate velit esse cillum dolore eu fugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in voluptate velit esse cillum dolore eu fugiat.'
               )}
             ></Text>
           </Flex>
@@ -139,7 +132,7 @@ export default function ProductDetail(props) {
             alignSelf="stretch"
             size="small"
             orientation="horizontal"
-            {...getOverrideProps(overrides, "Divider29766957")}
+            {...getOverrideProps(overrides, 'Divider29766957')}
           ></Divider>
           <Flex
             gap="8px"
@@ -152,7 +145,7 @@ export default function ProductDetail(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 729766958")}
+            {...getOverrideProps(overrides, 'Frame 729766958')}
           >
             <Text
               fontFamily="Inter"
@@ -174,7 +167,7 @@ export default function ProductDetail(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Highlights"
-              {...getOverrideProps(overrides, "Highlights")}
+              {...getOverrideProps(overrides, 'Highlights')}
             ></Text>
             <Text
               fontFamily="Inter"
@@ -199,7 +192,7 @@ export default function ProductDetail(props) {
               children="    Hand cut and sewn locally&#xA;    Dyed with our proprietary colors&#xA;    Pre-washed & pre-shrunk&#xA;    Ultra-soft 100% cotton"
               {...getOverrideProps(
                 overrides,
-                "Hand cut and sewn locally Dyed with our proprietary colors Pre-washed & pre-shrunk Ultra-soft 100% cotton"
+                'Hand cut and sewn locally Dyed with our proprietary colors Pre-washed & pre-shrunk Ultra-soft 100% cotton'
               )}
             ></Text>
           </Flex>
@@ -209,7 +202,7 @@ export default function ProductDetail(props) {
             alignSelf="stretch"
             size="small"
             orientation="horizontal"
-            {...getOverrideProps(overrides, "Divider29766961")}
+            {...getOverrideProps(overrides, 'Divider29766961')}
           ></Divider>
           <Flex
             gap="8px"
@@ -222,7 +215,7 @@ export default function ProductDetail(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 729766962")}
+            {...getOverrideProps(overrides, 'Frame 729766962')}
           >
             <Text
               fontFamily="Inter"
@@ -244,7 +237,7 @@ export default function ProductDetail(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Details"
-              {...getOverrideProps(overrides, "Details")}
+              {...getOverrideProps(overrides, 'Details')}
             ></Text>
             <Text
               fontFamily="Inter"
@@ -269,7 +262,7 @@ export default function ProductDetail(props) {
               children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor."
               {...getOverrideProps(
                 overrides,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor."
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.'
               )}
             ></Text>
           </Flex>
@@ -280,7 +273,7 @@ export default function ProductDetail(props) {
         shrink="0"
         size="small"
         orientation="vertical"
-        {...getOverrideProps(overrides, "Divider29766965")}
+        {...getOverrideProps(overrides, 'Divider29766965')}
       ></Divider>
       <Flex
         gap="24px"
@@ -292,7 +285,7 @@ export default function ProductDetail(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 402")}
+        {...getOverrideProps(overrides, 'Frame 402')}
       >
         <Text
           fontFamily="Inter"
@@ -313,7 +306,7 @@ export default function ProductDetail(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="$192"
-          {...getOverrideProps(overrides, "$192")}
+          {...getOverrideProps(overrides, '$192')}
         ></Text>
         <Flex
           gap="16px"
@@ -325,13 +318,9 @@ export default function ProductDetail(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Frame 27")}
+          {...getOverrideProps(overrides, 'Frame 27')}
         >
-          <Rating
-            shrink="0"
-            size="default"
-            {...getOverrideProps(overrides, "Rating")}
-          ></Rating>
+          <Rating shrink="0" size="default" {...getOverrideProps(overrides, 'Rating')}></Rating>
           <Text
             fontFamily="Inter"
             fontSize="14px"
@@ -352,7 +341,7 @@ export default function ProductDetail(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="12 reviews"
-            {...getOverrideProps(overrides, "12 reviews")}
+            {...getOverrideProps(overrides, '12 reviews')}
           ></Text>
         </Flex>
         <Flex
@@ -365,7 +354,7 @@ export default function ProductDetail(props) {
           justifyContent="unset"
           shrink="0"
           position="relative"
-          {...getOverrideProps(overrides, "Group 27")}
+          {...getOverrideProps(overrides, 'Group 27')}
         >
           <Button
             width="371px"
@@ -376,7 +365,7 @@ export default function ProductDetail(props) {
             isDisabled={false}
             variation="primary"
             children="Primary Button"
-            {...getOverrideProps(overrides, "Button29766972")}
+            {...getOverrideProps(overrides, 'Button29766972')}
           ></Button>
           <Flex
             gap="24px"
@@ -389,7 +378,7 @@ export default function ProductDetail(props) {
             top="40px"
             left="0px"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 2829766973")}
+            {...getOverrideProps(overrides, 'Frame 2829766973')}
           >
             <Button
               width="75px"
@@ -398,7 +387,7 @@ export default function ProductDetail(props) {
               isDisabled={true}
               variation="primary"
               children="XXS"
-              {...getOverrideProps(overrides, "Button29766974")}
+              {...getOverrideProps(overrides, 'Button29766974')}
             ></Button>
             <Button
               width="75px"
@@ -407,7 +396,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="XS"
-              {...getOverrideProps(overrides, "Button29766975")}
+              {...getOverrideProps(overrides, 'Button29766975')}
             ></Button>
             <Button
               width="74px"
@@ -416,7 +405,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="S"
-              {...getOverrideProps(overrides, "Button29766976")}
+              {...getOverrideProps(overrides, 'Button29766976')}
             ></Button>
             <Button
               width="75px"
@@ -425,7 +414,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="M"
-              {...getOverrideProps(overrides, "Button29766977")}
+              {...getOverrideProps(overrides, 'Button29766977')}
             ></Button>
           </Flex>
           <Flex
@@ -439,7 +428,7 @@ export default function ProductDetail(props) {
             top="112px"
             left="0px"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame 2829766978")}
+            {...getOverrideProps(overrides, 'Frame 2829766978')}
           >
             <Button
               gap="24px"
@@ -449,7 +438,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="L"
-              {...getOverrideProps(overrides, "Button29766979")}
+              {...getOverrideProps(overrides, 'Button29766979')}
             ></Button>
             <Button
               gap="24px"
@@ -459,7 +448,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="XL"
-              {...getOverrideProps(overrides, "Button29766980")}
+              {...getOverrideProps(overrides, 'Button29766980')}
             ></Button>
             <Button
               gap="24px"
@@ -469,7 +458,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="2XL"
-              {...getOverrideProps(overrides, "Button29766981")}
+              {...getOverrideProps(overrides, 'Button29766981')}
             ></Button>
             <Button
               gap="24px"
@@ -479,7 +468,7 @@ export default function ProductDetail(props) {
               isDisabled={false}
               variation="primary"
               children="3XL"
-              {...getOverrideProps(overrides, "Button29766982")}
+              {...getOverrideProps(overrides, 'Button29766982')}
             ></Button>
           </Flex>
           <Text
@@ -503,7 +492,7 @@ export default function ProductDetail(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Size Guide"
-            {...getOverrideProps(overrides, "Size Guide")}
+            {...getOverrideProps(overrides, 'Size Guide')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -526,7 +515,7 @@ export default function ProductDetail(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Size "
-            {...getOverrideProps(overrides, "Size")}
+            {...getOverrideProps(overrides, 'Size')}
           ></Text>
         </Flex>
       </Flex>

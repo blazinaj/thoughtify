@@ -56,7 +56,6 @@ export const useDatastore = ({
    * Queries the items from DataStore and stores into state
    */
   const handleQuery = () => {
-
     if (!model) {
       console.log(`No model provided for ${typename || model?.name}`);
       return;

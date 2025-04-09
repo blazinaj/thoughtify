@@ -4,47 +4,51 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { SubscriptionPlan } from "../models";
+import * as React from 'react';
+import { GridProps, SelectFieldProps, TextFieldProps } from '@aws-amplify/ui-react';
+import { SubscriptionPlan } from '../models';
 export declare type EscapeHatchProps = {
-    [elementHierarchy: string]: Record<string, unknown>;
+  [elementHierarchy: string]: Record<string, unknown>;
 } | null;
 export declare type VariantValues = {
-    [key: string]: string;
+  [key: string]: string;
 };
 export declare type Variant = {
-    variantValues: VariantValues;
-    overrides: EscapeHatchProps;
+  variantValues: VariantValues;
+  overrides: EscapeHatchProps;
 };
 export declare type ValidationResponse = {
-    hasError: boolean;
-    errorMessage?: string;
+  hasError: boolean;
+  errorMessage?: string;
 };
-export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
+export declare type ValidationFunction<T> = (
+  value: T,
+  validationResponse: ValidationResponse
+) => ValidationResponse | Promise<ValidationResponse>;
 export declare type SubscriptionPlanUpdateFormInputValues = {
-    subscriptionTier?: string;
-    status?: string;
-    squareSubscriptionID?: string;
-    owner?: string;
+  subscriptionTier?: string;
+  status?: string;
+  squareSubscriptionID?: string;
+  owner?: string;
 };
 export declare type SubscriptionPlanUpdateFormValidationValues = {
-    subscriptionTier?: ValidationFunction<string>;
-    status?: ValidationFunction<string>;
-    squareSubscriptionID?: ValidationFunction<string>;
-    owner?: ValidationFunction<string>;
+  subscriptionTier?: ValidationFunction<string>;
+  status?: ValidationFunction<string>;
+  squareSubscriptionID?: ValidationFunction<string>;
+  owner?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SubscriptionPlanUpdateFormOverridesProps = {
-    SubscriptionPlanUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    subscriptionTier?: PrimitiveOverrideProps<SelectFieldProps>;
-    status?: PrimitiveOverrideProps<SelectFieldProps>;
-    squareSubscriptionID?: PrimitiveOverrideProps<TextFieldProps>;
-    owner?: PrimitiveOverrideProps<TextFieldProps>;
+  SubscriptionPlanUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+  subscriptionTier?: PrimitiveOverrideProps<SelectFieldProps>;
+  status?: PrimitiveOverrideProps<SelectFieldProps>;
+  squareSubscriptionID?: PrimitiveOverrideProps<TextFieldProps>;
+  owner?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type SubscriptionPlanUpdateFormProps = React.PropsWithChildren<{
+export declare type SubscriptionPlanUpdateFormProps = React.PropsWithChildren<
+  {
     overrides?: SubscriptionPlanUpdateFormOverridesProps | undefined | null;
-} & {
+  } & {
     id?: string;
     subscriptionPlan?: SubscriptionPlan;
     onSubmit?: (fields: SubscriptionPlanUpdateFormInputValues) => SubscriptionPlanUpdateFormInputValues;
@@ -52,5 +56,6 @@ export declare type SubscriptionPlanUpdateFormProps = React.PropsWithChildren<{
     onError?: (fields: SubscriptionPlanUpdateFormInputValues, errorMessage: string) => void;
     onChange?: (fields: SubscriptionPlanUpdateFormInputValues) => SubscriptionPlanUpdateFormInputValues;
     onValidate?: SubscriptionPlanUpdateFormValidationValues;
-} & React.CSSProperties>;
+  } & React.CSSProperties
+>;
 export default function SubscriptionPlanUpdateForm(props: SubscriptionPlanUpdateFormProps): React.ReactElement;

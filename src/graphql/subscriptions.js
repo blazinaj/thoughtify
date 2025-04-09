@@ -2,10 +2,7 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateBiography = /* GraphQL */ `
-  subscription OnCreateBiography(
-    $filter: ModelSubscriptionBiographyFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateBiography($filter: ModelSubscriptionBiographyFilterInput, $owner: String) {
     onCreateBiography(filter: $filter, owner: $owner) {
       id
       date
@@ -27,10 +24,7 @@ export const onCreateBiography = /* GraphQL */ `
   }
 `;
 export const onUpdateBiography = /* GraphQL */ `
-  subscription OnUpdateBiography(
-    $filter: ModelSubscriptionBiographyFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateBiography($filter: ModelSubscriptionBiographyFilterInput, $owner: String) {
     onUpdateBiography(filter: $filter, owner: $owner) {
       id
       date
@@ -52,10 +46,7 @@ export const onUpdateBiography = /* GraphQL */ `
   }
 `;
 export const onDeleteBiography = /* GraphQL */ `
-  subscription OnDeleteBiography(
-    $filter: ModelSubscriptionBiographyFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteBiography($filter: ModelSubscriptionBiographyFilterInput, $owner: String) {
     onDeleteBiography(filter: $filter, owner: $owner) {
       id
       date
@@ -77,10 +68,7 @@ export const onDeleteBiography = /* GraphQL */ `
   }
 `;
 export const onCreateHealthReport = /* GraphQL */ `
-  subscription OnCreateHealthReport(
-    $filter: ModelSubscriptionHealthReportFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateHealthReport($filter: ModelSubscriptionHealthReportFilterInput, $owner: String) {
     onCreateHealthReport(filter: $filter, owner: $owner) {
       id
       date
@@ -102,10 +90,7 @@ export const onCreateHealthReport = /* GraphQL */ `
   }
 `;
 export const onUpdateHealthReport = /* GraphQL */ `
-  subscription OnUpdateHealthReport(
-    $filter: ModelSubscriptionHealthReportFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateHealthReport($filter: ModelSubscriptionHealthReportFilterInput, $owner: String) {
     onUpdateHealthReport(filter: $filter, owner: $owner) {
       id
       date
@@ -127,10 +112,7 @@ export const onUpdateHealthReport = /* GraphQL */ `
   }
 `;
 export const onDeleteHealthReport = /* GraphQL */ `
-  subscription OnDeleteHealthReport(
-    $filter: ModelSubscriptionHealthReportFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteHealthReport($filter: ModelSubscriptionHealthReportFilterInput, $owner: String) {
     onDeleteHealthReport(filter: $filter, owner: $owner) {
       id
       date
@@ -152,10 +134,7 @@ export const onDeleteHealthReport = /* GraphQL */ `
   }
 `;
 export const onCreateJournalEntry = /* GraphQL */ `
-  subscription OnCreateJournalEntry(
-    $filter: ModelSubscriptionJournalEntryFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateJournalEntry($filter: ModelSubscriptionJournalEntryFilterInput, $owner: String) {
     onCreateJournalEntry(filter: $filter, owner: $owner) {
       id
       date
@@ -178,10 +157,7 @@ export const onCreateJournalEntry = /* GraphQL */ `
   }
 `;
 export const onUpdateJournalEntry = /* GraphQL */ `
-  subscription OnUpdateJournalEntry(
-    $filter: ModelSubscriptionJournalEntryFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateJournalEntry($filter: ModelSubscriptionJournalEntryFilterInput, $owner: String) {
     onUpdateJournalEntry(filter: $filter, owner: $owner) {
       id
       date
@@ -204,10 +180,7 @@ export const onUpdateJournalEntry = /* GraphQL */ `
   }
 `;
 export const onDeleteJournalEntry = /* GraphQL */ `
-  subscription OnDeleteJournalEntry(
-    $filter: ModelSubscriptionJournalEntryFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteJournalEntry($filter: ModelSubscriptionJournalEntryFilterInput, $owner: String) {
     onDeleteJournalEntry(filter: $filter, owner: $owner) {
       id
       date
@@ -230,10 +203,7 @@ export const onDeleteJournalEntry = /* GraphQL */ `
   }
 `;
 export const onCreateNotification = /* GraphQL */ `
-  subscription OnCreateNotification(
-    $filter: ModelSubscriptionNotificationFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateNotification($filter: ModelSubscriptionNotificationFilterInput, $owner: String) {
     onCreateNotification(filter: $filter, owner: $owner) {
       id
       title
@@ -253,10 +223,7 @@ export const onCreateNotification = /* GraphQL */ `
   }
 `;
 export const onUpdateNotification = /* GraphQL */ `
-  subscription OnUpdateNotification(
-    $filter: ModelSubscriptionNotificationFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateNotification($filter: ModelSubscriptionNotificationFilterInput, $owner: String) {
     onUpdateNotification(filter: $filter, owner: $owner) {
       id
       title
@@ -276,10 +243,7 @@ export const onUpdateNotification = /* GraphQL */ `
   }
 `;
 export const onDeleteNotification = /* GraphQL */ `
-  subscription OnDeleteNotification(
-    $filter: ModelSubscriptionNotificationFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteNotification($filter: ModelSubscriptionNotificationFilterInput, $owner: String) {
     onDeleteNotification(filter: $filter, owner: $owner) {
       id
       title
@@ -299,10 +263,7 @@ export const onDeleteNotification = /* GraphQL */ `
   }
 `;
 export const onCreateSubscriptionPlan = /* GraphQL */ `
-  subscription OnCreateSubscriptionPlan(
-    $filter: ModelSubscriptionSubscriptionPlanFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateSubscriptionPlan($filter: ModelSubscriptionSubscriptionPlanFilterInput, $owner: String) {
     onCreateSubscriptionPlan(filter: $filter, owner: $owner) {
       id
       subscriptionTier
@@ -319,10 +280,7 @@ export const onCreateSubscriptionPlan = /* GraphQL */ `
   }
 `;
 export const onUpdateSubscriptionPlan = /* GraphQL */ `
-  subscription OnUpdateSubscriptionPlan(
-    $filter: ModelSubscriptionSubscriptionPlanFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateSubscriptionPlan($filter: ModelSubscriptionSubscriptionPlanFilterInput, $owner: String) {
     onUpdateSubscriptionPlan(filter: $filter, owner: $owner) {
       id
       subscriptionTier
@@ -339,10 +297,7 @@ export const onUpdateSubscriptionPlan = /* GraphQL */ `
   }
 `;
 export const onDeleteSubscriptionPlan = /* GraphQL */ `
-  subscription OnDeleteSubscriptionPlan(
-    $filter: ModelSubscriptionSubscriptionPlanFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteSubscriptionPlan($filter: ModelSubscriptionSubscriptionPlanFilterInput, $owner: String) {
     onDeleteSubscriptionPlan(filter: $filter, owner: $owner) {
       id
       subscriptionTier
@@ -359,10 +314,7 @@ export const onDeleteSubscriptionPlan = /* GraphQL */ `
   }
 `;
 export const onCreateThought = /* GraphQL */ `
-  subscription OnCreateThought(
-    $filter: ModelSubscriptionThoughtFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateThought($filter: ModelSubscriptionThoughtFilterInput, $owner: String) {
     onCreateThought(filter: $filter, owner: $owner) {
       id
       date
@@ -395,10 +347,7 @@ export const onCreateThought = /* GraphQL */ `
   }
 `;
 export const onUpdateThought = /* GraphQL */ `
-  subscription OnUpdateThought(
-    $filter: ModelSubscriptionThoughtFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateThought($filter: ModelSubscriptionThoughtFilterInput, $owner: String) {
     onUpdateThought(filter: $filter, owner: $owner) {
       id
       date
@@ -431,10 +380,7 @@ export const onUpdateThought = /* GraphQL */ `
   }
 `;
 export const onDeleteThought = /* GraphQL */ `
-  subscription OnDeleteThought(
-    $filter: ModelSubscriptionThoughtFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteThought($filter: ModelSubscriptionThoughtFilterInput, $owner: String) {
     onDeleteThought(filter: $filter, owner: $owner) {
       id
       date
@@ -467,10 +413,7 @@ export const onDeleteThought = /* GraphQL */ `
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser(
-    $filter: ModelSubscriptionUserFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput, $owner: String) {
     onCreateUser(filter: $filter, owner: $owner) {
       id
       firstName
@@ -496,10 +439,7 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser(
-    $filter: ModelSubscriptionUserFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput, $owner: String) {
     onUpdateUser(filter: $filter, owner: $owner) {
       id
       firstName
@@ -525,10 +465,7 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser(
-    $filter: ModelSubscriptionUserFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput, $owner: String) {
     onDeleteUser(filter: $filter, owner: $owner) {
       id
       firstName
@@ -554,10 +491,7 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateBiographyThoughts = /* GraphQL */ `
-  subscription OnCreateBiographyThoughts(
-    $filter: ModelSubscriptionBiographyThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateBiographyThoughts($filter: ModelSubscriptionBiographyThoughtsFilterInput, $owner: String) {
     onCreateBiographyThoughts(filter: $filter, owner: $owner) {
       id
       biographyId
@@ -600,10 +534,7 @@ export const onCreateBiographyThoughts = /* GraphQL */ `
   }
 `;
 export const onUpdateBiographyThoughts = /* GraphQL */ `
-  subscription OnUpdateBiographyThoughts(
-    $filter: ModelSubscriptionBiographyThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateBiographyThoughts($filter: ModelSubscriptionBiographyThoughtsFilterInput, $owner: String) {
     onUpdateBiographyThoughts(filter: $filter, owner: $owner) {
       id
       biographyId
@@ -646,10 +577,7 @@ export const onUpdateBiographyThoughts = /* GraphQL */ `
   }
 `;
 export const onDeleteBiographyThoughts = /* GraphQL */ `
-  subscription OnDeleteBiographyThoughts(
-    $filter: ModelSubscriptionBiographyThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteBiographyThoughts($filter: ModelSubscriptionBiographyThoughtsFilterInput, $owner: String) {
     onDeleteBiographyThoughts(filter: $filter, owner: $owner) {
       id
       biographyId
@@ -692,10 +620,7 @@ export const onDeleteBiographyThoughts = /* GraphQL */ `
   }
 `;
 export const onCreateHealthReportThoughts = /* GraphQL */ `
-  subscription OnCreateHealthReportThoughts(
-    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateHealthReportThoughts($filter: ModelSubscriptionHealthReportThoughtsFilterInput, $owner: String) {
     onCreateHealthReportThoughts(filter: $filter, owner: $owner) {
       id
       healthReportId
@@ -738,10 +663,7 @@ export const onCreateHealthReportThoughts = /* GraphQL */ `
   }
 `;
 export const onUpdateHealthReportThoughts = /* GraphQL */ `
-  subscription OnUpdateHealthReportThoughts(
-    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateHealthReportThoughts($filter: ModelSubscriptionHealthReportThoughtsFilterInput, $owner: String) {
     onUpdateHealthReportThoughts(filter: $filter, owner: $owner) {
       id
       healthReportId
@@ -784,10 +706,7 @@ export const onUpdateHealthReportThoughts = /* GraphQL */ `
   }
 `;
 export const onDeleteHealthReportThoughts = /* GraphQL */ `
-  subscription OnDeleteHealthReportThoughts(
-    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteHealthReportThoughts($filter: ModelSubscriptionHealthReportThoughtsFilterInput, $owner: String) {
     onDeleteHealthReportThoughts(filter: $filter, owner: $owner) {
       id
       healthReportId
@@ -830,10 +749,7 @@ export const onDeleteHealthReportThoughts = /* GraphQL */ `
   }
 `;
 export const onCreateJournalEntryThoughts = /* GraphQL */ `
-  subscription OnCreateJournalEntryThoughts(
-    $filter: ModelSubscriptionJournalEntryThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnCreateJournalEntryThoughts($filter: ModelSubscriptionJournalEntryThoughtsFilterInput, $owner: String) {
     onCreateJournalEntryThoughts(filter: $filter, owner: $owner) {
       id
       journalEntryId
@@ -877,10 +793,7 @@ export const onCreateJournalEntryThoughts = /* GraphQL */ `
   }
 `;
 export const onUpdateJournalEntryThoughts = /* GraphQL */ `
-  subscription OnUpdateJournalEntryThoughts(
-    $filter: ModelSubscriptionJournalEntryThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnUpdateJournalEntryThoughts($filter: ModelSubscriptionJournalEntryThoughtsFilterInput, $owner: String) {
     onUpdateJournalEntryThoughts(filter: $filter, owner: $owner) {
       id
       journalEntryId
@@ -924,10 +837,7 @@ export const onUpdateJournalEntryThoughts = /* GraphQL */ `
   }
 `;
 export const onDeleteJournalEntryThoughts = /* GraphQL */ `
-  subscription OnDeleteJournalEntryThoughts(
-    $filter: ModelSubscriptionJournalEntryThoughtsFilterInput
-    $owner: String
-  ) {
+  subscription OnDeleteJournalEntryThoughts($filter: ModelSubscriptionJournalEntryThoughtsFilterInput, $owner: String) {
     onDeleteJournalEntryThoughts(filter: $filter, owner: $owner) {
       id
       journalEntryId
