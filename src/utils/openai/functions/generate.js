@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from 'openai';
-import { AI_PROMPT_RULES } from '../../../api/tutors/tutorChatCompletion';
 
 const configuration = new Configuration({
   apiKey: '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'

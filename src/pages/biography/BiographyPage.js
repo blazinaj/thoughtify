@@ -1,10 +1,14 @@
 import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
-import { Container, Grid } from '@mui/material';
+import {Container} from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import { BiographyDisplay } from './components/BiographyDisplay';
-// import {BiographyDisplay} from '../../views/BiographyDisplay/BiographyDisplay';
+import {BiographyDisplay} from './components/BiographyDisplay';
 
+/**
+ * BiographyPage component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const BiographyPage = () => {
   const { themeStretch } = useSettings();
 
@@ -16,11 +20,7 @@ const BiographyPage = () => {
           subHeading={'View your Thoughts as an AI-Generated Biography.'}
           icon={'prime:book'}
         />
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <BiographyDisplay />
-          </Grid>
-        </Grid>
+        <BiographyDisplay />
       </Container>
     </Page>
   );
