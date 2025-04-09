@@ -11,7 +11,7 @@ import { Avatar, Box, Card, CardContent, Grid, Link, Typography } from '@mui/mat
 import { fDate } from '../../../../utils/functions/formatTime';
 import { fShortenNumber } from '../../../../utils/functions/formatNumber';
 //
-import SvgIconStyle from '../../../../utils/components/SvgIconStyle';
+import SvgIconStyle from '../../../components/SvgIconStyle';
 
 // ----------------------------------------------------------------------
 

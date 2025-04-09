@@ -5,7 +5,6 @@ import { alpha, styled } from '@mui/material/styles';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('span')(({ theme, styleProps }) => {
-  const isLight = theme.palette.mode === 'light';
   const { color, variant } = styleProps;
 
   const styleFilled = (color) => ({
@@ -20,7 +19,7 @@ const RootStyle = styled('span')(({ theme, styleProps }) => {
   });
 
   const styleGhost = (color) => ({
-    color: theme.palette[color][isLight ? 'dark' : 'light'],
+    color: theme.palette[color].dark,
     backgroundColor: alpha(theme.palette[color].main, 0.16)
   });
 
@@ -54,7 +53,7 @@ const RootStyle = styled('span')(({ theme, styleProps }) => {
             border: `1px solid ${theme.palette.grey[500_32]}`
           }),
           ...(variant === 'ghost' && {
-            color: isLight ? theme.palette.text.secondary : theme.palette.common.white,
+            color: theme.palette.text.secondary,
             backgroundColor: theme.palette.grey[500_16]
           })
         })

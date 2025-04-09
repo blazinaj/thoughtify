@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 /**
  * BiographySection component. Displays a section of the biography.
@@ -8,10 +8,10 @@ import * as React from "react";
  * @constructor
  */
 export const BiographySection = ({ page, pageNumber }) => {
-    return (
-        <span key={pageNumber}>
-            <div className="demoPage">{page}</div>
-            <hr style={{ marginBottom: '1em', marginTop: '1em' }} />
-        </span>
-    )
-}
+  return (
+    <span key={pageNumber}>
+      <div className="demoPage">{page}</div>
+      <hr style={{ marginBottom: '1em', marginTop: '1em' }} />
+    </span>
+  );
+};

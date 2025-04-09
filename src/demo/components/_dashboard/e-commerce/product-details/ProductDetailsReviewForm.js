@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import { Button, Rating, TextField, Typography, FormHelperText, Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // utils
-import fakeRequest from '../../../../../utils/fakeRequest';
+import fakeRequest from '../../../../utils/fakeRequest';
 
 // ----------------------------------------------------------------------
 

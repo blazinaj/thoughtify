@@ -19,7 +19,7 @@ import {
   FormControlLabel
 } from '@mui/material';
 // utils
-import fakeRequest from '../../../../utils/fakeRequest';
+import fakeRequest from '../../../utils/fakeRequest';
 //
 import { QuillEditor } from '../../editor';
 import { UploadSingleFile } from '../../upload';

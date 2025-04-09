@@ -1,5 +1,5 @@
-import { API, graphqlOperation } from 'aws-amplify';
-import { listUsers } from '../../graphql/queries';
+import {API, graphqlOperation} from 'aws-amplify';
+import {listUsers} from "./graphql/listUsers";
 
 /**
  * Fetches the user object from the database based on the cognitoSub field matching the logged in cognito user.

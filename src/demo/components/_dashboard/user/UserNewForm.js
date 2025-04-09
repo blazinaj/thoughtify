@@ -9,7 +9,7 @@ import { LoadingButton } from '@mui/lab';
 import { Box, Card, Grid, Stack, Switch, TextField, Typography, FormHelperText, FormControlLabel } from '@mui/material';
 // utils
 import { fData } from '../../../../utils/formatNumber';
-import fakeRequest from '../../../../utils/fakeRequest';
+import fakeRequest from '../../../utils/fakeRequest';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //

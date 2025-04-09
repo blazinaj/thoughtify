@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../../utils/components/Card';
 import LoadingScreen from '../../../demo/components/LoadingScreen';
-import {generateBiography} from "../../../api/biography/generateBiography";
-import {BiographySection} from "./BiographySection";
+import { generateBiography } from '../../../api/biography/generateBiography';
+import { BiographySection } from './BiographySection';
 
 /**
  * BiographyDisplay component. Fetches the biography from the API and displays it.
@@ -35,9 +35,7 @@ export const BiographyDisplay = () => {
   return (
     <Card subTitle={`${new Date().toLocaleDateString()}`}>
       {Object.entries(bio)?.map(([pageNumber, page]) => {
-        return (
-          <BiographySection page={page} pageNumber={pageNumber}/>
-        );
+        return <BiographySection page={page} pageNumber={pageNumber} />;
       })}
     </Card>
   );
