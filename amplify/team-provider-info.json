@@ -27,7 +27,9 @@
           "planCatalogItemVariantFree": "TN6NQQ5EIEFVIJ45VFECKLRI",
           "planCatalogItemVariantPremium": "TYDTRUEXGDV6FX2NQRG5DTM2"
         },
-        "handleCompletion": {}
+        "handleCompletion": {
+          "secretsPathAmplifyAppId": "d1d8vpf1p4j3dt"
+        }
       },
       "api": {
         "thoughtify": {}

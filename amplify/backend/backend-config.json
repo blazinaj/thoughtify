@@ -77,6 +77,14 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_handleCompletion_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCompletion"
+        }
+      ]
+    },
     "AMPLIFY_function_subscriptionPlan_accessToken": {
       "usedBy": [
         {

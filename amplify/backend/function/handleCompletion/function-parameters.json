@@ -1,3 +1,7 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "environmentVariableList": [],
+  "secretNames": [
+    "OPENAI_API_KEY"
+  ]
 }
