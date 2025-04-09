@@ -8,7 +8,7 @@ import { LoadingButton } from '@mui/lab';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // utils
-import fakeRequest from '../../../../utils/fakeRequest';
+import fakeRequest from '../../../utils/fakeRequest';
 
 // ----------------------------------------------------------------------
 

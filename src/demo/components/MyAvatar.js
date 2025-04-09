@@ -2,7 +2,7 @@
 import useAuth from '../../utils/hooks/useAuth';
 //
 import { MAvatar } from './@material-extend';
-import createAvatar from '../../utils/createAvatar';
+import createAvatar from '../utils/createAvatar';
 import { useUserContext } from '../../contexts/UserContext';
 
 // ----------------------------------------------------------------------

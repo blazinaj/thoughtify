@@ -2,7 +2,7 @@ import { useDatastore } from '../../../utils/hooks/useDatastore';
 import { JournalEntry, JournalEntryThoughts } from '../../../models';
 import { Grid } from '@mui/material';
 import Card from '../../../utils/components/Card';
-import { formatDate } from '../functions/createJournalTimeline';
+import { formatDate } from '../../../api/journal/createJournalTimeline';
 import { DeleteItemButton } from '../../../utils/components/DeleteItemButton';
 import { DataStore } from '@aws-amplify/datastore';
 import Thoughts from '../../thoughts/components/Thoughts';

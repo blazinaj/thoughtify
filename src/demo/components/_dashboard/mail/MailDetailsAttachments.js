@@ -5,7 +5,7 @@ import arrowCircleDownFill from '@iconify/icons-eva/arrow-circle-down-fill';
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Typography, IconButton, Stack } from '@mui/material';
 // utils
-import { getFileType, getFileName, getFileThumb } from '../../../../utils/getFileFormat';
+import { getFileType, getFileName, getFileThumb } from '../../../utils/getFileFormat';
 //
 import Scrollbar from '../../Scrollbar';
 

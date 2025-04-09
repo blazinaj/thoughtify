@@ -1,9 +1,9 @@
 // material
 import { styled } from '@mui/material/styles';
-import { Grid, Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 // components
 import Page from '../../demo/components/Page';
-import { ContactHero, ContactForm, ContactMap } from '../../demo/components/_external-pages/contact';
+import { ContactForm, ContactMap } from '../../demo/components/_external-pages/contact';
 
 // ----------------------------------------------------------------------
 

@@ -38,7 +38,6 @@ const UserContextProvider = ({ children }) => {
   };
 
   const onAccountSetupComplete = async ({ user, cognitoUser }) => {
-    console.log('Account Setup Complete', { user, cognitoUser });
     setUser(user);
 
     setShowAccountSetup(false);
@@ -52,12 +51,7 @@ const UserContextProvider = ({ children }) => {
   const fetchUser = async ({ username }) => {
     const cognitoUsername = username;
 
-    console.log('Fetching User Object', { cognitoUsername });
-    // const user = await DataStore.query(User, (user) => user.cognitoSub.eq(cognitoUsername));
     const user = await getUser({ username: cognitoUsername });
-
-    console.log('CURRENT USER OBJECT: ', user);
-    // console.log({user2})
 
     // When the cognito user changes, fetch the user object.
     // If the user object doesn't exist, then create it.
@@ -65,8 +59,6 @@ const UserContextProvider = ({ children }) => {
       if (user) {
         return user;
       }
-
-      console.log('NO CURRENT USER OBJECT, INITIATING ACCOUNT SETUP');
 
       await initiateAccountSetup();
     }
@@ -81,19 +73,10 @@ const UserContextProvider = ({ children }) => {
     // Add an event listener to handle changes in authentication state
     const listener = async (state, data) => {
       const event = state.payload.event;
-
-      console.log({
-        state,
-        data
-      });
-      console.log({ event });
       if (event === 'signIn') {
-        console.log('User has signed in');
         // Redirect the user to the /dashboard route upon successful sign-in
         await DataStore.start();
-        console.log('Fetching User from Database');
         const user = await fetchUser({ username: state.payload.data.username });
-        console.log('User Fetched from Database', { user });
         setCognitoUser(state.payload.data);
         setUser(user);
         setIsInitialized(true);
@@ -120,22 +103,17 @@ const UserContextProvider = ({ children }) => {
     const checkUser = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser();
-        console.log('User is signed in');
-        console.log({ user });
         const userObject = await fetchUser({
           username: user.username
         });
-        console.log({ userObject });
         setUser(userObject);
         setCognitoUser(user);
         setIsInitialized(true);
-        // navigate('/thoughts');
 
         if (location.pathname === '/') {
           navigate('/thoughts');
         }
       } catch (error) {
-        console.log('User is not signed in');
         setIsInitialized(true);
       }
     };

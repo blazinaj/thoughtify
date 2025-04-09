@@ -2,12 +2,7 @@
 import { styled } from '@mui/material/styles';
 // components
 import Page from '../../demo/components/Page';
-import {
-  LandingAdvertisement,
-  LandingDarkMode,
-  LandingHugePackElements,
-  LandingMinimal
-} from '../../demo/components/_external-pages/landing';
+import { LandingMinimal } from '../../demo/components/_external-pages/landing';
 import LandingHero from './LandingHero';
 
 // ----------------------------------------------------------------------
@@ -37,9 +32,6 @@ export default function LandingPage() {
       <LandingHero />
       <ContentStyle>
         <LandingMinimal />
-        {/*<LandingHugePackElements />*/}
-        {/*<LandingDarkMode />*/}
-        {/*<LandingAdvertisement />*/}
       </ContentStyle>
     </RootStyle>
   );

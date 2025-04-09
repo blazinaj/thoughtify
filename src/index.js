@@ -49,8 +49,6 @@ import reportWebVitals from './reportWebVitals';
 import Amplify from '@aws-amplify/core';
 import awsmobile from './aws-exports';
 import { Analytics } from '@aws-amplify/analytics';
-import { DevSupport } from '@react-buddy/ide-toolbox';
-import { ComponentPreviews, useInitial } from './dev';
 
 // ----------------------------------------------------------------------
 
@@ -94,9 +92,7 @@ ReactDOM.render(
     <ReduxProvider store={store}>
       <PersistGate loading={<LoadingScreen />} persistor={persistor}>
         <BrowserRouter>
-          <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
-            <App />
-          </DevSupport>
+          <App />
         </BrowserRouter>
       </PersistGate>
     </ReduxProvider>

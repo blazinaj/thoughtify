@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import fileFill from '@iconify/icons-eva/file-fill';
 // utils
-import mockData from '../../../utils/mock-data';
+import mockData from '../../utils/mock-data';
 
 // ----------------------------------------------------------------------
 

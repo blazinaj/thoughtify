@@ -4,7 +4,7 @@ import flashFill from '@iconify/icons-eva/flash-fill';
 // material
 import { Box, Card, Stack, Button, Avatar, Tooltip, Typography, CardHeader } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import { MIconButton } from '../../@material-extend';
 

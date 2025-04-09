@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 //
 import Scrollbar from '../../../../utils/components/Scrollbar';
-import ColorManyPicker from '../../../../utils/components/ColorManyPicker';
+import ColorManyPicker from '../../../components/ColorManyPicker';
 
 // ----------------------------------------------------------------------
 

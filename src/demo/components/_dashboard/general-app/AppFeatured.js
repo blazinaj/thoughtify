@@ -7,7 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { CardContent, Box, Card, Typography } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import { varFadeInRight, MotionContainer } from '../../animate';
 import { CarouselControlsPaging1, CarouselControlsArrowsBasic1 } from '../../carousel';

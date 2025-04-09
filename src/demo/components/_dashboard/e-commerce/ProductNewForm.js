@@ -26,7 +26,7 @@ import {
   FormControlLabel
 } from '@mui/material';
 // utils
-import fakeRequest from '../../../../utils/fakeRequest';
+import fakeRequest from '../../../utils/fakeRequest';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //

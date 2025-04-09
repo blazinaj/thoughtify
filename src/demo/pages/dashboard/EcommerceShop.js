@@ -9,7 +9,7 @@ import { getProducts, filterProducts } from '../../redux/slices/product';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
-import fakeRequest from '../../../utils/fakeRequest';
+import fakeRequest from '../../utils/fakeRequest';
 // hooks
 import useSettings from '../../../utils/hooks/useSettings';
 // components

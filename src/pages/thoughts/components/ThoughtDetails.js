@@ -31,7 +31,7 @@ export const ThoughtDetails = ({ item }) => {
             xxl: 4
           }}
           spacing={2}
-          minHeight={200}
+          // minHeight={200}
           sx={{ width: 'auto' }}
         >
           {Object.entries(item?.extract || {})

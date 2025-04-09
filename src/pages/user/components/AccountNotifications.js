@@ -1,12 +1,10 @@
 import { useSnackbar } from 'notistack';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 // material
-import { Card, Stack, Switch, Typography, FormControlLabel } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Card, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
 // redux
 import { useSelector } from '../../../demo/redux/store';
 // utils
-import fakeRequest from '../../../utils/fakeRequest';
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +42,6 @@ export default function AccountNotifications() {
       applicationBlog: notifications.applicationBlog
     },
     onSubmit: async (values, { setSubmitting }) => {
-      await fakeRequest(500);
       setSubmitting(false);
       alert(JSON.stringify(values, null, 2));
       enqueueSnackbar('Save success', { variant: 'success' });

@@ -11,7 +11,7 @@ import instagramFilled from '@iconify/icons-ant-design/instagram-filled';
 import { useTheme } from '@mui/material/styles';
 import { Box, Card, Button, Container, Typography, IconButton } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import { varFadeIn, varFadeInUp, MotionInView, varFadeInDown } from '../../animate';
 import { CarouselControlsArrowsBasic2 } from '../../carousel';

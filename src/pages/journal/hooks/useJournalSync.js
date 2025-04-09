@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchJournal } from '../functions/fetchJournal';
+import { fetchJournal } from '../../../api/journal/fetchJournal';
 import { useSnackbar } from 'notistack';
 
 /**

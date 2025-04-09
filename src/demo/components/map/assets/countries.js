@@ -1,5 +1,5 @@
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 
 // ----------------------------------------------------------------------
 

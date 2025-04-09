@@ -3,7 +3,7 @@ import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
 // material
 import { Accordion, Typography, AccordionSummary, AccordionDetails } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import { varFadeIn, MotionInView } from '../../animate';
 

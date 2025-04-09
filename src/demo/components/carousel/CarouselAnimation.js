@@ -6,7 +6,7 @@ import { useState, useRef } from 'react';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Card, Paper, Button, Typography, CardContent } from '@mui/material';
 // utils
-import mockData from '../../../utils/mock-data';
+import mockData from '../../utils/mock-data';
 //
 import { varFadeInRight, MotionContainer } from '../animate';
 import { CarouselControlsArrowsIndex } from './controls';

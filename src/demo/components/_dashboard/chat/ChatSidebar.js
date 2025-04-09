@@ -11,7 +11,7 @@ import { Box, useMediaQuery } from '@mui/material';
 // redux
 import { useSelector } from '../../../redux/store';
 // utils
-import axios from '../../../../utils/axios';
+import axios from '../../../utils/axios';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //

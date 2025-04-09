@@ -1,6 +1,7 @@
 import Grid from '@mui/material/Grid';
 import { ThoughtExtractAttributeChip } from './ThoughtExtractAttributeChip';
 import { sentenceCase } from 'change-case';
+import { generateId } from '../../../../../utils/functions/generateId';
 
 /**
  * Displays a list of Chips for each Attribute in the Thought Extract.
@@ -29,8 +30,9 @@ export const ThoughtExtractAttributeChips = ({ value, attribute }) => {
   return (
     <Grid container direction={'row'} spacing={2}>
       {values.map((item) => {
+        const uuid = generateId();
         return (
-          <Grid item>
+          <Grid item key={uuid}>
             <ThoughtExtractAttributeChip type={sentenceCase(attribute)} value={item} />
           </Grid>
         );

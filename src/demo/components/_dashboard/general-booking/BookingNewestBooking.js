@@ -9,7 +9,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Stack, Avatar, Typography, Paper, CardHeader } from '@mui/material';
 // utils
 import { fDateTime } from '../../../../utils/formatTime';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import Label from '../../Label';
 import { CarouselControlsArrowsBasic1 } from '../../carousel';

@@ -1,14 +1,13 @@
 import * as Yup from 'yup';
 import { useSnackbar } from 'notistack';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 // material
-import { useTheme, styled } from '@mui/material/styles';
-import { Box, Card, Grid, Container, Typography, useMediaQuery } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
+import { Box, Card, Container, Grid, Typography, useMediaQuery } from '@mui/material';
 // utils
-import fakeRequest from '../../utils/fakeRequest';
 // components
 import Page from '../../demo/components/Page';
-import { PaymentSummary, PaymentMethods, PaymentBillingAddress } from '../../demo/components/_external-pages/payment';
+import { PaymentBillingAddress, PaymentMethods, PaymentSummary } from '../../demo/components/_external-pages/payment';
 
 // ----------------------------------------------------------------------
 
@@ -56,7 +55,6 @@ export default function Payment() {
         address: values.address,
         subscription: 'premium'
       };
-      await fakeRequest(500);
       if (values.method === 'paypal') {
         alert(
           JSON.stringify(

@@ -1,8 +1,8 @@
 import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
-import {Container} from '@mui/material';
+import { Container } from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import {BiographyDisplay} from './components/BiographyDisplay';
+import { BiographyDisplay } from './components/BiographyDisplay';
 
 /**
  * BiographyPage component

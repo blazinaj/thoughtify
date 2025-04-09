@@ -1,13 +1,11 @@
 import { API, graphqlOperation } from 'aws-amplify';
-import { listUsers } from '../../graphql/queries';
+import { listUsers } from './graphql/listUsers';
 
 /**
  * Fetches the user object from the database based on the cognitoSub field matching the logged in cognito user.
  * @returns {Promise<void>}
  */
 export const getUser = async ({ username }) => {
-  console.log('Fetching User Object');
-
   const listUserResponse = await API.graphql(
     graphqlOperation(listUsers, {
       filter: {

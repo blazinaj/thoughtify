@@ -4,7 +4,7 @@ import { dotCase } from 'change-case';
 import { sample, isEmpty, xor } from 'lodash';
 // utils
 import mock from './mock';
-import mockData from '../../utils/mock-data';
+import mockData from '../utils/mock-data';
 
 // ----------------------------------------------------------------------
 

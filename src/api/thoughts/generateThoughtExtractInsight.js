@@ -2,6 +2,23 @@ import { DataStore } from '@aws-amplify/datastore';
 import { Thought } from '../../models';
 import { handleCompletion } from '../../utils/openai/functions/generate';
 
+/**
+ * Generate insights of related thoughts based on the attribute selected.
+ *
+ * Example: type: "people", value: "John Doe"
+ *          {
+ *              "timeline": [...],
+ *              "relatedThoughts": [...],
+ *              "relatedPeople": [...],
+ *              "relatedProjects": [...],
+ *              "relatedCategories": [...],
+ *              "relatedReminders": [...],
+ *              "relatedQuestions": [...]
+ *          }
+ * @param type
+ * @param value
+ * @returns {Promise<any>}
+ */
 export const generateThoughtExtractInsight = async (type, value) => {
   const thoughts = await DataStore.query(Thought);
 

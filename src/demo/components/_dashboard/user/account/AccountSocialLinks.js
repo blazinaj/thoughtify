@@ -11,7 +11,7 @@ import { LoadingButton } from '@mui/lab';
 // redux
 import { useSelector } from '../../../../redux/store';
 // utils
-import fakeRequest from '../../../../../utils/fakeRequest';
+import fakeRequest from '../../../../utils/fakeRequest';
 
 // ----------------------------------------------------------------------
 

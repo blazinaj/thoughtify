@@ -31,7 +31,7 @@ import {
   TableContainer
 } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import Label from '../../Label';
 import Scrollbar from '../../Scrollbar';

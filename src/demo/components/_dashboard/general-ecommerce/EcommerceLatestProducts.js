@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { Box, Link, Card, CardHeader, Typography, Stack } from '@mui/material';
 // utils
 import { fCurrency } from '../../../../utils/formatNumber';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import Scrollbar from '../../Scrollbar';
 import ColorPreview from '../../ColorPreview';
