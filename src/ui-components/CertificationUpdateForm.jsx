@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -18,15 +18,12 @@ import {
   Text,
   TextAreaField,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
-import { Certification, Course, Endorsement } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
+import { Certification, Course, Endorsement } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -40,15 +37,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -64,12 +61,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -84,18 +76,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -106,17 +97,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -174,7 +165,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -195,29 +186,23 @@ export default function CertificationUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: "",
-    owner: "",
-    issueDate: "",
-    userID: "",
-    description: "",
-    learningOutcomes: "",
+    name: '',
+    owner: '',
+    issueDate: '',
+    userID: '',
+    description: '',
+    learningOutcomes: '',
     course: undefined,
-    Endorsements: [],
+    Endorsements: []
   };
   const [name, setName] = React.useState(initialValues.name);
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [issueDate, setIssueDate] = React.useState(initialValues.issueDate);
   const [userID, setUserID] = React.useState(initialValues.userID);
-  const [description, setDescription] = React.useState(
-    initialValues.description
-  );
-  const [learningOutcomes, setLearningOutcomes] = React.useState(
-    initialValues.learningOutcomes
-  );
+  const [description, setDescription] = React.useState(initialValues.description);
+  const [learningOutcomes, setLearningOutcomes] = React.useState(initialValues.learningOutcomes);
   const [course, setCourse] = React.useState(initialValues.course);
-  const [Endorsements, setEndorsements] = React.useState(
-    initialValues.Endorsements
-  );
+  const [Endorsements, setEndorsements] = React.useState(initialValues.Endorsements);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = certificationRecord
@@ -225,7 +210,7 @@ export default function CertificationUpdateForm(props) {
           ...initialValues,
           ...certificationRecord,
           course,
-          Endorsements: linkedEndorsements,
+          Endorsements: linkedEndorsements
         }
       : initialValues;
     setName(cleanValues.name);
@@ -234,61 +219,45 @@ export default function CertificationUpdateForm(props) {
     setUserID(cleanValues.userID);
     setDescription(cleanValues.description);
     setLearningOutcomes(
-      typeof cleanValues.learningOutcomes === "string" ||
-        cleanValues.learningOutcomes === null
+      typeof cleanValues.learningOutcomes === 'string' || cleanValues.learningOutcomes === null
         ? cleanValues.learningOutcomes
         : JSON.stringify(cleanValues.learningOutcomes)
     );
     setCourse(cleanValues.course);
     setCurrentCourseValue(undefined);
-    setCurrentCourseDisplayValue("");
+    setCurrentCourseDisplayValue('');
     setEndorsements(cleanValues.Endorsements ?? []);
     setCurrentEndorsementsValue(undefined);
-    setCurrentEndorsementsDisplayValue("");
+    setCurrentEndorsementsDisplayValue('');
     setErrors({});
   };
-  const [certificationRecord, setCertificationRecord] = React.useState(
-    certificationModelProp
-  );
+  const [certificationRecord, setCertificationRecord] = React.useState(certificationModelProp);
   const [linkedEndorsements, setLinkedEndorsements] = React.useState([]);
   const canUnlinkEndorsements = false;
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(Certification, idProp)
-        : certificationModelProp;
+      const record = idProp ? await DataStore.query(Certification, idProp) : certificationModelProp;
       setCertificationRecord(record);
       const courseRecord = record ? await record.course : undefined;
       setCourse(courseRecord);
-      const linkedEndorsements = record
-        ? await record.Endorsements.toArray()
-        : [];
+      const linkedEndorsements = record ? await record.Endorsements.toArray() : [];
       setLinkedEndorsements(linkedEndorsements);
     };
     queryData();
   }, [idProp, certificationModelProp]);
-  React.useEffect(resetStateValues, [
-    certificationRecord,
-    course,
-    linkedEndorsements,
-  ]);
-  const [currentCourseDisplayValue, setCurrentCourseDisplayValue] =
-    React.useState("");
+  React.useEffect(resetStateValues, [certificationRecord, course, linkedEndorsements]);
+  const [currentCourseDisplayValue, setCurrentCourseDisplayValue] = React.useState('');
   const [currentCourseValue, setCurrentCourseValue] = React.useState(undefined);
   const courseRef = React.createRef();
-  const [currentEndorsementsDisplayValue, setCurrentEndorsementsDisplayValue] =
-    React.useState("");
-  const [currentEndorsementsValue, setCurrentEndorsementsValue] =
-    React.useState(undefined);
+  const [currentEndorsementsDisplayValue, setCurrentEndorsementsDisplayValue] = React.useState('');
+  const [currentEndorsementsValue, setCurrentEndorsementsValue] = React.useState(undefined);
   const EndorsementsRef = React.createRef();
   const getIDValue = {
     course: (r) => JSON.stringify({ id: r?.id }),
-    Endorsements: (r) => JSON.stringify({ id: r?.id }),
+    Endorsements: (r) => JSON.stringify({ id: r?.id })
   };
   const courseIdSet = new Set(
-    Array.isArray(course)
-      ? course.map((r) => getIDValue.course?.(r))
-      : getIDValue.course?.(course)
+    Array.isArray(course) ? course.map((r) => getIDValue.course?.(r)) : getIDValue.course?.(course)
   );
   const EndorsementsIdSet = new Set(
     Array.isArray(Endorsements)
@@ -296,16 +265,16 @@ export default function CertificationUpdateForm(props) {
       : getIDValue.Endorsements?.(Endorsements)
   );
   const courseRecords = useDataStoreBinding({
-    type: "collection",
-    model: Course,
+    type: 'collection',
+    model: Course
   }).items;
   const endorsementRecords = useDataStoreBinding({
-    type: "collection",
-    model: Endorsement,
+    type: 'collection',
+    model: Endorsement
   }).items;
   const getDisplayValue = {
-    course: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
-    Endorsements: (r) => `${r?.dateTime ? r?.dateTime + " - " : ""}${r?.id}`,
+    course: (r) => `${r?.name ? r?.name + ' - ' : ''}${r?.id}`,
+    Endorsements: (r) => `${r?.dateTime ? r?.dateTime + ' - ' : ''}${r?.id}`
   };
   const validations = {
     name: [],
@@ -313,19 +282,12 @@ export default function CertificationUpdateForm(props) {
     issueDate: [],
     userID: [],
     description: [],
-    learningOutcomes: [{ type: "JSON" }],
+    learningOutcomes: [{ type: 'JSON' }],
     course: [],
-    Endorsements: [],
+    Endorsements: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -350,29 +312,17 @@ export default function CertificationUpdateForm(props) {
           description,
           learningOutcomes,
           course,
-          Endorsements,
+          Endorsements
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(
-                    fieldName,
-                    item,
-                    getDisplayValue[fieldName]
-                  )
-                )
+                ...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item, getDisplayValue[fieldName]))
               );
               return promises;
             }
-            promises.push(
-              runValidationTasks(
-                fieldName,
-                modelFields[fieldName],
-                getDisplayValue[fieldName]
-              )
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName], getDisplayValue[fieldName]));
             return promises;
           }, [])
         );
@@ -384,7 +334,7 @@ export default function CertificationUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -393,12 +343,8 @@ export default function CertificationUpdateForm(props) {
           const endorsementsToUnLink = [];
           const endorsementsSet = new Set();
           const linkedEndorsementsSet = new Set();
-          Endorsements.forEach((r) =>
-            endorsementsSet.add(getIDValue.Endorsements?.(r))
-          );
-          linkedEndorsements.forEach((r) =>
-            linkedEndorsementsSet.add(getIDValue.Endorsements?.(r))
-          );
+          Endorsements.forEach((r) => endorsementsSet.add(getIDValue.Endorsements?.(r)));
+          linkedEndorsements.forEach((r) => linkedEndorsementsSet.add(getIDValue.Endorsements?.(r)));
           linkedEndorsements.forEach((r) => {
             if (!endorsementsSet.has(getIDValue.Endorsements?.(r))) {
               endorsementsToUnLink.push(r);
@@ -441,7 +387,7 @@ export default function CertificationUpdateForm(props) {
             course: modelFields.course,
             learningOutcomes: modelFields.learningOutcomes
               ? JSON.parse(modelFields.learningOutcomes)
-              : modelFields.learningOutcomes,
+              : modelFields.learningOutcomes
           };
           promises.push(
             DataStore.save(
@@ -463,7 +409,7 @@ export default function CertificationUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "CertificationUpdateForm")}
+      {...getOverrideProps(overrides, 'CertificationUpdateForm')}
       {...rest}
     >
       <TextField
@@ -482,20 +428,20 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes,
               course,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
           }
           if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+            runValidationTasks('name', value);
           }
           setName(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
+        onBlur={() => runValidationTasks('name', name)}
         errorMessage={errors.name?.errorMessage}
         hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
+        {...getOverrideProps(overrides, 'name')}
       ></TextField>
       <TextField
         label="Owner"
@@ -513,20 +459,20 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes,
               course,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
       <TextField
         label="Issue date"
@@ -544,20 +490,20 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes,
               course,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.issueDate ?? value;
           }
           if (errors.issueDate?.hasError) {
-            runValidationTasks("issueDate", value);
+            runValidationTasks('issueDate', value);
           }
           setIssueDate(value);
         }}
-        onBlur={() => runValidationTasks("issueDate", issueDate)}
+        onBlur={() => runValidationTasks('issueDate', issueDate)}
         errorMessage={errors.issueDate?.errorMessage}
         hasError={errors.issueDate?.hasError}
-        {...getOverrideProps(overrides, "issueDate")}
+        {...getOverrideProps(overrides, 'issueDate')}
       ></TextField>
       <TextField
         label="User id"
@@ -575,20 +521,20 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes,
               course,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.userID ?? value;
           }
           if (errors.userID?.hasError) {
-            runValidationTasks("userID", value);
+            runValidationTasks('userID', value);
           }
           setUserID(value);
         }}
-        onBlur={() => runValidationTasks("userID", userID)}
+        onBlur={() => runValidationTasks('userID', userID)}
         errorMessage={errors.userID?.errorMessage}
         hasError={errors.userID?.hasError}
-        {...getOverrideProps(overrides, "userID")}
+        {...getOverrideProps(overrides, 'userID')}
       ></TextField>
       <TextField
         label="Description"
@@ -606,20 +552,20 @@ export default function CertificationUpdateForm(props) {
               description: value,
               learningOutcomes,
               course,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
           }
           if (errors.description?.hasError) {
-            runValidationTasks("description", value);
+            runValidationTasks('description', value);
           }
           setDescription(value);
         }}
-        onBlur={() => runValidationTasks("description", description)}
+        onBlur={() => runValidationTasks('description', description)}
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
-        {...getOverrideProps(overrides, "description")}
+        {...getOverrideProps(overrides, 'description')}
       ></TextField>
       <TextAreaField
         label="Learning outcomes"
@@ -637,20 +583,20 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes: value,
               course,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.learningOutcomes ?? value;
           }
           if (errors.learningOutcomes?.hasError) {
-            runValidationTasks("learningOutcomes", value);
+            runValidationTasks('learningOutcomes', value);
           }
           setLearningOutcomes(value);
         }}
-        onBlur={() => runValidationTasks("learningOutcomes", learningOutcomes)}
+        onBlur={() => runValidationTasks('learningOutcomes', learningOutcomes)}
         errorMessage={errors.learningOutcomes?.errorMessage}
         hasError={errors.learningOutcomes?.hasError}
-        {...getOverrideProps(overrides, "learningOutcomes")}
+        {...getOverrideProps(overrides, 'learningOutcomes')}
       ></TextAreaField>
       <ArrayField
         lengthLimit={1}
@@ -665,32 +611,28 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes,
               course: value,
-              Endorsements,
+              Endorsements
             };
             const result = onChange(modelFields);
             value = result?.course ?? value;
           }
           setCourse(value);
           setCurrentCourseValue(undefined);
-          setCurrentCourseDisplayValue("");
+          setCurrentCourseDisplayValue('');
         }}
         currentFieldValue={currentCourseValue}
-        label={"Course"}
+        label={'Course'}
         items={course ? [course] : []}
         hasError={errors?.course?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("course", currentCourseValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('course', currentCourseValue)}
         errorMessage={errors?.course?.errorMessage}
         getBadgeText={getDisplayValue.course}
         setFieldValue={(model) => {
-          setCurrentCourseDisplayValue(
-            model ? getDisplayValue.course(model) : ""
-          );
+          setCurrentCourseDisplayValue(model ? getDisplayValue.course(model) : '');
           setCurrentCourseValue(model);
         }}
         inputFieldRef={courseRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Course"
@@ -702,37 +644,33 @@ export default function CertificationUpdateForm(props) {
             .filter((r) => !courseIdSet.has(getIDValue.course?.(r)))
             .map((r) => ({
               id: getIDValue.course?.(r),
-              label: getDisplayValue.course?.(r),
+              label: getDisplayValue.course?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentCourseValue(
-              courseRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              courseRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentCourseDisplayValue(label);
-            runValidationTasks("course", label);
+            runValidationTasks('course', label);
           }}
           onClear={() => {
-            setCurrentCourseDisplayValue("");
+            setCurrentCourseDisplayValue('');
           }}
           defaultValue={course}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.course?.hasError) {
-              runValidationTasks("course", value);
+              runValidationTasks('course', value);
             }
             setCurrentCourseDisplayValue(value);
             setCurrentCourseValue(undefined);
           }}
-          onBlur={() => runValidationTasks("course", currentCourseDisplayValue)}
+          onBlur={() => runValidationTasks('course', currentCourseDisplayValue)}
           errorMessage={errors.course?.errorMessage}
           hasError={errors.course?.hasError}
           ref={courseRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "course")}
+          {...getOverrideProps(overrides, 'course')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -747,32 +685,28 @@ export default function CertificationUpdateForm(props) {
               description,
               learningOutcomes,
               course,
-              Endorsements: values,
+              Endorsements: values
             };
             const result = onChange(modelFields);
             values = result?.Endorsements ?? values;
           }
           setEndorsements(values);
           setCurrentEndorsementsValue(undefined);
-          setCurrentEndorsementsDisplayValue("");
+          setCurrentEndorsementsDisplayValue('');
         }}
         currentFieldValue={currentEndorsementsValue}
-        label={"Endorsements"}
+        label={'Endorsements'}
         items={Endorsements}
         hasError={errors?.Endorsements?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("Endorsements", currentEndorsementsValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('Endorsements', currentEndorsementsValue)}
         errorMessage={errors?.Endorsements?.errorMessage}
         getBadgeText={getDisplayValue.Endorsements}
         setFieldValue={(model) => {
-          setCurrentEndorsementsDisplayValue(
-            model ? getDisplayValue.Endorsements(model) : ""
-          );
+          setCurrentEndorsementsDisplayValue(model ? getDisplayValue.Endorsements(model) : '');
           setCurrentEndorsementsValue(model);
         }}
         inputFieldRef={EndorsementsRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Endorsements"
@@ -784,44 +718,35 @@ export default function CertificationUpdateForm(props) {
             .filter((r) => !EndorsementsIdSet.has(getIDValue.Endorsements?.(r)))
             .map((r) => ({
               id: getIDValue.Endorsements?.(r),
-              label: getDisplayValue.Endorsements?.(r),
+              label: getDisplayValue.Endorsements?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentEndorsementsValue(
-              endorsementRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              endorsementRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentEndorsementsDisplayValue(label);
-            runValidationTasks("Endorsements", label);
+            runValidationTasks('Endorsements', label);
           }}
           onClear={() => {
-            setCurrentEndorsementsDisplayValue("");
+            setCurrentEndorsementsDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.Endorsements?.hasError) {
-              runValidationTasks("Endorsements", value);
+              runValidationTasks('Endorsements', value);
             }
             setCurrentEndorsementsDisplayValue(value);
             setCurrentEndorsementsValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("Endorsements", currentEndorsementsDisplayValue)
-          }
+          onBlur={() => runValidationTasks('Endorsements', currentEndorsementsDisplayValue)}
           errorMessage={errors.Endorsements?.errorMessage}
           hasError={errors.Endorsements?.hasError}
           ref={EndorsementsRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "Endorsements")}
+          {...getOverrideProps(overrides, 'Endorsements')}
         ></Autocomplete>
       </ArrayField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -830,21 +755,15 @@ export default function CertificationUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || certificationModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || certificationModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || certificationModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

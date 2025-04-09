@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Badge, Flex, Text } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Badge, Flex, Text } from '@aws-amplify/ui-react';
 export default function ItemCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function ItemCard(props) {
       position="relative"
       padding="16px 16px 16px 16px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "ItemCard")}
+      {...getOverrideProps(overrides, 'ItemCard')}
       {...rest}
     >
       <Badge
@@ -30,7 +30,7 @@ export default function ItemCard(props) {
         size="small"
         variation="default"
         children="New"
-        {...getOverrideProps(overrides, "Badge")}
+        {...getOverrideProps(overrides, 'Badge')}
       ></Badge>
       <Flex
         gap="0"
@@ -43,7 +43,7 @@ export default function ItemCard(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Frame 417")}
+        {...getOverrideProps(overrides, 'Frame 417')}
       >
         <Flex
           gap="0"
@@ -55,7 +55,7 @@ export default function ItemCard(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Product Title")}
+          {...getOverrideProps(overrides, 'Product Title')}
         >
           <Text
             fontFamily="Inter"
@@ -76,7 +76,7 @@ export default function ItemCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="T-Shirt"
-            {...getOverrideProps(overrides, "T-Shirt")}
+            {...getOverrideProps(overrides, 'T-Shirt')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -98,7 +98,7 @@ export default function ItemCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Classic Long Sleeve"
-            {...getOverrideProps(overrides, "Classic Long Sleeve")}
+            {...getOverrideProps(overrides, 'Classic Long Sleeve')}
           ></Text>
         </Flex>
         <Text
@@ -120,7 +120,7 @@ export default function ItemCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="$99"
-          {...getOverrideProps(overrides, "$99")}
+          {...getOverrideProps(overrides, '$99')}
         ></Text>
       </Flex>
     </Flex>

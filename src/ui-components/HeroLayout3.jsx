@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Text } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Button, Flex, Text } from '@aws-amplify/ui-react';
 export default function HeroLayout3(props) {
   const { overrides, ...rest } = props;
   return (
@@ -22,7 +22,7 @@ export default function HeroLayout3(props) {
       position="relative"
       padding="160px 240px 160px 240px"
       backgroundColor="rgba(0,0,0,1)"
-      {...getOverrideProps(overrides, "HeroLayout3")}
+      {...getOverrideProps(overrides, 'HeroLayout3')}
       {...rest}
     >
       <Flex
@@ -38,7 +38,7 @@ export default function HeroLayout3(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Type Lock Up")}
+        {...getOverrideProps(overrides, 'Type Lock Up')}
       >
         <Text
           fontFamily="Inter"
@@ -60,7 +60,7 @@ export default function HeroLayout3(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="LOREM IPSUM"
-          {...getOverrideProps(overrides, "LOREM IPSUM")}
+          {...getOverrideProps(overrides, 'LOREM IPSUM')}
         ></Text>
         <Flex
           gap="16px"
@@ -73,7 +73,7 @@ export default function HeroLayout3(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Main Body")}
+          {...getOverrideProps(overrides, 'Main Body')}
         >
           <Text
             fontFamily="Inter"
@@ -95,10 +95,7 @@ export default function HeroLayout3(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Ut enim ad minim veniam quis nostrud"
-            {...getOverrideProps(
-              overrides,
-              "Ut enim ad minim veniam quis nostrud"
-            )}
+            {...getOverrideProps(overrides, 'Ut enim ad minim veniam quis nostrud')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -123,7 +120,7 @@ export default function HeroLayout3(props) {
             children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
             {...getOverrideProps(
               overrides,
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.'
             )}
           ></Text>
         </Flex>
@@ -133,7 +130,7 @@ export default function HeroLayout3(props) {
           isDisabled={false}
           variation="primary"
           children="Primary Button"
-          {...getOverrideProps(overrides, "Button")}
+          {...getOverrideProps(overrides, 'Button')}
         ></Button>
       </Flex>
     </Flex>

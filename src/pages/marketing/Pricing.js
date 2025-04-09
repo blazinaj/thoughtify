@@ -71,7 +71,8 @@ export default function Pricing() {
           Thoughtify Pricing
         </Typography>
         <Typography align="center" sx={{ color: 'text.secondary' }}>
-          Thoughtify is currently in an alpha concept phase. It is free to try out and use, but this may change at any time.
+          Thoughtify is currently in an alpha concept phase. It is free to try out and use, but this may change at any
+          time.
         </Typography>
 
         {/*<Box sx={{ my: 5 }}>*/}

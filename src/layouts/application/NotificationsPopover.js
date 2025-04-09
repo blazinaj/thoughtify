@@ -9,18 +9,19 @@ import doneAllFill from '@iconify/icons-eva/done-all-fill';
 // material
 import { alpha } from '@mui/material/styles';
 import {
-    Avatar,
-    Badge,
-    Box,
-    Button,
-    Divider,
-    List, ListItem,
-    ListItemAvatar,
-    ListItemButton,
-    ListItemText,
-    ListSubheader,
-    Tooltip,
-    Typography
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
+  ListSubheader,
+  Tooltip,
+  Typography
 } from '@mui/material';
 // utils
 import { fToNow } from '../../utils/formatTime';
@@ -31,7 +32,7 @@ import { MIconButton } from '../../demo/components/@material-extend';
 import { useDatastore } from '../../utils/hooks/useDatastore';
 import { Notification as NotificationModel } from '../../models';
 import { DataStore } from '@aws-amplify/datastore';
-import {DeleteItemButton} from "../../utils/components/DeleteItemButton";
+import { DeleteItemButton } from '../../utils/components/DeleteItemButton';
 
 // ----------------------------------------------------------------------
 
@@ -83,7 +84,6 @@ function NotificationItem({ notification }) {
   const { avatar, title } = renderContent(notification);
 
   return (
-
     <ListItemButton
       to="#"
       disableGutters
@@ -97,32 +97,28 @@ function NotificationItem({ notification }) {
         })
       }}
     >
-        <ListItem
-            secondaryAction={
-                <DeleteItemButton model={NotificationModel} item={notification} />
-            }
-        >
-      <ListItemAvatar>
-        <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatar}</Avatar>
-      </ListItemAvatar>
-      <ListItemText
-        primary={title}
-        secondary={
-          <Typography
-            variant="caption"
-            sx={{
-              mt: 0.5,
-              display: 'flex',
-              alignItems: 'center',
-              color: 'text.disabled'
-            }}
-          >
-            <Box component={Icon} icon={clockFill} sx={{ mr: 0.5, width: 16, height: 16 }} />
-            {fToNow(notification.createdAt)}
-          </Typography>
-        }
-      />
-        </ListItem>
+      <ListItem secondaryAction={<DeleteItemButton model={NotificationModel} item={notification} />}>
+        <ListItemAvatar>
+          <Avatar sx={{ bgcolor: 'background.neutral' }}>{avatar}</Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary={title}
+          secondary={
+            <Typography
+              variant="caption"
+              sx={{
+                mt: 0.5,
+                display: 'flex',
+                alignItems: 'center',
+                color: 'text.disabled'
+              }}
+            >
+              <Box component={Icon} icon={clockFill} sx={{ mr: 0.5, width: 16, height: 16 }} />
+              {fToNow(notification.createdAt)}
+            </Typography>
+          }
+        />
+      </ListItem>
     </ListItemButton>
   );
 }

@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Button, Flex, Image, Text } from '@aws-amplify/ui-react';
+import MyIcon from './MyIcon';
 export default function ProfileCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -22,7 +22,7 @@ export default function ProfileCard(props) {
       position="relative"
       padding="24px 24px 24px 24px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "ProfileCard")}
+      {...getOverrideProps(overrides, 'ProfileCard')}
       {...rest}
     >
       <Image
@@ -37,7 +37,7 @@ export default function ProfileCard(props) {
         borderRadius="160px"
         padding="0px 0px 0px 0px"
         objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
+        {...getOverrideProps(overrides, 'image')}
       ></Image>
       <Flex
         gap="8px"
@@ -49,7 +49,7 @@ export default function ProfileCard(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Name")}
+        {...getOverrideProps(overrides, 'Name')}
       >
         <Text
           fontFamily="Inter"
@@ -70,7 +70,7 @@ export default function ProfileCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="Melinda Marcus"
-          {...getOverrideProps(overrides, "Melinda Marcus")}
+          {...getOverrideProps(overrides, 'Melinda Marcus')}
         ></Text>
         <Text
           fontFamily="Inter"
@@ -92,7 +92,7 @@ export default function ProfileCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="Design Engineer at Cloth Studios"
-          {...getOverrideProps(overrides, "Design Engineer at Cloth Studios")}
+          {...getOverrideProps(overrides, 'Design Engineer at Cloth Studios')}
         ></Text>
       </Flex>
       <Flex
@@ -105,7 +105,7 @@ export default function ProfileCard(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Followers")}
+        {...getOverrideProps(overrides, 'Followers')}
       >
         <MyIcon
           width="24px"
@@ -119,7 +119,7 @@ export default function ProfileCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           type="group"
-          {...getOverrideProps(overrides, "MyIcon")}
+          {...getOverrideProps(overrides, 'MyIcon')}
         ></MyIcon>
         <Text
           fontFamily="Inter"
@@ -141,7 +141,7 @@ export default function ProfileCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="99 Followers"
-          {...getOverrideProps(overrides, "99 Followers")}
+          {...getOverrideProps(overrides, '99 Followers')}
         ></Text>
       </Flex>
       <Button
@@ -151,7 +151,7 @@ export default function ProfileCard(props) {
         isDisabled={false}
         variation="primary"
         children="View Profile"
-        {...getOverrideProps(overrides, "Button")}
+        {...getOverrideProps(overrides, 'Button')}
       ></Button>
     </Flex>
   );

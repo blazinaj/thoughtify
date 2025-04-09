@@ -5,9 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Text, TextField } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Button, Flex, Text, TextField } from '@aws-amplify/ui-react';
 export default function HeroLayout4(props) {
   const { overrides, ...rest } = props;
   return (
@@ -22,7 +22,7 @@ export default function HeroLayout4(props) {
       position="relative"
       padding="160px 160px 160px 160px"
       backgroundColor="rgba(0,0,0,1)"
-      {...getOverrideProps(overrides, "HeroLayout4")}
+      {...getOverrideProps(overrides, 'HeroLayout4')}
       {...rest}
     >
       <Flex
@@ -36,7 +36,7 @@ export default function HeroLayout4(props) {
         alignSelf="stretch"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "Type Lock Up")}
+        {...getOverrideProps(overrides, 'Type Lock Up')}
       >
         <Text
           fontFamily="Inter"
@@ -58,7 +58,7 @@ export default function HeroLayout4(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="LOREM IPSUM"
-          {...getOverrideProps(overrides, "LOREM IPSUM")}
+          {...getOverrideProps(overrides, 'LOREM IPSUM')}
         ></Text>
         <Text
           fontFamily="Inter"
@@ -80,10 +80,7 @@ export default function HeroLayout4(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children="Ut enim ad minim veniam quis nostrud"
-          {...getOverrideProps(
-            overrides,
-            "Ut enim ad minim veniam quis nostrud"
-          )}
+          {...getOverrideProps(overrides, 'Ut enim ad minim veniam quis nostrud')}
         ></Text>
         <Text
           fontFamily="Inter"
@@ -107,7 +104,7 @@ export default function HeroLayout4(props) {
           children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
           {...getOverrideProps(
             overrides,
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.29766572"
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.29766572'
           )}
         ></Text>
         <Flex
@@ -120,7 +117,7 @@ export default function HeroLayout4(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Form")}
+          {...getOverrideProps(overrides, 'Form')}
         >
           <TextField
             shrink="0"
@@ -129,7 +126,7 @@ export default function HeroLayout4(props) {
             isDisabled={false}
             labelHidden={true}
             variation="default"
-            {...getOverrideProps(overrides, "TextField")}
+            {...getOverrideProps(overrides, 'TextField')}
           ></TextField>
           <Button
             shrink="0"
@@ -137,7 +134,7 @@ export default function HeroLayout4(props) {
             isDisabled={false}
             variation="primary"
             children="Primary Button"
-            {...getOverrideProps(overrides, "Button")}
+            {...getOverrideProps(overrides, 'Button')}
           ></Button>
         </Flex>
         <Text
@@ -162,7 +159,7 @@ export default function HeroLayout4(props) {
           children="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
           {...getOverrideProps(
             overrides,
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.29766576"
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.29766576'
           )}
         ></Text>
       </Flex>

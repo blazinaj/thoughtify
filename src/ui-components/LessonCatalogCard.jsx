@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import ProductCard from "./ProductCard";
-import { Flex } from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import ProductCard from './ProductCard';
+import { Flex } from '@aws-amplify/ui-react';
 export default function LessonCatalogCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function LessonCatalogCard(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "LessonCatalogCard")}
+      {...getOverrideProps(overrides, 'LessonCatalogCard')}
       {...rest}
     >
       <ProductCard
@@ -35,7 +35,7 @@ export default function LessonCatalogCard(props) {
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        {...getOverrideProps(overrides, "LessonCatalogCard36489798")}
+        {...getOverrideProps(overrides, 'LessonCatalogCard36489798')}
       ></ProductCard>
     </Flex>
   );

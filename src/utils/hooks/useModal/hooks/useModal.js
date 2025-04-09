@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import {DefaultModalButton} from '../components/DefaultModalButton';
-import {useGUID} from '../../useGUID';
-import CloseIcon from "@mui/icons-material/Close";
-import {Box, IconButton} from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import {getIcon} from "../../../functions/getIcon";
-import {useBreakpoints} from "../../../../theme/useBreakpoints";
+import { DefaultModalButton } from '../components/DefaultModalButton';
+import { useGUID } from '../../useGUID';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, IconButton } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import { getIcon } from '../../../functions/getIcon';
+import { useBreakpoints } from '../../../../theme/useBreakpoints';
 
 export const useModal = ({
   title,
@@ -18,7 +18,7 @@ export const useModal = ({
   buttonText = 'Open',
   button: buttonInput = <DefaultModalButton text={buttonText} />,
   width,
-  icon,
+  icon
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +26,7 @@ export const useModal = ({
 
   const [id] = useGUID();
 
-  const {isSmall} = useBreakpoints()
+  const { isSmall } = useBreakpoints();
 
   const modal = (
     <Dialog
@@ -38,35 +38,25 @@ export const useModal = ({
       maxWidth="lg"
       fullScreen={isSmall}
     >
-      <AppBar sx={{ position: 'relative', paddingBottom: "1em" }}>
-        {
-          title && (
-            <DialogTitle
-              id="form-dialog-title"
-            >
-              {
-                icon && (
-                  <Box
-                    component="flex"
-                    alignContent={"bottom"}
-                    justifyContent={"bottom"}
-                    sx={{
-                      marginRight: "0.5em",
-                      marginTop: "1em",
-                    }}
-                  >
-                    {
-                      icon && (
-                        getIcon(icon)
-                      )
-                    }
-                  </Box>
-                )
-              }
-              {title}
-            </DialogTitle>
-          )
-        }
+      <AppBar sx={{ position: 'relative', paddingBottom: '1em' }}>
+        {title && (
+          <DialogTitle id="form-dialog-title">
+            {icon && (
+              <Box
+                component="flex"
+                alignContent={'bottom'}
+                justifyContent={'bottom'}
+                sx={{
+                  marginRight: '0.5em',
+                  marginTop: '1em'
+                }}
+              >
+                {icon && getIcon(icon)}
+              </Box>
+            )}
+            {title}
+          </DialogTitle>
+        )}
         <IconButton
           edge="start"
           color="inherit"
@@ -80,14 +70,10 @@ export const useModal = ({
       <DialogContent>
         {subTitle && <DialogContentText>{subTitle}</DialogContentText>}
         <br style={{ marginBottom: '1em' }} />
-        {
-          children && React.cloneElement(
-            children,
-            {
-              handleClose,
-            }
-          )
-        }
+        {children &&
+          React.cloneElement(children, {
+            handleClose
+          })}
       </DialogContent>
     </Dialog>
   );

@@ -1,6 +1,6 @@
-import {useModal} from "../../../../../utils/hooks/useModal";
-import {ThoughtExtractInsight} from "./ThoughtExtractInsight";
-import {Chip} from "@mui/material";
+import { useModal } from '../../../../../utils/hooks/useModal';
+import { ThoughtExtractInsight } from './ThoughtExtractInsight';
+import { Chip } from '@mui/material';
 
 /**
  * Displays the value of a Thought Extract Attribute as a chip that opens a modal
@@ -11,28 +11,16 @@ import {Chip} from "@mui/material";
  * @returns {Element} - chip that is a modal button
  * @constructor
  */
-export const ThoughtExtractAttributeChip = ({type, value}) => {
-
+export const ThoughtExtractAttributeChip = ({ type, value }) => {
   const title = `${type}: ${value}`;
-  const button = (
-    <Chip
-      title={type}
-      label={value}
-    />
-  )
-  const children = (
-    <ThoughtExtractInsight
-      type={type}
-      value={value}
-    />
-  )
+  const button = <Chip title={type} label={value} />;
+  const children = <ThoughtExtractInsight type={type} value={value} />;
 
   const modal = useModal({
     title,
     children,
-    button,
-  })
+    button
+  });
 
   return modal.modalButton;
-
-}
+};

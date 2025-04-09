@@ -4,44 +4,48 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
-import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { Biography } from "../models";
+import * as React from 'react';
+import { GridProps, SelectFieldProps, TextFieldProps } from '@aws-amplify/ui-react';
+import { Biography } from '../models';
 export declare type EscapeHatchProps = {
-    [elementHierarchy: string]: Record<string, unknown>;
+  [elementHierarchy: string]: Record<string, unknown>;
 } | null;
 export declare type VariantValues = {
-    [key: string]: string;
+  [key: string]: string;
 };
 export declare type Variant = {
-    variantValues: VariantValues;
-    overrides: EscapeHatchProps;
+  variantValues: VariantValues;
+  overrides: EscapeHatchProps;
 };
 export declare type ValidationResponse = {
-    hasError: boolean;
-    errorMessage?: string;
+  hasError: boolean;
+  errorMessage?: string;
 };
-export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
+export declare type ValidationFunction<T> = (
+  value: T,
+  validationResponse: ValidationResponse
+) => ValidationResponse | Promise<ValidationResponse>;
 export declare type BiographyUpdateFormInputValues = {
-    date?: string;
-    cadence?: string;
-    entry?: string;
+  date?: string;
+  cadence?: string;
+  entry?: string;
 };
 export declare type BiographyUpdateFormValidationValues = {
-    date?: ValidationFunction<string>;
-    cadence?: ValidationFunction<string>;
-    entry?: ValidationFunction<string>;
+  date?: ValidationFunction<string>;
+  cadence?: ValidationFunction<string>;
+  entry?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type BiographyUpdateFormOverridesProps = {
-    BiographyUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    date?: PrimitiveOverrideProps<TextFieldProps>;
-    cadence?: PrimitiveOverrideProps<SelectFieldProps>;
-    entry?: PrimitiveOverrideProps<TextFieldProps>;
+  BiographyUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+  date?: PrimitiveOverrideProps<TextFieldProps>;
+  cadence?: PrimitiveOverrideProps<SelectFieldProps>;
+  entry?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type BiographyUpdateFormProps = React.PropsWithChildren<{
+export declare type BiographyUpdateFormProps = React.PropsWithChildren<
+  {
     overrides?: BiographyUpdateFormOverridesProps | undefined | null;
-} & {
+  } & {
     id?: string;
     biography?: Biography;
     onSubmit?: (fields: BiographyUpdateFormInputValues) => BiographyUpdateFormInputValues;
@@ -49,5 +53,6 @@ export declare type BiographyUpdateFormProps = React.PropsWithChildren<{
     onError?: (fields: BiographyUpdateFormInputValues, errorMessage: string) => void;
     onChange?: (fields: BiographyUpdateFormInputValues) => BiographyUpdateFormInputValues;
     onValidate?: BiographyUpdateFormValidationValues;
-} & React.CSSProperties>;
+  } & React.CSSProperties
+>;
 export default function BiographyUpdateForm(props: BiographyUpdateFormProps): React.ReactElement;

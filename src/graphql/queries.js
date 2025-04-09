@@ -24,11 +24,7 @@ export const getBiography = /* GraphQL */ `
   }
 `;
 export const listBiographies = /* GraphQL */ `
-  query ListBiographies(
-    $filter: ModelBiographyFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListBiographies($filter: ModelBiographyFilterInput, $limit: Int, $nextToken: String) {
     listBiographies(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -50,18 +46,8 @@ export const listBiographies = /* GraphQL */ `
   }
 `;
 export const syncBiographies = /* GraphQL */ `
-  query SyncBiographies(
-    $filter: ModelBiographyFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncBiographies(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+  query SyncBiographies($filter: ModelBiographyFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+    syncBiographies(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         date
@@ -104,11 +90,7 @@ export const getHealthReport = /* GraphQL */ `
   }
 `;
 export const listHealthReports = /* GraphQL */ `
-  query ListHealthReports(
-    $filter: ModelHealthReportFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListHealthReports($filter: ModelHealthReportFilterInput, $limit: Int, $nextToken: String) {
     listHealthReports(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -136,12 +118,7 @@ export const syncHealthReports = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncHealthReports(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncHealthReports(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         date
@@ -185,11 +162,7 @@ export const getJournalEntry = /* GraphQL */ `
   }
 `;
 export const listJournalEntries = /* GraphQL */ `
-  query ListJournalEntries(
-    $filter: ModelJournalEntryFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListJournalEntries($filter: ModelJournalEntryFilterInput, $limit: Int, $nextToken: String) {
     listJournalEntries(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -218,12 +191,7 @@ export const syncJournalEntries = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncJournalEntries(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncJournalEntries(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         date
@@ -265,11 +233,7 @@ export const getNotification = /* GraphQL */ `
   }
 `;
 export const listNotifications = /* GraphQL */ `
-  query ListNotifications(
-    $filter: ModelNotificationFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListNotifications($filter: ModelNotificationFilterInput, $limit: Int, $nextToken: String) {
     listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -300,12 +264,7 @@ export const syncNotifications = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncNotifications(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncNotifications(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         title
@@ -383,16 +342,8 @@ export const getSubscriptionPlan = /* GraphQL */ `
   }
 `;
 export const listSubscriptionPlans = /* GraphQL */ `
-  query ListSubscriptionPlans(
-    $filter: ModelSubscriptionPlanFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSubscriptionPlans(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+  query ListSubscriptionPlans($filter: ModelSubscriptionPlanFilterInput, $limit: Int, $nextToken: String) {
+    listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         subscriptionTier
@@ -419,12 +370,7 @@ export const syncSubscriptionPlans = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncSubscriptionPlans(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         subscriptionTier
@@ -478,11 +424,7 @@ export const getThought = /* GraphQL */ `
   }
 `;
 export const listThoughts = /* GraphQL */ `
-  query ListThoughts(
-    $filter: ModelThoughtFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListThoughts($filter: ModelThoughtFilterInput, $limit: Int, $nextToken: String) {
     listThoughts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -505,18 +447,8 @@ export const listThoughts = /* GraphQL */ `
   }
 `;
 export const syncThoughts = /* GraphQL */ `
-  query SyncThoughts(
-    $filter: ModelThoughtFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+  query SyncThoughts($filter: ModelThoughtFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+    syncThoughts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         date
@@ -564,11 +496,7 @@ export const getUser = /* GraphQL */ `
   }
 `;
 export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListUsers($filter: ModelUserFilterInput, $limit: Int, $nextToken: String) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -594,18 +522,8 @@ export const listUsers = /* GraphQL */ `
   }
 `;
 export const syncUsers = /* GraphQL */ `
-  query SyncUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+  query SyncUsers($filter: ModelUserFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+    syncUsers(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         firstName
@@ -673,16 +591,8 @@ export const getBiographyThoughts = /* GraphQL */ `
   }
 `;
 export const listBiographyThoughts = /* GraphQL */ `
-  query ListBiographyThoughts(
-    $filter: ModelBiographyThoughtsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listBiographyThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+  query ListBiographyThoughts($filter: ModelBiographyThoughtsFilterInput, $limit: Int, $nextToken: String) {
+    listBiographyThoughts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         biographyId
@@ -708,12 +618,7 @@ export const syncBiographyThoughts = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncBiographyThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncBiographyThoughts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         biographyId
@@ -842,16 +747,8 @@ export const getHealthReportThoughts = /* GraphQL */ `
   }
 `;
 export const listHealthReportThoughts = /* GraphQL */ `
-  query ListHealthReportThoughts(
-    $filter: ModelHealthReportThoughtsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listHealthReportThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+  query ListHealthReportThoughts($filter: ModelHealthReportThoughtsFilterInput, $limit: Int, $nextToken: String) {
+    listHealthReportThoughts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         healthReportId
@@ -877,12 +774,7 @@ export const syncHealthReportThoughts = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncHealthReportThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncHealthReportThoughts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         healthReportId
@@ -1012,16 +904,8 @@ export const getJournalEntryThoughts = /* GraphQL */ `
   }
 `;
 export const listJournalEntryThoughts = /* GraphQL */ `
-  query ListJournalEntryThoughts(
-    $filter: ModelJournalEntryThoughtsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listJournalEntryThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
+  query ListJournalEntryThoughts($filter: ModelJournalEntryThoughtsFilterInput, $limit: Int, $nextToken: String) {
+    listJournalEntryThoughts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         journalEntryId
@@ -1047,12 +931,7 @@ export const syncJournalEntryThoughts = /* GraphQL */ `
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncJournalEntryThoughts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
+    syncJournalEntryThoughts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
       items {
         id
         journalEntryId

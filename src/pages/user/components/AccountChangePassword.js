@@ -28,12 +28,11 @@ export default function AccountChangePassword() {
           {
             // only show password change if there are no Federated Identities
             !cognitoUser?.attributes?.identities ? (
-                  <AccountSettings.ChangePassword onSuccess={onChangePassword} />
-
-              ) : (
-                  <Typography variant="h7" sx={{ mb: 5 }}>
-                    You are logged in with a Federated Identity. Please contact your administrator to change your password.
-                  </Typography>
+              <AccountSettings.ChangePassword onSuccess={onChangePassword} />
+            ) : (
+              <Typography variant="h7" sx={{ mb: 5 }}>
+                You are logged in with a Federated Identity. Please contact your administrator to change your password.
+              </Typography>
             )
           }
         </Card>

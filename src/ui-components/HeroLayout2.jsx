@@ -5,10 +5,10 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Image, View } from "@aws-amplify/ui-react";
-import HeroLayout3 from "./HeroLayout3";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Image, View } from '@aws-amplify/ui-react';
+import HeroLayout3 from './HeroLayout3';
 export default function HeroLayout2(props) {
   const { overrides, ...rest } = props;
   return (
@@ -21,7 +21,7 @@ export default function HeroLayout2(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "HeroLayout2")}
+      {...getOverrideProps(overrides, 'HeroLayout2')}
       {...rest}
     >
       <Image
@@ -38,7 +38,7 @@ export default function HeroLayout2(props) {
         right="0%"
         padding="0px 0px 0px 0px"
         objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
+        {...getOverrideProps(overrides, 'image')}
       ></Image>
       <HeroLayout3
         display="flex"
@@ -56,7 +56,7 @@ export default function HeroLayout2(props) {
         right="0%"
         padding="160px 240px 160px 240px"
         backgroundColor="rgba(0,0,0,0.5)"
-        {...getOverrideProps(overrides, "HeroLayout3")}
+        {...getOverrideProps(overrides, 'HeroLayout3')}
       ></HeroLayout3>
     </View>
   );

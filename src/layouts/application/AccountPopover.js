@@ -17,7 +17,7 @@ import MyAvatar from '../../demo/components/MyAvatar';
 import MenuPopover from '../../demo/components/MenuPopover';
 import { Auth } from '@aws-amplify/auth';
 import { DataStore } from '@aws-amplify/datastore';
-import {useUserContext} from "../../contexts/UserContext";
+import { useUserContext } from '../../contexts/UserContext';
 
 // ----------------------------------------------------------------------
 

@@ -3,27 +3,38 @@ import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
 const JournalCadence = {
-  "DAILY": "DAILY",
-  "WEEKLY": "WEEKLY",
-  "MONTHLY": "MONTHLY",
-  "YEARLY": "YEARLY"
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
 };
 
 const NotificationType = {
-  "MESSAGE": "MESSAGE"
+  MESSAGE: 'MESSAGE'
 };
 
 const SubscriptionStatus = {
-  "ACTIVE": "ACTIVE",
-  "INACTIVE": "INACTIVE"
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
 };
 
 const SubscriptionTier = {
-  "FREE": "FREE",
-  "PREMIUM": "PREMIUM"
+  FREE: 'FREE',
+  PREMIUM: 'PREMIUM'
 };
 
-const { Biography, HealthReport, JournalEntry, Notification, SubscriptionPlan, Thought, User, BiographyThoughts, HealthReportThoughts, JournalEntryThoughts } = initSchema(schema);
+const {
+  Biography,
+  HealthReport,
+  JournalEntry,
+  Notification,
+  SubscriptionPlan,
+  Thought,
+  User,
+  BiographyThoughts,
+  HealthReportThoughts,
+  JournalEntryThoughts
+} = initSchema(schema);
 
 export {
   Biography,

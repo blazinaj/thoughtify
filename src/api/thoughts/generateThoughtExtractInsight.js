@@ -1,23 +1,24 @@
-import {DataStore} from "@aws-amplify/datastore";
-import {Thought} from "../../models";
-import {handleCompletion} from "../../utils/openai/functions/generate";
+import { DataStore } from '@aws-amplify/datastore';
+import { Thought } from '../../models';
+import { handleCompletion } from '../../utils/openai/functions/generate';
 
 export const generateThoughtExtractInsight = async (type, value) => {
+  const thoughts = await DataStore.query(Thought);
 
-    const thoughts = await DataStore.query(Thought)
+  const extractType = type;
+  const extractValue = value;
 
-    const extractType = type;
-    const extractValue = value;
-
-    const prompt = `
+  const prompt = `
     
       Based on the following User's Thoughts:
       
       ${thoughts
-    .map((thought) => {
-        return `${thought?.date || thought.createdAt} - ${thought?.extract ? JSON.stringify(thought.extract) : thought.input}`;
-    })
-    .join('\n')}
+        .map((thought) => {
+          return `${thought?.date || thought.createdAt} - ${
+            thought?.extract ? JSON.stringify(thought.extract) : thought.input
+          }`;
+        })
+        .join('\n')}
       
       Extract the following information related to the ${extractType}: ${extractValue}
       
@@ -36,12 +37,11 @@ export const generateThoughtExtractInsight = async (type, value) => {
     
     `;
 
-    const response = await handleCompletion({
-        prompt,
-        responseFormat: {type: 'json_object'},
-        seed: 505,
-    });
+  const response = await handleCompletion({
+    prompt,
+    responseFormat: { type: 'json_object' },
+    seed: 505
+  });
 
-    return JSON.parse(response);
-
-}
+  return JSON.parse(response);
+};

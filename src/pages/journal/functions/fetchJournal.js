@@ -1,11 +1,10 @@
-import {DataStore} from "@aws-amplify/datastore";
-import {JournalEntry, JournalEntryThoughts, Thought} from "../../../models";
-import {createJournalTimeline, formatDate} from "./createJournalTimeline";
-import {handleJournalEntryCompletion} from "./handleJournalEntryCompletion";
-import {checkDate} from "./checkDate";
+import { DataStore } from '@aws-amplify/datastore';
+import { JournalEntry, JournalEntryThoughts, Thought } from '../../../models';
+import { createJournalTimeline, formatDate } from './createJournalTimeline';
+import { handleJournalEntryCompletion } from './handleJournalEntryCompletion';
+import { checkDate } from './checkDate';
 
-export const fetchJournal = async ({cadence, enqueueSnackbar}) => {
-
+export const fetchJournal = async ({ cadence, enqueueSnackbar }) => {
   // Fetch All Thoughts
   const thoughts = await DataStore.query(Thought);
 
@@ -17,18 +16,18 @@ export const fetchJournal = async ({cadence, enqueueSnackbar}) => {
 
   // Loop through each entry in the timeline
   for (const group of timeline) {
-
     // The thoughts that are associated with this timeline entry
     const currentThoughts = group.thoughts;
 
     // see if there's already a journal entry for this date
-    const foundJournal = journalEntries?.find((entry) => checkDate(new Date(entry.date), new Date(group.date), cadence));
+    const foundJournal = journalEntries?.find((entry) =>
+      checkDate(new Date(entry.date), new Date(group.date), cadence)
+    );
 
     if (foundJournal) {
-
       // If this Journal entry is loading, then skip it
       if (foundJournal.isLoading) {
-        console.log('journal entry is loading, skipping')
+        console.log('journal entry is loading, skipping');
         // eslint-disable-next-line no-continue
         continue;
       }
@@ -43,92 +42,97 @@ export const fetchJournal = async ({cadence, enqueueSnackbar}) => {
 
       // if all the thoughts in the journal entry are in the current timeline thoughts group, then there are no new thoughts
       const newThoughts = currentThoughts.filter((thought) => {
-        return !journalThoughts?.find((journalThought) => journalThought.id === thought.id)
-      })
+        return !journalThoughts?.find((journalThought) => journalThought.id === thought.id);
+      });
 
       if (newThoughts.length === 0) {
-        console.log('no new thoughts since last journal entry, skipping')
+        console.log('no new thoughts since last journal entry, skipping');
         // eslint-disable-next-line no-continue
         continue;
       }
 
-      enqueueSnackbar(`Found ${newThoughts.length} new thoughts for Journal Entry: ${formatDate(foundJournal?.date, cadence)}, updating the journal entry..`, {
-        variant: "info"
-      })
+      enqueueSnackbar(
+        `Found ${newThoughts.length} new thoughts for Journal Entry: ${formatDate(
+          foundJournal?.date,
+          cadence
+        )}, updating the journal entry..`,
+        {
+          variant: 'info'
+        }
+      );
 
       const journalEntry = await handleJournalEntryCompletion({
         thoughts: newThoughts,
         cadence,
         journalEntry: foundJournal.entry,
-        date: formatDate(
-          new Date(foundJournal.date),
-          cadence
-        )
-      })
+        date: formatDate(new Date(foundJournal.date), cadence)
+      });
 
       const promises = [];
 
       for (const newThought of newThoughts) {
-        promises.push(DataStore.save(
-          new JournalEntryThoughts({
-            journalEntryId: foundJournal.id,
-            thoughtId: newThought.id
-          })
-        ))
+        promises.push(
+          DataStore.save(
+            new JournalEntryThoughts({
+              journalEntryId: foundJournal.id,
+              thoughtId: newThought.id
+            })
+          )
+        );
       }
 
       await Promise.allSettled(promises);
 
       await DataStore.save(
-        JournalEntry.copyOf(foundJournal, entry => {
+        JournalEntry.copyOf(foundJournal, (entry) => {
           entry.entry = journalEntry;
         })
-      )
-
-    }
-    else {
-
-      enqueueSnackbar(`Found ${currentThoughts.length} new thoughts for Journal Entry: ${formatDate(group.date, cadence)}, updating the journal entry..`, {
-        variant: "info"
-      })
+      );
+    } else {
+      enqueueSnackbar(
+        `Found ${currentThoughts.length} new thoughts for Journal Entry: ${formatDate(
+          group.date,
+          cadence
+        )}, updating the journal entry..`,
+        {
+          variant: 'info'
+        }
+      );
 
       let newJournalEntry = await DataStore.save(
         new JournalEntry({
           date: new Date(group.date).toISOString(),
-          cadence,
+          cadence
           // isLoading: true,
         })
-      )
+      );
 
       const journalEntryCompletion = await handleJournalEntryCompletion({
         thoughts: currentThoughts,
         cadence,
-        date: formatDate(
-          new Date(group.date),
-          cadence
-        )
-      })
+        date: formatDate(new Date(group.date), cadence)
+      });
 
       newJournalEntry = await DataStore.save(
-        JournalEntry.copyOf(newJournalEntry, entry => {
+        JournalEntry.copyOf(newJournalEntry, (entry) => {
           entry.entry = journalEntryCompletion;
         })
       );
 
-      const promises = []
+      const promises = [];
 
       for (const currentThought of currentThoughts) {
-        promises.push(DataStore.save(
-          new JournalEntryThoughts({
-            journalEntryId: newJournalEntry.id,
-            thoughtId: currentThought.id
-          })
-        ))
+        promises.push(
+          DataStore.save(
+            new JournalEntryThoughts({
+              journalEntryId: newJournalEntry.id,
+              thoughtId: currentThought.id
+            })
+          )
+        );
       }
 
       await Promise.allSettled(promises);
-
     }
-
   }
 };

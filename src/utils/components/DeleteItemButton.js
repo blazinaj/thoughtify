@@ -6,9 +6,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { deleteItem } from '../functions/deleteItem';
-import {Button, Typography} from "@mui/material";
-import DialogActions from "@mui/material/DialogActions";
-import {sentenceCase} from "change-case";
+import { Button, Typography } from '@mui/material';
+import DialogActions from '@mui/material/DialogActions';
+import { sentenceCase } from 'change-case';
 
 /**
  * A button that allows the user to delete an item from the database
@@ -52,24 +52,18 @@ export const DeleteItemButton = ({ item, model, onBeforeDelete, onAfterDelete })
         fullWidth
         maxWidth="md"
       >
-        <DialogTitle id="form-dialog-title">Are you sure you want to delete this {sentenceCase(model.name || "Item")}?</DialogTitle>
-        <DialogContent>
-          {
-            isDeleting && (
-              <Typography>
-                Deleting...
-              </Typography>
-            )
-          }
-        </DialogContent>
-         <DialogActions>
+        <DialogTitle id="form-dialog-title">
+          Are you sure you want to delete this {sentenceCase(model.name || 'Item')}?
+        </DialogTitle>
+        <DialogContent>{isDeleting && <Typography>Deleting...</Typography>}</DialogContent>
+        <DialogActions>
           <Button onClick={() => setDialogOpen(false)} color="error">
             No
           </Button>
           <Button onClick={async () => handleDelete()} color="success" disabled={isDeleting}>
             Yes
           </Button>
-         </DialogActions>
+        </DialogActions>
       </Dialog>
       <IconButton aria-label="delete" onClick={() => setDialogOpen(true)} size="large">
         <Delete />

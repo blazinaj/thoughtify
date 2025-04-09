@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -19,15 +19,12 @@ import {
   SwitchField,
   Text,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
-import { Notification, User } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
+import { Notification, User } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -41,15 +38,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -65,12 +62,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -85,18 +77,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -107,17 +98,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -175,7 +166,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -184,24 +175,15 @@ function ArrayField({
   );
 }
 export default function NotificationCreateForm(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    title: "",
-    content: "",
-    readDate: "",
-    type: "",
+    title: '',
+    content: '',
+    readDate: '',
+    type: '',
     userID: undefined,
     isUnread: false,
-    owner: "",
+    owner: ''
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [content, setContent] = React.useState(initialValues.content);
@@ -218,40 +200,32 @@ export default function NotificationCreateForm(props) {
     setType(initialValues.type);
     setUserID(initialValues.userID);
     setCurrentUserIDValue(undefined);
-    setCurrentUserIDDisplayValue("");
+    setCurrentUserIDDisplayValue('');
     setIsUnread(initialValues.isUnread);
     setOwner(initialValues.owner);
     setErrors({});
   };
-  const [currentUserIDDisplayValue, setCurrentUserIDDisplayValue] =
-    React.useState("");
+  const [currentUserIDDisplayValue, setCurrentUserIDDisplayValue] = React.useState('');
   const [currentUserIDValue, setCurrentUserIDValue] = React.useState(undefined);
   const userIDRef = React.createRef();
   const userRecords = useDataStoreBinding({
-    type: "collection",
-    model: User,
+    type: 'collection',
+    model: User
   }).items;
   const getDisplayValue = {
-    userID: (r) => `${r?.firstName ? r?.firstName + " - " : ""}${r?.id}`,
+    userID: (r) => `${r?.firstName ? r?.firstName + ' - ' : ''}${r?.id}`
   };
   const validations = {
     title: [],
     content: [],
     readDate: [],
     type: [],
-    userID: [{ type: "Required" }],
+    userID: [{ type: 'Required' }],
     isUnread: [],
-    owner: [],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -261,15 +235,15 @@ export default function NotificationCreateForm(props) {
     return validationResponse;
   };
   const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
+    const df = new Intl.DateTimeFormat('default', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      calendar: 'iso8601',
+      numberingSystem: 'latn',
+      hourCycle: 'h23'
     });
     const parts = df.formatToParts(date).reduce((acc, part) => {
       acc[part.type] = part.value;
@@ -292,21 +266,15 @@ export default function NotificationCreateForm(props) {
           type,
           userID,
           isUnread,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -318,7 +286,7 @@ export default function NotificationCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -335,7 +303,7 @@ export default function NotificationCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "NotificationCreateForm")}
+      {...getOverrideProps(overrides, 'NotificationCreateForm')}
       {...rest}
     >
       <TextField
@@ -353,20 +321,20 @@ export default function NotificationCreateForm(props) {
               type,
               userID,
               isUnread,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
           }
           if (errors.title?.hasError) {
-            runValidationTasks("title", value);
+            runValidationTasks('title', value);
           }
           setTitle(value);
         }}
-        onBlur={() => runValidationTasks("title", title)}
+        onBlur={() => runValidationTasks('title', title)}
         errorMessage={errors.title?.errorMessage}
         hasError={errors.title?.hasError}
-        {...getOverrideProps(overrides, "title")}
+        {...getOverrideProps(overrides, 'title')}
       ></TextField>
       <TextField
         label="Content"
@@ -383,20 +351,20 @@ export default function NotificationCreateForm(props) {
               type,
               userID,
               isUnread,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.content ?? value;
           }
           if (errors.content?.hasError) {
-            runValidationTasks("content", value);
+            runValidationTasks('content', value);
           }
           setContent(value);
         }}
-        onBlur={() => runValidationTasks("content", content)}
+        onBlur={() => runValidationTasks('content', content)}
         errorMessage={errors.content?.errorMessage}
         hasError={errors.content?.hasError}
-        {...getOverrideProps(overrides, "content")}
+        {...getOverrideProps(overrides, 'content')}
       ></TextField>
       <TextField
         label="Read date"
@@ -405,8 +373,7 @@ export default function NotificationCreateForm(props) {
         type="datetime-local"
         value={readDate && convertToLocal(new Date(readDate))}
         onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          let value = e.target.value === '' ? '' : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
               title,
@@ -415,20 +382,20 @@ export default function NotificationCreateForm(props) {
               type,
               userID,
               isUnread,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.readDate ?? value;
           }
           if (errors.readDate?.hasError) {
-            runValidationTasks("readDate", value);
+            runValidationTasks('readDate', value);
           }
           setReadDate(value);
         }}
-        onBlur={() => runValidationTasks("readDate", readDate)}
+        onBlur={() => runValidationTasks('readDate', readDate)}
         errorMessage={errors.readDate?.errorMessage}
         hasError={errors.readDate?.hasError}
-        {...getOverrideProps(overrides, "readDate")}
+        {...getOverrideProps(overrides, 'readDate')}
       ></TextField>
       <SelectField
         label="Type"
@@ -445,26 +412,22 @@ export default function NotificationCreateForm(props) {
               type: value,
               userID,
               isUnread,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.type ?? value;
           }
           if (errors.type?.hasError) {
-            runValidationTasks("type", value);
+            runValidationTasks('type', value);
           }
           setType(value);
         }}
-        onBlur={() => runValidationTasks("type", type)}
+        onBlur={() => runValidationTasks('type', type)}
         errorMessage={errors.type?.errorMessage}
         hasError={errors.type?.hasError}
-        {...getOverrideProps(overrides, "type")}
+        {...getOverrideProps(overrides, 'type')}
       >
-        <option
-          children="Message"
-          value="MESSAGE"
-          {...getOverrideProps(overrides, "typeoption0")}
-        ></option>
+        <option children="Message" value="MESSAGE" {...getOverrideProps(overrides, 'typeoption0')}></option>
       </SelectField>
       <ArrayField
         lengthLimit={1}
@@ -478,7 +441,7 @@ export default function NotificationCreateForm(props) {
               type,
               userID: value,
               isUnread,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.userID ?? value;
@@ -487,28 +450,18 @@ export default function NotificationCreateForm(props) {
           setCurrentUserIDValue(undefined);
         }}
         currentFieldValue={currentUserIDValue}
-        label={"User id"}
+        label={'User id'}
         items={userID ? [userID] : []}
         hasError={errors?.userID?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("userID", currentUserIDValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('userID', currentUserIDValue)}
         errorMessage={errors?.userID?.errorMessage}
-        getBadgeText={(value) =>
-          value
-            ? getDisplayValue.userID(userRecords.find((r) => r.id === value))
-            : ""
-        }
+        getBadgeText={(value) => (value ? getDisplayValue.userID(userRecords.find((r) => r.id === value)) : '')}
         setFieldValue={(value) => {
-          setCurrentUserIDDisplayValue(
-            value
-              ? getDisplayValue.userID(userRecords.find((r) => r.id === value))
-              : ""
-          );
+          setCurrentUserIDDisplayValue(value ? getDisplayValue.userID(userRecords.find((r) => r.id === value)) : '');
           setCurrentUserIDValue(value);
         }}
         inputFieldRef={userIDRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="User id"
@@ -517,36 +470,33 @@ export default function NotificationCreateForm(props) {
           placeholder="Search User"
           value={currentUserIDDisplayValue}
           options={userRecords
-            .filter(
-              (r, i, arr) =>
-                arr.findIndex((member) => member?.id === r?.id) === i
-            )
+            .filter((r, i, arr) => arr.findIndex((member) => member?.id === r?.id) === i)
             .map((r) => ({
               id: r?.id,
-              label: getDisplayValue.userID?.(r),
+              label: getDisplayValue.userID?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentUserIDValue(id);
             setCurrentUserIDDisplayValue(label);
-            runValidationTasks("userID", label);
+            runValidationTasks('userID', label);
           }}
           onClear={() => {
-            setCurrentUserIDDisplayValue("");
+            setCurrentUserIDDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.userID?.hasError) {
-              runValidationTasks("userID", value);
+              runValidationTasks('userID', value);
             }
             setCurrentUserIDDisplayValue(value);
             setCurrentUserIDValue(undefined);
           }}
-          onBlur={() => runValidationTasks("userID", currentUserIDValue)}
+          onBlur={() => runValidationTasks('userID', currentUserIDValue)}
           errorMessage={errors.userID?.errorMessage}
           hasError={errors.userID?.hasError}
           ref={userIDRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "userID")}
+          {...getOverrideProps(overrides, 'userID')}
         ></Autocomplete>
       </ArrayField>
       <SwitchField
@@ -564,20 +514,20 @@ export default function NotificationCreateForm(props) {
               type,
               userID,
               isUnread: value,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.isUnread ?? value;
           }
           if (errors.isUnread?.hasError) {
-            runValidationTasks("isUnread", value);
+            runValidationTasks('isUnread', value);
           }
           setIsUnread(value);
         }}
-        onBlur={() => runValidationTasks("isUnread", isUnread)}
+        onBlur={() => runValidationTasks('isUnread', isUnread)}
         errorMessage={errors.isUnread?.errorMessage}
         hasError={errors.isUnread?.hasError}
-        {...getOverrideProps(overrides, "isUnread")}
+        {...getOverrideProps(overrides, 'isUnread')}
       ></SwitchField>
       <TextField
         label="Owner"
@@ -594,25 +544,22 @@ export default function NotificationCreateForm(props) {
               type,
               userID,
               isUnread,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -620,18 +567,15 @@ export default function NotificationCreateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

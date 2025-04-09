@@ -2,10 +2,7 @@
 // this is an auto generated file. This will be overwritten
 
 export const createBiography = /* GraphQL */ `
-  mutation CreateBiography(
-    $input: CreateBiographyInput!
-    $condition: ModelBiographyConditionInput
-  ) {
+  mutation CreateBiography($input: CreateBiographyInput!, $condition: ModelBiographyConditionInput) {
     createBiography(input: $input, condition: $condition) {
       id
       date
@@ -27,10 +24,7 @@ export const createBiography = /* GraphQL */ `
   }
 `;
 export const updateBiography = /* GraphQL */ `
-  mutation UpdateBiography(
-    $input: UpdateBiographyInput!
-    $condition: ModelBiographyConditionInput
-  ) {
+  mutation UpdateBiography($input: UpdateBiographyInput!, $condition: ModelBiographyConditionInput) {
     updateBiography(input: $input, condition: $condition) {
       id
       date
@@ -52,10 +46,7 @@ export const updateBiography = /* GraphQL */ `
   }
 `;
 export const deleteBiography = /* GraphQL */ `
-  mutation DeleteBiography(
-    $input: DeleteBiographyInput!
-    $condition: ModelBiographyConditionInput
-  ) {
+  mutation DeleteBiography($input: DeleteBiographyInput!, $condition: ModelBiographyConditionInput) {
     deleteBiography(input: $input, condition: $condition) {
       id
       date
@@ -77,10 +68,7 @@ export const deleteBiography = /* GraphQL */ `
   }
 `;
 export const createHealthReport = /* GraphQL */ `
-  mutation CreateHealthReport(
-    $input: CreateHealthReportInput!
-    $condition: ModelHealthReportConditionInput
-  ) {
+  mutation CreateHealthReport($input: CreateHealthReportInput!, $condition: ModelHealthReportConditionInput) {
     createHealthReport(input: $input, condition: $condition) {
       id
       date
@@ -102,10 +90,7 @@ export const createHealthReport = /* GraphQL */ `
   }
 `;
 export const updateHealthReport = /* GraphQL */ `
-  mutation UpdateHealthReport(
-    $input: UpdateHealthReportInput!
-    $condition: ModelHealthReportConditionInput
-  ) {
+  mutation UpdateHealthReport($input: UpdateHealthReportInput!, $condition: ModelHealthReportConditionInput) {
     updateHealthReport(input: $input, condition: $condition) {
       id
       date
@@ -127,10 +112,7 @@ export const updateHealthReport = /* GraphQL */ `
   }
 `;
 export const deleteHealthReport = /* GraphQL */ `
-  mutation DeleteHealthReport(
-    $input: DeleteHealthReportInput!
-    $condition: ModelHealthReportConditionInput
-  ) {
+  mutation DeleteHealthReport($input: DeleteHealthReportInput!, $condition: ModelHealthReportConditionInput) {
     deleteHealthReport(input: $input, condition: $condition) {
       id
       date
@@ -152,10 +134,7 @@ export const deleteHealthReport = /* GraphQL */ `
   }
 `;
 export const createJournalEntry = /* GraphQL */ `
-  mutation CreateJournalEntry(
-    $input: CreateJournalEntryInput!
-    $condition: ModelJournalEntryConditionInput
-  ) {
+  mutation CreateJournalEntry($input: CreateJournalEntryInput!, $condition: ModelJournalEntryConditionInput) {
     createJournalEntry(input: $input, condition: $condition) {
       id
       date
@@ -178,10 +157,7 @@ export const createJournalEntry = /* GraphQL */ `
   }
 `;
 export const updateJournalEntry = /* GraphQL */ `
-  mutation UpdateJournalEntry(
-    $input: UpdateJournalEntryInput!
-    $condition: ModelJournalEntryConditionInput
-  ) {
+  mutation UpdateJournalEntry($input: UpdateJournalEntryInput!, $condition: ModelJournalEntryConditionInput) {
     updateJournalEntry(input: $input, condition: $condition) {
       id
       date
@@ -204,10 +180,7 @@ export const updateJournalEntry = /* GraphQL */ `
   }
 `;
 export const deleteJournalEntry = /* GraphQL */ `
-  mutation DeleteJournalEntry(
-    $input: DeleteJournalEntryInput!
-    $condition: ModelJournalEntryConditionInput
-  ) {
+  mutation DeleteJournalEntry($input: DeleteJournalEntryInput!, $condition: ModelJournalEntryConditionInput) {
     deleteJournalEntry(input: $input, condition: $condition) {
       id
       date
@@ -230,10 +203,7 @@ export const deleteJournalEntry = /* GraphQL */ `
   }
 `;
 export const createNotification = /* GraphQL */ `
-  mutation CreateNotification(
-    $input: CreateNotificationInput!
-    $condition: ModelNotificationConditionInput
-  ) {
+  mutation CreateNotification($input: CreateNotificationInput!, $condition: ModelNotificationConditionInput) {
     createNotification(input: $input, condition: $condition) {
       id
       title
@@ -253,10 +223,7 @@ export const createNotification = /* GraphQL */ `
   }
 `;
 export const updateNotification = /* GraphQL */ `
-  mutation UpdateNotification(
-    $input: UpdateNotificationInput!
-    $condition: ModelNotificationConditionInput
-  ) {
+  mutation UpdateNotification($input: UpdateNotificationInput!, $condition: ModelNotificationConditionInput) {
     updateNotification(input: $input, condition: $condition) {
       id
       title
@@ -276,10 +243,7 @@ export const updateNotification = /* GraphQL */ `
   }
 `;
 export const deleteNotification = /* GraphQL */ `
-  mutation DeleteNotification(
-    $input: DeleteNotificationInput!
-    $condition: ModelNotificationConditionInput
-  ) {
+  mutation DeleteNotification($input: DeleteNotificationInput!, $condition: ModelNotificationConditionInput) {
     deleteNotification(input: $input, condition: $condition) {
       id
       title
@@ -359,10 +323,7 @@ export const deleteSubscriptionPlan = /* GraphQL */ `
   }
 `;
 export const createThought = /* GraphQL */ `
-  mutation CreateThought(
-    $input: CreateThoughtInput!
-    $condition: ModelThoughtConditionInput
-  ) {
+  mutation CreateThought($input: CreateThoughtInput!, $condition: ModelThoughtConditionInput) {
     createThought(input: $input, condition: $condition) {
       id
       date
@@ -395,10 +356,7 @@ export const createThought = /* GraphQL */ `
   }
 `;
 export const updateThought = /* GraphQL */ `
-  mutation UpdateThought(
-    $input: UpdateThoughtInput!
-    $condition: ModelThoughtConditionInput
-  ) {
+  mutation UpdateThought($input: UpdateThoughtInput!, $condition: ModelThoughtConditionInput) {
     updateThought(input: $input, condition: $condition) {
       id
       date
@@ -431,10 +389,7 @@ export const updateThought = /* GraphQL */ `
   }
 `;
 export const deleteThought = /* GraphQL */ `
-  mutation DeleteThought(
-    $input: DeleteThoughtInput!
-    $condition: ModelThoughtConditionInput
-  ) {
+  mutation DeleteThought($input: DeleteThoughtInput!, $condition: ModelThoughtConditionInput) {
     deleteThought(input: $input, condition: $condition) {
       id
       date
@@ -467,10 +422,7 @@ export const deleteThought = /* GraphQL */ `
   }
 `;
 export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
+  mutation CreateUser($input: CreateUserInput!, $condition: ModelUserConditionInput) {
     createUser(input: $input, condition: $condition) {
       id
       firstName
@@ -496,10 +448,7 @@ export const createUser = /* GraphQL */ `
   }
 `;
 export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
+  mutation UpdateUser($input: UpdateUserInput!, $condition: ModelUserConditionInput) {
     updateUser(input: $input, condition: $condition) {
       id
       firstName
@@ -525,10 +474,7 @@ export const updateUser = /* GraphQL */ `
   }
 `;
 export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
+  mutation DeleteUser($input: DeleteUserInput!, $condition: ModelUserConditionInput) {
     deleteUser(input: $input, condition: $condition) {
       id
       firstName

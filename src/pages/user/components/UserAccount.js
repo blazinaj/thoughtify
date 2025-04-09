@@ -16,7 +16,7 @@ import { getAddressBook, getCards, getInvoices, getNotifications, getProfile } f
 import { AccountBilling, AccountGeneral, AccountNotifications } from '../../../demo/components/_dashboard/user/account';
 import AccountDelete from './AccountDelete';
 import AccountChangePassword from './AccountChangePassword';
-import AccountData from "./AccountData";
+import AccountData from './AccountData';
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ export const UserAccount = () => {
     // },
     {
       value: 'change-password',
-      icon: <Icon icon={"carbon:password"} width={20} height={20} />,
+      icon: <Icon icon={'carbon:password'} width={20} height={20} />,
       component: <AccountChangePassword />
     },
     {

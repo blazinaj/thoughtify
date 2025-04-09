@@ -5,41 +5,22 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SelectField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { SubscriptionPlan } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, SelectField, TextField } from '@aws-amplify/ui-react';
+import { SubscriptionPlan } from '../models';
+import { fetchByPath, getOverrideProps, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function SubscriptionPlanCreateForm(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    subscriptionTier: "",
-    status: "",
-    squareSubscriptionID: "",
-    owner: "",
+    subscriptionTier: '',
+    status: '',
+    squareSubscriptionID: '',
+    owner: ''
   };
-  const [subscriptionTier, setSubscriptionTier] = React.useState(
-    initialValues.subscriptionTier
-  );
+  const [subscriptionTier, setSubscriptionTier] = React.useState(initialValues.subscriptionTier);
   const [status, setStatus] = React.useState(initialValues.status);
-  const [squareSubscriptionID, setSquareSubscriptionID] = React.useState(
-    initialValues.squareSubscriptionID
-  );
+  const [squareSubscriptionID, setSquareSubscriptionID] = React.useState(initialValues.squareSubscriptionID);
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -53,17 +34,10 @@ export default function SubscriptionPlanCreateForm(props) {
     subscriptionTier: [],
     status: [],
     squareSubscriptionID: [],
-    owner: [],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -84,21 +58,15 @@ export default function SubscriptionPlanCreateForm(props) {
           subscriptionTier,
           status,
           squareSubscriptionID,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -110,7 +78,7 @@ export default function SubscriptionPlanCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -127,7 +95,7 @@ export default function SubscriptionPlanCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "SubscriptionPlanCreateForm")}
+      {...getOverrideProps(overrides, 'SubscriptionPlanCreateForm')}
       {...rest}
     >
       <SelectField
@@ -142,31 +110,23 @@ export default function SubscriptionPlanCreateForm(props) {
               subscriptionTier: value,
               status,
               squareSubscriptionID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.subscriptionTier ?? value;
           }
           if (errors.subscriptionTier?.hasError) {
-            runValidationTasks("subscriptionTier", value);
+            runValidationTasks('subscriptionTier', value);
           }
           setSubscriptionTier(value);
         }}
-        onBlur={() => runValidationTasks("subscriptionTier", subscriptionTier)}
+        onBlur={() => runValidationTasks('subscriptionTier', subscriptionTier)}
         errorMessage={errors.subscriptionTier?.errorMessage}
         hasError={errors.subscriptionTier?.hasError}
-        {...getOverrideProps(overrides, "subscriptionTier")}
+        {...getOverrideProps(overrides, 'subscriptionTier')}
       >
-        <option
-          children="Free"
-          value="FREE"
-          {...getOverrideProps(overrides, "subscriptionTieroption0")}
-        ></option>
-        <option
-          children="Premium"
-          value="PREMIUM"
-          {...getOverrideProps(overrides, "subscriptionTieroption1")}
-        ></option>
+        <option children="Free" value="FREE" {...getOverrideProps(overrides, 'subscriptionTieroption0')}></option>
+        <option children="Premium" value="PREMIUM" {...getOverrideProps(overrides, 'subscriptionTieroption1')}></option>
       </SelectField>
       <SelectField
         label="Status"
@@ -180,31 +140,23 @@ export default function SubscriptionPlanCreateForm(props) {
               subscriptionTier,
               status: value,
               squareSubscriptionID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.status ?? value;
           }
           if (errors.status?.hasError) {
-            runValidationTasks("status", value);
+            runValidationTasks('status', value);
           }
           setStatus(value);
         }}
-        onBlur={() => runValidationTasks("status", status)}
+        onBlur={() => runValidationTasks('status', status)}
         errorMessage={errors.status?.errorMessage}
         hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        {...getOverrideProps(overrides, 'status')}
       >
-        <option
-          children="Active"
-          value="ACTIVE"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="Inactive"
-          value="INACTIVE"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
+        <option children="Active" value="ACTIVE" {...getOverrideProps(overrides, 'statusoption0')}></option>
+        <option children="Inactive" value="INACTIVE" {...getOverrideProps(overrides, 'statusoption1')}></option>
       </SelectField>
       <TextField
         label="Square subscription id"
@@ -218,22 +170,20 @@ export default function SubscriptionPlanCreateForm(props) {
               subscriptionTier,
               status,
               squareSubscriptionID: value,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.squareSubscriptionID ?? value;
           }
           if (errors.squareSubscriptionID?.hasError) {
-            runValidationTasks("squareSubscriptionID", value);
+            runValidationTasks('squareSubscriptionID', value);
           }
           setSquareSubscriptionID(value);
         }}
-        onBlur={() =>
-          runValidationTasks("squareSubscriptionID", squareSubscriptionID)
-        }
+        onBlur={() => runValidationTasks('squareSubscriptionID', squareSubscriptionID)}
         errorMessage={errors.squareSubscriptionID?.errorMessage}
         hasError={errors.squareSubscriptionID?.hasError}
-        {...getOverrideProps(overrides, "squareSubscriptionID")}
+        {...getOverrideProps(overrides, 'squareSubscriptionID')}
       ></TextField>
       <TextField
         label="Owner"
@@ -247,25 +197,22 @@ export default function SubscriptionPlanCreateForm(props) {
               subscriptionTier,
               status,
               squareSubscriptionID,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -273,18 +220,15 @@ export default function SubscriptionPlanCreateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

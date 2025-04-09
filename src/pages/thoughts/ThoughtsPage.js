@@ -1,8 +1,8 @@
 import Page from '../../utils/components/Page';
-import {Container} from '@mui/material';
+import { Container } from '@mui/material';
 import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import Thoughts from "./components/Thoughts";
+import Thoughts from './components/Thoughts';
 
 /**
  * Displays the main Thoughts page for the user.
@@ -17,10 +17,10 @@ const ThoughtsPage = () => {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
           heading="Thoughts"
-          subHeading={"Collect your Thoughts and extract Insights"}
+          subHeading={'Collect your Thoughts and extract Insights'}
           icon={'mingcute:thought-line'}
         />
-        <Thoughts/>
+        <Thoughts />
       </Container>
     </Page>
   );

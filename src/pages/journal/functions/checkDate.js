@@ -1,4 +1,4 @@
-import {isSameDay, isSameWeek, isSameMonth, isSameYear} from "date-fns";
+import { isSameDay, isSameWeek, isSameMonth, isSameYear } from 'date-fns';
 
 export const checkDate = (date1, date2, cadence) => {
   if (cadence === 'DAILY') {
@@ -13,4 +13,4 @@ export const checkDate = (date1, date2, cadence) => {
   if (cadence === 'YEARLY') {
     return isSameYear(date1, date2);
   }
-}
+};

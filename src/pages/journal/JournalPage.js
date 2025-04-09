@@ -1,12 +1,12 @@
 import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
-import {Box, Button, Container, Grid, useMediaQuery} from '@mui/material';
+import { Box, Button, Container, Grid, useMediaQuery } from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
 import JournalTimeline from './components/JournalTimeline';
-import ButtonGroup from "@mui/material/ButtonGroup";
-import {JournalCadence} from "../../models";
-import {useState} from "react";
-import {useTheme} from "../../theme/useTheme";
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { JournalCadence } from '../../models';
+import { useState } from 'react';
+import { useTheme } from '../../theme/useTheme';
 
 /**
  * Displays Journal Entries for the user.
@@ -19,11 +19,11 @@ import {useTheme} from "../../theme/useTheme";
 const JournalPage = () => {
   const { themeStretch } = useSettings();
 
-  const [cadence, setCadence] = useState(JournalCadence.DAILY || "DAILY");
+  const [cadence, setCadence] = useState(JournalCadence.DAILY || 'DAILY');
 
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
-  const smallToMid = useMediaQuery(theme.breakpoints.between("xs", "sm"))
+  const smallToMid = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
   return (
     <Page title="Thoughtify Journal">
@@ -31,32 +31,24 @@ const JournalPage = () => {
         <HeaderBreadcrumbs
           icon={'carbon:book'}
           heading="Journal"
-          subHeading={"View your Thoughts in an AI-Generated Journal format at the cadence of your choosing."}
+          subHeading={'View your Thoughts in an AI-Generated Journal format at the cadence of your choosing.'}
           action={
-            <Box
-              display="flex"
-              justifyContent="left"
-            >
-              <ButtonGroup
-                orientation={smallToMid ? "vertical" : "horizontal"}
-                size={"small"}
-              >
-                {
-                  Object.values(JournalCadence).map((cadenceEnum) => {
-                    return (
-                      <Button
-                        key={cadenceEnum}
-                        onClick={() => {
-                          setCadence(cadenceEnum);
-                        }}
-                        variant={cadence === cadenceEnum ? 'contained' : 'outlined'}
-                        size={"small"}
-                      >
-                        {cadenceEnum}
-                      </Button>
-                    )
-                  })
-                }
+            <Box display="flex" justifyContent="left">
+              <ButtonGroup orientation={smallToMid ? 'vertical' : 'horizontal'} size={'small'}>
+                {Object.values(JournalCadence).map((cadenceEnum) => {
+                  return (
+                    <Button
+                      key={cadenceEnum}
+                      onClick={() => {
+                        setCadence(cadenceEnum);
+                      }}
+                      variant={cadence === cadenceEnum ? 'contained' : 'outlined'}
+                      size={'small'}
+                    >
+                      {cadenceEnum}
+                    </Button>
+                  );
+                })}
               </ButtonGroup>
             </Box>
           }

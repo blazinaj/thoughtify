@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -18,15 +18,12 @@ import {
   SelectField,
   Text,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
-import { EnrollmentTopicProgress, LessonNode, Enrollment } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
+import { EnrollmentTopicProgress, LessonNode, Enrollment } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -40,15 +37,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -64,12 +61,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -84,18 +76,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -106,17 +97,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -174,7 +165,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -195,16 +186,14 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    status: "",
+    status: '',
     Topic: undefined,
     enrollmentID: undefined,
-    owner: "",
+    owner: ''
   };
   const [status, setStatus] = React.useState(initialValues.status);
   const [Topic, setTopic] = React.useState(initialValues.Topic);
-  const [enrollmentID, setEnrollmentID] = React.useState(
-    initialValues.enrollmentID
-  );
+  const [enrollmentID, setEnrollmentID] = React.useState(initialValues.enrollmentID);
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -213,26 +202,25 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
           ...initialValues,
           ...enrollmentTopicProgressRecord,
           Topic,
-          enrollmentID,
+          enrollmentID
         }
       : initialValues;
     setStatus(cleanValues.status);
     setTopic(cleanValues.Topic);
     setCurrentTopicValue(undefined);
-    setCurrentTopicDisplayValue("");
+    setCurrentTopicDisplayValue('');
     setEnrollmentID(cleanValues.enrollmentID);
     setCurrentEnrollmentIDValue(undefined);
-    setCurrentEnrollmentIDDisplayValue("");
+    setCurrentEnrollmentIDDisplayValue('');
     setOwner(cleanValues.owner);
     setErrors({});
   };
-  const [enrollmentTopicProgressRecord, setEnrollmentTopicProgressRecord] =
-    React.useState(enrollmentTopicProgressModelProp);
+  const [enrollmentTopicProgressRecord, setEnrollmentTopicProgressRecord] = React.useState(
+    enrollmentTopicProgressModelProp
+  );
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(EnrollmentTopicProgress, idProp)
-        : enrollmentTopicProgressModelProp;
+      const record = idProp ? await DataStore.query(EnrollmentTopicProgress, idProp) : enrollmentTopicProgressModelProp;
       setEnrollmentTopicProgressRecord(record);
       const TopicRecord = record ? await record.Topic : undefined;
       setTopic(TopicRecord);
@@ -241,55 +229,39 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
     };
     queryData();
   }, [idProp, enrollmentTopicProgressModelProp]);
-  React.useEffect(resetStateValues, [
-    enrollmentTopicProgressRecord,
-    Topic,
-    enrollmentID,
-  ]);
-  const [currentTopicDisplayValue, setCurrentTopicDisplayValue] =
-    React.useState("");
+  React.useEffect(resetStateValues, [enrollmentTopicProgressRecord, Topic, enrollmentID]);
+  const [currentTopicDisplayValue, setCurrentTopicDisplayValue] = React.useState('');
   const [currentTopicValue, setCurrentTopicValue] = React.useState(undefined);
   const TopicRef = React.createRef();
-  const [currentEnrollmentIDDisplayValue, setCurrentEnrollmentIDDisplayValue] =
-    React.useState("");
-  const [currentEnrollmentIDValue, setCurrentEnrollmentIDValue] =
-    React.useState(undefined);
+  const [currentEnrollmentIDDisplayValue, setCurrentEnrollmentIDDisplayValue] = React.useState('');
+  const [currentEnrollmentIDValue, setCurrentEnrollmentIDValue] = React.useState(undefined);
   const enrollmentIDRef = React.createRef();
   const getIDValue = {
-    Topic: (r) => JSON.stringify({ id: r?.id }),
+    Topic: (r) => JSON.stringify({ id: r?.id })
   };
   const TopicIdSet = new Set(
-    Array.isArray(Topic)
-      ? Topic.map((r) => getIDValue.Topic?.(r))
-      : getIDValue.Topic?.(Topic)
+    Array.isArray(Topic) ? Topic.map((r) => getIDValue.Topic?.(r)) : getIDValue.Topic?.(Topic)
   );
   const lessonNodeRecords = useDataStoreBinding({
-    type: "collection",
-    model: LessonNode,
+    type: 'collection',
+    model: LessonNode
   }).items;
   const enrollmentRecords = useDataStoreBinding({
-    type: "collection",
-    model: Enrollment,
+    type: 'collection',
+    model: Enrollment
   }).items;
   const getDisplayValue = {
-    Topic: (r) => `${r?.owner ? r?.owner + " - " : ""}${r?.id}`,
-    enrollmentID: (r) => `${r?.status ? r?.status + " - " : ""}${r?.id}`,
+    Topic: (r) => `${r?.owner ? r?.owner + ' - ' : ''}${r?.id}`,
+    enrollmentID: (r) => `${r?.status ? r?.status + ' - ' : ''}${r?.id}`
   };
   const validations = {
     status: [],
     Topic: [],
-    enrollmentID: [{ type: "Required" }],
-    owner: [],
+    enrollmentID: [{ type: 'Required' }],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -310,29 +282,17 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
           status,
           Topic,
           enrollmentID,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(
-                    fieldName,
-                    item,
-                    getDisplayValue[fieldName]
-                  )
-                )
+                ...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item, getDisplayValue[fieldName]))
               );
               return promises;
             }
-            promises.push(
-              runValidationTasks(
-                fieldName,
-                modelFields[fieldName],
-                getDisplayValue[fieldName]
-              )
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName], getDisplayValue[fieldName]));
             return promises;
           }, [])
         );
@@ -344,20 +304,17 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
           await DataStore.save(
-            EnrollmentTopicProgress.copyOf(
-              enrollmentTopicProgressRecord,
-              (updated) => {
-                Object.assign(updated, modelFields);
-                if (!modelFields.Topic) {
-                  updated.enrollmentTopicProgressTopicId = undefined;
-                }
+            EnrollmentTopicProgress.copyOf(enrollmentTopicProgressRecord, (updated) => {
+              Object.assign(updated, modelFields);
+              if (!modelFields.Topic) {
+                updated.enrollmentTopicProgressTopicId = undefined;
               }
-            )
+            })
           );
           if (onSuccess) {
             onSuccess(modelFields);
@@ -368,7 +325,7 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "EnrollmentTopicProgressUpdateForm")}
+      {...getOverrideProps(overrides, 'EnrollmentTopicProgressUpdateForm')}
       {...rest}
     >
       <SelectField
@@ -383,41 +340,25 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
               status: value,
               Topic,
               enrollmentID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.status ?? value;
           }
           if (errors.status?.hasError) {
-            runValidationTasks("status", value);
+            runValidationTasks('status', value);
           }
           setStatus(value);
         }}
-        onBlur={() => runValidationTasks("status", status)}
+        onBlur={() => runValidationTasks('status', status)}
         errorMessage={errors.status?.errorMessage}
         hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        {...getOverrideProps(overrides, 'status')}
       >
-        <option
-          children="Not started"
-          value="NOT_STARTED"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="In progress"
-          value="IN_PROGRESS"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
-        <option
-          children="Completed"
-          value="COMPLETED"
-          {...getOverrideProps(overrides, "statusoption2")}
-        ></option>
-        <option
-          children="Failed"
-          value="FAILED"
-          {...getOverrideProps(overrides, "statusoption3")}
-        ></option>
+        <option children="Not started" value="NOT_STARTED" {...getOverrideProps(overrides, 'statusoption0')}></option>
+        <option children="In progress" value="IN_PROGRESS" {...getOverrideProps(overrides, 'statusoption1')}></option>
+        <option children="Completed" value="COMPLETED" {...getOverrideProps(overrides, 'statusoption2')}></option>
+        <option children="Failed" value="FAILED" {...getOverrideProps(overrides, 'statusoption3')}></option>
       </SelectField>
       <ArrayField
         lengthLimit={1}
@@ -428,32 +369,28 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
               status,
               Topic: value,
               enrollmentID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.Topic ?? value;
           }
           setTopic(value);
           setCurrentTopicValue(undefined);
-          setCurrentTopicDisplayValue("");
+          setCurrentTopicDisplayValue('');
         }}
         currentFieldValue={currentTopicValue}
-        label={"Topic"}
+        label={'Topic'}
         items={Topic ? [Topic] : []}
         hasError={errors?.Topic?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("Topic", currentTopicValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('Topic', currentTopicValue)}
         errorMessage={errors?.Topic?.errorMessage}
         getBadgeText={getDisplayValue.Topic}
         setFieldValue={(model) => {
-          setCurrentTopicDisplayValue(
-            model ? getDisplayValue.Topic(model) : ""
-          );
+          setCurrentTopicDisplayValue(model ? getDisplayValue.Topic(model) : '');
           setCurrentTopicValue(model);
         }}
         inputFieldRef={TopicRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Topic"
@@ -465,37 +402,33 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
             .filter((r) => !TopicIdSet.has(getIDValue.Topic?.(r)))
             .map((r) => ({
               id: getIDValue.Topic?.(r),
-              label: getDisplayValue.Topic?.(r),
+              label: getDisplayValue.Topic?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentTopicValue(
-              lessonNodeRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              lessonNodeRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentTopicDisplayValue(label);
-            runValidationTasks("Topic", label);
+            runValidationTasks('Topic', label);
           }}
           onClear={() => {
-            setCurrentTopicDisplayValue("");
+            setCurrentTopicDisplayValue('');
           }}
           defaultValue={Topic}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.Topic?.hasError) {
-              runValidationTasks("Topic", value);
+              runValidationTasks('Topic', value);
             }
             setCurrentTopicDisplayValue(value);
             setCurrentTopicValue(undefined);
           }}
-          onBlur={() => runValidationTasks("Topic", currentTopicDisplayValue)}
+          onBlur={() => runValidationTasks('Topic', currentTopicDisplayValue)}
           errorMessage={errors.Topic?.errorMessage}
           hasError={errors.Topic?.hasError}
           ref={TopicRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "Topic")}
+          {...getOverrideProps(overrides, 'Topic')}
         ></Autocomplete>
       </ArrayField>
       <ArrayField
@@ -507,7 +440,7 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
               status,
               Topic,
               enrollmentID: value,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.enrollmentID ?? value;
@@ -516,32 +449,22 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
           setCurrentEnrollmentIDValue(undefined);
         }}
         currentFieldValue={currentEnrollmentIDValue}
-        label={"Enrollment id"}
+        label={'Enrollment id'}
         items={enrollmentID ? [enrollmentID] : []}
         hasError={errors?.enrollmentID?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("enrollmentID", currentEnrollmentIDValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('enrollmentID', currentEnrollmentIDValue)}
         errorMessage={errors?.enrollmentID?.errorMessage}
         getBadgeText={(value) =>
-          value
-            ? getDisplayValue.enrollmentID(
-                enrollmentRecords.find((r) => r.id === value)
-              )
-            : ""
+          value ? getDisplayValue.enrollmentID(enrollmentRecords.find((r) => r.id === value)) : ''
         }
         setFieldValue={(value) => {
           setCurrentEnrollmentIDDisplayValue(
-            value
-              ? getDisplayValue.enrollmentID(
-                  enrollmentRecords.find((r) => r.id === value)
-                )
-              : ""
+            value ? getDisplayValue.enrollmentID(enrollmentRecords.find((r) => r.id === value)) : ''
           );
           setCurrentEnrollmentIDValue(value);
         }}
         inputFieldRef={enrollmentIDRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Enrollment id"
@@ -550,39 +473,34 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
           placeholder="Search Enrollment"
           value={currentEnrollmentIDDisplayValue}
           options={enrollmentRecords
-            .filter(
-              (r, i, arr) =>
-                arr.findIndex((member) => member?.id === r?.id) === i
-            )
+            .filter((r, i, arr) => arr.findIndex((member) => member?.id === r?.id) === i)
             .map((r) => ({
               id: r?.id,
-              label: getDisplayValue.enrollmentID?.(r),
+              label: getDisplayValue.enrollmentID?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentEnrollmentIDValue(id);
             setCurrentEnrollmentIDDisplayValue(label);
-            runValidationTasks("enrollmentID", label);
+            runValidationTasks('enrollmentID', label);
           }}
           onClear={() => {
-            setCurrentEnrollmentIDDisplayValue("");
+            setCurrentEnrollmentIDDisplayValue('');
           }}
           defaultValue={enrollmentID}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.enrollmentID?.hasError) {
-              runValidationTasks("enrollmentID", value);
+              runValidationTasks('enrollmentID', value);
             }
             setCurrentEnrollmentIDDisplayValue(value);
             setCurrentEnrollmentIDValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("enrollmentID", currentEnrollmentIDValue)
-          }
+          onBlur={() => runValidationTasks('enrollmentID', currentEnrollmentIDValue)}
           errorMessage={errors.enrollmentID?.errorMessage}
           hasError={errors.enrollmentID?.hasError}
           ref={enrollmentIDRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "enrollmentID")}
+          {...getOverrideProps(overrides, 'enrollmentID')}
         ></Autocomplete>
       </ArrayField>
       <TextField
@@ -597,25 +515,22 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
               status,
               Topic,
               enrollmentID,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -624,21 +539,15 @@ export default function EnrollmentTopicProgressUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || enrollmentTopicProgressModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || enrollmentTopicProgressModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || enrollmentTopicProgressModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

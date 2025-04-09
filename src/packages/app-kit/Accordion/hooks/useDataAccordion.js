@@ -56,7 +56,7 @@ export const useDataAccordion = ({
     predicate,
     filter,
     typename,
-    items: itemsInit,
+    items: itemsInit
   });
 
   const display = (

@@ -5,17 +5,11 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SelectField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { SubscriptionPlan } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, SelectField, TextField } from '@aws-amplify/ui-react';
+import { SubscriptionPlan } from '../models';
+import { fetchByPath, getOverrideProps, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function SubscriptionPlanUpdateForm(props) {
   const {
     id: idProp,
@@ -29,38 +23,28 @@ export default function SubscriptionPlanUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    subscriptionTier: "",
-    status: "",
-    squareSubscriptionID: "",
-    owner: "",
+    subscriptionTier: '',
+    status: '',
+    squareSubscriptionID: '',
+    owner: ''
   };
-  const [subscriptionTier, setSubscriptionTier] = React.useState(
-    initialValues.subscriptionTier
-  );
+  const [subscriptionTier, setSubscriptionTier] = React.useState(initialValues.subscriptionTier);
   const [status, setStatus] = React.useState(initialValues.status);
-  const [squareSubscriptionID, setSquareSubscriptionID] = React.useState(
-    initialValues.squareSubscriptionID
-  );
+  const [squareSubscriptionID, setSquareSubscriptionID] = React.useState(initialValues.squareSubscriptionID);
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = subscriptionPlanRecord
-      ? { ...initialValues, ...subscriptionPlanRecord }
-      : initialValues;
+    const cleanValues = subscriptionPlanRecord ? { ...initialValues, ...subscriptionPlanRecord } : initialValues;
     setSubscriptionTier(cleanValues.subscriptionTier);
     setStatus(cleanValues.status);
     setSquareSubscriptionID(cleanValues.squareSubscriptionID);
     setOwner(cleanValues.owner);
     setErrors({});
   };
-  const [subscriptionPlanRecord, setSubscriptionPlanRecord] = React.useState(
-    subscriptionPlanModelProp
-  );
+  const [subscriptionPlanRecord, setSubscriptionPlanRecord] = React.useState(subscriptionPlanModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(SubscriptionPlan, idProp)
-        : subscriptionPlanModelProp;
+      const record = idProp ? await DataStore.query(SubscriptionPlan, idProp) : subscriptionPlanModelProp;
       setSubscriptionPlanRecord(record);
     };
     queryData();
@@ -70,17 +54,10 @@ export default function SubscriptionPlanUpdateForm(props) {
     subscriptionTier: [],
     status: [],
     squareSubscriptionID: [],
-    owner: [],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -101,21 +78,15 @@ export default function SubscriptionPlanUpdateForm(props) {
           subscriptionTier,
           status,
           squareSubscriptionID,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -127,7 +98,7 @@ export default function SubscriptionPlanUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -145,7 +116,7 @@ export default function SubscriptionPlanUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "SubscriptionPlanUpdateForm")}
+      {...getOverrideProps(overrides, 'SubscriptionPlanUpdateForm')}
       {...rest}
     >
       <SelectField
@@ -160,31 +131,23 @@ export default function SubscriptionPlanUpdateForm(props) {
               subscriptionTier: value,
               status,
               squareSubscriptionID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.subscriptionTier ?? value;
           }
           if (errors.subscriptionTier?.hasError) {
-            runValidationTasks("subscriptionTier", value);
+            runValidationTasks('subscriptionTier', value);
           }
           setSubscriptionTier(value);
         }}
-        onBlur={() => runValidationTasks("subscriptionTier", subscriptionTier)}
+        onBlur={() => runValidationTasks('subscriptionTier', subscriptionTier)}
         errorMessage={errors.subscriptionTier?.errorMessage}
         hasError={errors.subscriptionTier?.hasError}
-        {...getOverrideProps(overrides, "subscriptionTier")}
+        {...getOverrideProps(overrides, 'subscriptionTier')}
       >
-        <option
-          children="Free"
-          value="FREE"
-          {...getOverrideProps(overrides, "subscriptionTieroption0")}
-        ></option>
-        <option
-          children="Premium"
-          value="PREMIUM"
-          {...getOverrideProps(overrides, "subscriptionTieroption1")}
-        ></option>
+        <option children="Free" value="FREE" {...getOverrideProps(overrides, 'subscriptionTieroption0')}></option>
+        <option children="Premium" value="PREMIUM" {...getOverrideProps(overrides, 'subscriptionTieroption1')}></option>
       </SelectField>
       <SelectField
         label="Status"
@@ -198,31 +161,23 @@ export default function SubscriptionPlanUpdateForm(props) {
               subscriptionTier,
               status: value,
               squareSubscriptionID,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.status ?? value;
           }
           if (errors.status?.hasError) {
-            runValidationTasks("status", value);
+            runValidationTasks('status', value);
           }
           setStatus(value);
         }}
-        onBlur={() => runValidationTasks("status", status)}
+        onBlur={() => runValidationTasks('status', status)}
         errorMessage={errors.status?.errorMessage}
         hasError={errors.status?.hasError}
-        {...getOverrideProps(overrides, "status")}
+        {...getOverrideProps(overrides, 'status')}
       >
-        <option
-          children="Active"
-          value="ACTIVE"
-          {...getOverrideProps(overrides, "statusoption0")}
-        ></option>
-        <option
-          children="Inactive"
-          value="INACTIVE"
-          {...getOverrideProps(overrides, "statusoption1")}
-        ></option>
+        <option children="Active" value="ACTIVE" {...getOverrideProps(overrides, 'statusoption0')}></option>
+        <option children="Inactive" value="INACTIVE" {...getOverrideProps(overrides, 'statusoption1')}></option>
       </SelectField>
       <TextField
         label="Square subscription id"
@@ -236,22 +191,20 @@ export default function SubscriptionPlanUpdateForm(props) {
               subscriptionTier,
               status,
               squareSubscriptionID: value,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.squareSubscriptionID ?? value;
           }
           if (errors.squareSubscriptionID?.hasError) {
-            runValidationTasks("squareSubscriptionID", value);
+            runValidationTasks('squareSubscriptionID', value);
           }
           setSquareSubscriptionID(value);
         }}
-        onBlur={() =>
-          runValidationTasks("squareSubscriptionID", squareSubscriptionID)
-        }
+        onBlur={() => runValidationTasks('squareSubscriptionID', squareSubscriptionID)}
         errorMessage={errors.squareSubscriptionID?.errorMessage}
         hasError={errors.squareSubscriptionID?.hasError}
-        {...getOverrideProps(overrides, "squareSubscriptionID")}
+        {...getOverrideProps(overrides, 'squareSubscriptionID')}
       ></TextField>
       <TextField
         label="Owner"
@@ -265,25 +218,22 @@ export default function SubscriptionPlanUpdateForm(props) {
               subscriptionTier,
               status,
               squareSubscriptionID,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -292,21 +242,15 @@ export default function SubscriptionPlanUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || subscriptionPlanModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || subscriptionPlanModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || subscriptionPlanModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

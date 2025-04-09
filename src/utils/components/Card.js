@@ -48,7 +48,7 @@ export default function Card({
   formModalButton,
   className,
   actions = [],
-  sx= {},
+  sx = {}
 }) {
   const classes = useStyles();
 
@@ -61,7 +61,12 @@ export default function Card({
         action={
           <ButtonGroup>
             {formComponent && (
-              <ModalButton buttonText={formButtonText} title={formModalTitle} subTitle={formModalSubTitle} button={formModalButton}>
+              <ModalButton
+                buttonText={formButtonText}
+                title={formModalTitle}
+                subTitle={formModalSubTitle}
+                button={formModalButton}
+              >
                 {React.cloneElement(formComponent)}
               </ModalButton>
             )}
@@ -70,12 +75,7 @@ export default function Card({
                 <Refresh />
               </IconButton>
             )}
-            {actions?.map((action) =>
-              React.cloneElement(
-                action,
-              )
-            )}
-
+            {actions?.map((action) => React.cloneElement(action))}
           </ButtonGroup>
         }
         title={title}

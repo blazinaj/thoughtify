@@ -1,6 +1,6 @@
-import Grid from "@mui/material/Grid";
-import {ThoughtExtractAttributeChip} from "./ThoughtExtractAttributeChip";
-import {sentenceCase} from "change-case";
+import Grid from '@mui/material/Grid';
+import { ThoughtExtractAttributeChip } from './ThoughtExtractAttributeChip';
+import { sentenceCase } from 'change-case';
 
 /**
  * Displays a list of Chips for each Attribute in the Thought Extract.
@@ -11,8 +11,7 @@ import {sentenceCase} from "change-case";
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtExtractAttributeChips = ({value, attribute}) => {
-
+export const ThoughtExtractAttributeChips = ({ value, attribute }) => {
   const values = [];
 
   // need to handle the case where the value is a string or an array of strings for backwards compatibility
@@ -23,25 +22,19 @@ export const ThoughtExtractAttributeChips = ({value, attribute}) => {
         values.push(item);
       }
     });
-  }
-  else {
+  } else {
     values.push(value);
   }
 
   return (
     <Grid container direction={'row'} spacing={2}>
-      {
-        values.map((item) => {
-          return (
-            <Grid item>
-              <ThoughtExtractAttributeChip
-                type={sentenceCase(attribute)}
-                value={item}
-              />
-            </Grid>
-          );
-        })
-      }
+      {values.map((item) => {
+        return (
+          <Grid item>
+            <ThoughtExtractAttributeChip type={sentenceCase(attribute)} value={item} />
+          </Grid>
+        );
+      })}
     </Grid>
-  )
-}
+  );
+};

@@ -5,18 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Badge,
-  Divider,
-  Flex,
-  Icon,
-  Image,
-  Rating,
-  Text,
-  View,
-} from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Badge, Divider, Flex, Icon, Image, Rating, Text, View } from '@aws-amplify/ui-react';
 export default function ReviewCard(props) {
   const { overrides, ...rest } = props;
   return (
@@ -29,7 +20,7 @@ export default function ReviewCard(props) {
       alignItems="center"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "ReviewCard")}
+      {...getOverrideProps(overrides, 'ReviewCard')}
       {...rest}
     >
       <Image
@@ -43,7 +34,7 @@ export default function ReviewCard(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
+        {...getOverrideProps(overrides, 'image')}
       ></Image>
       <Flex
         gap="24px"
@@ -59,7 +50,7 @@ export default function ReviewCard(props) {
         position="relative"
         padding="32px 32px 32px 32px"
         backgroundColor="rgba(255,255,255,1)"
-        {...getOverrideProps(overrides, "Card Area")}
+        {...getOverrideProps(overrides, 'Card Area')}
       >
         <Flex
           gap="8px"
@@ -72,7 +63,7 @@ export default function ReviewCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Title")}
+          {...getOverrideProps(overrides, 'Title')}
         >
           <Flex
             gap="8px"
@@ -85,7 +76,7 @@ export default function ReviewCard(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Frame")}
+            {...getOverrideProps(overrides, 'Frame')}
           >
             <Text
               fontFamily="Inter"
@@ -108,7 +99,7 @@ export default function ReviewCard(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Information about this product"
-              {...getOverrideProps(overrides, "Information about this product")}
+              {...getOverrideProps(overrides, 'Information about this product')}
             ></Text>
             <View
               width="24px"
@@ -121,7 +112,7 @@ export default function ReviewCard(props) {
               shrink="0"
               position="relative"
               padding="0px 0px 0px 0px"
-              {...getOverrideProps(overrides, "Icon")}
+              {...getOverrideProps(overrides, 'Icon')}
             >
               <Icon
                 width="20px"
@@ -130,14 +121,14 @@ export default function ReviewCard(props) {
                   minX: 0,
                   minY: 0,
                   width: 20,
-                  height: 18.350006103515625,
+                  height: 18.350006103515625
                 }}
                 paths={[
                   {
-                    d: "M14.5 0C12.76 0 11.09 0.81 10 2.09C8.91 0.81 7.24 0 5.5 0C2.42 0 0 2.42 0 5.5C0 9.28 3.4 12.36 8.55 17.04L10 18.35L11.45 17.03C16.6 12.36 20 9.28 20 5.5C20 2.42 17.58 0 14.5 0ZM10.1 15.55L10 15.65L9.9 15.55C5.14 11.24 2 8.39 2 5.5C2 3.5 3.5 2 5.5 2C7.04 2 8.54 2.99 9.07 4.36L10.94 4.36C11.46 2.99 12.96 2 14.5 2C16.5 2 18 3.5 18 5.5C18 8.39 14.86 11.24 10.1 15.55Z",
-                    fill: "rgba(13,26,38,1)",
-                    fillRule: "nonzero",
-                  },
+                    d: 'M14.5 0C12.76 0 11.09 0.81 10 2.09C8.91 0.81 7.24 0 5.5 0C2.42 0 0 2.42 0 5.5C0 9.28 3.4 12.36 8.55 17.04L10 18.35L11.45 17.03C16.6 12.36 20 9.28 20 5.5C20 2.42 17.58 0 14.5 0ZM10.1 15.55L10 15.65L9.9 15.55C5.14 11.24 2 8.39 2 5.5C2 3.5 3.5 2 5.5 2C7.04 2 8.54 2.99 9.07 4.36L10.94 4.36C11.46 2.99 12.96 2 14.5 2C16.5 2 18 3.5 18 5.5C18 8.39 14.86 11.24 10.1 15.55Z',
+                    fill: 'rgba(13,26,38,1)',
+                    fillRule: 'nonzero'
+                  }
                 ]}
                 display="block"
                 gap="unset"
@@ -148,7 +139,7 @@ export default function ReviewCard(props) {
                 bottom="11.04%"
                 left="8.33%"
                 right="8.33%"
-                {...getOverrideProps(overrides, "Vector")}
+                {...getOverrideProps(overrides, 'Vector')}
               ></Icon>
             </View>
           </Flex>
@@ -172,7 +163,7 @@ export default function ReviewCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Classic Long Sleeve T-Shirt"
-            {...getOverrideProps(overrides, "Classic Long Sleeve T-Shirt")}
+            {...getOverrideProps(overrides, 'Classic Long Sleeve T-Shirt')}
           ></Text>
         </Flex>
         <Divider
@@ -180,7 +171,7 @@ export default function ReviewCard(props) {
           shrink="0"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider")}
+          {...getOverrideProps(overrides, 'Divider')}
         ></Divider>
         <Flex
           gap="8px"
@@ -193,7 +184,7 @@ export default function ReviewCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Features")}
+          {...getOverrideProps(overrides, 'Features')}
         >
           <Text
             fontFamily="Inter"
@@ -216,10 +207,7 @@ export default function ReviewCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Information about this product."
-            {...getOverrideProps(
-              overrides,
-              "Information about this product.29766836"
-            )}
+            {...getOverrideProps(overrides, 'Information about this product.29766836')}
           ></Text>
           <Text
             fontFamily="Inter"
@@ -242,10 +230,7 @@ export default function ReviewCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Information about this product."
-            {...getOverrideProps(
-              overrides,
-              "Information about this product.29766837"
-            )}
+            {...getOverrideProps(overrides, 'Information about this product.29766837')}
           ></Text>
         </Flex>
         <Badge
@@ -253,7 +238,7 @@ export default function ReviewCard(props) {
           size="small"
           variation="default"
           children="New!"
-          {...getOverrideProps(overrides, "Badge")}
+          {...getOverrideProps(overrides, 'Badge')}
         ></Badge>
         <Flex
           gap="16px"
@@ -266,7 +251,7 @@ export default function ReviewCard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Bottom Row")}
+          {...getOverrideProps(overrides, 'Bottom Row')}
         >
           <Flex
             gap="16px"
@@ -278,13 +263,9 @@ export default function ReviewCard(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Rating29766840")}
+            {...getOverrideProps(overrides, 'Rating29766840')}
           >
-            <Rating
-              shrink="0"
-              size="large"
-              {...getOverrideProps(overrides, "Rating29766841")}
-            ></Rating>
+            <Rating shrink="0" size="large" {...getOverrideProps(overrides, 'Rating29766841')}></Rating>
             <Text
               fontFamily="Inter"
               fontSize="16px"
@@ -305,7 +286,7 @@ export default function ReviewCard(props) {
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
               children="Reviews"
-              {...getOverrideProps(overrides, "Reviews")}
+              {...getOverrideProps(overrides, 'Reviews')}
             ></Text>
           </Flex>
           <Text
@@ -329,7 +310,7 @@ export default function ReviewCard(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="$99/Night"
-            {...getOverrideProps(overrides, "$99/Night")}
+            {...getOverrideProps(overrides, '$99/Night')}
           ></Text>
         </Flex>
       </Flex>

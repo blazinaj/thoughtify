@@ -5,18 +5,9 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import {
-  Button,
-  Divider,
-  Flex,
-  Icon,
-  Image,
-  Text,
-  TextField,
-  View,
-} from "@aws-amplify/ui-react";
+import * as React from 'react';
+import { getOverrideProps } from '@aws-amplify/ui-react/internal';
+import { Button, Divider, Flex, Icon, Image, Text, TextField, View } from '@aws-amplify/ui-react';
 export default function EditProfile(props) {
   const { overrides, ...rest } = props;
   return (
@@ -30,7 +21,7 @@ export default function EditProfile(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "EditProfile")}
+      {...getOverrideProps(overrides, 'EditProfile')}
       {...rest}
     >
       <Flex
@@ -44,7 +35,7 @@ export default function EditProfile(props) {
         alignSelf="stretch"
         position="relative"
         padding="24px 24px 24px 24px"
-        {...getOverrideProps(overrides, "Content")}
+        {...getOverrideProps(overrides, 'Content')}
       >
         <Flex
           gap="16px"
@@ -57,7 +48,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Edit Profile29766913")}
+          {...getOverrideProps(overrides, 'Edit Profile29766913')}
         >
           <View
             width="24px"
@@ -70,7 +61,7 @@ export default function EditProfile(props) {
             shrink="0"
             position="relative"
             padding="0px 0px 0px 0px"
-            {...getOverrideProps(overrides, "Icon")}
+            {...getOverrideProps(overrides, 'Icon')}
           >
             <Icon
               width="14px"
@@ -78,10 +69,10 @@ export default function EditProfile(props) {
               viewBox={{ minX: 0, minY: 0, width: 14, height: 14 }}
               paths={[
                 {
-                  d: "M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z",
-                  fill: "rgba(13,26,38,1)",
-                  fillRule: "nonzero",
-                },
+                  d: 'M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z',
+                  fill: 'rgba(13,26,38,1)',
+                  fillRule: 'nonzero'
+                }
               ]}
               display="block"
               gap="unset"
@@ -92,7 +83,7 @@ export default function EditProfile(props) {
               bottom="20.83%"
               left="20.83%"
               right="20.83%"
-              {...getOverrideProps(overrides, "Vector")}
+              {...getOverrideProps(overrides, 'Vector')}
             ></Icon>
           </View>
           <Text
@@ -114,7 +105,7 @@ export default function EditProfile(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Edit Profile"
-            {...getOverrideProps(overrides, "Edit Profile29766916")}
+            {...getOverrideProps(overrides, 'Edit Profile29766916')}
           ></Text>
         </Flex>
         <Divider
@@ -123,7 +114,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29766917")}
+          {...getOverrideProps(overrides, 'Divider29766917')}
         ></Divider>
         <Flex
           gap="16px"
@@ -136,7 +127,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Profile")}
+          {...getOverrideProps(overrides, 'Profile')}
         >
           <Image
             width="96px"
@@ -150,7 +141,7 @@ export default function EditProfile(props) {
             borderRadius="160px"
             padding="0px 0px 0px 0px"
             objectFit="cover"
-            {...getOverrideProps(overrides, "image")}
+            {...getOverrideProps(overrides, 'image')}
           ></Image>
           <Text
             fontFamily="Inter"
@@ -172,7 +163,7 @@ export default function EditProfile(props) {
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Upload New Image"
-            {...getOverrideProps(overrides, "Upload New Image")}
+            {...getOverrideProps(overrides, 'Upload New Image')}
           ></Text>
         </Flex>
         <Flex
@@ -186,7 +177,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "Forms")}
+          {...getOverrideProps(overrides, 'Forms')}
         >
           <TextField
             label="Name"
@@ -198,7 +189,7 @@ export default function EditProfile(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            {...getOverrideProps(overrides, "TextField29766922")}
+            {...getOverrideProps(overrides, 'TextField29766922')}
           ></TextField>
           <TextField
             label="Location"
@@ -210,7 +201,7 @@ export default function EditProfile(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            {...getOverrideProps(overrides, "TextField29766923")}
+            {...getOverrideProps(overrides, 'TextField29766923')}
           ></TextField>
           <TextField
             label="Email"
@@ -222,7 +213,7 @@ export default function EditProfile(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            {...getOverrideProps(overrides, "TextField29766924")}
+            {...getOverrideProps(overrides, 'TextField29766924')}
           ></TextField>
         </Flex>
         <Divider
@@ -231,7 +222,7 @@ export default function EditProfile(props) {
           alignSelf="stretch"
           size="small"
           orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider29766925")}
+          {...getOverrideProps(overrides, 'Divider29766925')}
         ></Divider>
         <Button
           shrink="0"
@@ -239,7 +230,7 @@ export default function EditProfile(props) {
           isDisabled={false}
           variation="primary"
           children="Save"
-          {...getOverrideProps(overrides, "Button")}
+          {...getOverrideProps(overrides, 'Button')}
         ></Button>
       </Flex>
     </Flex>

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -18,15 +18,12 @@ import {
   Text,
   TextAreaField,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
-import { Tutor, TutorMemory } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
+import { Tutor, TutorMemory } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -40,15 +37,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -64,12 +61,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -84,18 +76,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -106,17 +97,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -174,7 +165,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -195,16 +186,14 @@ export default function TutorUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    name: "",
+    name: '',
     attributes: [],
     TutorMemories: [],
-    owner: "",
+    owner: ''
   };
   const [name, setName] = React.useState(initialValues.name);
   const [attributes, setAttributes] = React.useState(initialValues.attributes);
-  const [TutorMemories, setTutorMemories] = React.useState(
-    initialValues.TutorMemories
-  );
+  const [TutorMemories, setTutorMemories] = React.useState(initialValues.TutorMemories);
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -213,14 +202,12 @@ export default function TutorUpdateForm(props) {
       : initialValues;
     setName(cleanValues.name);
     setAttributes(
-      cleanValues.attributes?.map((item) =>
-        typeof item === "string" ? item : JSON.stringify(item)
-      ) ?? []
+      cleanValues.attributes?.map((item) => (typeof item === 'string' ? item : JSON.stringify(item))) ?? []
     );
-    setCurrentAttributesValue("");
+    setCurrentAttributesValue('');
     setTutorMemories(cleanValues.TutorMemories ?? []);
     setCurrentTutorMemoriesValue(undefined);
-    setCurrentTutorMemoriesDisplayValue("");
+    setCurrentTutorMemoriesDisplayValue('');
     setOwner(cleanValues.owner);
     setErrors({});
   };
@@ -229,30 +216,21 @@ export default function TutorUpdateForm(props) {
   const canUnlinkTutorMemories = false;
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
-        ? await DataStore.query(Tutor, idProp)
-        : tutorModelProp;
+      const record = idProp ? await DataStore.query(Tutor, idProp) : tutorModelProp;
       setTutorRecord(record);
-      const linkedTutorMemories = record
-        ? await record.TutorMemories.toArray()
-        : [];
+      const linkedTutorMemories = record ? await record.TutorMemories.toArray() : [];
       setLinkedTutorMemories(linkedTutorMemories);
     };
     queryData();
   }, [idProp, tutorModelProp]);
   React.useEffect(resetStateValues, [tutorRecord, linkedTutorMemories]);
-  const [currentAttributesValue, setCurrentAttributesValue] =
-    React.useState("");
+  const [currentAttributesValue, setCurrentAttributesValue] = React.useState('');
   const attributesRef = React.createRef();
-  const [
-    currentTutorMemoriesDisplayValue,
-    setCurrentTutorMemoriesDisplayValue,
-  ] = React.useState("");
-  const [currentTutorMemoriesValue, setCurrentTutorMemoriesValue] =
-    React.useState(undefined);
+  const [currentTutorMemoriesDisplayValue, setCurrentTutorMemoriesDisplayValue] = React.useState('');
+  const [currentTutorMemoriesValue, setCurrentTutorMemoriesValue] = React.useState(undefined);
   const TutorMemoriesRef = React.createRef();
   const getIDValue = {
-    TutorMemories: (r) => JSON.stringify({ id: r?.id }),
+    TutorMemories: (r) => JSON.stringify({ id: r?.id })
   };
   const TutorMemoriesIdSet = new Set(
     Array.isArray(TutorMemories)
@@ -260,27 +238,20 @@ export default function TutorUpdateForm(props) {
       : getIDValue.TutorMemories?.(TutorMemories)
   );
   const tutorMemoryRecords = useDataStoreBinding({
-    type: "collection",
-    model: TutorMemory,
+    type: 'collection',
+    model: TutorMemory
   }).items;
   const getDisplayValue = {
-    TutorMemories: (r) => `${r?.content ? r?.content + " - " : ""}${r?.id}`,
+    TutorMemories: (r) => `${r?.content ? r?.content + ' - ' : ''}${r?.id}`
   };
   const validations = {
     name: [],
-    attributes: [{ type: "JSON" }],
+    attributes: [{ type: 'JSON' }],
     TutorMemories: [],
-    owner: [],
+    owner: []
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -301,29 +272,17 @@ export default function TutorUpdateForm(props) {
           name,
           attributes,
           TutorMemories,
-          owner,
+          owner
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
               promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(
-                    fieldName,
-                    item,
-                    getDisplayValue[fieldName]
-                  )
-                )
+                ...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item, getDisplayValue[fieldName]))
               );
               return promises;
             }
-            promises.push(
-              runValidationTasks(
-                fieldName,
-                modelFields[fieldName],
-                getDisplayValue[fieldName]
-              )
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName], getDisplayValue[fieldName]));
             return promises;
           }, [])
         );
@@ -335,7 +294,7 @@ export default function TutorUpdateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -344,12 +303,8 @@ export default function TutorUpdateForm(props) {
           const tutorMemoriesToUnLink = [];
           const tutorMemoriesSet = new Set();
           const linkedTutorMemoriesSet = new Set();
-          TutorMemories.forEach((r) =>
-            tutorMemoriesSet.add(getIDValue.TutorMemories?.(r))
-          );
-          linkedTutorMemories.forEach((r) =>
-            linkedTutorMemoriesSet.add(getIDValue.TutorMemories?.(r))
-          );
+          TutorMemories.forEach((r) => tutorMemoriesSet.add(getIDValue.TutorMemories?.(r)));
+          linkedTutorMemories.forEach((r) => linkedTutorMemoriesSet.add(getIDValue.TutorMemories?.(r)));
           linkedTutorMemories.forEach((r) => {
             if (!tutorMemoriesSet.has(getIDValue.TutorMemories?.(r))) {
               tutorMemoriesToUnLink.push(r);
@@ -386,7 +341,7 @@ export default function TutorUpdateForm(props) {
           const modelFieldsToSave = {
             name: modelFields.name,
             owner: modelFields.owner,
-            attributes: modelFields.attributes.map((s) => JSON.parse(s)),
+            attributes: modelFields.attributes.map((s) => JSON.parse(s))
           };
           promises.push(
             DataStore.save(
@@ -405,7 +360,7 @@ export default function TutorUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "TutorUpdateForm")}
+      {...getOverrideProps(overrides, 'TutorUpdateForm')}
       {...rest}
     >
       <TextField
@@ -420,20 +375,20 @@ export default function TutorUpdateForm(props) {
               name: value,
               attributes,
               TutorMemories,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
           }
           if (errors.name?.hasError) {
-            runValidationTasks("name", value);
+            runValidationTasks('name', value);
           }
           setName(value);
         }}
-        onBlur={() => runValidationTasks("name", name)}
+        onBlur={() => runValidationTasks('name', name)}
         errorMessage={errors.name?.errorMessage}
         hasError={errors.name?.hasError}
-        {...getOverrideProps(overrides, "name")}
+        {...getOverrideProps(overrides, 'name')}
       ></TextField>
       <ArrayField
         onChange={async (items) => {
@@ -443,25 +398,23 @@ export default function TutorUpdateForm(props) {
               name,
               attributes: values,
               TutorMemories,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             values = result?.attributes ?? values;
           }
           setAttributes(values);
-          setCurrentAttributesValue("");
+          setCurrentAttributesValue('');
         }}
         currentFieldValue={currentAttributesValue}
-        label={"Attributes"}
+        label={'Attributes'}
         items={attributes}
         hasError={errors?.attributes?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("attributes", currentAttributesValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('attributes', currentAttributesValue)}
         errorMessage={errors?.attributes?.errorMessage}
         setFieldValue={setCurrentAttributesValue}
         inputFieldRef={attributesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <TextAreaField
           label="Attributes"
@@ -471,18 +424,16 @@ export default function TutorUpdateForm(props) {
           onChange={(e) => {
             let { value } = e.target;
             if (errors.attributes?.hasError) {
-              runValidationTasks("attributes", value);
+              runValidationTasks('attributes', value);
             }
             setCurrentAttributesValue(value);
           }}
-          onBlur={() =>
-            runValidationTasks("attributes", currentAttributesValue)
-          }
+          onBlur={() => runValidationTasks('attributes', currentAttributesValue)}
           errorMessage={errors.attributes?.errorMessage}
           hasError={errors.attributes?.hasError}
           ref={attributesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "attributes")}
+          {...getOverrideProps(overrides, 'attributes')}
         ></TextAreaField>
       </ArrayField>
       <ArrayField
@@ -493,32 +444,28 @@ export default function TutorUpdateForm(props) {
               name,
               attributes,
               TutorMemories: values,
-              owner,
+              owner
             };
             const result = onChange(modelFields);
             values = result?.TutorMemories ?? values;
           }
           setTutorMemories(values);
           setCurrentTutorMemoriesValue(undefined);
-          setCurrentTutorMemoriesDisplayValue("");
+          setCurrentTutorMemoriesDisplayValue('');
         }}
         currentFieldValue={currentTutorMemoriesValue}
-        label={"Tutor memories"}
+        label={'Tutor memories'}
         items={TutorMemories}
         hasError={errors?.TutorMemories?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("TutorMemories", currentTutorMemoriesValue)
-        }
+        runValidationTasks={async () => await runValidationTasks('TutorMemories', currentTutorMemoriesValue)}
         errorMessage={errors?.TutorMemories?.errorMessage}
         getBadgeText={getDisplayValue.TutorMemories}
         setFieldValue={(model) => {
-          setCurrentTutorMemoriesDisplayValue(
-            model ? getDisplayValue.TutorMemories(model) : ""
-          );
+          setCurrentTutorMemoriesDisplayValue(model ? getDisplayValue.TutorMemories(model) : '');
           setCurrentTutorMemoriesValue(model);
         }}
         inputFieldRef={TutorMemoriesRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Tutor memories"
@@ -527,46 +474,35 @@ export default function TutorUpdateForm(props) {
           placeholder="Search TutorMemory"
           value={currentTutorMemoriesDisplayValue}
           options={tutorMemoryRecords
-            .filter(
-              (r) => !TutorMemoriesIdSet.has(getIDValue.TutorMemories?.(r))
-            )
+            .filter((r) => !TutorMemoriesIdSet.has(getIDValue.TutorMemories?.(r)))
             .map((r) => ({
               id: getIDValue.TutorMemories?.(r),
-              label: getDisplayValue.TutorMemories?.(r),
+              label: getDisplayValue.TutorMemories?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentTutorMemoriesValue(
-              tutorMemoryRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
+              tutorMemoryRecords.find((r) => Object.entries(JSON.parse(id)).every(([key, value]) => r[key] === value))
             );
             setCurrentTutorMemoriesDisplayValue(label);
-            runValidationTasks("TutorMemories", label);
+            runValidationTasks('TutorMemories', label);
           }}
           onClear={() => {
-            setCurrentTutorMemoriesDisplayValue("");
+            setCurrentTutorMemoriesDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.TutorMemories?.hasError) {
-              runValidationTasks("TutorMemories", value);
+              runValidationTasks('TutorMemories', value);
             }
             setCurrentTutorMemoriesDisplayValue(value);
             setCurrentTutorMemoriesValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks(
-              "TutorMemories",
-              currentTutorMemoriesDisplayValue
-            )
-          }
+          onBlur={() => runValidationTasks('TutorMemories', currentTutorMemoriesDisplayValue)}
           errorMessage={errors.TutorMemories?.errorMessage}
           hasError={errors.TutorMemories?.hasError}
           ref={TutorMemoriesRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "TutorMemories")}
+          {...getOverrideProps(overrides, 'TutorMemories')}
         ></Autocomplete>
       </ArrayField>
       <TextField
@@ -581,25 +517,22 @@ export default function TutorUpdateForm(props) {
               name,
               attributes,
               TutorMemories,
-              owner: value,
+              owner: value
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
           }
           if (errors.owner?.hasError) {
-            runValidationTasks("owner", value);
+            runValidationTasks('owner', value);
           }
           setOwner(value);
         }}
-        onBlur={() => runValidationTasks("owner", owner)}
+        onBlur={() => runValidationTasks('owner', owner)}
         errorMessage={errors.owner?.errorMessage}
         hasError={errors.owner?.hasError}
-        {...getOverrideProps(overrides, "owner")}
+        {...getOverrideProps(overrides, 'owner')}
       ></TextField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Reset"
           type="reset"
@@ -608,21 +541,15 @@ export default function TutorUpdateForm(props) {
             resetStateValues();
           }}
           isDisabled={!(idProp || tutorModelProp)}
-          {...getOverrideProps(overrides, "ResetButton")}
+          {...getOverrideProps(overrides, 'ResetButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
-            isDisabled={
-              !(idProp || tutorModelProp) ||
-              Object.values(errors).some((e) => e?.hasError)
-            }
-            {...getOverrideProps(overrides, "SubmitButton")}
+            isDisabled={!(idProp || tutorModelProp) || Object.values(errors).some((e) => e?.hasError)}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

@@ -1,7 +1,7 @@
-import {Link as ScrollLink} from 'react-scroll';
-import {Outlet, useLocation} from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
+import { Outlet, useLocation } from 'react-router-dom';
 // material
-import {Box, Container, Link, Typography} from '@mui/material';
+import { Box, Container, Link, Typography } from '@mui/material';
 // components
 import Logo from '../../demo/components/Logo';
 //

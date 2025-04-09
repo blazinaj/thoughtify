@@ -1,8 +1,8 @@
-import {JournalEntryThoughts, Thought} from '../../../models';
-import {DataStore} from '@aws-amplify/datastore';
+import { JournalEntryThoughts, Thought } from '../../../models';
+import { DataStore } from '@aws-amplify/datastore';
 import ThoughtInputField from './ThoughtInputField';
-import {generateThoughtExtract} from "../../../api/thoughts/generateThoughtExtract";
-import {getWeek} from "date-fns";
+import { generateThoughtExtract } from '../../../api/thoughts/generateThoughtExtract';
+import { getWeek } from 'date-fns';
 
 /**
  * Input Field for Thoughts.
@@ -13,8 +13,7 @@ import {getWeek} from "date-fns";
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtInput = ({journalEntry}) => {
-
+export const ThoughtInput = ({ journalEntry }) => {
   const onSubmit = async (input) => {
     const newThought = await DataStore.save(
       new Thought({
@@ -28,7 +27,7 @@ export const ThoughtInput = ({journalEntry}) => {
           journalEntryId: journalEntry.id,
           thoughtId: newThought.id
         })
-      )
+      );
     }
 
     const extract = await generateThoughtExtract(newThought);
@@ -63,17 +62,19 @@ export const ThoughtInput = ({journalEntry}) => {
         break;
     }
     return {
-        minDate,
-        maxDate
+      minDate,
+      maxDate
     };
-  }
+  };
 
-  return <ThoughtInputField
+  return (
+    <ThoughtInputField
       onSubmit={onSubmit}
       showDateSelector={!!journalEntry}
       dateConfig={{
         ...getDates(journalEntry?.date, journalEntry?.cadence),
         defaultValue: new Date(journalEntry?.date)
       }}
-  />;
+    />
+  );
 };

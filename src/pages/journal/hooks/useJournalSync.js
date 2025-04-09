@@ -1,13 +1,12 @@
-import {useEffect, useState} from "react";
-import {fetchJournal} from "../functions/fetchJournal";
-import {useSnackbar} from "notistack";
+import { useEffect, useState } from 'react';
+import { fetchJournal } from '../functions/fetchJournal';
+import { useSnackbar } from 'notistack';
 
 /**
  * Fetches Journal entries based on cadence and updates the DataStore if necessary
  * @param cadence - The cadence of the journal entries to display
  */
-export const useJournalSync = ({cadence}) => {
-
+export const useJournalSync = ({ cadence }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -22,19 +21,18 @@ export const useJournalSync = ({cadence}) => {
         });
       } catch (error) {
         console.error(error);
-        enqueueSnackbar("There was an error loading the Journal", {
+        enqueueSnackbar('There was an error loading the Journal', {
           variant: 'error'
-        })
-      }
-      finally {
+        });
+      } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     handle();
   }, [cadence]);
 
   return {
     isLoading
-  }
-}
+  };
+};

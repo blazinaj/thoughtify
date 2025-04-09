@@ -5,33 +5,18 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  TextAreaField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { Thought } from "../models";
-import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+import * as React from 'react';
+import { Button, Flex, Grid, TextAreaField, TextField } from '@aws-amplify/ui-react';
+import { Thought } from '../models';
+import { fetchByPath, getOverrideProps, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 export default function ThoughtCreateForm(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    date: "",
-    input: "",
-    output: "",
-    extract: "",
+    date: '',
+    input: '',
+    output: '',
+    extract: ''
   };
   const [date, setDate] = React.useState(initialValues.date);
   const [input, setInput] = React.useState(initialValues.input);
@@ -49,17 +34,10 @@ export default function ThoughtCreateForm(props) {
     date: [],
     input: [],
     output: [],
-    extract: [{ type: "JSON" }],
+    extract: [{ type: 'JSON' }]
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -69,15 +47,15 @@ export default function ThoughtCreateForm(props) {
     return validationResponse;
   };
   const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
+    const df = new Intl.DateTimeFormat('default', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      calendar: 'iso8601',
+      numberingSystem: 'latn',
+      hourCycle: 'h23'
     });
     const parts = df.formatToParts(date).reduce((acc, part) => {
       acc[part.type] = part.value;
@@ -97,21 +75,15 @@ export default function ThoughtCreateForm(props) {
           date,
           input,
           output,
-          extract,
+          extract
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -123,7 +95,7 @@ export default function ThoughtCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -140,7 +112,7 @@ export default function ThoughtCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "ThoughtCreateForm")}
+      {...getOverrideProps(overrides, 'ThoughtCreateForm')}
       {...rest}
     >
       <TextField
@@ -150,27 +122,26 @@ export default function ThoughtCreateForm(props) {
         type="datetime-local"
         value={date && convertToLocal(new Date(date))}
         onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          let value = e.target.value === '' ? '' : new Date(e.target.value).toISOString();
           if (onChange) {
             const modelFields = {
               date: value,
               input,
               output,
-              extract,
+              extract
             };
             const result = onChange(modelFields);
             value = result?.date ?? value;
           }
           if (errors.date?.hasError) {
-            runValidationTasks("date", value);
+            runValidationTasks('date', value);
           }
           setDate(value);
         }}
-        onBlur={() => runValidationTasks("date", date)}
+        onBlur={() => runValidationTasks('date', date)}
         errorMessage={errors.date?.errorMessage}
         hasError={errors.date?.hasError}
-        {...getOverrideProps(overrides, "date")}
+        {...getOverrideProps(overrides, 'date')}
       ></TextField>
       <TextField
         label="Input"
@@ -184,20 +155,20 @@ export default function ThoughtCreateForm(props) {
               date,
               input: value,
               output,
-              extract,
+              extract
             };
             const result = onChange(modelFields);
             value = result?.input ?? value;
           }
           if (errors.input?.hasError) {
-            runValidationTasks("input", value);
+            runValidationTasks('input', value);
           }
           setInput(value);
         }}
-        onBlur={() => runValidationTasks("input", input)}
+        onBlur={() => runValidationTasks('input', input)}
         errorMessage={errors.input?.errorMessage}
         hasError={errors.input?.hasError}
-        {...getOverrideProps(overrides, "input")}
+        {...getOverrideProps(overrides, 'input')}
       ></TextField>
       <TextField
         label="Output"
@@ -211,20 +182,20 @@ export default function ThoughtCreateForm(props) {
               date,
               input,
               output: value,
-              extract,
+              extract
             };
             const result = onChange(modelFields);
             value = result?.output ?? value;
           }
           if (errors.output?.hasError) {
-            runValidationTasks("output", value);
+            runValidationTasks('output', value);
           }
           setOutput(value);
         }}
-        onBlur={() => runValidationTasks("output", output)}
+        onBlur={() => runValidationTasks('output', output)}
         errorMessage={errors.output?.errorMessage}
         hasError={errors.output?.hasError}
-        {...getOverrideProps(overrides, "output")}
+        {...getOverrideProps(overrides, 'output')}
       ></TextField>
       <TextAreaField
         label="Extract"
@@ -237,25 +208,22 @@ export default function ThoughtCreateForm(props) {
               date,
               input,
               output,
-              extract: value,
+              extract: value
             };
             const result = onChange(modelFields);
             value = result?.extract ?? value;
           }
           if (errors.extract?.hasError) {
-            runValidationTasks("extract", value);
+            runValidationTasks('extract', value);
           }
           setExtract(value);
         }}
-        onBlur={() => runValidationTasks("extract", extract)}
+        onBlur={() => runValidationTasks('extract', extract)}
         errorMessage={errors.extract?.errorMessage}
         hasError={errors.extract?.hasError}
-        {...getOverrideProps(overrides, "extract")}
+        {...getOverrideProps(overrides, 'extract')}
       ></TextAreaField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -263,18 +231,15 @@ export default function ThoughtCreateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>

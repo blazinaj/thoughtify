@@ -5,7 +5,7 @@
  **************************************************************************/
 
 /* eslint-disable */
-import * as React from "react";
+import * as React from 'react';
 import {
   Autocomplete,
   Badge,
@@ -17,15 +17,12 @@ import {
   ScrollView,
   Text,
   TextField,
-  useTheme,
-} from "@aws-amplify/ui-react";
-import {
-  getOverrideProps,
-  useDataStoreBinding,
-} from "@aws-amplify/ui-react/internal";
-import { Endorsement, Certification } from "../models";
-import { fetchByPath, validateField } from "./utils";
-import { DataStore } from "aws-amplify";
+  useTheme
+} from '@aws-amplify/ui-react';
+import { getOverrideProps, useDataStoreBinding } from '@aws-amplify/ui-react/internal';
+import { Endorsement, Certification } from '../models';
+import { fetchByPath, validateField } from './utils';
+import { DataStore } from 'aws-amplify';
 function ArrayField({
   items = [],
   onChange,
@@ -39,15 +36,15 @@ function ArrayField({
   lengthLimit,
   getBadgeText,
   runValidationTasks,
-  errorMessage,
+  errorMessage
 }) {
   const labelElement = <Text>{label}</Text>;
   const {
     tokens: {
       components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
+        fieldmessages: { error: errorStyles }
+      }
+    }
   } = useTheme();
   const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
   const [isEditing, setIsEditing] = React.useState();
@@ -63,12 +60,7 @@ function ArrayField({
   };
   const addItem = async () => {
     const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
+    if (currentFieldValue !== undefined && currentFieldValue !== null && currentFieldValue !== '' && !hasError) {
       const newItems = [...items];
       if (selectedBadgeIndex !== undefined) {
         newItems[selectedBadgeIndex] = currentFieldValue;
@@ -83,18 +75,17 @@ function ArrayField({
   const arraySection = (
     <React.Fragment>
       {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
+        <ScrollView height="inherit" width="inherit" maxHeight={'7rem'}>
           {items.map((value, index) => {
             return (
               <Badge
                 key={index}
                 style={{
-                  cursor: "pointer",
-                  alignItems: "center",
+                  cursor: 'pointer',
+                  alignItems: 'center',
                   marginRight: 3,
                   marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
+                  backgroundColor: index === selectedBadgeIndex ? '#B8CEF9' : ''
                 }}
                 onClick={() => {
                   setSelectedBadgeIndex(index);
@@ -105,17 +96,17 @@ function ArrayField({
                 {getBadgeText ? getBadgeText(value) : value.toString()}
                 <Icon
                   style={{
-                    cursor: "pointer",
+                    cursor: 'pointer',
                     paddingLeft: 3,
                     width: 20,
-                    height: 20,
+                    height: 20
                   }}
                   viewBox={{ width: 20, height: 20 }}
                   paths={[
                     {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
+                      d: 'M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z',
+                      stroke: 'black'
+                    }
                   ]}
                   ariaLabel="button"
                   onClick={(event) => {
@@ -173,7 +164,7 @@ function ArrayField({
             ></Button>
           )}
           <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
+            {selectedBadgeIndex !== undefined ? 'Save' : 'Add'}
           </Button>
         </Flex>
       )}
@@ -182,28 +173,17 @@ function ArrayField({
   );
 }
 export default function EndorsementCreateForm(props) {
-  const {
-    clearOnSuccess = true,
-    onSuccess,
-    onError,
-    onSubmit,
-    onValidate,
-    onChange,
-    overrides,
-    ...rest
-  } = props;
+  const { clearOnSuccess = true, onSuccess, onError, onSubmit, onValidate, onChange, overrides, ...rest } = props;
   const initialValues = {
-    dateTime: "",
-    testimony: "",
-    author: "",
-    certificationID: undefined,
+    dateTime: '',
+    testimony: '',
+    author: '',
+    certificationID: undefined
   };
   const [dateTime, setDateTime] = React.useState(initialValues.dateTime);
   const [testimony, setTestimony] = React.useState(initialValues.testimony);
   const [author, setAuthor] = React.useState(initialValues.author);
-  const [certificationID, setCertificationID] = React.useState(
-    initialValues.certificationID
-  );
+  const [certificationID, setCertificationID] = React.useState(initialValues.certificationID);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setDateTime(initialValues.dateTime);
@@ -211,38 +191,27 @@ export default function EndorsementCreateForm(props) {
     setAuthor(initialValues.author);
     setCertificationID(initialValues.certificationID);
     setCurrentCertificationIDValue(undefined);
-    setCurrentCertificationIDDisplayValue("");
+    setCurrentCertificationIDDisplayValue('');
     setErrors({});
   };
-  const [
-    currentCertificationIDDisplayValue,
-    setCurrentCertificationIDDisplayValue,
-  ] = React.useState("");
-  const [currentCertificationIDValue, setCurrentCertificationIDValue] =
-    React.useState(undefined);
+  const [currentCertificationIDDisplayValue, setCurrentCertificationIDDisplayValue] = React.useState('');
+  const [currentCertificationIDValue, setCurrentCertificationIDValue] = React.useState(undefined);
   const certificationIDRef = React.createRef();
   const certificationRecords = useDataStoreBinding({
-    type: "collection",
-    model: Certification,
+    type: 'collection',
+    model: Certification
   }).items;
   const getDisplayValue = {
-    certificationID: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
+    certificationID: (r) => `${r?.name ? r?.name + ' - ' : ''}${r?.id}`
   };
   const validations = {
     dateTime: [],
     testimony: [],
     author: [],
-    certificationID: [{ type: "Required" }],
+    certificationID: [{ type: 'Required' }]
   };
-  const runValidationTasks = async (
-    fieldName,
-    currentValue,
-    getDisplayValue
-  ) => {
-    const value =
-      currentValue && getDisplayValue
-        ? getDisplayValue(currentValue)
-        : currentValue;
+  const runValidationTasks = async (fieldName, currentValue, getDisplayValue) => {
+    const value = currentValue && getDisplayValue ? getDisplayValue(currentValue) : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -263,21 +232,15 @@ export default function EndorsementCreateForm(props) {
           dateTime,
           testimony,
           author,
-          certificationID,
+          certificationID
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
             if (Array.isArray(modelFields[fieldName])) {
-              promises.push(
-                ...modelFields[fieldName].map((item) =>
-                  runValidationTasks(fieldName, item)
-                )
-              );
+              promises.push(...modelFields[fieldName].map((item) => runValidationTasks(fieldName, item)));
               return promises;
             }
-            promises.push(
-              runValidationTasks(fieldName, modelFields[fieldName])
-            );
+            promises.push(runValidationTasks(fieldName, modelFields[fieldName]));
             return promises;
           }, [])
         );
@@ -289,7 +252,7 @@ export default function EndorsementCreateForm(props) {
         }
         try {
           Object.entries(modelFields).forEach(([key, value]) => {
-            if (typeof value === "string" && value === "") {
+            if (typeof value === 'string' && value === '') {
               modelFields[key] = null;
             }
           });
@@ -306,7 +269,7 @@ export default function EndorsementCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "EndorsementCreateForm")}
+      {...getOverrideProps(overrides, 'EndorsementCreateForm')}
       {...rest}
     >
       <TextField
@@ -321,20 +284,20 @@ export default function EndorsementCreateForm(props) {
               dateTime: value,
               testimony,
               author,
-              certificationID,
+              certificationID
             };
             const result = onChange(modelFields);
             value = result?.dateTime ?? value;
           }
           if (errors.dateTime?.hasError) {
-            runValidationTasks("dateTime", value);
+            runValidationTasks('dateTime', value);
           }
           setDateTime(value);
         }}
-        onBlur={() => runValidationTasks("dateTime", dateTime)}
+        onBlur={() => runValidationTasks('dateTime', dateTime)}
         errorMessage={errors.dateTime?.errorMessage}
         hasError={errors.dateTime?.hasError}
-        {...getOverrideProps(overrides, "dateTime")}
+        {...getOverrideProps(overrides, 'dateTime')}
       ></TextField>
       <TextField
         label="Testimony"
@@ -348,20 +311,20 @@ export default function EndorsementCreateForm(props) {
               dateTime,
               testimony: value,
               author,
-              certificationID,
+              certificationID
             };
             const result = onChange(modelFields);
             value = result?.testimony ?? value;
           }
           if (errors.testimony?.hasError) {
-            runValidationTasks("testimony", value);
+            runValidationTasks('testimony', value);
           }
           setTestimony(value);
         }}
-        onBlur={() => runValidationTasks("testimony", testimony)}
+        onBlur={() => runValidationTasks('testimony', testimony)}
         errorMessage={errors.testimony?.errorMessage}
         hasError={errors.testimony?.hasError}
-        {...getOverrideProps(overrides, "testimony")}
+        {...getOverrideProps(overrides, 'testimony')}
       ></TextField>
       <TextField
         label="Author"
@@ -375,20 +338,20 @@ export default function EndorsementCreateForm(props) {
               dateTime,
               testimony,
               author: value,
-              certificationID,
+              certificationID
             };
             const result = onChange(modelFields);
             value = result?.author ?? value;
           }
           if (errors.author?.hasError) {
-            runValidationTasks("author", value);
+            runValidationTasks('author', value);
           }
           setAuthor(value);
         }}
-        onBlur={() => runValidationTasks("author", author)}
+        onBlur={() => runValidationTasks('author', author)}
         errorMessage={errors.author?.errorMessage}
         hasError={errors.author?.hasError}
-        {...getOverrideProps(overrides, "author")}
+        {...getOverrideProps(overrides, 'author')}
       ></TextField>
       <ArrayField
         lengthLimit={1}
@@ -399,7 +362,7 @@ export default function EndorsementCreateForm(props) {
               dateTime,
               testimony,
               author,
-              certificationID: value,
+              certificationID: value
             };
             const result = onChange(modelFields);
             value = result?.certificationID ?? value;
@@ -408,35 +371,22 @@ export default function EndorsementCreateForm(props) {
           setCurrentCertificationIDValue(undefined);
         }}
         currentFieldValue={currentCertificationIDValue}
-        label={"Certification id"}
+        label={'Certification id'}
         items={certificationID ? [certificationID] : []}
         hasError={errors?.certificationID?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks(
-            "certificationID",
-            currentCertificationIDValue
-          )
-        }
+        runValidationTasks={async () => await runValidationTasks('certificationID', currentCertificationIDValue)}
         errorMessage={errors?.certificationID?.errorMessage}
         getBadgeText={(value) =>
-          value
-            ? getDisplayValue.certificationID(
-                certificationRecords.find((r) => r.id === value)
-              )
-            : ""
+          value ? getDisplayValue.certificationID(certificationRecords.find((r) => r.id === value)) : ''
         }
         setFieldValue={(value) => {
           setCurrentCertificationIDDisplayValue(
-            value
-              ? getDisplayValue.certificationID(
-                  certificationRecords.find((r) => r.id === value)
-                )
-              : ""
+            value ? getDisplayValue.certificationID(certificationRecords.find((r) => r.id === value)) : ''
           );
           setCurrentCertificationIDValue(value);
         }}
         inputFieldRef={certificationIDRef}
-        defaultFieldValue={""}
+        defaultFieldValue={''}
       >
         <Autocomplete
           label="Certification id"
@@ -445,44 +395,36 @@ export default function EndorsementCreateForm(props) {
           placeholder="Search Certification"
           value={currentCertificationIDDisplayValue}
           options={certificationRecords
-            .filter(
-              (r, i, arr) =>
-                arr.findIndex((member) => member?.id === r?.id) === i
-            )
+            .filter((r, i, arr) => arr.findIndex((member) => member?.id === r?.id) === i)
             .map((r) => ({
               id: r?.id,
-              label: getDisplayValue.certificationID?.(r),
+              label: getDisplayValue.certificationID?.(r)
             }))}
           onSelect={({ id, label }) => {
             setCurrentCertificationIDValue(id);
             setCurrentCertificationIDDisplayValue(label);
-            runValidationTasks("certificationID", label);
+            runValidationTasks('certificationID', label);
           }}
           onClear={() => {
-            setCurrentCertificationIDDisplayValue("");
+            setCurrentCertificationIDDisplayValue('');
           }}
           onChange={(e) => {
             let { value } = e.target;
             if (errors.certificationID?.hasError) {
-              runValidationTasks("certificationID", value);
+              runValidationTasks('certificationID', value);
             }
             setCurrentCertificationIDDisplayValue(value);
             setCurrentCertificationIDValue(undefined);
           }}
-          onBlur={() =>
-            runValidationTasks("certificationID", currentCertificationIDValue)
-          }
+          onBlur={() => runValidationTasks('certificationID', currentCertificationIDValue)}
           errorMessage={errors.certificationID?.errorMessage}
           hasError={errors.certificationID?.hasError}
           ref={certificationIDRef}
           labelHidden={true}
-          {...getOverrideProps(overrides, "certificationID")}
+          {...getOverrideProps(overrides, 'certificationID')}
         ></Autocomplete>
       </ArrayField>
-      <Flex
-        justifyContent="space-between"
-        {...getOverrideProps(overrides, "CTAFlex")}
-      >
+      <Flex justifyContent="space-between" {...getOverrideProps(overrides, 'CTAFlex')}>
         <Button
           children="Clear"
           type="reset"
@@ -490,18 +432,15 @@ export default function EndorsementCreateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          {...getOverrideProps(overrides, "ClearButton")}
+          {...getOverrideProps(overrides, 'ClearButton')}
         ></Button>
-        <Flex
-          gap="15px"
-          {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
-        >
+        <Flex gap="15px" {...getOverrideProps(overrides, 'RightAlignCTASubFlex')}>
           <Button
             children="Submit"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}
-            {...getOverrideProps(overrides, "SubmitButton")}
+            {...getOverrideProps(overrides, 'SubmitButton')}
           ></Button>
         </Flex>
       </Flex>
