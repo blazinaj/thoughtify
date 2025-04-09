@@ -27,10 +27,7 @@
           "planCatalogItemVariantFree": "TN6NQQ5EIEFVIJ45VFECKLRI",
           "planCatalogItemVariantPremium": "TYDTRUEXGDV6FX2NQRG5DTM2"
         },
-        "api": {
-          "deploymentBucketName": "amplify-thoughtify-staging-02929-deployment",
-          "s3Key": "amplify-builds/api-656252345a324d477755-build.zip"
-        }
+        "handleCompletion": {}
       },
       "api": {
         "thoughtify": {}
