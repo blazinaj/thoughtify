@@ -30,7 +30,7 @@ const menuConfig = [
     icon: <Icon icon={fileFill} {...ICON_SIZE} />,
     children: [
       {
-        subheader: 'Other',
+        subheader: 'Information',
         items: [
           { title: 'Contact us', path: PATH_PAGE.contact },
           { title: 'Pricing', path: PATH_PAGE.pricing },

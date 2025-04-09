@@ -34,6 +34,7 @@ type EagerBiography = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly entry?: string | null;
+  readonly thoughts?: (BiographyThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -47,6 +48,7 @@ type LazyBiography = {
   readonly date?: string | null;
   readonly cadence?: JournalCadence | keyof typeof JournalCadence | null;
   readonly entry?: string | null;
+  readonly thoughts: AsyncCollection<BiographyThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -213,6 +215,7 @@ type EagerThought = {
   readonly extract?: string | null;
   readonly journalEntries?: (JournalEntryThoughts | null)[] | null;
   readonly healthReports?: (HealthReportThoughts | null)[] | null;
+  readonly biographies?: (BiographyThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -229,6 +232,7 @@ type LazyThought = {
   readonly extract?: string | null;
   readonly journalEntries: AsyncCollection<JournalEntryThoughts>;
   readonly healthReports: AsyncCollection<HealthReportThoughts>;
+  readonly biographies: AsyncCollection<BiographyThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -281,6 +285,40 @@ export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser :
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
+
+type EagerBiographyThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<BiographyThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly biographyId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly biography: Biography;
+  readonly thought: Thought;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyBiographyThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<BiographyThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly biographyId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly biography: AsyncItem<Biography>;
+  readonly thought: AsyncItem<Thought>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type BiographyThoughts = LazyLoading extends LazyLoadingDisabled ? EagerBiographyThoughts : LazyBiographyThoughts
+
+export declare const BiographyThoughts: (new (init: ModelInit<BiographyThoughts>) => BiographyThoughts) & {
+  copyOf(source: BiographyThoughts, mutator: (draft: MutableModel<BiographyThoughts>) => MutableModel<BiographyThoughts> | void): BiographyThoughts;
 }
 
 type EagerHealthReportThoughts = {

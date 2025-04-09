@@ -5,7 +5,7 @@ import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
 import Thoughts from "./components/Thoughts";
 
 /**
- * This page displays the details of a course for a Teacher
+ * Displays the main Thoughts page for the user.
  * @returns {JSX.Element}
  * @constructor
  */

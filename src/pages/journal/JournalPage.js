@@ -8,6 +8,14 @@ import {JournalCadence} from "../../models";
 import {useState} from "react";
 import {useTheme} from "../../theme/useTheme";
 
+/**
+ * Displays Journal Entries for the user.
+ * A Journal Entry is a collection of thoughts that are grouped together by a date based on the cadence.
+ * The cadence can be daily, weekly, monthly, or yearly.
+ * The journal entries are created automatically by the AI based on the user's thoughts.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const JournalPage = () => {
   const { themeStretch } = useSettings();
 

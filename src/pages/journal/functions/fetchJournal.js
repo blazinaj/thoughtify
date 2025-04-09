@@ -102,6 +102,7 @@ export const fetchJournal = async ({cadence, enqueueSnackbar}) => {
 
       const journalEntryCompletion = await handleJournalEntryCompletion({
         thoughts: currentThoughts,
+        cadence,
         date: formatDate(
           new Date(group.date),
           cadence

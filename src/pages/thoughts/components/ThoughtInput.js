@@ -4,8 +4,6 @@ import ThoughtInputField from './ThoughtInputField';
 import {generateThoughtExtract} from "../../../api/thoughts/generateThoughtExtract";
 import {getWeek} from "date-fns";
 
-
-
 /**
  * Input Field for Thoughts.
  * Includes Speech to Text.
@@ -18,7 +16,6 @@ import {getWeek} from "date-fns";
 export const ThoughtInput = ({journalEntry}) => {
 
   const onSubmit = async (input) => {
-    console.log('saving thought', input);
     const newThought = await DataStore.save(
       new Thought({
         ...input
@@ -26,7 +23,6 @@ export const ThoughtInput = ({journalEntry}) => {
     );
 
     if (journalEntry?.id) {
-      console.log({journalEntry, newThought})
       await DataStore.save(
         new JournalEntryThoughts({
           journalEntryId: journalEntry.id,
