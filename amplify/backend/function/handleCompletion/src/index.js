@@ -7,7 +7,7 @@ const {Configuration, OpenAIApi} = require("openai");
 exports.handler = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
 
-    const { prompt, seed, responseFormat } = event.body
+    const { prompt, seed, responseFormat } = event;
 
     const configuration = new Configuration({
         organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
