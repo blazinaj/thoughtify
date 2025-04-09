@@ -24,7 +24,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // utils
 import { fData } from '../../../../../utils/formatNumber';
 import { fTimestamp } from '../../../../../utils/formatTime';
-import HelperFormik from '../../../../../utils/helperFormik';
+import HelperFormik from '../../../../utils/helperFormik';
 // components
 import { QuillEditor, DraftEditor } from '../../../../components/editor';
 //

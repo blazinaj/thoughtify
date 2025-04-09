@@ -20,7 +20,7 @@ import {
 import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import { fCurrency } from '../../../utils/formatNumber';
-import mockData from '../../../utils/mock-data';
+import mockData from '../../utils/mock-data';
 // hooks
 import useSettings from '../../../utils/hooks/useSettings';
 // components

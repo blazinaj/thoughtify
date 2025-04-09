@@ -27,7 +27,7 @@ import {
 } from '@mui/material';
 // utils
 import { fCurrency } from '../../../../utils/formatNumber';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 
 // ----------------------------------------------------------------------
 

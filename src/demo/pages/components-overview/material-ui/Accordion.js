@@ -5,7 +5,7 @@ import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
 import { styled } from '@mui/material/styles';
 import { Box, Container, Accordion, AccordionSummary, Typography, AccordionDetails } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 // components
 import Page from '../../../components/Page';
 import { PATH_PAGE } from '../../../routes/paths';

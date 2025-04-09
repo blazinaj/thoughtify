@@ -4,7 +4,7 @@ import moreVerticalFill from '@iconify/icons-eva/more-vertical-fill';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 // utils
-import mockData from '../../../../../utils/mock-data';
+import mockData from '../../../../utils/mock-data';
 // components
 import { MIconButton } from '../../../../components/@material-extend';
 

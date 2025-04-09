@@ -10,7 +10,7 @@ import { Box, Link, Tooltip, Typography, IconButton } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // utils
-import createAvatar from '../../../../utils/createAvatar';
+import createAvatar from '../../../utils/createAvatar';
 import { fDateTimeSuffix } from '../../../../utils/formatTime';
 //
 import { MAvatar, MHidden } from '../../@material-extend';

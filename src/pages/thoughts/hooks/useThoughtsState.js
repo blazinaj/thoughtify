@@ -5,6 +5,10 @@ import { Chip } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+/**
+ * Custom hook to manage the state of the thoughts page.
+ * @param journalEntry
+ */
 export const useThoughtsState = ({ journalEntry }) => {
   /**
    * If a journal entry is passed in, filter the thoughts by the journal entry id.

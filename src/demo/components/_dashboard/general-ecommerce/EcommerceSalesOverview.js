@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, CardHeader, Typography, Stack, LinearProgress } from '@mui/material';
 // utils
 import { fPercent, fCurrency } from '../../../../utils/formatNumber';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 
 // ----------------------------------------------------------------------
 

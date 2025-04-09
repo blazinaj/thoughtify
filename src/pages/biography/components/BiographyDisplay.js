@@ -20,7 +20,6 @@ export const BiographyDisplay = () => {
       setIsLoading(true);
       generateBiography()
         .then((res) => {
-          console.log({ res });
           setBio(res);
         })
         .finally(() => {

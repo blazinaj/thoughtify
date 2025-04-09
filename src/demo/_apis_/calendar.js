@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { add, set, sub } from 'date-fns';
 import { map, assign, reject } from 'lodash';
 // utils
-import mockData from '../../utils/mock-data';
+import mockData from '../utils/mock-data';
 //
 import mock from './mock';
 

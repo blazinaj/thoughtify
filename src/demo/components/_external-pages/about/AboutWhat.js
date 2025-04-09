@@ -6,7 +6,7 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Grid, Button, Container, Typography, LinearProgress } from '@mui/material';
 // utils
 import { fPercent } from '../../../../utils/formatNumber';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import { MHidden } from '../../@material-extend';
 import { varFadeInUp, varFadeInRight, MotionInView } from '../../animate';

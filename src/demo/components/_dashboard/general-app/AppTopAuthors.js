@@ -8,7 +8,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, Card, Avatar, CardHeader, Typography } from '@mui/material';
 // utils
 import { fShortenNumber } from '../../../../utils/formatNumber';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 
 // ----------------------------------------------------------------------
 

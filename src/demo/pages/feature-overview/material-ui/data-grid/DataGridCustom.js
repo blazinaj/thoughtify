@@ -13,9 +13,9 @@ import {
   getGridNumericColumnOperators
 } from '@mui/x-data-grid';
 // utils
-import createAvatar from '../../../../../utils/createAvatar';
+import createAvatar from '../../../../utils/createAvatar';
 import { fPercent } from '../../../../../utils/formatNumber';
-import mockData from '../../../../../utils/mock-data';
+import mockData from '../../../../utils/mock-data';
 // components
 import Label from '../../../../components/Label';
 import { MIconButton, MAvatar } from '../../../../components/@material-extend';

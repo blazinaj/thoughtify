@@ -5,7 +5,7 @@ import { forwardRef, useEffect, useCallback } from 'react';
 // material
 import { Box } from '@mui/material';
 // utils
-import track from '../../utils/analytics';
+import track from '../utils/analytics';
 
 // ----------------------------------------------------------------------
 

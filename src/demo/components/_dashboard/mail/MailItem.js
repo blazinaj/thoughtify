@@ -12,7 +12,7 @@ import { Box, Link, Tooltip, Typography, Stack, Checkbox } from '@mui/material';
 import { useSelector } from '../../../redux/store';
 // utils
 import { fDate } from '../../../../utils/formatTime';
-import createAvatar from '../../../../utils/createAvatar';
+import createAvatar from '../../../utils/createAvatar';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //

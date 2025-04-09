@@ -9,7 +9,7 @@ import { Box, Grid, Card, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from '../../../../redux/store';
 import { onBackStep, onNextStep, createBilling } from '../../../../redux/slices/product';
 // utils
-import mockData from '../../../../../utils/mock-data';
+import mockData from '../../../../utils/mock-data';
 //
 import Label from '../../../Label';
 import CheckoutSummary from './CheckoutSummary';

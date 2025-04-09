@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useTheme, styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 // utils
-import mockData from '../../../utils/mock-data';
+import mockData from '../../utils/mock-data';
 //
 import { CarouselControlsPaging2, CarouselControlsArrowsBasic2 } from './controls';
 

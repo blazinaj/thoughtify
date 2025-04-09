@@ -9,7 +9,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Card, Rating, CardHeader, Typography, Stack } from '@mui/material';
 // utils
 import { fCurrency, fShortenNumber } from '../../../../utils/formatNumber';
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import Label from '../../Label';
 import Scrollbar from '../../Scrollbar';

@@ -8,7 +8,7 @@ import androidFilled from '@iconify/icons-ant-design/android-filled';
 import { styled } from '@mui/material/styles';
 import { Box, Card, CardHeader, Typography, Stack } from '@mui/material';
 // utils
-import mockData from '../../../../utils/mock-data';
+import mockData from '../../../utils/mock-data';
 //
 import Scrollbar from '../../Scrollbar';
 import { fShortenNumber } from '../../../../utils/formatNumber';

@@ -18,7 +18,7 @@ import {
   TableContainer
 } from '@mui/material';
 // utils
-import getColorName from '../../../../../utils/getColorName';
+import getColorName from '../../../../utils/getColorName';
 import { fCurrency } from '../../../../../utils/formatNumber';
 //
 import { MIconButton } from '../../../@material-extend';

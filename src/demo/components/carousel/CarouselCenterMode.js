@@ -8,7 +8,7 @@ import arrowForwardFill from '@iconify/icons-eva/arrow-forward-fill';
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, Paper, Link, Typography, CardContent } from '@mui/material';
 // utils
-import mockData from '../../../utils/mock-data';
+import mockData from '../../utils/mock-data';
 //
 import { CarouselControlsArrowsBasic2 } from './controls';
 
