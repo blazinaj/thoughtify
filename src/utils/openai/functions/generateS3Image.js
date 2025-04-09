@@ -1,6 +1,6 @@
 import { generateImage } from './generate';
 import { v4 } from 'uuid';
-import awsmobile from '../../../aws-exports';
+import awsmobile from "../../../aws-exports";
 
 export const generateS3Images = async ({ prompt, numberOfImages = 1 }) => {
   // eslint-disable-next-line
