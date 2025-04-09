@@ -1,5 +1,5 @@
 import { createJournalTimeline } from './createJournalTimeline';
-import { handleCompletion } from '../../../utils/openai/functions/generate';
+import { handleCompletion } from '../../utils/openai/functions/generate';
 
 export const generateJournalEntry = async ({ thoughts, journalEntry }) => {
   // for each grouping of thoughts, use completion to create a 'Journal Entry'

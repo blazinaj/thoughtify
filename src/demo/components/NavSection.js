@@ -7,6 +7,7 @@ import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListSubheader, ListItemButton } from '@mui/material';
+import { generateId } from '../../utils/functions/generateId';
 
 // ----------------------------------------------------------------------
 
@@ -182,8 +183,9 @@ export default function NavSection({ navConfig, isShow = true, ...other }) {
     <Box {...other}>
       {navConfig.map((list) => {
         const { subheader, items } = list;
+        const uuid = generateId();
         return (
-          <List key={subheader} disablePadding>
+          <List key={uuid} disablePadding>
             {isShow && <ListSubheaderStyle>{subheader}</ListSubheaderStyle>}
             {items.map((item) => (
               <NavItem key={item.title} item={item} active={match} isShow={isShow} />

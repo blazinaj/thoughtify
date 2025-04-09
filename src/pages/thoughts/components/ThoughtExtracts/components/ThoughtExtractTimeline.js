@@ -1,7 +1,7 @@
 import TimelineOppositeContent, { timelineOppositeContentClasses } from '@mui/lab/TimelineOppositeContent';
 import { timelineItemClasses } from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
-import { formatDate } from '../../../../journal/functions/createJournalTimeline';
+import { formatDate } from '../../../../../api/journal/createJournalTimeline';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';

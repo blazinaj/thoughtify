@@ -24,12 +24,6 @@ export const useDatastore = ({
   filter,
   typename
 }) => {
-  useEffect(() => {
-    if (itemId) {
-      console.log(`Fetching ${typename || model?.name} for: ${itemId}`);
-    }
-  }, [itemId]);
-
   const [isLoading, setIsLoading] = useBoolean(true);
 
   /**
@@ -47,7 +41,6 @@ export const useDatastore = ({
    * @param item
    */
   const afterQuery = (data) => {
-    console.log(`Fetched ${typename || model?.name}(s) from query: `, data);
     setIsLoading(false);
     onAfterQuery && onAfterQuery(data);
   };
@@ -57,11 +50,9 @@ export const useDatastore = ({
    */
   const handleQuery = () => {
     if (!model) {
-      console.log(`No model provided for ${typename || model?.name}`);
       return;
     }
 
-    console.log('Starting Query For Typename: ', typename || model?.name);
     /**
      * Sets loading state to true at the beginning of the query
      */
@@ -85,9 +76,7 @@ export const useDatastore = ({
      * If an ID is passed in, query for a single object
      */
     if (!isNullOrUndefined(itemId)) {
-      console.log(`Querying a single Item: ${itemId}`);
       DataStore.query(model, itemId).then(async (item) => {
-        console.log(`Retrieved single Item: ${JSON.stringify(item)}`);
         setItem(item);
         // eslint-disable-next-line no-unused-expressions
         afterQuery(item);
@@ -96,7 +85,6 @@ export const useDatastore = ({
       /**
        * If a predicate is passed in, apply filters
        */
-      console.log(`Querying a list of items with predicate: ${predicate}`);
       DataStore.query(model, predicate).then(async (items) => {
         if (filter) {
           setItems(items.filter(filter));
@@ -111,7 +99,6 @@ export const useDatastore = ({
       /**
        * Default to querying a list
        */
-      console.log(`Querying a list of ${typename || model?.name}s`);
       getItems(model, DataStore).then(async (items) => {
         if (filter) {
           console.log(`Filtering ${typename || model?.name}s with: ${filter}`);
@@ -135,10 +122,8 @@ export const useDatastore = ({
    */
   useEffect(() => {
     if (Array.isArray(itemsInit)) {
-      console.log(`DataStore is in a controlled state, passing update along..`);
       setItems(itemsInit);
     } else {
-      console.log(`DataStore is in an uncontrolled state, handling automatic query..`);
       // Handle the query
       handleQuery();
     }

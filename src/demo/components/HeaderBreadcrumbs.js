@@ -33,7 +33,7 @@ export default function HeaderBreadcrumbs({
           <Typography variant="h4" gutterBottom>
             {icon && (
               <Box
-                component="flex"
+                component="span"
                 alignContent={'bottom'}
                 justifyContent={'bottom'}
                 sx={{

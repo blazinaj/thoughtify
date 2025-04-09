@@ -1,8 +1,8 @@
 import { DataStore } from '@aws-amplify/datastore';
-import { JournalEntry, JournalEntryThoughts, Thought } from '../../../models';
+import { JournalEntry, JournalEntryThoughts, Thought } from '../../models';
 import { createJournalTimeline, formatDate } from './createJournalTimeline';
 import { handleJournalEntryCompletion } from './handleJournalEntryCompletion';
-import { checkDate } from './checkDate';
+import { checkDate } from './utils/checkDate';
 
 export const fetchJournal = async ({ cadence, enqueueSnackbar }) => {
   // Fetch All Thoughts

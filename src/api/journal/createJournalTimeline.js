@@ -1,4 +1,4 @@
-import { JournalCadence } from '../../../models';
+import { JournalCadence } from '../../models';
 import { endOfWeek, getWeek, startOfWeek } from 'date-fns';
 
 export const formatDate = (dateParam, groupBy = JournalCadence.DAILY) => {

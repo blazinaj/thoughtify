@@ -1,4 +1,4 @@
-import { handleCompletion } from '../../../utils/openai/functions/generate';
+import { handleCompletion } from '../../utils/openai/functions/generate';
 
 export const generateHealthCategoryReport = async ({ category, thoughts }) => {
   const prompt = `

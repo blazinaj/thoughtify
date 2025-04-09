@@ -1,5 +1,5 @@
-import { handleCompletion } from '../../../utils/openai/functions/generate';
-import { JournalEntry } from '../../../models';
+import { handleCompletion } from '../../utils/openai/functions/generate';
+import { JournalEntry } from '../../models';
 
 export const handleJournalEntryCompletion = async ({
   thoughts,

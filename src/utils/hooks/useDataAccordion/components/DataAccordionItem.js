@@ -11,6 +11,10 @@ import React from 'react';
  * @param item
  * @param detailsComponent
  * @param handleIcon
+ * @param titleField
+ * @param subTitleField
+ * @param dateField
+ * @param accordionStyle
  * @returns {JSX.Element}
  * @constructor
  */
@@ -30,8 +34,8 @@ const DataAccordionItem = ({
   >
     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel3a-content" id={`panel3a-header${item?.id}`}>
       {handleIcon && <span style={{ marginRight: '1em' }}>{handleIcon(item)}</span>}
-      <Typography className={classes.heading}>{handleTitle(item, titleField)}</Typography>
-      <Typography className={classes.secondaryHeading}>{handleTitle(item, subTitleField)}</Typography>
+      {handleTitle(item, titleField)}
+      {handleTitle(item, subTitleField)}
       {item[dateField] && dateField && (
         <Typography className={classes.dateHeading}>{new Date(item[dateField]).toLocaleString()}</Typography>
       )}
@@ -46,7 +50,7 @@ const handleTitle = (item, titleField = 'name') => {
   if (typeof titleField === 'function') {
     return titleField(item);
   }
-  return item[titleField];
+  return <Typography>{item[titleField]}</Typography>;
 };
 
 export default DataAccordionItem;

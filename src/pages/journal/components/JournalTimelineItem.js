@@ -3,7 +3,7 @@ import { useModal } from '../../../utils/hooks/useModal';
 import { useGUID } from '../../../utils/hooks/useGUID';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import { formatDate } from '../functions/createJournalTimeline';
+import { formatDate } from '../../../api/journal/createJournalTimeline';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';

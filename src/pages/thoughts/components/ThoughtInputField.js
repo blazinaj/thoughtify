@@ -77,7 +77,6 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
       <TextField
         disabled={disabled}
         value={message}
-        disableUnderline
         onKeyUp={handleKeyUp}
         onChange={handleChangeMessage}
         placeholder="Save a thought..."

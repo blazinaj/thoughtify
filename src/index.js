@@ -19,7 +19,7 @@ import 'react-image-lightbox/style.css';
 // editor
 import 'react-quill/dist/quill.snow.css';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import {AmazonAIPredictionsProvider, Predictions} from '@aws-amplify/predictions';
+import { AmazonAIPredictionsProvider, Predictions } from '@aws-amplify/predictions';
 
 // slick-carousel
 import 'slick-carousel/slick/slick.css';
@@ -37,18 +37,18 @@ import 'lazysizes/plugins/object-fit/ls.object-fit';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import {HelmetProvider} from 'react-helmet-async';
-import {Provider as ReduxProvider} from 'react-redux';
-import {PersistGate} from 'redux-persist/lib/integration/react';
-import {persistor, store} from './demo/redux/store';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { persistor, store } from './demo/redux/store';
 import LoadingScreen from './demo/components/LoadingScreen';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import Amplify from '@aws-amplify/core';
 import awsmobile from './aws-exports';
-import {Analytics} from '@aws-amplify/analytics';
+import { Analytics } from '@aws-amplify/analytics';
 
 // ----------------------------------------------------------------------
 

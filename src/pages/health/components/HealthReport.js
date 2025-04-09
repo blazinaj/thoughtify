@@ -11,7 +11,7 @@ import { Box } from '@mui/material';
 import { differenceInDays } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import { HealthCategoryStatusButton } from './HealthCategoryStatusButton';
-import { generateHealthCategoryReport } from '../functions/generateHealthCategoryReport';
+import { generateHealthCategoryReport } from '../../../api/health/generateHealthCategoryReport';
 
 /**
  * Displays a Health Report for a user
