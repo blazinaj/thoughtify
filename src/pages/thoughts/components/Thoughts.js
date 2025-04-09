@@ -2,7 +2,6 @@ import {Chip, Grid, Stack} from "@mui/material";
 import {ThoughtInput} from "./ThoughtInput";
 import {ThoughtGallery} from "./ThoughtGallery";
 import {ThoughtExtracts} from "./ThoughtExtracts/components/ThoughtExtracts";
-import introJs from "intro.js";
 import {useEffect, useMemo, useState} from "react";
 import {useUserContext} from "../../../contexts/UserContext";
 import {useDatastore} from "../../../utils/hooks/useDatastore";

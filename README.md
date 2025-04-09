@@ -1,6 +1,6 @@
-# Edify
+# Thoughtify
 
-Edify is a web application for creating and sharing educational content.
+Thoughtify is a Web Application for managing thoughts, extracting insights, and generating journals.
 
 ## Getting Started
 
