@@ -11,6 +11,11 @@ export const createBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -31,6 +36,11 @@ export const updateBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -51,6 +61,11 @@ export const deleteBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -71,6 +86,11 @@ export const createHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -91,6 +111,11 @@ export const updateHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -111,6 +136,11 @@ export const deleteHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -344,6 +374,16 @@ export const createThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -370,6 +410,16 @@ export const updateThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -392,6 +442,16 @@ export const deleteThought = /* GraphQL */ `
       output
       extract
       journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
         nextToken
         startedAt
         __typename
@@ -489,6 +549,282 @@ export const deleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createBiographyThoughts = /* GraphQL */ `
+  mutation CreateBiographyThoughts(
+    $input: CreateBiographyThoughtsInput!
+    $condition: ModelBiographyThoughtsConditionInput
+  ) {
+    createBiographyThoughts(input: $input, condition: $condition) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateBiographyThoughts = /* GraphQL */ `
+  mutation UpdateBiographyThoughts(
+    $input: UpdateBiographyThoughtsInput!
+    $condition: ModelBiographyThoughtsConditionInput
+  ) {
+    updateBiographyThoughts(input: $input, condition: $condition) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteBiographyThoughts = /* GraphQL */ `
+  mutation DeleteBiographyThoughts(
+    $input: DeleteBiographyThoughtsInput!
+    $condition: ModelBiographyThoughtsConditionInput
+  ) {
+    deleteBiographyThoughts(input: $input, condition: $condition) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const createHealthReportThoughts = /* GraphQL */ `
+  mutation CreateHealthReportThoughts(
+    $input: CreateHealthReportThoughtsInput!
+    $condition: ModelHealthReportThoughtsConditionInput
+  ) {
+    createHealthReportThoughts(input: $input, condition: $condition) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateHealthReportThoughts = /* GraphQL */ `
+  mutation UpdateHealthReportThoughts(
+    $input: UpdateHealthReportThoughtsInput!
+    $condition: ModelHealthReportThoughtsConditionInput
+  ) {
+    updateHealthReportThoughts(input: $input, condition: $condition) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteHealthReportThoughts = /* GraphQL */ `
+  mutation DeleteHealthReportThoughts(
+    $input: DeleteHealthReportThoughtsInput!
+    $condition: ModelHealthReportThoughtsConditionInput
+  ) {
+    deleteHealthReportThoughts(input: $input, condition: $condition) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
       __typename
     }
   }

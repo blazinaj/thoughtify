@@ -37,7 +37,16 @@ export const generateThoughtExtract = async (newThought) => {
       New Thought:
       ${newThought.input}
       
-      Format the response as a javascript parseable JSON object string
+      Format the response as a javascript parseable JSON object string like: 
+      {
+        "overallTone": "...",
+        "emotions": ["..."],
+        "people": ["..."],
+        "projects": ["..."],
+        "categories": ["..."],
+        "reminders": ["..."],
+        "questions": ["..."]
+      }
       
     `;
     const response = await handleCompletion({

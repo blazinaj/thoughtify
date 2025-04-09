@@ -4,7 +4,7 @@ import {useSnackbar} from "notistack";
 
 /**
  * Fetches Journal entries based on cadence and updates the DataStore if necessary
- * @param cadence
+ * @param cadence - The cadence of the journal entries to display
  */
 export const useJournalSync = ({cadence}) => {
 

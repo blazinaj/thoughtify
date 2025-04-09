@@ -11,6 +11,11 @@ export const onCreateBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -31,6 +36,11 @@ export const onUpdateBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -51,6 +61,11 @@ export const onDeleteBiography = /* GraphQL */ `
       date
       cadence
       entry
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -71,6 +86,11 @@ export const onCreateHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -91,6 +111,11 @@ export const onUpdateHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -111,6 +136,11 @@ export const onDeleteHealthReport = /* GraphQL */ `
       date
       cadence
       report
+      thoughts {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -344,6 +374,16 @@ export const onCreateThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -370,6 +410,16 @@ export const onUpdateThought = /* GraphQL */ `
         startedAt
         __typename
       }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
+        nextToken
+        startedAt
+        __typename
+      }
       createdAt
       updatedAt
       _version
@@ -392,6 +442,16 @@ export const onDeleteThought = /* GraphQL */ `
       output
       extract
       journalEntries {
+        nextToken
+        startedAt
+        __typename
+      }
+      healthReports {
+        nextToken
+        startedAt
+        __typename
+      }
+      biographies {
         nextToken
         startedAt
         __typename
@@ -489,6 +549,282 @@ export const onDeleteUser = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateBiographyThoughts = /* GraphQL */ `
+  subscription OnCreateBiographyThoughts(
+    $filter: ModelSubscriptionBiographyThoughtsFilterInput
+    $owner: String
+  ) {
+    onCreateBiographyThoughts(filter: $filter, owner: $owner) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateBiographyThoughts = /* GraphQL */ `
+  subscription OnUpdateBiographyThoughts(
+    $filter: ModelSubscriptionBiographyThoughtsFilterInput
+    $owner: String
+  ) {
+    onUpdateBiographyThoughts(filter: $filter, owner: $owner) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteBiographyThoughts = /* GraphQL */ `
+  subscription OnDeleteBiographyThoughts(
+    $filter: ModelSubscriptionBiographyThoughtsFilterInput
+    $owner: String
+  ) {
+    onDeleteBiographyThoughts(filter: $filter, owner: $owner) {
+      id
+      biographyId
+      thoughtId
+      biography {
+        id
+        date
+        cadence
+        entry
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onCreateHealthReportThoughts = /* GraphQL */ `
+  subscription OnCreateHealthReportThoughts(
+    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
+    $owner: String
+  ) {
+    onCreateHealthReportThoughts(filter: $filter, owner: $owner) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateHealthReportThoughts = /* GraphQL */ `
+  subscription OnUpdateHealthReportThoughts(
+    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
+    $owner: String
+  ) {
+    onUpdateHealthReportThoughts(filter: $filter, owner: $owner) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteHealthReportThoughts = /* GraphQL */ `
+  subscription OnDeleteHealthReportThoughts(
+    $filter: ModelSubscriptionHealthReportThoughtsFilterInput
+    $owner: String
+  ) {
+    onDeleteHealthReportThoughts(filter: $filter, owner: $owner) {
+      id
+      healthReportId
+      thoughtId
+      healthReport {
+        id
+        date
+        cadence
+        report
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      thought {
+        id
+        date
+        input
+        output
+        extract
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
       __typename
     }
   }

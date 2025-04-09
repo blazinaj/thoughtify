@@ -1,44 +1,49 @@
-import { styled } from '@mui/material/styles';
-import { useRef, useState } from 'react';
-import {Box, IconButton, Input, InputAdornment, Stack, TextField} from '@mui/material';
-import { Icon } from '@iconify/react';
+import {styled} from '@mui/material/styles';
+import {useState} from 'react';
+import {Box, IconButton, InputAdornment, Stack, TextField} from '@mui/material';
+import {Icon} from '@iconify/react';
 import micFill from '@iconify/icons-eva/mic-fill';
 import roundSend from '@iconify/icons-ic/round-send';
-import {FileUploader} from "@aws-amplify/ui-react";
 import {useForm} from "../../../utils/hooks/useForm";
 
 const RootStyle = styled('div')(({ theme }) => ({
-  // minHeight: 56,
-  // display: 'flex',
-  // position: 'relative',
-  // alignItems: 'center',
-  // paddingLeft: theme.spacing(2),
-  // border: '1px solid lightGrey',
-  // borderRadius: '16px',
   width: '100%'
-  // marginBottom: "3em"
 }));
 
 // ----------------------------------------------------------------------
 
-export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit, showDateSelector = false, dateConfig = {}, ...other }) {
-  const fileInputRef = useRef(null);
-  const [message, setMessage] = useState('');
+/**
+ * Input field for submitting Thoughts.
+ */
+export default function ThoughtInputField({ disabled, onSubmit, showDateSelector = false, dateConfig = {}, ...other }) {
 
-  const handleAttach = () => {
-    fileInputRef.current.click();
-  };
+    /**
+     * State for the input field of the Thought.
+     */
+    const [message, setMessage] = useState('');
 
+    /**
+     * Handles the change of the input field for the Thought.
+     * @param event
+     */
   const handleChangeMessage = (event) => {
     setMessage(event.target.value);
   };
 
+    /**
+     * Handles the Enter key for the input field
+     * @param event
+     */
   const handleKeyUp = (event) => {
     if (event.key === 'Enter') {
       handleSend();
     }
   };
 
+    /**
+     * Form for selecting the date of a thought
+     * @type {{display: *, input: {}}}
+     */
   const form = useForm({
     fieldConfig: {
       date: {
@@ -51,6 +56,10 @@ export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit,
     disableSubmitButton: true,
   })
 
+    /**
+     * Handles the submission of the Thought input field.
+     * @returns {Promise<void|string>}
+     */
   const handleSend = async () => {
     if (!message) {
       return '';
@@ -109,52 +118,6 @@ export default function ThoughtInputField({ disabled, onSend, onFocus, onSubmit,
             </Box>
           )
       }
-
-
-
-      {/*<input type="file" ref={fileInputRef}*/}
-      {/*       // style={{ display: 'none' }}*/}
-      {/*/>*/}
     </RootStyle>
   );
-}
-
-const FileUploaderComponent = ({ onUpload }) => {
-  /**
-   * Uploads files to S3 and updates the lesson with the new images
-   * @param key
-   * @returns {Promise<void>}
-   */
-  const onFileUploadSuccess = async ({key}) => {
-
-    const bucketKey = `public/lesson-images/${key}`;
-
-    // const original = await details.query(Lesson,  id)
-    //
-    // await details.save(Lesson.copyOf(original, updated => {
-    //     updated.images = [
-    //       ...(Array.isArray(original?.images) ? original?.images : []),
-    //       {
-    //         url: bucketKey,
-    //       }
-    //     ]
-    //   }
-    // ))
-  }
-
-  const onFileUploadError = (error) => {
-    console.error(error)
-  }
-
-  return (
-    <FileUploader
-      acceptedFileTypes={['image/*']}
-      accessLevel="private"
-      hasMultipleFiles
-      isResumable
-      showImages
-      onSuccess={async (...input) => onFileUploadSuccess(...input)}
-      onError={onFileUploadError}
-    />
-  )
 }

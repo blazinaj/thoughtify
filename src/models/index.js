@@ -23,7 +23,7 @@ const SubscriptionTier = {
   "PREMIUM": "PREMIUM"
 };
 
-const { Biography, HealthReport, JournalEntry, Notification, SubscriptionPlan, Thought, User, HealthReportThoughts, JournalEntryThoughts } = initSchema(schema);
+const { Biography, HealthReport, JournalEntry, Notification, SubscriptionPlan, Thought, User, BiographyThoughts, HealthReportThoughts, JournalEntryThoughts } = initSchema(schema);
 
 export {
   Biography,
@@ -33,6 +33,7 @@ export {
   SubscriptionPlan,
   Thought,
   User,
+  BiographyThoughts,
   HealthReportThoughts,
   JournalEntryThoughts,
   JournalCadence,
