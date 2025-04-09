@@ -1,19 +1,13 @@
 import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
-import { Box, Container, Grid } from '@mui/material';
+import {Container, Grid} from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import { HealthReport } from './components/HealthReport';
-import { useDatastore } from '../../utils/hooks/useDatastore';
-import { HealthReport as HealthReportModel } from '../../models';
-import { useEffect, useState } from 'react';
-import { useForm } from '../../utils/hooks/useForm';
-import dayjs from 'dayjs';
+import {HealthReport} from './components/HealthReport';
+import {useDatastore} from '../../utils/hooks/useDatastore';
+import {HealthReport as HealthReportModel} from '../../models';
+import {useEffect, useState} from 'react';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DefinedRange } from 'react-date-range';
-import { DateRangePicker } from '@mui/x-date-pickers-pro';
-import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField/SingleInputDateRangeField';
-import HealthReportDatePicker from './components/HealthReportDatePicker';
 
 const HealthPage = () => {
   const { themeStretch } = useSettings();
@@ -36,8 +30,6 @@ const HealthPage = () => {
       }
     }
   }, []);
-
-  console.log(healthReportDatastore.items);
 
   return (
     <Page title="Thoughtify Health">

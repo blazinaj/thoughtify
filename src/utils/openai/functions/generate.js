@@ -73,8 +73,6 @@ export const generateImage = async ({ prompt, n = 1, size = '256x256' }) => {
       size
     });
 
-    // res.status(200).json({ result: completion.data.choices[0].text });
-
     /**
      * Response looks like this
      * {
@@ -116,8 +114,6 @@ export const handleCompletion = async ({ prompt, seed, responseFormat = { type: 
       seed,
       response_format: responseFormat
     });
-
-    console.log({ completion });
 
     const response = completion.data.choices[0].message.content;
 
