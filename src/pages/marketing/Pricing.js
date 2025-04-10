@@ -65,7 +65,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Pricing() {
   return (
-    <RootStyle title="Edify - Pricing">
+    <RootStyle title="Thoughtify - Pricing">
       <Container maxWidth="lg" sx={{ my: 10 }}>
         <Typography variant="h3" align="center" paragraph>
           Thoughtify Pricing

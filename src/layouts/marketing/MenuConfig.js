@@ -1,6 +1,8 @@
 import { Icon } from '@iconify/react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import fileFill from '@iconify/icons-eva/file-fill';
+import roundGrain from '@iconify/icons-ic/round-grain';
+import docs from '@iconify/icons-ic/round-description';
 // routes
 import { PATH_PAGE } from '../../demo/routes/paths';
 
@@ -17,28 +19,29 @@ const menuConfig = [
     icon: <Icon icon={homeFill} {...ICON_SIZE} />,
     path: '/'
   },
-  // {
-  //   title: 'Our Mission',
-  //   icon: <Icon icon={roundGrain} {...ICON_SIZE} />,
-  //   path: '/mission'
-  // },
   {
-    title: 'Pages',
+    title: 'Documentation',
+    icon: <Icon icon={docs} {...ICON_SIZE} />,
+    path: 'https://thoughts.mobi/docs'
+  },
+  {
+    title: 'More',
     path: '/pages',
     icon: <Icon icon={fileFill} {...ICON_SIZE} />,
     children: [
       {
         subheader: 'Information',
         items: [
-          { title: 'Contact us', path: PATH_PAGE.contact },
           { title: 'Pricing', path: PATH_PAGE.pricing },
-          { title: 'Privacy', path: PATH_PAGE.privacy },
-          { title: 'Terms and Conditions', path: '/terms-and-conditions' }
+          { title: 'Contact us', path: PATH_PAGE.contact },
         ]
       },
       {
-        subheader: 'Dashboard',
-        items: [{ title: 'Dashboard', path: '/thoughts' }]
+        subheader: 'Compliance',
+        items: [
+          { title: 'Privacy', path: PATH_PAGE.privacy },
+          { title: 'Terms and Conditions', path: '/terms-and-conditions' }
+        ]
       }
     ]
   }

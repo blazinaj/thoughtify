@@ -21,7 +21,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Maintenance() {
   return (
-    <RootStyle title="Maintenance | Edify">
+    <RootStyle title="Maintenance | Thoughtify">
       <Container sx={{ textAlign: 'center' }}>
         <Typography variant="h3" paragraph>
           Website currently under maintenance

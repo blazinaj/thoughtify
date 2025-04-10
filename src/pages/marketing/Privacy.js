@@ -18,7 +18,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Privacy() {
   return (
-    <RootStyle title="Edify - Privacy Policy">
+    <RootStyle title="Thoughtify - Privacy Policy">
       <Container maxWidth="lg" sx={{ my: 10 }}>
         <h1>Privacy Policy</h1>
         <p>Last updated: October 10, 2023</p>

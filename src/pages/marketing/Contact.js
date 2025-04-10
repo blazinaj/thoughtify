@@ -18,7 +18,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Contact() {
   return (
-    <RootStyle title="Edify - Contact Us">
+    <RootStyle title="Thoughtify - Contact Us">
       <Container sx={{ my: 10 }}>
         <Grid container spacing={10}>
           <Grid item xs={12} md={6}>
