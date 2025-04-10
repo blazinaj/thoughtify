@@ -20,6 +20,15 @@ Thoughtify is a Web Application for managing thoughts, extracting insights, and 
 
 `npm start`
 
+### Features
+- Create Thoughts
+- Edit Thoughts
+- Extract Information from Thoughts
+- Explore related Thoughts based on extracted information
+- Generate Journals based on Thoughts. Journals are written in a Daily, Weekly, Monthly, or Yearly format.
+- Generate a Health Report based on Thoughts.
+- Generate a Biography based on Thoughts.
+
 ### File Structure
 
 ```
