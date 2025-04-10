@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
+    "aws-sdk": "latest",
     "openai": "3.2.1"
   },
   "devDependencies": {
