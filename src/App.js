@@ -39,7 +39,6 @@ const App = () => {
             <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={currentLang}>
               <RtlLayoutContext>
                 <NotistackProvider>
-                  <Settings />
                   <ScrollToTop />
                   <Viewport />
                 </NotistackProvider>
