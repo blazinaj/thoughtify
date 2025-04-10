@@ -51,10 +51,10 @@ import awsmobile from './aws-exports';
 import { Analytics } from '@aws-amplify/analytics';
 
 // ----------------------------------------------------------------------
-
+awsmobile.oauth.domain = 'auth.thoughts.mobi';
 // ensures that oAuth redirects happen regardless of where the user is
 awsmobile.oauth.redirectSignIn = `${window.location.origin}/`;
-// awsmobile.oauth.redirectSignOut = `${window.location.origin}/`;
+awsmobile.oauth.redirectSignOut = `${window.location.origin}/`;
 
 /**
  * Configure AWS Amplify provider globally.
