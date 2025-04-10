@@ -247,7 +247,7 @@ export const TermsContent = () => {
 
 export default function TermsAndConditions() {
   return (
-    <RootStyle title="Edify - Terms and Conditions">
+    <RootStyle title="Thoughtify - Terms and Conditions">
       <Container maxWidth="lg" sx={{ my: 10 }}>
         <TermsContent />
       </Container>

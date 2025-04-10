@@ -18,7 +18,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function About() {
   return (
-    <RootStyle title="Edify - About Us">
+    <RootStyle title="Thoughtify - About Us">
       <AboutHero />
       <AboutVision />
       <Divider orientation="vertical" sx={{ my: 10, mx: 'auto', width: 2, height: 40 }} />

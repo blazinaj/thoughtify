@@ -18,7 +18,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Faqs() {
   return (
-    <RootStyle title="Edify - Faqs">
+    <RootStyle title="Thoughtify - FAQs">
       <FaqsHero />
 
       <Container sx={{ mt: 15, mb: 10 }}>

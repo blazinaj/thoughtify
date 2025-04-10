@@ -1,8 +1,13 @@
 import { DataStore } from '@aws-amplify/datastore';
 import { Thought } from '../../models';
 import { handleCompletion } from '../../utils/openai/functions/generate';
+import {invokeLambda} from "../../utils/functions/invokeLambda";
 
 /**
+ * Uses openAI to generate a thought extract for a new thought.
+ *
+ * An extract pulls out the following information from a thought:
+ *
  * Related thoughts
  * Emotions
  * People
@@ -49,11 +54,30 @@ export const generateThoughtExtract = async (newThought) => {
       }
       
     `;
-  const response = await handleCompletion({
-    prompt: _prompt,
-    response_format: { type: 'json_object' },
-    seed: 101
-  });
+  // const response = await handleCompletion({
+  //   prompt: _prompt,
+  //   response_format: { type: 'json_object' },
+  //   seed: 101
+  // });
 
-  return response;
+  const response = await invokeLambda(
+      `handleCompletion-${process.env.REACT_APP_AMPLIFY_ENVIRONMENT || 'staging'}`,
+      {
+        prompt: _prompt,
+        seed: 101,
+        response_format: { type: 'json_object' }
+      }
+  )
+
+    if (response.statusCode !== 200) {
+        console.error('Error with OpenAI API request', response);
+        throw new Error('Error with OpenAI API request');
+    }
+
+    // Parse the response to get the JSON object
+    const { body } = response;
+
+  const parsedResponse = JSON.parse(body);
+
+  return parsedResponse;
 };
