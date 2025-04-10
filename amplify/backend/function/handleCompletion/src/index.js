@@ -23,18 +23,18 @@ exports.handler = async (event) => {
 
     const { prompt, seed, responseFormat } = event;
 
-    const { Parameters } = await (new aws.SSM())
-    .getParameters({
-        Names: ["OPENAI_API_KEY"].map(secretName => process.env[secretName]),
-        WithDecryption: true,
-    })
-    .promise();
-
-    const apiKey = Parameters.find(param => param.Name === 'OPENAI_API_KEY').Value;
+    // const { Parameters } = await (new aws.SSM())
+    // .getParameters({
+    //     Names: ["OPENAI_API_KEY"].map(secretName => process.env[secretName]),
+    //     WithDecryption: true,
+    // })
+    // .promise();
+    //
+    // const apiKey = Parameters.find(param => param.Name === 'OPENAI_API_KEY').Value;
 
     const configuration = new Configuration({
         organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
-        apiKey,
+        apiKey: "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",
     });
 
     const openai = new OpenAIApi(configuration);
