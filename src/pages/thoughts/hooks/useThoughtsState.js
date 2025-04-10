@@ -1,9 +1,6 @@
-import { useDatastore } from '../../../utils/hooks/useDatastore';
-import { Thought } from '../../../models';
-import { useEffect, useMemo, useState } from 'react';
-import { Chip } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {useDatastore} from '../../../utils/hooks/useDatastore';
+import {Thought} from '../../../models';
+import {useEffect, useMemo, useState} from 'react';
 
 /**
  * Custom hook to manage the state of the thoughts page.
@@ -31,9 +28,11 @@ export const useThoughtsState = ({ journalEntry }) => {
     predicate: getPredicate()
   });
 
-  const [positiveThoughts, setPositiveThoughts] = useState([]);
-  const [negativeThoughts, setNegativeThoughts] = useState([]);
-  const [neutralThoughts, setNeutralThoughts] = useState([]);
+  const [allThoughts, setAllThoughts] = useState({
+    positiveThoughts: [],
+    negativeThoughts: [],
+    neutralThoughts: []
+  })
 
   const [showPositiveThoughts, setShowPositiveThoughts] = useState(true);
   const [showNegativeThoughts, setShowNegativeThoughts] = useState(false);
@@ -41,42 +40,37 @@ export const useThoughtsState = ({ journalEntry }) => {
 
   useEffect(() => {
     if (thoughtsDatastore?.items) {
-      setPositiveThoughts(
-        thoughtsDatastore?.items?.filter((thought) => {
+      setAllThoughts({
+        positiveThoughts: thoughtsDatastore?.items?.filter((thought) => {
           return thought?.extract ? thought?.extract?.overallTone === 'positive' : false;
-        })
-      );
-      setNegativeThoughts(
-        thoughtsDatastore?.items?.filter((thought) => {
+        }),
+        negativeThoughts: thoughtsDatastore?.items?.filter((thought) => {
           return thought?.extract ? thought?.extract?.overallTone === 'negative' : false;
+        }),
+        neutralThoughts: thoughtsDatastore?.items?.filter((thought) => {
+            return thought?.extract
+                ? thought?.extract?.overallTone !== 'positive' && thought?.extract?.overallTone !== 'negative'
+                : true;
         })
-      );
-      setNeutralThoughts(
-        thoughtsDatastore?.items?.filter((thought) => {
-          return thought?.extract
-            ? thought?.extract?.overallTone !== 'positive' && thought?.extract?.overallTone !== 'negative'
-            : true;
-        })
-      );
+      })
     }
   }, [thoughtsDatastore?.items]);
 
   const thoughts = useMemo(() => {
     return [
-      ...(showPositiveThoughts ? positiveThoughts : []),
-      ...(showNegativeThoughts ? negativeThoughts : []),
-      ...(showNeutralThoughts ? neutralThoughts : [])
+      ...(showPositiveThoughts ? allThoughts.positiveThoughts : []),
+      ...(showNegativeThoughts ? allThoughts.negativeThoughts : []),
+      ...(showNeutralThoughts ? allThoughts.neutralThoughts : [])
     ];
   }, [
     showPositiveThoughts,
     showNegativeThoughts,
     showNeutralThoughts,
-    positiveThoughts,
-    negativeThoughts,
-    neutralThoughts
+    allThoughts
   ]);
 
   return {
+    allThoughts,
     thoughts,
     showPositiveThoughts,
     setShowPositiveThoughts,
@@ -84,8 +78,5 @@ export const useThoughtsState = ({ journalEntry }) => {
     setShowNegativeThoughts,
     showNeutralThoughts,
     setShowNeutralThoughts,
-    positiveThoughts,
-    negativeThoughts,
-    neutralThoughts
   };
 };

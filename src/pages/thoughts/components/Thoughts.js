@@ -13,15 +13,13 @@ import { ThoughtsChipFilter } from './ThoughtsChipFilter';
  */
 const Thoughts = ({ journalEntry }) => {
   const {
-    positiveThoughts,
-    negativeThoughts,
-    neutralThoughts,
     showPositiveThoughts,
     showNegativeThoughts,
     showNeutralThoughts,
     setShowPositiveThoughts,
     setShowNegativeThoughts,
     setShowNeutralThoughts,
+      allThoughts,
     thoughts
   } = useThoughtsState({ journalEntry });
 
@@ -39,18 +37,18 @@ const Thoughts = ({ journalEntry }) => {
       <Grid item xs={12}>
         <Stack direction={'row'} spacing={1} justifyContent={'space-around'}>
           <ThoughtsChipFilter
-            label={`${positiveThoughts?.length} Positive`}
+            label={`${allThoughts?.positiveThoughts?.length} Positive`}
             onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}
             show={showPositiveThoughts}
             color={'success'}
           />
           <ThoughtsChipFilter
-            label={`${neutralThoughts?.length} Neutral`}
+            label={`${allThoughts?.neutralThoughts?.length} Neutral`}
             onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}
             show={showNeutralThoughts}
           />
           <ThoughtsChipFilter
-            label={`${negativeThoughts?.length} Negative`}
+            label={`${allThoughts?.negativeThoughts?.length} Negative`}
             onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}
             show={showNegativeThoughts}
             color={'warning'}
