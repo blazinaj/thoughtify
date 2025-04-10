@@ -77,6 +77,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_handleCompletion_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCompletion"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleCompletion_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleCompletion"
+        }
+      ]
+    },
     "AMPLIFY_function_handleCompletion_secretsPathAmplifyAppId": {
       "usedBy": [
         {
