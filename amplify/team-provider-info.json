@@ -62,7 +62,6 @@
         "transcription": {}
       },
       "function": {
-        "api": {},
         "subscriptionPlan": {
           "locationId": "TEMP",
           "accessToken": "TEMP",
@@ -70,7 +69,14 @@
           "planVariantIdAnnual": "TEMP",
           "planCatalogItemId": "TEMP",
           "planCatalogItemVariantFree": "TEMP",
-          "planCatalogItemVariantPremium": "TEMP"
+          "planCatalogItemVariantPremium": "TEMP",
+          "deploymentBucketName": "amplify-thoughtify-prod-203925-deployment",
+          "s3Key": "amplify-builds/subscriptionPlan-79786746494e55364b49-build.zip"
+        },
+        "handleCompletion": {
+          "secretsPathAmplifyAppId": "d1d8vpf1p4j3dt",
+          "deploymentBucketName": "amplify-thoughtify-prod-203925-deployment",
+          "s3Key": "amplify-builds/handleCompletion-5251486476424d4f4a62-build.zip"
         }
       }
     }
