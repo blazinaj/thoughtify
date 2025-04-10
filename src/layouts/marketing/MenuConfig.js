@@ -22,7 +22,7 @@ const menuConfig = [
   {
     title: 'Documentation',
     icon: <Icon icon={docs} {...ICON_SIZE} />,
-    path: 'https://thoughts.mobi/docs'
+    path: 'https://docs.thoughts.mobi'
   },
   {
     title: 'More',
