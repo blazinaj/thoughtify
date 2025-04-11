@@ -19,8 +19,11 @@ const Thoughts = ({ journalEntry }) => {
     setShowPositiveThoughts,
     setShowNegativeThoughts,
     setShowNeutralThoughts,
-      allThoughts,
-    thoughts
+    allThoughts,
+    thoughts,
+      extract,
+    visibleAttributes,
+    setVisibleAttributes
   } = useThoughtsState({ journalEntry });
 
   return (
@@ -34,27 +37,27 @@ const Thoughts = ({ journalEntry }) => {
         />
       </Grid>
 
-      <Grid item xs={12}>
-        <Stack direction={'row'} spacing={1} justifyContent={'space-around'}>
-          <ThoughtsChipFilter
-            label={`${allThoughts?.positiveThoughts?.length} Positive`}
-            onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}
-            show={showPositiveThoughts}
-            color={'success'}
-          />
-          <ThoughtsChipFilter
-            label={`${allThoughts?.neutralThoughts?.length} Neutral`}
-            onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}
-            show={showNeutralThoughts}
-          />
-          <ThoughtsChipFilter
-            label={`${allThoughts?.negativeThoughts?.length} Negative`}
-            onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}
-            show={showNegativeThoughts}
-            color={'warning'}
-          />
-        </Stack>
-      </Grid>
+      {/*<Grid item xs={12}>*/}
+      {/*  <Stack direction={'row'} spacing={1} justifyContent={'space-around'}>*/}
+      {/*    <ThoughtsChipFilter*/}
+      {/*      label={`${allThoughts?.positiveThoughts?.length} Positive`}*/}
+      {/*      onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}*/}
+      {/*      show={showPositiveThoughts}*/}
+      {/*      color={'success'}*/}
+      {/*    />*/}
+      {/*    <ThoughtsChipFilter*/}
+      {/*      label={`${allThoughts?.neutralThoughts?.length} Neutral`}*/}
+      {/*      onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}*/}
+      {/*      show={showNeutralThoughts}*/}
+      {/*    />*/}
+      {/*    <ThoughtsChipFilter*/}
+      {/*      label={`${allThoughts?.negativeThoughts?.length} Negative`}*/}
+      {/*      onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}*/}
+      {/*      show={showNegativeThoughts}*/}
+      {/*      color={'warning'}*/}
+      {/*    />*/}
+      {/*  </Stack>*/}
+      {/*</Grid>*/}
 
       <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
         <ThoughtGallery
@@ -70,6 +73,16 @@ const Thoughts = ({ journalEntry }) => {
           data-intro={
             'Artificial Intelligence will extract the most important information from your Thoughts and display them here.'
           }
+          visibleAttributes={visibleAttributes}
+          setVisibleAttributes={setVisibleAttributes}
+          extract={extract}
+            allThoughts={allThoughts}
+    showPositiveThoughts={showPositiveThoughts}
+          setShowPositiveThoughts={setShowPositiveThoughts}
+            showNegativeThoughts={showNegativeThoughts}
+          setShowNegativeThoughts={setShowNegativeThoughts}
+          showNeutralThoughts={showNeutralThoughts}
+          setShowNeutralThoughts={setShowNeutralThoughts}
         />
       </Grid>
     </Grid>
