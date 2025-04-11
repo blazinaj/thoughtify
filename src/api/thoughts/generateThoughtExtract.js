@@ -38,6 +38,8 @@ export const generateThoughtExtract = async (newThought) => {
       categories
       reminders
       questions
+      places
+      events
       
       New Thought:
       ${newThought.input}
@@ -54,11 +56,6 @@ export const generateThoughtExtract = async (newThought) => {
       }
       
     `;
-  // const response = await handleCompletion({
-  //   prompt: _prompt,
-  //   response_format: { type: 'json_object' },
-  //   seed: 101
-  // });
 
   const response = await invokeLambda(
       `handleCompletion-${process.env.REACT_APP_AMPLIFY_ENVIRONMENT || 'staging'}`,

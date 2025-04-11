@@ -1,6 +1,7 @@
 import { useModal } from '../../../../../utils/hooks/useModal';
 import { ThoughtExtractInsight } from './ThoughtExtractInsight';
 import { Chip } from '@mui/material';
+import {sentenceCase} from "change-case";
 
 /**
  * Displays the value of a Thought Extract Attribute as a chip that opens a modal
@@ -13,7 +14,7 @@ import { Chip } from '@mui/material';
  */
 export const ThoughtExtractAttributeChip = ({ type, value }) => {
   const title = `${type}: ${value}`;
-  const button = <Chip title={type} label={value} />;
+  const button = <Chip title={type} label={sentenceCase(value)} />;
   const children = <ThoughtExtractInsight type={type} value={value} />;
 
   const modal = useModal({

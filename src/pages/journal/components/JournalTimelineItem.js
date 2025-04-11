@@ -18,7 +18,8 @@ export const JournalTimelineItem = ({ journalEntry, cadence, isSmall }) => {
   const modal = useModal({
     icon: 'carbon:book',
     title: 'Journal Entry',
-    children: <JournalTimelineItemDetails item={journalEntry} />
+    children: <JournalTimelineItemDetails item={journalEntry} />,
+      width: '80vw',
   });
 
   const [guid] = useGUID();

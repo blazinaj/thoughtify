@@ -13,16 +13,17 @@ import { ThoughtsChipFilter } from './ThoughtsChipFilter';
  */
 const Thoughts = ({ journalEntry }) => {
   const {
-    positiveThoughts,
-    negativeThoughts,
-    neutralThoughts,
     showPositiveThoughts,
     showNegativeThoughts,
     showNeutralThoughts,
     setShowPositiveThoughts,
     setShowNegativeThoughts,
     setShowNeutralThoughts,
-    thoughts
+    allThoughts,
+    thoughts,
+      extract,
+    visibleAttributes,
+    setVisibleAttributes
   } = useThoughtsState({ journalEntry });
 
   return (
@@ -34,28 +35,6 @@ const Thoughts = ({ journalEntry }) => {
             'Record a Thought here. This can be anything from a note to a bit of venting about your neighbor. Anything goes!'
           }
         />
-      </Grid>
-
-      <Grid item xs={12}>
-        <Stack direction={'row'} spacing={1} justifyContent={'space-around'}>
-          <ThoughtsChipFilter
-            label={`${positiveThoughts?.length} Positive`}
-            onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}
-            show={showPositiveThoughts}
-            color={'success'}
-          />
-          <ThoughtsChipFilter
-            label={`${neutralThoughts?.length} Neutral`}
-            onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}
-            show={showNeutralThoughts}
-          />
-          <ThoughtsChipFilter
-            label={`${negativeThoughts?.length} Negative`}
-            onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}
-            show={showNegativeThoughts}
-            color={'warning'}
-          />
-        </Stack>
       </Grid>
 
       <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
@@ -72,6 +51,16 @@ const Thoughts = ({ journalEntry }) => {
           data-intro={
             'Artificial Intelligence will extract the most important information from your Thoughts and display them here.'
           }
+          visibleAttributes={visibleAttributes}
+          setVisibleAttributes={setVisibleAttributes}
+          extract={extract}
+            allThoughts={allThoughts}
+    showPositiveThoughts={showPositiveThoughts}
+          setShowPositiveThoughts={setShowPositiveThoughts}
+            showNegativeThoughts={showNegativeThoughts}
+          setShowNegativeThoughts={setShowNegativeThoughts}
+          showNeutralThoughts={showNeutralThoughts}
+          setShowNeutralThoughts={setShowNeutralThoughts}
         />
       </Grid>
     </Grid>

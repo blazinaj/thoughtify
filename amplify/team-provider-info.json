@@ -28,7 +28,9 @@
           "planCatalogItemVariantPremium": "TYDTRUEXGDV6FX2NQRG5DTM2"
         },
         "handleCompletion": {
-          "secretsPathAmplifyAppId": "d1d8vpf1p4j3dt"
+          "secretsPathAmplifyAppId": "d1d8vpf1p4j3dt",
+          "deploymentBucketName": "amplify-thoughtify-staging-02929-deployment",
+          "s3Key": "amplify-builds/handleCompletion-5761574a63424d364c76-build.zip"
         }
       },
       "api": {
