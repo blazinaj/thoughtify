@@ -10,7 +10,7 @@
  */
 export const generateThoughtExtracts = async ({
   thoughts,
-  attributes = ['emotions', 'people', 'projects', 'categories', 'reminders', 'questions']
+  attributes = ['emotions', 'people', 'projects', 'categories', 'reminders', 'questions', 'places', 'events']
 }) => {
   if (!thoughts) {
     return {};

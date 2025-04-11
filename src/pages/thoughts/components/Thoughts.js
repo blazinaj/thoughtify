@@ -37,28 +37,6 @@ const Thoughts = ({ journalEntry }) => {
         />
       </Grid>
 
-      {/*<Grid item xs={12}>*/}
-      {/*  <Stack direction={'row'} spacing={1} justifyContent={'space-around'}>*/}
-      {/*    <ThoughtsChipFilter*/}
-      {/*      label={`${allThoughts?.positiveThoughts?.length} Positive`}*/}
-      {/*      onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}*/}
-      {/*      show={showPositiveThoughts}*/}
-      {/*      color={'success'}*/}
-      {/*    />*/}
-      {/*    <ThoughtsChipFilter*/}
-      {/*      label={`${allThoughts?.neutralThoughts?.length} Neutral`}*/}
-      {/*      onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}*/}
-      {/*      show={showNeutralThoughts}*/}
-      {/*    />*/}
-      {/*    <ThoughtsChipFilter*/}
-      {/*      label={`${allThoughts?.negativeThoughts?.length} Negative`}*/}
-      {/*      onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}*/}
-      {/*      show={showNegativeThoughts}*/}
-      {/*      color={'warning'}*/}
-      {/*    />*/}
-      {/*  </Stack>*/}
-      {/*</Grid>*/}
-
       <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
         <ThoughtGallery
           journalEntry={journalEntry}

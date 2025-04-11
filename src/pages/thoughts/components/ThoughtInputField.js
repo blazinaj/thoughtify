@@ -1,11 +1,10 @@
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import {useEffect, useState} from 'react';
-import { Box, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
-import { Icon } from '@iconify/react';
-import micFill from '@iconify/icons-eva/mic-fill';
+import {Box, IconButton, InputAdornment, Stack, TextField} from '@mui/material';
+import {Icon} from '@iconify/react';
 import roundSend from '@iconify/icons-ic/round-send';
-import { useForm } from '../../../utils/hooks/useForm';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import {useForm} from '../../../utils/hooks/useForm';
+import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
 import {ThoughtInputMicButton} from "./ThoughtInputMicButton";
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -101,48 +100,48 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
 
   return (
     <RootStyle {...other}>
-      <TextField
-        disabled={disabled}
-        value={message}
-        onKeyUp={handleKeyUp}
-        onChange={handleChangeMessage}
-        placeholder="Save a thought..."
-        multiline
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Stack direction="row" spacing={0.5} mr={1.5}>
-                <ThoughtInputMicButton
-                  toggleListening={toggleListening}
-                  disabled={!browserSupportsSpeechRecognition}
-                  listening={listening}
-                />
-              </Stack>
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
-                <Icon icon={roundSend} width={24} height={24} />
-              </IconButton>
-            </InputAdornment>
-          )
-        }}
-        sx={{
-          height: '100%',
-          width: '100%'
-        }}
-      />
+      <Stack direction={'row'} spacing={1}>
+        <TextField
+            disabled={disabled}
+            value={message}
+            onKeyUp={handleKeyUp}
+            onChange={handleChangeMessage}
+            placeholder="Save a thought..."
+            multiline
+            InputProps={{
+              startAdornment: (
+                  <InputAdornment position="start">
+                    <Stack direction="row" spacing={0.5} mr={1.5}>
+                      <ThoughtInputMicButton
+                          toggleListening={toggleListening}
+                          disabled={!browserSupportsSpeechRecognition}
+                          listening={listening}
+                      />
+                    </Stack>
+                  </InputAdornment>
+              ),
+              endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
+                      <Icon icon={roundSend} width={24} height={24} />
+                    </IconButton>
+                  </InputAdornment>
+              )
+            }}
+            sx={{
+              height: '100%',
+              width: showDateSelector ? '80%':'100%'
+            }}
+        />
 
-      {showDateSelector && (
-        <Box
-          sx={{
-            width: '100%'
-          }}
-        >
-          {form.display}
-        </Box>
-      )}
+        {showDateSelector && (
+            <Box
+            >
+              {form.display}
+            </Box>
+        )}
+      </Stack>
+
     </RootStyle>
   );
 }
