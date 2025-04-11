@@ -1,10 +1,12 @@
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Box, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import { Icon } from '@iconify/react';
 import micFill from '@iconify/icons-eva/mic-fill';
 import roundSend from '@iconify/icons-ic/round-send';
 import { useForm } from '../../../utils/hooks/useForm';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import {ThoughtInputMicButton} from "./ThoughtInputMicButton";
 
 const RootStyle = styled('div')(({ theme }) => ({
   width: '100%'
@@ -72,6 +74,31 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     return setMessage('');
   };
 
+    const {
+      transcript,
+      listening,
+      browserSupportsSpeechRecognition
+    } = useSpeechRecognition({
+      clearTranscriptOnListen: true,
+      transcribing: true,
+    });
+    const startListening = () => SpeechRecognition.startListening({ continuous: true });
+
+  useEffect(() => {
+    if (transcript) {
+      console.log(transcript)
+        setMessage(transcript);
+    }
+  }, [transcript])
+
+  const toggleListening = () => {
+    if (listening) {
+      SpeechRecognition.stopListening();
+    } else {
+      startListening();
+    }
+  }
+
   return (
     <RootStyle {...other}>
       <TextField
@@ -85,9 +112,11 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
           startAdornment: (
             <InputAdornment position="start">
               <Stack direction="row" spacing={0.5} mr={1.5}>
-                <IconButton disabled={disabled} size="small">
-                  <Icon icon={micFill} width={24} height={24} />
-                </IconButton>
+                <ThoughtInputMicButton
+                  toggleListening={toggleListening}
+                  disabled={!browserSupportsSpeechRecognition}
+                  listening={listening}
+                />
               </Stack>
             </InputAdornment>
           ),
