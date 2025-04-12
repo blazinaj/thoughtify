@@ -33,7 +33,6 @@ export const useThoughtsState = ({ journalEntry }) => {
   // temporarily convert the 'extract' AWSJSON field to the attribute field
   useEffect(() => {
     if (thoughtsDatastore?.items) {
-      console.log('transforming thoughts');
       for (const thought of thoughtsDatastore.items) {
         DataStore.save(
           Thought.copyOf(thought, (updated) => {

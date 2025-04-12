@@ -70,7 +70,6 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      console.log('Clearing Datastore..');
       await DataStore.clear();
 
       await Auth.signOut()

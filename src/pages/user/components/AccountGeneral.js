@@ -142,7 +142,6 @@ export default function AccountGeneral() {
                       {...getFieldProps('showOnboarding')}
                       value={user?.showOnboarding}
                       onClick={() => {
-                        console.log({ user });
                         DataStore.query(User, user.id).then((currentUser) => {
                           DataStore.save(
                             User.copyOf(currentUser, (updated) => {

@@ -118,7 +118,6 @@ export const ApplicationSearchbar = ({ sx, handleClose }) => {
           recentSearch: false
         };
       });
-      console.log('thoughtResults', thoughtResults);
       setLoading(false);
       return thoughtResults || [];
     }

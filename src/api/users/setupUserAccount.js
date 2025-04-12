@@ -3,7 +3,6 @@ import { Notification, User } from '../../models';
 import { createThought } from '../thoughts/createThought';
 
 export const setupUserAccount = async ({ cognitoUser, userData }) => {
-  console.log('Setting up a new User Account for the Cognito User', { cognitoUser, userData });
 
   const username = cognitoUser?.username;
   const firstName = cognitoUser?.attributes?.given_name || userData?.firstName;
@@ -11,8 +10,6 @@ export const setupUserAccount = async ({ cognitoUser, userData }) => {
   const email = cognitoUser?.attributes?.email;
   const phone = cognitoUser?.attributes?.phone_number;
   const profileImage = cognitoUser?.attributes?.picture;
-
-  console.log('Creating a new User Object');
 
   const newUser = await DataStore.save(
     new User({
@@ -32,7 +29,6 @@ export const setupUserAccount = async ({ cognitoUser, userData }) => {
     date: new Date().toISOString()
   });
 
-  console.log('Creating a new Welcome Notification');
   // Create a welcome notification
   await DataStore.save(
     new Notification({

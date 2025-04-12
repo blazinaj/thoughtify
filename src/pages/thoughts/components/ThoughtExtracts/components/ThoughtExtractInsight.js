@@ -26,7 +26,6 @@ export const ThoughtExtractInsight = ({ type, value }) => {
 
   const getRelatedThoughts = async (type, value) => {
     const thoughtsDatastore = await DataStore.query(Thought, (p) => p[type].contains(value));
-    console.log('ThoughtExtractInsight', { type, value, thoughtsDatastore });
 
     //       Example Output:
     //       "{'timeline': [{'timestamp': '...', 'summary': "..."}], 'relatedThoughts': [...], "relatedPeople": ['taylor', ...], "relatedProjects": [...], "relatedCategories": [...], "relatedReminders": [...], "relatedQuestions": [...] }"
@@ -97,7 +96,6 @@ export const ThoughtExtractInsight = ({ type, value }) => {
     setIsLoading(true);
     getRelatedThoughts(type, value)
       .then((res) => {
-        console.log('Related Thoughts:', res);
         setInsight(res);
         setIsLoading(false);
       })

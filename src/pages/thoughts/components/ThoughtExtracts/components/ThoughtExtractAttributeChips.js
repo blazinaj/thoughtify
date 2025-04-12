@@ -16,8 +16,6 @@ import { ThoughtsChipFilter } from '../../ThoughtsChipFilter';
  * @constructor
  */
 export const ThoughtExtractAttributeChips = ({ value, attribute, visibleAttributes, setVisibleAttributes }) => {
-  // log
-  console.log('ThoughtExtractAttributeChips', { value, attribute, visibleAttributes, setVisibleAttributes });
   const values = [];
 
   // need to handle the case where the value is a string or an array of strings for backwards compatibility
@@ -55,8 +53,6 @@ export const ThoughtExtractAttributeChips = ({ value, attribute, visibleAttribut
   return (
     <Grid container direction={'row'} spacing={2}>
       {values.map((item) => {
-        console.log({ item, attribute });
-
         if (!attribute || !item) {
           return null;
         }

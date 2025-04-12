@@ -101,7 +101,6 @@ export const useDatastore = ({
        */
       getItems(model, DataStore).then(async (items) => {
         if (filter) {
-          console.log(`Filtering ${typename || model?.name}s with: ${filter}`);
           setItems(items.filter(filter));
         } else {
           setItems(items);

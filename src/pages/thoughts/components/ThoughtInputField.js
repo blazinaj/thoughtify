@@ -81,7 +81,6 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
 
   useEffect(() => {
     if (transcript) {
-      console.log(transcript);
       setMessage(transcript);
     }
   }, [transcript]);

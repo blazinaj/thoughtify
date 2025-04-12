@@ -8,7 +8,6 @@ export const handleJournalEntryCompletion = async ({
   tone = 'neutral, factual',
   date
 }) => {
-  console.log('handling journal entry completion');
 
   let prompt;
 

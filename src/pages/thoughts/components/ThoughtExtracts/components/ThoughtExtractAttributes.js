@@ -31,7 +31,6 @@ export const ThoughtExtractAttributes = ({ insight, value: attributeValue }) => 
           return key !== 'thoughts' && key !== 'timeline' && value !== null && value !== undefined && value.length > 0;
         })
         .map(([key, value]) => {
-          console.log({ key, value, attributeValue });
           if (!key || !value) {
             return null;
           }

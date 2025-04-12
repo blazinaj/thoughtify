@@ -79,7 +79,6 @@ export const useModal = ({
   );
 
   const onButtonClick = () => {
-    console.log('opening modal');
     setIsOpen((op) => !op);
   };
 

@@ -46,7 +46,6 @@ export const CreateItemButton = ({
 
     saveItem(model, item, DataStore)
       .then((newItem) => {
-        console.log('Saved Item: ', newItem);
         setOpen(false);
         setItem(itemParam || {});
 

@@ -37,8 +37,6 @@ export const submitForm = async ({
     finalInput.ownerGroup = organizationID;
   }
 
-  console.log({ finalInput });
-
   /**
    * If there is a mutation, an item, and no submit function,
    * this is now an 'edit' form.
