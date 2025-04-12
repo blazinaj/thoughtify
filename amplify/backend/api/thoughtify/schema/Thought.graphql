@@ -20,14 +20,14 @@ type Thought @model @auth(rules: [{allow: owner}]) {
     events: [String]
 }
 
-type ThoughtAttributes {
-    overallTone: String
-    people: [String]
-    projects: [String]
-    categories: [String]
-    emotions: [String]
-    reminders: [String]
-    questions: [String]
-    places: [String]
-    events: [String]
+enum ThoughtAttributes {
+    overallTone,
+    people,
+    projects,
+    categories,
+    emotions,
+    reminders,
+    questions,
+    places,
+    events
 }
