@@ -8,6 +8,16 @@ type Thought @model @auth(rules: [{allow: owner}]) {
     journalEntries: [JournalEntry] @manyToMany(relationName: "JournalEntryThoughts")
     healthReports: [HealthReport] @manyToMany(relationName: "HealthReportThoughts")
     biographies: [Biography] @manyToMany(relationName: "BiographyThoughts")
+
+    overallTone: String
+    people: [String]
+    projects: [String]
+    categories: [String]
+    emotions: [String]
+    reminders: [String]
+    questions: [String]
+    places: [String]
+    events: [String]
 }
 
 type ThoughtAttributes {
