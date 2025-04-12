@@ -1,9 +1,8 @@
-import { Grid, Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 import { ThoughtInput } from './ThoughtInput';
 import { ThoughtGallery } from './ThoughtGallery';
 import { ThoughtExtracts } from './ThoughtExtracts/components/ThoughtExtracts';
 import { useThoughtsState } from '../hooks/useThoughtsState';
-import { ThoughtsChipFilter } from './ThoughtsChipFilter';
 
 /**
  * Displays the Thoughts page for the user.
@@ -21,7 +20,7 @@ const Thoughts = ({ journalEntry }) => {
     setShowNeutralThoughts,
     allThoughts,
     thoughts,
-      extract,
+    extract,
     visibleAttributes,
     setVisibleAttributes
   } = useThoughtsState({ journalEntry });
@@ -51,13 +50,13 @@ const Thoughts = ({ journalEntry }) => {
           data-intro={
             'Artificial Intelligence will extract the most important information from your Thoughts and display them here.'
           }
-          visibleAttributes={visibleAttributes}
-          setVisibleAttributes={setVisibleAttributes}
+          visibleAttributes={!journalEntry ? visibleAttributes : undefined}
+          setVisibleAttributes={!journalEntry ? setVisibleAttributes : undefined}
           extract={extract}
-            allThoughts={allThoughts}
-    showPositiveThoughts={showPositiveThoughts}
+          allThoughts={allThoughts}
+          showPositiveThoughts={showPositiveThoughts}
           setShowPositiveThoughts={setShowPositiveThoughts}
-            showNegativeThoughts={showNegativeThoughts}
+          showNegativeThoughts={showNegativeThoughts}
           setShowNegativeThoughts={setShowNegativeThoughts}
           showNeutralThoughts={showNeutralThoughts}
           setShowNeutralThoughts={setShowNeutralThoughts}

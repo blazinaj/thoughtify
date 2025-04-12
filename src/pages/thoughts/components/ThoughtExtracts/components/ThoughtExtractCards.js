@@ -1,8 +1,8 @@
 import Card from '../../../../../utils/components/Card';
 import { sentenceCase } from 'change-case';
 import { ThoughtExtractAttributeChips } from './ThoughtExtractAttributeChips';
-import {ThoughtsChipFilter} from "../../ThoughtsChipFilter";
-import {Grid, Stack} from "@mui/material";
+import { ThoughtsChipFilter } from '../../ThoughtsChipFilter';
+import { Grid, Stack } from '@mui/material';
 
 /**
  * Displays a list of Cards for each Attribute in the Thought Extract
@@ -27,44 +27,79 @@ import {Grid, Stack} from "@mui/material";
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtExtractCards = (
-    {
-      extract,
-      visibleAttributes,
-      setVisibleAttributes,
-      allThoughts,
-        showPositiveThoughts,
-        showNegativeThoughts,
-        showNeutralThoughts,
-        setShowPositiveThoughts,
-        setShowNegativeThoughts,
-        setShowNeutralThoughts,
-    }) => {
+export const ThoughtExtractCards = ({
+  extract,
+  visibleAttributes,
+  setVisibleAttributes,
+  allThoughts,
+  showPositiveThoughts,
+  showNegativeThoughts,
+  showNeutralThoughts,
+  setShowPositiveThoughts,
+  setShowNegativeThoughts,
+  setShowNeutralThoughts
+}) => {
   return (
     <>
-      <Card
-          title={'Overall Tone'}
-          key={'overall-tone-filter-card'}
-      >
-          <Stack direction={'row'} spacing={1} justifyContent={'space-between'}>
-              <ThoughtsChipFilter
-                  label={`${allThoughts?.positiveThoughts?.length} Positive`}
-                  onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}
-                  show={showPositiveThoughts}
-                  color={'success'}
-              />
-              <ThoughtsChipFilter
-                  label={`${allThoughts?.neutralThoughts?.length} Neutral`}
-                  onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}
-                  show={showNeutralThoughts}
-              />
-              <ThoughtsChipFilter
-                  label={`${allThoughts?.negativeThoughts?.length} Negative`}
-                  onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}
-                  show={showNegativeThoughts}
-                  color={'warning'}
-              />
-          </Stack>
+      <Card title={'Overall Tone'} key={'overall-tone-filter-card'} style={{ width: '100%' }}>
+        <Grid container spacing={1}>
+          <Grid
+            item
+            size={{
+              xs: 4,
+              sm: 4,
+              md: 4,
+              lg: 4,
+              xl: 4
+            }}
+          >
+            <ThoughtsChipFilter
+              label={`${allThoughts?.positiveThoughts?.length} Positive`}
+              onClick={() => setShowPositiveThoughts(!showPositiveThoughts)}
+              show={showPositiveThoughts}
+              color={'success'}
+              type={'overallTone'}
+              value={'positive'}
+            />
+          </Grid>
+          <Grid
+            item
+            size={{
+              xs: 4,
+              sm: 4,
+              md: 4,
+              lg: 4,
+              xl: 4
+            }}
+          >
+            <ThoughtsChipFilter
+              label={`${allThoughts?.neutralThoughts?.length} Neutral`}
+              onClick={() => setShowNeutralThoughts(!showNeutralThoughts)}
+              show={showNeutralThoughts}
+              type={'overallTone'}
+              value={'neutral'}
+            />
+          </Grid>
+          <Grid
+            item
+            size={{
+              xs: 4,
+              sm: 4,
+              md: 4,
+              lg: 4,
+              xl: 4
+            }}
+          >
+            <ThoughtsChipFilter
+              label={`${allThoughts?.negativeThoughts?.length} Negative`}
+              onClick={() => setShowNegativeThoughts(!showNegativeThoughts)}
+              show={showNegativeThoughts}
+              color={'warning'}
+              type={'overallTone'}
+              value={'negative'}
+            />
+          </Grid>
+        </Grid>
       </Card>
       {Object.entries(extract).map(([attribute, value]) => {
         return (
@@ -76,10 +111,10 @@ export const ThoughtExtractCards = (
             }}
           >
             <ThoughtExtractAttributeChips
-                attribute={attribute}
-                value={value}
-                visibleAttributes={visibleAttributes}
-                setVisibleAttributes={setVisibleAttributes}
+              attribute={attribute}
+              value={value}
+              visibleAttributes={visibleAttributes}
+              setVisibleAttributes={setVisibleAttributes}
             />
           </Card>
         );

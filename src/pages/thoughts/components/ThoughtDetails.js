@@ -4,7 +4,7 @@ import { Masonry } from '@mui/lab';
 import { ThoughtExtractAttributeChips } from './ThoughtExtracts/components/ThoughtExtractAttributeChips';
 import { Grid, Stack } from '@mui/material';
 import { DeleteItemButton } from '../../../utils/components/DeleteItemButton';
-import { Thought } from '../../../models';
+import { Thought, ThoughtAttributes } from '../../../models';
 
 /**
  * Similar thoughts
@@ -34,29 +34,17 @@ export const ThoughtDetails = ({ item }) => {
           // minHeight={200}
           sx={{ width: 'auto' }}
         >
-          {Object.entries(item?.extract || {})
-            .filter(([key, value]) => {
-              return value && value.length > 0;
-            })
-            .map(([key, value]) => {
+          {Object.values(ThoughtAttributes).map((attribute) => {
+            const value = item?.[attribute];
+            if (value && value.length > 0) {
               return (
-                <Card key={key} title={sentenceCase(key)}>
-                  <Masonry
-                    spacing={1}
-                    columns={{
-                      xs: 1,
-                      sm: 1,
-                      md: 1,
-                      lg: 1,
-                      xl: 2,
-                      xxl: 2
-                    }}
-                  >
-                    <ThoughtExtractAttributeChips value={value} attribute={key} thought={item} />
-                  </Masonry>
+                <Card key={attribute} title={sentenceCase(attribute)}>
+                  <ThoughtExtractAttributeChips value={value} attribute={attribute} thought={item} />
                 </Card>
               );
-            })}
+            }
+            return null;
+          })}
         </Masonry>
       </Grid>
 

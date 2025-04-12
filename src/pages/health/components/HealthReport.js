@@ -118,7 +118,6 @@ export const HealthReport = ({ selectedHealthReport }) => {
         const promiseResults = await Promise.allSettled(categoryPromises);
 
         for (const result of promiseResults) {
-          console.log({ result });
           if (result.status === 'fulfilled') {
             const { value } = result;
             health[value.category] = value.description;

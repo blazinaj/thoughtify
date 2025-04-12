@@ -27,7 +27,6 @@ export const fetchJournal = async ({ cadence, enqueueSnackbar }) => {
     if (foundJournal) {
       // If this Journal entry is loading, then skip it
       if (foundJournal.isLoading) {
-        console.log('journal entry is loading, skipping');
         // eslint-disable-next-line no-continue
         continue;
       }
@@ -46,7 +45,6 @@ export const fetchJournal = async ({ cadence, enqueueSnackbar }) => {
       });
 
       if (newThoughts.length === 0) {
-        console.log('no new thoughts since last journal entry, skipping');
         // eslint-disable-next-line no-continue
         continue;
       }

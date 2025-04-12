@@ -1,11 +1,11 @@
 import useSettings from '../../utils/hooks/useSettings';
 import Page from '../../utils/components/Page';
-import {Container, Grid} from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import {HealthReport} from './components/HealthReport';
-import {useDatastore} from '../../utils/hooks/useDatastore';
-import {HealthReport as HealthReportModel} from '../../models';
-import {useEffect, useState} from 'react';
+import { HealthReport } from './components/HealthReport';
+import { useDatastore } from '../../utils/hooks/useDatastore';
+import { HealthReport as HealthReportModel } from '../../models';
+import { useEffect, useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 

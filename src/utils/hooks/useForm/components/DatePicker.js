@@ -28,7 +28,6 @@ const DatePicker = ({ onChange, defaultValue, value = defaultValue, dateConfig =
         dropdownMode="select"
         value={!Number.isNaN(new Date(value).getTime()) ? new Date(value) : new Date(defaultValue)}
         onChange={(date) => {
-          console.log({ date });
           onChange && onChange(date);
         }}
         renderInput={(inputProps) => <TextField {...inputProps} variant="outlined" />}

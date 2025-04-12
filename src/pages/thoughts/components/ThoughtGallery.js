@@ -62,7 +62,7 @@ export const ThoughtGallery = ({ journalEntry, thoughts }) => {
         borderLeft: getBorder(item)
       };
     },
-    dateField: 'date',
+    dateField: 'date'
   });
 
   return <div style={{ borderRadius: '16px' }}>{accordion.display}</div>;

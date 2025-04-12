@@ -15,4 +15,29 @@ type User @model @auth(rules: [
     cognitoSub: String
     owner: String
     showOnboarding: Boolean
+    hometown: String
+    hobbies: [String]
+    journalStyle: WritingStyle
+    journalBrevity: WritingBrevity
+    biographyStyle: WritingStyle
+    biographyBrevity: WritingBrevity
+}
+
+enum WritingStyle {
+    SIMPLE,
+    FUNNY,
+    DETAILED,
+    ENGINEERING,
+    POETIC,
+    NARRATIVE,
+    REFLECTIVE,
+    WHIMSICAL,
+    SPIRITUAL,
+    MOTIVATIONAL,
+}
+
+enum WritingBrevity {
+    SHORT,
+    MEDIUM,
+    LONG,
 }

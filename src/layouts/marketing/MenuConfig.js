@@ -33,7 +33,7 @@ const menuConfig = [
         subheader: 'Information',
         items: [
           { title: 'Pricing', path: PATH_PAGE.pricing },
-          { title: 'Contact us', path: PATH_PAGE.contact },
+          { title: 'Contact us', path: PATH_PAGE.contact }
         ]
       },
       {

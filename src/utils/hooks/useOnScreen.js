@@ -16,7 +16,6 @@ import { useEffect, useState } from 'react';
  */
 
 export async function getServerSideProps() {
-  console.log('rendering now');
   return { props: {} };
 }
 

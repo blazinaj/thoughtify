@@ -17,6 +17,7 @@ import { AccountBilling, AccountGeneral, AccountNotifications } from '../../../d
 import AccountDelete from './AccountDelete';
 import AccountChangePassword from './AccountChangePassword';
 import AccountData from './AccountData';
+import AccountJournalSettings from './AccountJournalSettings';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,11 @@ export const UserAccount = () => {
       value: 'billing',
       icon: <Icon icon={roundReceipt} width={20} height={20} />,
       component: <AccountBilling />
+    },
+    {
+      value: 'journal',
+      icon: <Icon icon={'carbon:book'} width={20} height={20} />,
+      component: <AccountJournalSettings />
     },
     // {
     //   value: 'notifications',

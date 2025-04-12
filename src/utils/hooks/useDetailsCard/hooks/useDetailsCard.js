@@ -18,10 +18,6 @@ export const useDetailsCard = ({ model, itemId, fields, typename, fieldConfig = 
     enableSubscription
   });
 
-  useEffect(() => {
-    console.log(`Loading ${typename} Details: `, { itemId, item });
-  }, [itemId, item]);
-
   const list = useDetailsList({
     item,
     fields,

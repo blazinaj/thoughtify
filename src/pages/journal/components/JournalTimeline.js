@@ -50,12 +50,14 @@ export default function JournalTimeline({ cadence = JournalCadence.DAILY }) {
       {journalEntryDataStore?.items
         ?.sort((a, b) => new Date(b.date) - new Date(a.date))
         ?.map((journalEntry, index) => {
+            const isLastEntry = index === journalEntryDataStore.items.length - 1;
           return (
             <JournalTimelineItem
               key={`${journalEntry?.id}-${index}`}
               journalEntry={journalEntry}
               cadence={cadence}
               isSmall={isSmall}
+                isLastEntry={isLastEntry}
             />
           );
         })}

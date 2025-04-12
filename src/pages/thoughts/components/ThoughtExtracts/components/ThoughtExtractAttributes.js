@@ -28,9 +28,12 @@ export const ThoughtExtractAttributes = ({ insight, value: attributeValue }) => 
     >
       {Object.entries(insight)
         .filter(([key, value]) => {
-          return key !== 'timeline' && value !== null && value !== undefined && value.length > 0;
+          return key !== 'thoughts' && key !== 'timeline' && value !== null && value !== undefined && value.length > 0;
         })
         .map(([key, value]) => {
+          if (!key || !value) {
+            return null;
+          }
           return (
             <Card
               title={sentenceCase(key)}
@@ -46,12 +49,12 @@ export const ThoughtExtractAttributes = ({ insight, value: attributeValue }) => 
                     .map((item) => {
                       return (
                         <Grid item>
-                          <ThoughtExtractAttributeChip type={sentenceCase(key)} value={item} />
+                          <ThoughtExtractAttributeChip type={key} value={item} />
                         </Grid>
                       );
                     })
                 ) : (
-                  <ThoughtExtractAttributeChip type={sentenceCase(key)} value={value} />
+                  <ThoughtExtractAttributeChip type={key} value={value} />
                 )}
               </Grid>
             </Card>

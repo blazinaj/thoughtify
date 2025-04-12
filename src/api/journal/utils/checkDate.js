@@ -14,5 +14,5 @@ export const checkDate = (date1, date2, cadence) => {
     return isSameYear(date1, date2);
   }
 
-    return false;
+  return false;
 };

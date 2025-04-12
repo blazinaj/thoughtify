@@ -4,13 +4,10 @@ type Thought @model @auth(rules: [{allow: owner}]) {
     input: String
     output: String
     extract: AWSJSON
-    attributes: ThoughtAttributes
     journalEntries: [JournalEntry] @manyToMany(relationName: "JournalEntryThoughts")
     healthReports: [HealthReport] @manyToMany(relationName: "HealthReportThoughts")
     biographies: [Biography] @manyToMany(relationName: "BiographyThoughts")
-}
 
-type ThoughtAttributes {
     overallTone: String
     people: [String]
     projects: [String]
@@ -20,4 +17,16 @@ type ThoughtAttributes {
     questions: [String]
     places: [String]
     events: [String]
+}
+
+enum ThoughtAttributes {
+    overallTone,
+    people,
+    projects,
+    categories,
+    emotions,
+    reminders,
+    questions,
+    places,
+    events
 }

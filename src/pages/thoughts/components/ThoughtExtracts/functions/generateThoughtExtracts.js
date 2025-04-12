@@ -20,23 +20,19 @@ export const generateThoughtExtracts = async ({
 
   // fetches all thoughts and aggregates the extract attributes, skips empty attributes, and removes duplicates
   thoughts.forEach((thought) => {
-    const extract = thought?.extract;
-
-    if (extract) {
-      attributes.forEach((attribute) => {
-        if (Array.isArray(extract[attribute])) {
-          if (!extracts[attribute]) {
-            extracts[attribute] = [];
-          }
-
-          extract[attribute].forEach((item) => {
-            if (!extracts[attribute].includes(item)) {
-              extracts[attribute].push(item);
-            }
-          });
+    attributes.forEach((attribute) => {
+      if (Array.isArray(thought[attribute])) {
+        if (!extracts[attribute]) {
+          extracts[attribute] = [];
         }
-      });
-    }
+
+        thought[attribute].forEach((item) => {
+          if (!extracts[attribute].includes(item)) {
+            extracts[attribute].push(item);
+          }
+        });
+      }
+    });
   });
 
   return extracts;

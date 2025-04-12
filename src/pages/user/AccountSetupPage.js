@@ -88,7 +88,6 @@ export const AccountSetupPage = ({ setupUserAccount, cognitoUser, onComplete }) 
   useEffect(() => {
     if (isComplete) {
       setupUserAccount({ cognitoUser, userData }).then((result) => {
-        console.log({ cognitoUser, userData, result });
         setTimeout(() => {
           onComplete && onComplete(result);
         }, 1800);
