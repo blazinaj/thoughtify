@@ -1,8 +1,7 @@
-import { useDatastore } from '../../../utils/hooks/useDatastore';
-import { Thought, ThoughtAttributes } from '../../../models';
-import { useEffect, useMemo, useState } from 'react';
-import { useThoughtExtractData } from '../components/ThoughtExtracts/hooks/useThoughtExtractData';
-import { DataStore } from '@aws-amplify/datastore';
+import {useDatastore} from '../../../utils/hooks/useDatastore';
+import {Thought, ThoughtAttributes} from '../../../models';
+import {useEffect, useMemo, useState} from 'react';
+import {useThoughtExtractData} from '../components/ThoughtExtracts/hooks/useThoughtExtractData';
 
 /**
  * Custom hook to manage the state of the thoughts page.
@@ -29,26 +28,6 @@ export const useThoughtsState = ({ journalEntry }) => {
     enableSubscription: true,
     predicate: getPredicate()
   });
-
-  // temporarily convert the 'extract' AWSJSON field to the attribute field
-  useEffect(() => {
-    if (thoughtsDatastore?.items) {
-      for (const thought of thoughtsDatastore.items) {
-        DataStore.save(
-          Thought.copyOf(thought, (updated) => {
-            for (const attribute of Object.values(ThoughtAttributes)) {
-              if (thought.extract?.[attribute] && thought[attribute] !== thought.extract?.[attribute]) {
-                updated[attribute] = thought.extract?.[attribute];
-              }
-            }
-            return updated;
-          })
-        ).then((thouht) => {
-          console.log('transformed thought', thouht);
-        });
-      }
-    }
-  }, [thoughtsDatastore?.items]);
 
   const [allThoughts, setAllThoughts] = useState({
     positiveThoughts: [],
