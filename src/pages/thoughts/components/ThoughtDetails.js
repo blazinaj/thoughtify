@@ -45,29 +45,6 @@ export const ThoughtDetails = ({ item }) => {
             }
             return null;
           })}
-          {/*{Object.entries(item?.extract || {})*/}
-          {/*  .filter(([key, value]) => {*/}
-          {/*    return value && value.length > 0;*/}
-          {/*  })*/}
-          {/*  .map(([key, value]) => {*/}
-          {/*    return (*/}
-          {/*      <Card key={key} title={sentenceCase(key)}>*/}
-          {/*        <Masonry*/}
-          {/*          spacing={1}*/}
-          {/*          columns={{*/}
-          {/*            xs: 1,*/}
-          {/*            sm: 1,*/}
-          {/*            md: 1,*/}
-          {/*            lg: 1,*/}
-          {/*            xl: 2,*/}
-          {/*            xxl: 2*/}
-          {/*          }}*/}
-          {/*        >*/}
-          {/*          <ThoughtExtractAttributeChips value={value} attribute={key} thought={item} />*/}
-          {/*        </Masonry>*/}
-          {/*      </Card>*/}
-          {/*    );*/}
-          {/*  })}*/}
         </Masonry>
       </Grid>
 

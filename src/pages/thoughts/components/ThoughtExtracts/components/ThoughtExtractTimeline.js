@@ -6,7 +6,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
-import { Typography } from '@mui/material';
+import {Link, Typography} from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import * as React from 'react';
 
@@ -59,7 +59,9 @@ export const ThoughtExtractTimeline = ({ insight }) => {
                 {isSmall && (
                   <Typography color="textSecondary">{formatDate(timelineEntry.timestamp, 'DAILY')}</Typography>
                 )}
-                {timelineEntry?.summary}
+                  <Link href={`/thoughts/${timelineEntry?.id}`} underline="hover" color={'inherit'}>
+                      {timelineEntry?.summary}
+                  </Link>
               </TimelineContent>
             </TimelineItem>
           );

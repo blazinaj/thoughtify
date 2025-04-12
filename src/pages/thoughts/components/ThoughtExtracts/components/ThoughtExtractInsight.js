@@ -26,13 +26,6 @@ export const ThoughtExtractInsight = ({ type, value }) => {
 
   const getRelatedThoughts = async (type, value) => {
     const thoughtsDatastore = await DataStore.query(Thought, (p) => p[type].contains(value));
-
-    //       Example Output:
-    //       "{'timeline': [{'timestamp': '...', 'summary': "..."}], 'relatedThoughts': [...], "relatedPeople": ['taylor', ...], "relatedProjects": [...], "relatedCategories": [...], "relatedReminders": [...], "relatedQuestions": [...] }"
-    //
-
-    // remove duplicates and null values
-    // de-duplicate
     const relatedPeople = thoughtsDatastore
       .map((item) => item.people)
       .flat()
@@ -75,6 +68,7 @@ export const ThoughtExtractInsight = ({ type, value }) => {
       .filter((item, index, self) => self.indexOf(item) === index);
     const timeline = thoughtsDatastore.map((item) => {
       return {
+        id: item.id,
         timestamp: item.createdAt,
         summary: item.input
       };
@@ -100,7 +94,6 @@ export const ThoughtExtractInsight = ({ type, value }) => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error(err);
         setIsLoading(false);
         setError(err);
       });
