@@ -19,7 +19,7 @@ export const JournalTimelineItem = ({ journalEntry, cadence, isSmall }) => {
     icon: 'carbon:book',
     title: 'Journal Entry',
     children: <JournalTimelineItemDetails item={journalEntry} />,
-      width: '80vw',
+    width: '80vw'
   });
 
   const [guid] = useGUID();

@@ -47,7 +47,7 @@ export const useDataAccordion = ({
   sortFunction = (a, b) => a[titleField]?.localeCompare(b[titleField]),
   items: itemsInit,
   accordionStyle = {},
-                                   dateField = 'createdAt'
+  dateField = 'createdAt'
 }) => {
   const classes = useStyles();
 

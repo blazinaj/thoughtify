@@ -4,7 +4,7 @@ import Card from '../../../utils/components/Card';
 import LoadingScreen from '../../../demo/components/LoadingScreen';
 import { generateBiography } from '../../../api/biography/generateBiography';
 import { BiographySection } from './BiographySection';
-import {generateId} from "../../../utils/functions/generateId";
+import { generateId } from '../../../utils/functions/generateId';
 
 /**
  * BiographyDisplay component. Fetches the biography from the API and displays it.

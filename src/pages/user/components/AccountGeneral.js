@@ -3,7 +3,7 @@ import { useSnackbar } from 'notistack';
 import { useCallback } from 'react';
 import { Form, FormikProvider, useFormik } from 'formik';
 // material
-import { Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField } from '@mui/material';
+import { Card, FormControlLabel, FormHelperText, Grid, Stack, Switch, TextField, Typography } from '@mui/material';
 // hooks
 import useIsMountedRef from '../../../utils/hooks/useIsMountedRef';
 import { UploadAvatar } from '../../../demo/components/upload';
@@ -12,6 +12,7 @@ import { UploadAvatar } from '../../../demo/components/upload';
 import { useUserContext } from '../../../contexts/UserContext';
 import { DataStore } from '@aws-amplify/datastore';
 import { User } from '../../../models';
+import { fData } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -89,21 +90,21 @@ export default function AccountGeneral() {
                 onDrop={handleDrop}
                 error={Boolean(touched.photoURL && errors.photoURL)}
                 disabled={true} // until custom profile images are supported
-                // caption={
-                //   <Typography
-                //     variant="caption"
-                //     sx={{
-                //       mt: 2,
-                //       mx: 'auto',
-                //       display: 'block',
-                //       textAlign: 'center',
-                //       color: 'text.secondary'
-                //     }}
-                //   >
-                //     Allowed *.jpeg, *.jpg, *.png, *.gif
-                //     <br /> max size of {fData(3145728)}
-                //   </Typography>
-                // }
+                caption={
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      mt: 2,
+                      mx: 'auto',
+                      display: 'block',
+                      textAlign: 'center',
+                      color: 'text.secondary'
+                    }}
+                  >
+                    Allowed *.jpeg, *.jpg, *.png, *.gif
+                    <br /> max size of {fData(3145728)}
+                  </Typography>
+                }
               />
 
               <FormHelperText error sx={{ px: 2, textAlign: 'center' }}>

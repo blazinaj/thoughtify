@@ -1,4 +1,4 @@
-import { JournalEntryThoughts, Thought } from '../../../models';
+import { JournalEntryThoughts, Thought, ThoughtAttributes } from '../../../models';
 import { DataStore } from '@aws-amplify/datastore';
 import ThoughtInputField from './ThoughtInputField';
 import { generateThoughtExtract } from '../../../api/thoughts/generateThoughtExtract';
@@ -30,11 +30,21 @@ export const ThoughtInput = ({ journalEntry }) => {
       );
     }
 
-    const extract = await generateThoughtExtract(newThought);
+    let extract = await generateThoughtExtract(newThought);
+
+    if (typeof extract === 'string') {
+      extract = JSON.parse(extract);
+    }
 
     await DataStore.save(
       Thought.copyOf(newThought, (updated) => {
-        updated.extract = extract;
+        for (const attribute of Object.values(ThoughtAttributes)) {
+          const attributeValue = extract?.[attribute];
+          if (extract?.[attribute]) {
+            updated[attribute] = attributeValue;
+          }
+        }
+        return updated;
       })
     );
   };
@@ -58,7 +68,7 @@ export const ThoughtInput = ({ journalEntry }) => {
         // set the max date to the last day of the week of the 'date' param, or today, whichever is earlier
         maxDate.setDate(maxDate.getDate() + (6 - maxDate.getDay()));
         if (maxDate > todayDate) {
-            maxDate.setDate(todayDate.getDate());
+          maxDate.setDate(todayDate.getDate());
         }
 
         break;
@@ -69,7 +79,7 @@ export const ThoughtInput = ({ journalEntry }) => {
         maxDate.setMonth(maxDate.getMonth() + 1);
         maxDate.setDate(0);
         if (maxDate > todayDate) {
-            maxDate.setDate(todayDate.getDate());
+          maxDate.setDate(todayDate.getDate());
         }
         break;
       case 'YEARLY':
@@ -81,7 +91,7 @@ export const ThoughtInput = ({ journalEntry }) => {
         maxDate.setMonth(0);
         maxDate.setDate(0);
         if (maxDate > todayDate) {
-            maxDate.setDate(todayDate.getDate());
+          maxDate.setDate(todayDate.getDate());
         }
         break;
       default:
@@ -91,12 +101,12 @@ export const ThoughtInput = ({ journalEntry }) => {
     // default date is the journal date, or today if today is in the date range
     const defaultDate = new Date(date);
     if (todayDate >= minDate && todayDate <= maxDate) {
-        defaultDate.setDate(todayDate.getDate());
+      defaultDate.setDate(todayDate.getDate());
     }
     return {
       minDate,
       maxDate,
-        defaultValue: defaultDate
+      defaultValue: defaultDate
     };
   };
 
@@ -105,7 +115,7 @@ export const ThoughtInput = ({ journalEntry }) => {
       onSubmit={onSubmit}
       showDateSelector={!!journalEntry}
       dateConfig={{
-        ...getDates(journalEntry?.date, journalEntry?.cadence),
+        ...getDates(journalEntry?.date, journalEntry?.cadence)
       }}
     />
   );

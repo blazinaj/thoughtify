@@ -1,7 +1,8 @@
-import {useDatastore} from '../../../utils/hooks/useDatastore';
-import {Thought} from '../../../models';
-import {useEffect, useMemo, useState} from 'react';
-import {useThoughtExtractData} from "../components/ThoughtExtracts/hooks/useThoughtExtractData";
+import { useDatastore } from '../../../utils/hooks/useDatastore';
+import { Thought, ThoughtAttributes } from '../../../models';
+import { useEffect, useMemo, useState } from 'react';
+import { useThoughtExtractData } from '../components/ThoughtExtracts/hooks/useThoughtExtractData';
+import { DataStore } from '@aws-amplify/datastore';
 
 /**
  * Custom hook to manage the state of the thoughts page.
@@ -29,11 +30,32 @@ export const useThoughtsState = ({ journalEntry }) => {
     predicate: getPredicate()
   });
 
+  // temporarily convert the 'extract' AWSJSON field to the attribute field
+  useEffect(() => {
+    if (thoughtsDatastore?.items) {
+      console.log('transforming thoughts');
+      for (const thought of thoughtsDatastore.items) {
+        DataStore.save(
+          Thought.copyOf(thought, (updated) => {
+            for (const attribute of Object.values(ThoughtAttributes)) {
+              if (thought.extract?.[attribute] && thought[attribute] !== thought.extract?.[attribute]) {
+                updated[attribute] = thought.extract?.[attribute];
+              }
+            }
+            return updated;
+          })
+        ).then((thouht) => {
+          console.log('transformed thought', thouht);
+        });
+      }
+    }
+  }, [thoughtsDatastore?.items]);
+
   const [allThoughts, setAllThoughts] = useState({
     positiveThoughts: [],
     negativeThoughts: [],
     neutralThoughts: []
-  })
+  });
 
   /**
    * Extracts is an object with attributes as keys and values as arrays of values
@@ -48,7 +70,7 @@ export const useThoughtsState = ({ journalEntry }) => {
     if (!extract) {
       return {};
     }
-    const newAttributes = {}
+    const newAttributes = {};
     for (const [key, values] of Object.entries(extract)) {
       for (const value of values) {
         // uses key-value to avoid potential conflicts. Such as an emotion named 'happy' and a person named 'happy'
@@ -57,9 +79,9 @@ export const useThoughtsState = ({ journalEntry }) => {
       }
     }
     return newAttributes;
-  }
+  };
 
-  const [visibleAttributes, setVisibleAttributes] = useState(() => initializeVisibleAttributes(extract) || {})
+  const [visibleAttributes, setVisibleAttributes] = useState(() => initializeVisibleAttributes(extract) || {});
 
   // Initializes the visible attributes based on the extract
   // useEffect(() => {
@@ -92,54 +114,42 @@ export const useThoughtsState = ({ journalEntry }) => {
       // and the overall tone of the thought
 
       const visibleThoughts = thoughtsDatastore?.items?.filter((thought) => {
-        const thoughtExtract = thought?.extract;
-        if (thoughtExtract) {
-          // check if the thought is visible based on the attributes
-          // extract ex: { emotions: ['happy', 'sad'], people: ['bob'], overallTone: 'positive' }
-          let isVisible = true;
+        // check if the thought is visible based on the attributes
+        // extract ex: { emotions: ['happy', 'sad'], people: ['bob'], overallTone: 'positive' }
+        let isVisible = true;
 
+        for (const attribute of Object.values(ThoughtAttributes)) {
           // key is the category and values are the present attribute values
           // ex: { emotions: ['happy', 'sad'] }
-          for (const [key, values] of Object.entries(thoughtExtract)) {
+          // attribute values like ['happy', 'sad']
+          const values = thought[attribute];
+          const attributeValues = Array.isArray(values) ? values : [values];
 
-
-            // attribute values like ['happy', 'sad']
-            const attributeValues = Array.isArray(values) ? values : [values];
-
-            console.log({key, values, attributeValues})
-
-
-            // check if the attribute is in the visible attributes
-            for (const value of attributeValues) {
-              // key ex: 'emotions-happy'
-              const keyId = `${key}-${value}`;
-              // if the key is false in visible attributes, set isVisible to false
-              if (visibleAttributes[keyId] === false) {
-                isVisible = false;
-              }
+          // check if the attribute is in the visible attributes
+          for (const value of attributeValues) {
+            // key ex: 'emotions-happy'
+            const keyId = `${attribute}-${value}`;
+            // if the key is false in visible attributes, set isVisible to false
+            if (visibleAttributes[keyId] === false) {
+              isVisible = false;
             }
           }
-
-          return isVisible;
         }
-        return true;
-      })
 
-      console.log({visibleThoughts})
+        return isVisible;
+      });
 
       setAllThoughts({
         positiveThoughts: visibleThoughts?.filter((thought) => {
-          return thought?.extract ? thought?.extract?.overallTone === 'positive' : false;
+          return thought?.overallTone === 'positive';
         }),
         negativeThoughts: visibleThoughts?.filter((thought) => {
-          return thought?.extract ? thought?.extract?.overallTone === 'negative' : false;
+          return thought?.overallTone === 'negative';
         }),
         neutralThoughts: visibleThoughts?.filter((thought) => {
-            return thought?.extract
-                ? thought?.extract?.overallTone !== 'positive' && thought?.extract?.overallTone !== 'negative'
-                : true;
+          return thought?.overallTone !== 'positive' && thought?.overallTone !== 'negative';
         })
-      })
+      });
     }
   }, [thoughtsDatastore?.items, visibleAttributes]);
 
@@ -149,12 +159,7 @@ export const useThoughtsState = ({ journalEntry }) => {
       ...(showNegativeThoughts ? allThoughts.negativeThoughts : []),
       ...(showNeutralThoughts ? allThoughts.neutralThoughts : [])
     ];
-  }, [
-    showPositiveThoughts,
-    showNegativeThoughts,
-    showNeutralThoughts,
-    allThoughts
-  ]);
+  }, [showPositiveThoughts, showNegativeThoughts, showNeutralThoughts, allThoughts]);
 
   return {
     allThoughts,
@@ -167,6 +172,6 @@ export const useThoughtsState = ({ journalEntry }) => {
     showNeutralThoughts,
     setShowNeutralThoughts,
     visibleAttributes,
-    setVisibleAttributes,
+    setVisibleAttributes
   };
 };
