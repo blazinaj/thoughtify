@@ -12,7 +12,7 @@ import { Typography } from '@mui/material';
 import * as React from 'react';
 import { JournalTimelineItemDetails } from './JournalTimelineItemDetails';
 
-export const JournalTimelineItem = ({ journalEntry, cadence, isSmall }) => {
+export const JournalTimelineItem = ({ journalEntry, cadence, isSmall, isLastEntry }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const modal = useModal({
@@ -32,7 +32,8 @@ export const JournalTimelineItem = ({ journalEntry, cadence, isSmall }) => {
       sx={{
         borderRadius: '16px',
         cursor: 'pointer',
-        boxShadow: isHovered ? 5 : undefined
+        boxShadow: isHovered ? 5 : undefined,
+          padding: '8px',
       }}
       onClick={() => {
         !modal.isOpen && modal.setIsOpen(true);
@@ -46,7 +47,11 @@ export const JournalTimelineItem = ({ journalEntry, cadence, isSmall }) => {
 
       <TimelineSeparator>
         <TimelineDot />
-        <TimelineConnector />
+          {
+            !isLastEntry && (
+                  <TimelineConnector />
+              )
+          }
       </TimelineSeparator>
       <TimelineContent>
         {isSmall && <Typography color="textSecondary">{formatDate(journalEntry.date, cadence)}</Typography>}

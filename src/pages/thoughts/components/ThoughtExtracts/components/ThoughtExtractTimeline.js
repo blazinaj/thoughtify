@@ -36,7 +36,8 @@ export const ThoughtExtractTimeline = ({ insight }) => {
     >
       {insight.timeline
         ?.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-        ?.map((timelineEntry) => {
+        ?.map((timelineEntry, index) => {
+            const isLastEntry = index === insight.timeline.length - 1;
           return (
             <TimelineItem
               key={`journal-timeline-entry-${timelineEntry.timestamp}`}
@@ -53,7 +54,11 @@ export const ThoughtExtractTimeline = ({ insight }) => {
 
               <TimelineSeparator>
                 <TimelineDot />
-                <TimelineConnector />
+                  {
+                    !isLastEntry && (
+                          <TimelineConnector />
+                      )
+                  }
               </TimelineSeparator>
               <TimelineContent>
                 {isSmall && (
