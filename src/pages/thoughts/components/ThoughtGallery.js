@@ -12,6 +12,7 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import * as React from "react";
 import { Link as RouterLink } from 'react-router-dom';
+import {useMemo} from "react";
 
 
 /**
@@ -78,25 +79,40 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
 
   const isSmall = true;
 
-  // by the day
-  const groupThoughtsByDate = (thoughts) => {
+    const groupThoughtsByDate = (thoughts) => {
 
-    const groupedThoughts = {};
-    thoughts.sort(
-        (a, b) => (b?.date || b?.createdAt)?.localeCompare(a?.date || a?.createdAt)
-    ).forEach((thought) => {
-      const date = thought.date.split('T')[0]; // Get the date part
-      if (!groupedThoughts[date]) {
-        groupedThoughts[date] = [];
-      }
-      groupedThoughts[date].push(thought);
-    });
-    console.log({groupedThoughts})
-    return groupedThoughts;
-  }
+        const groupedThoughts = {};
+        thoughts.sort(
+            (a, b) => (b?.date || b?.createdAt)?.localeCompare(a?.date || a?.createdAt)
+        ).forEach((thought) => {
+            const thoughtDate = thought?.date || thought?.createdAt;
+            console.log({thoughtDate, thought})
+            if (!thoughtDate) {
+                return;
+            }
+            // handle .split is not a function
+            if (typeof thoughtDate !== 'string') {
+                return;
+            }
+            const date = thoughtDate.split('T')[0]; // Get the date part
+            if (!groupedThoughts[date]) {
+                groupedThoughts[date] = [];
+            }
+            groupedThoughts[date].push(thought);
+        })
+        console.log({groupedThoughts})
+        return groupedThoughts;
+    }
+
+
+    const groupedThoughts = useMemo(() => {
+    return groupThoughtsByDate(thoughts);
+    }, [thoughts, journalEntry?.id]) // only re-run when thoughts or journalEntry changes)
+
+  // by the day
 
     // Group thoughts by date
-    const groupedThoughts = groupThoughtsByDate(thoughts);
+    // const groupedThoughts = groupThoughtsByDate(thoughts);
 
   return (
       <Timeline

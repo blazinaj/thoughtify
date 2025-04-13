@@ -1,0 +1,15 @@
+type Task @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    date: AWSDateTime
+    name: String!
+    description: String
+    status: TaskStatus
+    thoughts: [Thought] @manyToMany(relationName: "TaskThoughts")
+    projects: [Project] @manyToMany(relationName: "ProjectTasks")
+}
+
+enum TaskStatus {
+    TODO
+    IN_PROGRESS
+    DONE
+}
