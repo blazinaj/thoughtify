@@ -2,6 +2,7 @@ import { useModal } from '../../../../../utils/hooks/useModal';
 import { ThoughtExtractInsight } from './ThoughtExtractInsight';
 import { Chip } from '@mui/material';
 import { sentenceCase } from 'change-case';
+import { Link } from 'react-router-dom';
 
 /**
  * Displays the value of a Thought Extract Attribute as a chip that opens a modal
@@ -22,14 +23,20 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
   }
 
   const title = `${sentenceCase(type)}: ${value}`;
-  const button = <Chip title={sentenceCase(type)} label={sentenceCase(value)} size={'small'} />;
-  const children = <ThoughtExtractInsight type={type} value={value} />;
+  const button = <Chip
+      title={sentenceCase(type)}
+      component={Link}
+      sx={{
+        cursor: 'pointer',
+      }}
+      label={sentenceCase(value)} size={'small'} to={`/thoughts/${type}/${value}`} />;
+  // const children = <ThoughtExtractInsight type={type} value={value} />;
 
-  const modal = useModal({
-    title,
-    children,
-    button
-  });
+  // const modal = useModal({
+  //   title,
+  //   children,
+  //   button
+  // });
 
-  return modal.modalButton;
+  return button
 };
