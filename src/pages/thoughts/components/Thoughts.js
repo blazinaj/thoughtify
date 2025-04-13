@@ -1,8 +1,10 @@
-import { Grid } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import { ThoughtInput } from './ThoughtInput';
 import { ThoughtGallery } from './ThoughtGallery';
 import { ThoughtExtracts } from './ThoughtExtracts/components/ThoughtExtracts';
 import { useThoughtsState } from '../hooks/useThoughtsState';
+import {useState} from "react";
+import {getIcon} from "@iconify/react";
 
 /**
  * Displays the Thoughts page for the user.
@@ -25,6 +27,9 @@ const Thoughts = ({ journalEntry }) => {
     setVisibleAttributes
   } = useThoughtsState({ journalEntry });
 
+  // show filters by default on xl, lg, md and hide on sm and xs
+  const [showFilters, setShowFilters] = useState(() => window.innerWidth > 900);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} lg={12}>
@@ -35,16 +40,57 @@ const Thoughts = ({ journalEntry }) => {
           }
         />
       </Grid>
+        <Grid item xs={12} lg={12}
+              sx={{
+                  marginTop: '-10px',
+                  marginBottom: '-125px',
+              }}>
 
-      <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
+            <Button
+                variant="subtle"
+                onClick={() => setShowFilters(!showFilters)}
+                startIcon={getIcon(showFilters ? 'ic:baseline-filter-list' : 'ic:baseline-filter-list-off')}
+                sx={{
+                    float: 'right',
+                    zIndex: 999,
+                }}
+                size={'small'}
+            >
+                {showFilters ? 'Hide Filters' : 'Show Filters'}
+            </Button>
+        </Grid>
+
+      <Grid item xs={12} sm={12} md={showFilters ? 8 : 0} lg={showFilters ? 8 : 0} xl={showFilters ? 8 : 0}
+
+            order={{
+                xs: 4,
+                sm: 4,
+                md: 3,
+                lg: 3,
+                xl: 3
+            }}
+      >
         <ThoughtGallery
           journalEntry={journalEntry}
           data-intro={'View your Thoughts here. You can edit them, delete them, or even add a new one!'}
           thoughts={thoughts}
+          extract={extract}
         />
       </Grid>
 
-      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+      <Grid item xs={12} sm={12} md={showFilters ? 4 : 0} lg={showFilters ? 4 : 0} xl={showFilters ? 4 : 0}
+            sx={{
+                marginTop: '50px',
+                display: showFilters ? undefined : 'none',
+            }}
+            order={{
+                xs: 3,
+                sm: 3,
+                md: 4,
+                lg: 4,
+                xl: 4
+            }}
+      >
         <ThoughtExtracts
           journalEntry={journalEntry}
           data-intro={

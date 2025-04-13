@@ -147,7 +147,7 @@ export const ThoughtExtractInsight = ({ type, value }) => {
             Related Insights
           </Typography>
 
-          <ThoughtExtractAttributes insight={insight} value={value} />
+          <ThoughtExtractAttributes insight={insight} value={value} type={type} />
         </Grid>
       </Grid>
     </div>

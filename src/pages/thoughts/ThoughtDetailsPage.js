@@ -1,5 +1,5 @@
 import Page from '../../utils/components/Page';
-import { Container } from '@mui/material';
+import {Container, Grid, Stack} from '@mui/material';
 import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
 import { ThoughtDetails } from './components/ThoughtDetails';
@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 import { useDatastore } from '../../utils/hooks/useDatastore';
 import { Thought } from '../../models';
 import Card from '../../utils/components/Card';
+import { ThoughtExtractAttributeChip } from './components/ThoughtExtracts/components/ThoughtExtractAttributeChip';
+import {DeleteItemButton} from "../../utils/components/DeleteItemButton";
 
 /**
  * Displays the details of a particular Thought.
@@ -27,7 +29,22 @@ const ThoughtDetailsPage = () => {
     <Page title="Thoughtify">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading={new Date(datastore?.item?.date).toLocaleString()}
+          heading='Thought Details'
+          icon={'mingcute:thought-line'}
+          action={      <Grid>
+              <Stack
+                  direction={'column'}
+                  spacing={2}
+                  justifyContent="flex-end"
+                  alignItems="flex-end"
+                  sx={{
+                      height: '100%',
+                      marginRight: '-2em'
+                  }}
+              >
+                  <DeleteItemButton model={Thought} item={datastore.item} />
+              </Stack>
+          </Grid>}
           links={[
             {
               href: '/thoughts',
@@ -35,12 +52,15 @@ const ThoughtDetailsPage = () => {
             },
             {
               href: `/thoughts/${id}`,
-              name: 'Thought Details'
+              name: new Date(datastore?.item?.date).toLocaleString()
             }
           ]}
         />
         <Card
           title={'Thought'}
+          actions={[
+              <ThoughtExtractAttributeChip type={'overallTone'} value={datastore?.item?.overallTone}/>
+          ]}
           sx={{
             mb: 2
           }}
