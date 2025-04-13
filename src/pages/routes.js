@@ -73,7 +73,16 @@ export default function Router() {
         ),
         children: [
           { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
-          { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
+            {path: 'thoughts/categories/:id', exact: true, element: <ThoughtsPage />},
+            {path: 'thoughts/projects/:id', exact: true, element: <ThoughtsPage />},
+            {path: 'thoughts/people/:id', exact: true, element: <ThoughtsPage />},
+            {path: 'thoughts/places/:id', exact: true, element: <ThoughtsPage />},
+            {path: 'thoughts/emotions/:id', exact: true, element: <ThoughtsPage />},
+            // reminders, questions, and tasks
+            {path: 'thoughts/reminders/:id', exact: true, element: <ThoughtsPage />},
+            {path: 'thoughts/questions/:id', exact: true, element: <ThoughtsPage />},
+            {path: 'thoughts/tasks/:id', exact: true, element: <ThoughtsPage />},
+            { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
           { path: 'journal', element: <JournalPage /> },
           { path: 'biography', element: <BiographyPage /> },
           { path: 'user/*', element: <UserAccountPage /> },

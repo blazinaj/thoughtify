@@ -41,6 +41,7 @@ const Thoughts = ({ journalEntry }) => {
           journalEntry={journalEntry}
           data-intro={'View your Thoughts here. You can edit them, delete them, or even add a new one!'}
           thoughts={thoughts}
+          extract={extract}
         />
       </Grid>
 

@@ -36,6 +36,10 @@ export const ThoughtDetails = ({ item }) => {
         >
           {Object.values(ThoughtAttributes).map((attribute) => {
             const value = item?.[attribute];
+            const excludedAttributes = ['overallTone']
+            if (excludedAttributes.includes(attribute)) {
+                return null;
+            }
             if (value && value.length > 0) {
               return (
                 <Card key={attribute} title={sentenceCase(attribute)}>
@@ -46,21 +50,6 @@ export const ThoughtDetails = ({ item }) => {
             return null;
           })}
         </Masonry>
-      </Grid>
-
-      <Grid>
-        <Stack
-          direction={'column'}
-          spacing={2}
-          justifyContent="flex-end"
-          alignItems="flex-end"
-          sx={{
-            height: '100%',
-            marginRight: '-2em'
-          }}
-        >
-          <DeleteItemButton model={Thought} item={item} />
-        </Stack>
       </Grid>
     </Grid>
   );
