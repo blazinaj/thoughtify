@@ -126,7 +126,7 @@ export const useDatastore = ({
       // Handle the query
       handleQuery();
     }
-  }, [JSON.stringify({ itemId, predicate, itemsInit })]);
+  }, [JSON.stringify({ itemId, itemsInit }), predicate]);
 
   return {
     items,

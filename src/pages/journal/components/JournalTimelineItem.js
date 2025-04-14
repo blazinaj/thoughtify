@@ -8,9 +8,10 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
-import { Typography } from '@mui/material';
+import {Card, CardActionArea, Stack, Typography} from '@mui/material';
 import * as React from 'react';
 import { JournalTimelineItemDetails } from './JournalTimelineItemDetails';
+import {Link as RouterLink} from "react-router-dom";
 
 export const JournalTimelineItem = ({ journalEntry, cadence, isSmall, isLastEntry }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -54,10 +55,28 @@ export const JournalTimelineItem = ({ journalEntry, cadence, isSmall, isLastEntr
           }
       </TimelineSeparator>
       <TimelineContent>
-        {isSmall && <Typography color="textSecondary">{formatDate(journalEntry.date, cadence)}</Typography>}
-        {journalEntry?.isLoading && 'Loading..'}
-        {journalEntry?.entry}
+          <Stack spacing={2}>
+
+          {isSmall && <Typography color="textSecondary">{formatDate(journalEntry.date, cadence)}</Typography>}
+              <Card>
+              <CardActionArea
+                  // to={`/thoughts/${thought?.id}`}
+                  sx={{p: 1, pr: 2, pl: 2}}
+                  component={RouterLink}
+                  // to="/questions"
+              >
+                  {/*just the time from thought.date*/}
+                  <Stack spacing={2}>
+                      {journalEntry?.isLoading && 'Loading..'}
+                      {journalEntry?.entry}
+
+                  </Stack>
+              </CardActionArea>
+          </Card>
+
+
         {modal.modal}
+            </Stack>
       </TimelineContent>
     </TimelineItem>
   );

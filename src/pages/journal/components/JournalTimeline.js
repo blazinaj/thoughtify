@@ -29,7 +29,7 @@ export default function JournalTimeline({ cadence = JournalCadence.DAILY }) {
     cadence
   });
 
-  const { isSmall } = useBreakpoints();
+  const isSmall = true
 
   if (isLoading) {
     return <LoadingScreen sx={{ marginTop: '15vh' }} />;
