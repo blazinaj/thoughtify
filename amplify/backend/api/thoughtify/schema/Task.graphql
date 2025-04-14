@@ -9,7 +9,7 @@ type Task @model @auth(rules: [{allow: owner}]) {
 }
 
 enum TaskStatus {
-    TODO
+    NOT_STARTED
     IN_PROGRESS
-    DONE
+    COMPLETED
 }
