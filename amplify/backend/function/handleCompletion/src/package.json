@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "aws-sdk": "latest",
-    "openai": "3.2.1"
+    "openai": "^4.94.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.92"
