@@ -4,9 +4,9 @@ import { createJournalTimeline, formatDate } from './createJournalTimeline';
 import { handleJournalEntryCompletion } from './handleJournalEntryCompletion';
 import { checkDate } from './utils/checkDate';
 
-export const fetchJournal = async ({ cadence, enqueueSnackbar }) => {
+export const fetchJournal = async ({ cadence, enqueueSnackbar, thoughts }) => {
   // Fetch All Thoughts
-  const thoughts = await DataStore.query(Thought);
+  // const thoughts = await DataStore.query(Thought);
 
   // Fetch All existing Journal Entries for the selected Cadence
   const journalEntries = await DataStore.query(JournalEntry, (entry) => entry.cadence.eq(cadence));

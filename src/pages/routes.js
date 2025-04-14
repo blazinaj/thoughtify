@@ -83,8 +83,13 @@ export default function Router() {
             {path: 'thoughts/tasks/:id', exact: true, element: <TaskDetailsPage />},
             {path: 'thoughts/events/:id', exact: true, element: <EventDetailsPage />},
             {path: 'thoughts/overallTone/:id', exact: true, element: <OverallToneDetailsPage />},
+            {path: 'thoughts/journals/:id', exact: true, element: <JournalDetailsPage />},
             { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
-          { path: 'journal', element: <JournalPage /> },
+            {path: 'projects', exact: true, element: <ProjectsPage />},
+            {path: 'projects/:id', exact: true, element: <ProjectDetailsPage />},
+
+          { path: 'journal', element: <ThoughtsPage /> },
+            {path: 'journal/:id', exact: true, element: <CategoryDetailsPage />},
           { path: 'biography', element: <BiographyPage /> },
           { path: 'user/*', element: <UserAccountPage /> },
           { path: 'health', element: <HealthPage /> }
@@ -117,6 +122,7 @@ const ThoughtsPage = Loadable(lazy(() => import('./thoughts/ThoughtsPage')));
 const PlaceDetailsPage = Loadable(lazy(() => import('./thoughts/PlaceDetailsPage')));
 const ThoughtDetailsPage = Loadable(lazy(() => import('./thoughts/ThoughtDetailsPage')));
 const ProjectDetailsPage = Loadable(lazy(() => import('./thoughts/ProjectDetailsPage')));
+const ProjectsPage = Loadable(lazy(() => import('./thoughts/ProjectsPage')));
 const CategoryDetailsPage = Loadable(lazy(() => import('./thoughts/CategoryDetailsPage')));
 const EmotionDetailsPage = Loadable(lazy(() => import('./thoughts/EmotionDetailsPage')));
 const ReminderDetailsPage = Loadable(lazy(() => import('./thoughts/ReminderDetailsPage')));
@@ -126,6 +132,7 @@ const EventDetailsPage = Loadable(lazy(() => import('./thoughts/EventDetailsPage
 const PeopleDetailsPage = Loadable(lazy(() => import('./thoughts/PeopleDetailsPage')));
 const OverallToneDetailsPage = Loadable(lazy(() => import('./thoughts/OverallToneDetailsPage')));
 const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
+const JournalDetailsPage = Loadable(lazy(() => import('./journal/JournalDetailsPage')));
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
 const HealthPage = Loadable(lazy(() => import('./health/HealthPage')));
 const UserAccountPage = Loadable(lazy(() => import('./user/UserAccountPage')));

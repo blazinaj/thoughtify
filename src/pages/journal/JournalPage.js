@@ -25,6 +25,15 @@ const JournalPage = () => {
 
   const smallToMid = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
+  const cadenceOptions = [
+      "CURRENT",
+    JournalCadence.DAILY,
+    JournalCadence.WEEKLY,
+    JournalCadence.MONTHLY,
+    JournalCadence.YEARLY,
+      'BIOGRAPHY',
+  ]
+
   return (
     <Page title="Thoughtify Journal">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -35,7 +44,7 @@ const JournalPage = () => {
           action={
             <Box display="flex" justifyContent="left">
               <ButtonGroup orientation={smallToMid ? 'vertical' : 'horizontal'} size={'small'}>
-                {Object.values(JournalCadence).map((cadenceEnum) => {
+                {cadenceOptions.map((cadenceEnum) => {
                   return (
                     <Button
                       key={cadenceEnum}

@@ -12,6 +12,7 @@ import { differenceInDays } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import { HealthCategoryStatusButton } from './HealthCategoryStatusButton';
 import { generateHealthCategoryReport } from '../../../api/health/generateHealthCategoryReport';
+import {useDatastore} from "../../../utils/hooks/useDatastore";
 
 /**
  * Displays a Health Report for a user
@@ -197,6 +198,11 @@ export const HealthReport = ({ selectedHealthReport }) => {
     return newHealthReport.report;
   };
 
+  const thoughtsDatastore = useDatastore({
+    model: Thought,
+    enableSubscription: true
+  })
+
   useEffect(() => {
     if (!health) {
       setIsLoading(true);
@@ -208,7 +214,7 @@ export const HealthReport = ({ selectedHealthReport }) => {
           setIsLoading(false);
         });
     }
-  }, []);
+  }, [thoughtsDatastore?.items?.length]);
 
   if (isLoading) {
     return <LoadingScreen sx={{ marginTop: '15vh' }} />;

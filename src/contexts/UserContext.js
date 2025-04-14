@@ -41,7 +41,7 @@ const UserContextProvider = ({ children }) => {
     setUser(user);
 
     setShowAccountSetup(false);
-    navigate('/thoughts');
+    navigate('/journal');
   };
 
   /**
@@ -80,7 +80,7 @@ const UserContextProvider = ({ children }) => {
         setCognitoUser(state.payload.data);
         setUser(user);
         setIsInitialized(true);
-        navigate('/thoughts');
+        navigate('/journal');
       }
 
       if (event === 'signUp') {
@@ -111,7 +111,7 @@ const UserContextProvider = ({ children }) => {
         setIsInitialized(true);
 
         if (location.pathname === '/') {
-          navigate('/thoughts');
+          navigate('/journal');
         }
       } catch (error) {
         setIsInitialized(true);

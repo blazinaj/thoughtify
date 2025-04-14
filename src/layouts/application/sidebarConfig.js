@@ -8,11 +8,6 @@ const sidebarConfig = [
   {
     items: [
       {
-        title: 'Thoughts',
-        icon: getIcon('mingcute:thought-line'),
-        path: '/thoughts'
-      },
-      {
         title: 'Journal',
         icon: getIcon('carbon:book'),
         path: '/journal'
@@ -23,9 +18,9 @@ const sidebarConfig = [
         path: '/health'
       },
       {
-        title: 'Biography',
-        icon: getIcon('prime:book'),
-        path: '/biography'
+        title: 'Projects',
+        icon: getIcon('ic:round-workspaces'),
+        path: '/projects'
       }
     ]
   }

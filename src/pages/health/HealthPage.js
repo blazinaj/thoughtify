@@ -7,7 +7,8 @@ import { useDatastore } from '../../utils/hooks/useDatastore';
 import { HealthReport as HealthReportModel } from '../../models';
 import { useEffect, useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/theme/default.css';
+import {ThoughtInput} from "../thoughts/components/ThoughtInput"; // theme css file
 
 const HealthPage = () => {
   const { themeStretch } = useSettings();
@@ -58,6 +59,9 @@ const HealthPage = () => {
           }
         />
         <Grid container spacing={3}>
+          <Grid item xs={12} md={12}>
+            <ThoughtInput />
+          </Grid>
           <Grid item xs={12}>
             <HealthReport selectedHealthReport={selectedHealthReport} />
           </Grid>

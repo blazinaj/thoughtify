@@ -13,6 +13,12 @@ export enum NotificationType {
   MESSAGE = "MESSAGE"
 }
 
+export enum ProjectStatus {
+  NOT_STARTED = "NOT_STARTED",
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED"
+}
+
 export enum SubscriptionStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE"
@@ -21,6 +27,12 @@ export enum SubscriptionStatus {
 export enum SubscriptionTier {
   FREE = "FREE",
   PREMIUM = "PREMIUM"
+}
+
+export enum TaskStatus {
+  NOT_STARTED = "NOT_STARTED",
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED"
 }
 
 export enum ThoughtAttributes {
@@ -200,6 +212,44 @@ export declare const Notification: (new (init: ModelInit<Notification>) => Notif
   copyOf(source: Notification, mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void): Notification;
 }
 
+type EagerProject = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Project, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly status?: ProjectStatus | keyof typeof ProjectStatus | null;
+  readonly thoughts?: (ProjectThoughts | null)[] | null;
+  readonly tasks?: (ProjectTasks | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyProject = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Project, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly status?: ProjectStatus | keyof typeof ProjectStatus | null;
+  readonly thoughts: AsyncCollection<ProjectThoughts>;
+  readonly tasks: AsyncCollection<ProjectTasks>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Project = LazyLoading extends LazyLoadingDisabled ? EagerProject : LazyProject
+
+export declare const Project: (new (init: ModelInit<Project>) => Project) & {
+  copyOf(source: Project, mutator: (draft: MutableModel<Project>) => MutableModel<Project> | void): Project;
+}
+
 type EagerSubscriptionPlan = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<SubscriptionPlan, 'id'>;
@@ -234,6 +284,44 @@ export declare const SubscriptionPlan: (new (init: ModelInit<SubscriptionPlan>) 
   copyOf(source: SubscriptionPlan, mutator: (draft: MutableModel<SubscriptionPlan>) => MutableModel<SubscriptionPlan> | void): SubscriptionPlan;
 }
 
+type EagerTask = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Task, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly status?: TaskStatus | keyof typeof TaskStatus | null;
+  readonly thoughts?: (TaskThoughts | null)[] | null;
+  readonly projects?: (ProjectTasks | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyTask = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Task, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly date?: string | null;
+  readonly name: string;
+  readonly description?: string | null;
+  readonly status?: TaskStatus | keyof typeof TaskStatus | null;
+  readonly thoughts: AsyncCollection<TaskThoughts>;
+  readonly projects: AsyncCollection<ProjectTasks>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Task = LazyLoading extends LazyLoadingDisabled ? EagerTask : LazyTask
+
+export declare const Task: (new (init: ModelInit<Task>) => Task) & {
+  copyOf(source: Task, mutator: (draft: MutableModel<Task>) => MutableModel<Task> | void): Task;
+}
+
 type EagerThought = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Thought, 'id'>;
@@ -247,6 +335,8 @@ type EagerThought = {
   readonly journalEntries?: (JournalEntryThoughts | null)[] | null;
   readonly healthReports?: (HealthReportThoughts | null)[] | null;
   readonly biographies?: (BiographyThoughts | null)[] | null;
+  readonly relatedProjects?: (ProjectThoughts | null)[] | null;
+  readonly tasks?: (TaskThoughts | null)[] | null;
   readonly overallTone?: string | null;
   readonly people?: (string | null)[] | null;
   readonly projects?: (string | null)[] | null;
@@ -273,6 +363,8 @@ type LazyThought = {
   readonly journalEntries: AsyncCollection<JournalEntryThoughts>;
   readonly healthReports: AsyncCollection<HealthReportThoughts>;
   readonly biographies: AsyncCollection<BiographyThoughts>;
+  readonly relatedProjects: AsyncCollection<ProjectThoughts>;
+  readonly tasks: AsyncCollection<TaskThoughts>;
   readonly overallTone?: string | null;
   readonly people?: (string | null)[] | null;
   readonly projects?: (string | null)[] | null;
@@ -448,4 +540,106 @@ export declare type JournalEntryThoughts = LazyLoading extends LazyLoadingDisabl
 
 export declare const JournalEntryThoughts: (new (init: ModelInit<JournalEntryThoughts>) => JournalEntryThoughts) & {
   copyOf(source: JournalEntryThoughts, mutator: (draft: MutableModel<JournalEntryThoughts>) => MutableModel<JournalEntryThoughts> | void): JournalEntryThoughts;
+}
+
+type EagerProjectThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProjectThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly projectId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly project: Project;
+  readonly thought: Thought;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyProjectThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProjectThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly projectId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly project: AsyncItem<Project>;
+  readonly thought: AsyncItem<Thought>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type ProjectThoughts = LazyLoading extends LazyLoadingDisabled ? EagerProjectThoughts : LazyProjectThoughts
+
+export declare const ProjectThoughts: (new (init: ModelInit<ProjectThoughts>) => ProjectThoughts) & {
+  copyOf(source: ProjectThoughts, mutator: (draft: MutableModel<ProjectThoughts>) => MutableModel<ProjectThoughts> | void): ProjectThoughts;
+}
+
+type EagerProjectTasks = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProjectTasks, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly projectId?: string | null;
+  readonly taskId?: string | null;
+  readonly project: Project;
+  readonly task: Task;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyProjectTasks = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ProjectTasks, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly projectId?: string | null;
+  readonly taskId?: string | null;
+  readonly project: AsyncItem<Project>;
+  readonly task: AsyncItem<Task>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type ProjectTasks = LazyLoading extends LazyLoadingDisabled ? EagerProjectTasks : LazyProjectTasks
+
+export declare const ProjectTasks: (new (init: ModelInit<ProjectTasks>) => ProjectTasks) & {
+  copyOf(source: ProjectTasks, mutator: (draft: MutableModel<ProjectTasks>) => MutableModel<ProjectTasks> | void): ProjectTasks;
+}
+
+type EagerTaskThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<TaskThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly taskId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly task: Task;
+  readonly thought: Thought;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyTaskThoughts = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<TaskThoughts, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly taskId?: string | null;
+  readonly thoughtId?: string | null;
+  readonly task: AsyncItem<Task>;
+  readonly thought: AsyncItem<Thought>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type TaskThoughts = LazyLoading extends LazyLoadingDisabled ? EagerTaskThoughts : LazyTaskThoughts
+
+export declare const TaskThoughts: (new (init: ModelInit<TaskThoughts>) => TaskThoughts) & {
+  copyOf(source: TaskThoughts, mutator: (draft: MutableModel<TaskThoughts>) => MutableModel<TaskThoughts> | void): TaskThoughts;
 }

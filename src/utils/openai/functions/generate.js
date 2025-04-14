@@ -1,9 +1,10 @@
-import { Configuration, OpenAIApi } from 'openai';
+import {OpenAI} from 'openai';
 
-const configuration = new Configuration({
-  apiKey: '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'
-});
-const openai = new OpenAIApi(configuration);
+const configuration = {
+  apiKey: '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',
+  dangerouslyAllowBrowser: true,
+};
+const openai = new OpenAI(configuration);
 
 /**
  * Uses openAI to generate text based on a prompt
@@ -99,23 +100,28 @@ export const generateImage = async ({ prompt, n = 1, size = '256x256' }) => {
 };
 
 export const handleCompletion = async ({ prompt, seed, responseFormat = { type: 'json_object' } }) => {
-  const configuration = new Configuration({
+  const configuration = {
     organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
     // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: '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'
-  });
+    apiKey: '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',
+    dangerouslyAllowBrowser: true,
 
-  const openai = new OpenAIApi(configuration);
+  }
+
+  const openai = new OpenAI(configuration);
 
   try {
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.responses.create({
       model: 'gpt-3.5-turbo-1106',
-      messages: [{ role: 'system', content: prompt }],
-      seed,
-      response_format: responseFormat
+      input: [{ role: 'developer', content: prompt }],
+      // text: {
+      //   format: 'json_object',
+      // }
     });
 
-    const response = completion.data.choices[0].message.content;
+    console.log({completion})
+
+    const response = completion.output_text;
 
     return response;
   } catch (e) {

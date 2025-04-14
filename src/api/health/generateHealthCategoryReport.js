@@ -17,7 +17,7 @@ export const generateHealthCategoryReport = async ({ category, thoughts }) => {
         "description": "...",
       }
       
-      Output the health report as a health category. First person. Javascript parseable JSON object.
+      Output the health report as a health category. First person. 
       
     `;
 

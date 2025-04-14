@@ -13,6 +13,12 @@ const NotificationType = {
   "MESSAGE": "MESSAGE"
 };
 
+const ProjectStatus = {
+  "NOT_STARTED": "NOT_STARTED",
+  "IN_PROGRESS": "IN_PROGRESS",
+  "COMPLETED": "COMPLETED"
+};
+
 const SubscriptionStatus = {
   "ACTIVE": "ACTIVE",
   "INACTIVE": "INACTIVE"
@@ -21,6 +27,12 @@ const SubscriptionStatus = {
 const SubscriptionTier = {
   "FREE": "FREE",
   "PREMIUM": "PREMIUM"
+};
+
+const TaskStatus = {
+  "NOT_STARTED": "NOT_STARTED",
+  "IN_PROGRESS": "IN_PROGRESS",
+  "COMPLETED": "COMPLETED"
 };
 
 const ThoughtAttributes = {
@@ -54,23 +66,30 @@ const WritingBrevity = {
   "LONG": "LONG"
 };
 
-const { Biography, HealthReport, JournalEntry, Notification, SubscriptionPlan, Thought, User, BiographyThoughts, HealthReportThoughts, JournalEntryThoughts } = initSchema(schema);
+const { Biography, HealthReport, JournalEntry, Notification, Project, SubscriptionPlan, Task, Thought, User, BiographyThoughts, HealthReportThoughts, JournalEntryThoughts, ProjectThoughts, ProjectTasks, TaskThoughts } = initSchema(schema);
 
 export {
   Biography,
   HealthReport,
   JournalEntry,
   Notification,
+  Project,
   SubscriptionPlan,
+  Task,
   Thought,
   User,
   BiographyThoughts,
   HealthReportThoughts,
   JournalEntryThoughts,
+  ProjectThoughts,
+  ProjectTasks,
+  TaskThoughts,
   JournalCadence,
   NotificationType,
+  ProjectStatus,
   SubscriptionStatus,
   SubscriptionTier,
+  TaskStatus,
   ThoughtAttributes,
   WritingStyle,
   WritingBrevity

@@ -5,6 +5,8 @@ import { ThoughtExtracts } from './ThoughtExtracts/components/ThoughtExtracts';
 import { useThoughtsState } from '../hooks/useThoughtsState';
 import {useState} from "react";
 import {getIcon} from "@iconify/react";
+import JournalTimeline from "../../journal/components/JournalTimeline";
+import {BiographyDisplay} from "../../biography/components/BiographyDisplay";
 
 /**
  * Displays the Thoughts page for the user.
@@ -12,7 +14,7 @@ import {getIcon} from "@iconify/react";
  * @returns {JSX.Element}
  * @constructor
  */
-const Thoughts = ({ journalEntry }) => {
+const Thoughts = ({ journalEntry, cadence = 'CURRENT' }) => {
   const {
     showPositiveThoughts,
     showNegativeThoughts,
@@ -27,8 +29,10 @@ const Thoughts = ({ journalEntry }) => {
     setVisibleAttributes
   } = useThoughtsState({ journalEntry });
 
+
+
   // show filters by default on xl, lg, md and hide on sm and xs
-  const [showFilters, setShowFilters] = useState(() => window.innerWidth > 900);
+  const [showFilters, setShowFilters] = useState(false);
 
   return (
     <Grid container spacing={3}>
@@ -70,12 +74,29 @@ const Thoughts = ({ journalEntry }) => {
                 xl: 3
             }}
       >
-        <ThoughtGallery
-          journalEntry={journalEntry}
-          data-intro={'View your Thoughts here. You can edit them, delete them, or even add a new one!'}
-          thoughts={thoughts}
-          extract={extract}
-        />
+          {
+              cadence === 'CURRENT' && (
+                  <ThoughtGallery
+                      journalEntry={journalEntry}
+                      data-intro={'View your Thoughts here. You can edit them, delete them, or even add a new one!'}
+                      thoughts={thoughts}
+                      extract={extract}
+                  />
+              )
+          }
+
+          {
+              cadence !== 'CURRENT' && cadence !== 'BIOGRAPHY' && (
+                    <JournalTimeline cadence={cadence} journalEntry={journalEntry} />
+              )
+          }
+
+        {
+            cadence === 'BIOGRAPHY' && (
+                <BiographyDisplay />
+            )
+        }
+
       </Grid>
 
       <Grid item xs={12} sm={12} md={showFilters ? 4 : 0} lg={showFilters ? 4 : 0} xl={showFilters ? 4 : 0}

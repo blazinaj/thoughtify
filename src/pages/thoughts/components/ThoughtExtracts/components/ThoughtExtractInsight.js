@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import LoadingScreen from '../../../../../demo/components/LoadingScreen';
 import Grid from '@mui/material/Grid';
-import { Typography } from '@mui/material';
-import { generateThoughtExtractInsight } from '../../../../../api/thoughts/generateThoughtExtractInsight';
-import { ThoughtExtractTimeline } from './ThoughtExtractTimeline';
-import { ThoughtExtractAttributes } from './ThoughtExtractAttributes';
-import { Thought } from '../../../../../models';
-import { useDatastore } from '../../../../../utils/hooks/useDatastore';
-import { DataStore, Predicates } from '@aws-amplify/datastore';
+import {Typography} from '@mui/material';
+import {ThoughtExtractTimeline} from './ThoughtExtractTimeline';
+import {ThoughtExtractAttributes} from './ThoughtExtractAttributes';
+import {ProjectThoughts, Thought} from '../../../../../models';
+import {DataStore} from '@aws-amplify/datastore';
+import Card from "../../../../../utils/components/Card";
 
 /**
  * Displays Insight from an extract value from a Thought, for instance a Person, Project, Reminder, or Emotion
@@ -17,7 +16,7 @@ import { DataStore, Predicates } from '@aws-amplify/datastore';
  * @param {string} value - the value of the insight e.g. "bob", "project 1"
  * @constructor
  */
-export const ThoughtExtractInsight = ({ type, value }) => {
+export const ThoughtExtractInsight = ({ type, value, projectId }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [insight, setInsight] = useState(null);
@@ -25,7 +24,16 @@ export const ThoughtExtractInsight = ({ type, value }) => {
   const [error, setError] = useState(null);
 
   const getRelatedThoughts = async (type, value) => {
-    const thoughtsDatastore = await DataStore.query(Thought, (p) => p[type].contains(value));
+    let thoughtsDatastore = [];
+    if (type === 'projects') {
+
+      // if this is a projects insight, we need to get the Thoughts through the ProjectThoughts connection
+      thoughtsDatastore = await DataStore.query(Thought, (p) => p.relatedProjects.project.id.eq(projectId));
+      console.log({thoughtsDatastore})
+    }
+    else {
+      thoughtsDatastore = await DataStore.query(Thought, (p) => p[type].contains(value));
+    }
     const relatedPeople = thoughtsDatastore
       .map((item) => item.people)
       .flat()
@@ -126,26 +134,15 @@ export const ThoughtExtractInsight = ({ type, value }) => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-          <Typography
-            variant={'h6'}
-            sx={{
-              marginBottom: 2
-            }}
+          <Card
+            title={'Timeline'}
           >
-            Timeline
-          </Typography>
-          <ThoughtExtractTimeline insight={insight} />
+            <ThoughtExtractTimeline insight={insight} />
+          </Card>
+
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-          <Typography
-            variant={'h6'}
-            sx={{
-              marginBottom: 2
-            }}
-          >
-            Related Insights
-          </Typography>
 
           <ThoughtExtractAttributes insight={insight} value={value} type={type} />
         </Grid>
