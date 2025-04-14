@@ -24,8 +24,8 @@ const CategoryDetailsPage = () => {
                     icon={'mingcute:thought-line'}
                     links={[
                         {
-                            href: '/thoughts',
-                            name: 'Thoughts'
+                            href: '/journal',
+                            name: 'Journal'
                         },
                         {
                             name: 'Categories'

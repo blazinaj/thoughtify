@@ -23,6 +23,10 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
   }
 
   const title = `${sentenceCase(type)}: ${value}`;
+  let route = `/thoughts/${type}/${value}`;
+  if (type === 'projects') {
+    route = `/projects/${value}`;
+  }
   const button = <Chip
       title={sentenceCase(type)}
       component={Link}

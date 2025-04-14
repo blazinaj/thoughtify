@@ -91,7 +91,7 @@ export default function LandingHero() {
                 size="large"
                 variant="contained"
                 component={RouterLink}
-                to={'/thoughts'}
+                to={'/journal'}
                 startIcon={<Icon icon={flashFill} width={20} height={20} />}
               >
                 Get Started

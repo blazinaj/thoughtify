@@ -80,7 +80,7 @@ export default function MainNavbar() {
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
-          <Button variant="contained" target="_self" href="/thoughts">
+          <Button variant="contained" target="_self" href="/journal">
             Login
           </Button>
 

@@ -5,7 +5,7 @@ import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
 import { ThoughtDetails } from './components/ThoughtDetails';
 import { useParams } from 'react-router-dom';
 import { useDatastore } from '../../utils/hooks/useDatastore';
-import { Thought } from '../../models';
+import {ProjectThoughts, Thought} from '../../models';
 import Card from '../../utils/components/Card';
 import { ThoughtExtractAttributeChip } from './components/ThoughtExtracts/components/ThoughtExtractAttributeChip';
 import {DeleteItemButton} from "../../utils/components/DeleteItemButton";

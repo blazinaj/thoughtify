@@ -86,7 +86,6 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
             (a, b) => (b?.date || b?.createdAt)?.localeCompare(a?.date || a?.createdAt)
         ).forEach((thought) => {
             const thoughtDate = thought?.date || thought?.createdAt;
-            console.log({thoughtDate, thought})
             if (!thoughtDate) {
                 return;
             }
@@ -94,13 +93,14 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
             if (typeof thoughtDate !== 'string') {
                 return;
             }
+            // get the MM-DD-YYYY part of the date
             const date = thoughtDate.split('T')[0]; // Get the date part
+          console.log({date})
             if (!groupedThoughts[date]) {
                 groupedThoughts[date] = [];
             }
             groupedThoughts[date].push(thought);
         })
-        console.log({groupedThoughts})
         return groupedThoughts;
     }
 
