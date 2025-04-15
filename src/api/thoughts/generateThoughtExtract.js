@@ -44,23 +44,114 @@ export const generateThoughtExtract = async (newThought) => {
       New Thought:
       ${newThought.input}
       
-      Format the response as a javascript parseable JSON object string like: 
-      {
-        "overallTone": "...",
-        "emotions": ["..."],
-        "people": ["..."],
-        "projects": ["..."],
-        "categories": ["..."],
-        "reminders": ["..."],
-        "questions": ["..."]
-      }
-      
     `;
 
   const response = await invokeLambda(`handleCompletion-${process.env.REACT_APP_AMPLIFY_ENVIRONMENT || 'staging'}`, {
     prompt: _prompt,
     seed: 101,
-    response_format: { type: 'json_object' }
+    response_format: { type: 'json_object' },
+    format: {
+      type: 'json_schema',
+      name: 'thought_extract',
+      schema: {
+        type: 'object',
+        properties: {
+          overallTone: {
+            type: 'string',
+            enum: ['positive', 'negative', 'neutral'],
+            description: 'The overall tone of the thought'
+          },
+          emotions: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The emotions expressed in the thought'
+            }
+          },
+          people: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The people mentioned in the thought'
+            }
+          },
+          projects: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The projects mentioned in the thought'
+            }
+          },
+          categories: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The categories mentioned in the thought'
+            }
+          },
+          reminders: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The reminders mentioned in the thought'
+            }
+          },
+          questions: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The questions mentioned in the thought'
+            }
+          },
+          places: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The places mentioned in the thought'
+            }
+          },
+          events: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description: 'The events mentioned in the thought'
+            }
+          },
+          tasks: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'The task name'
+                },
+                status: {
+                  type: 'string',
+                  enum: ['NOT_STARTED', 'IN_PROGRESS', 'COMPLETED']
+                }
+              },
+              required: ['name', 'status'],
+              description: 'The tasks mentioned in the thought',
+              additionalProperties: false
+            }
+          }
+        },
+        required: [
+          'overallTone',
+          'emotions',
+          'people',
+          'projects',
+          'categories',
+          'reminders',
+          'questions',
+          'places',
+          'events',
+          'tasks'
+        ],
+        additionalProperties: false
+      }
+    }
   });
 
   if (response.statusCode !== 200) {

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import LoadingScreen from '../../../../../demo/components/LoadingScreen';
 import Grid from '@mui/material/Grid';
-import {Typography} from '@mui/material';
-import {ThoughtExtractTimeline} from './ThoughtExtractTimeline';
-import {ThoughtExtractAttributes} from './ThoughtExtractAttributes';
-import {ProjectThoughts, Thought} from '../../../../../models';
-import {DataStore} from '@aws-amplify/datastore';
-import Card from "../../../../../utils/components/Card";
+import { Typography } from '@mui/material';
+import { ThoughtExtractTimeline } from './ThoughtExtractTimeline';
+import { ThoughtExtractAttributes } from './ThoughtExtractAttributes';
+import { ProjectThoughts, Thought } from '../../../../../models';
+import { DataStore } from '@aws-amplify/datastore';
+import Card from '../../../../../utils/components/Card';
 
 /**
  * Displays Insight from an extract value from a Thought, for instance a Person, Project, Reminder, or Emotion
@@ -26,12 +26,10 @@ export const ThoughtExtractInsight = ({ type, value, projectId }) => {
   const getRelatedThoughts = async (type, value) => {
     let thoughtsDatastore = [];
     if (type === 'projects') {
-
       // if this is a projects insight, we need to get the Thoughts through the ProjectThoughts connection
       thoughtsDatastore = await DataStore.query(Thought, (p) => p.relatedProjects.project.id.eq(projectId));
-      console.log({thoughtsDatastore})
-    }
-    else {
+      console.log({ thoughtsDatastore });
+    } else {
       thoughtsDatastore = await DataStore.query(Thought, (p) => p[type].contains(value));
     }
     const relatedPeople = thoughtsDatastore
@@ -134,16 +132,12 @@ export const ThoughtExtractInsight = ({ type, value, projectId }) => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-          <Card
-            title={'Timeline'}
-          >
+          <Card title={'Timeline'}>
             <ThoughtExtractTimeline insight={insight} />
           </Card>
-
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-
           <ThoughtExtractAttributes insight={insight} value={value} type={type} />
         </Grid>
       </Grid>

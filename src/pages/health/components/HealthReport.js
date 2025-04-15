@@ -12,7 +12,7 @@ import { differenceInDays } from 'date-fns';
 import { useSnackbar } from 'notistack';
 import { HealthCategoryStatusButton } from './HealthCategoryStatusButton';
 import { generateHealthCategoryReport } from '../../../api/health/generateHealthCategoryReport';
-import {useDatastore} from "../../../utils/hooks/useDatastore";
+import { useDatastore } from '../../../utils/hooks/useDatastore';
 
 /**
  * Displays a Health Report for a user
@@ -201,19 +201,17 @@ export const HealthReport = ({ selectedHealthReport }) => {
   const thoughtsDatastore = useDatastore({
     model: Thought,
     enableSubscription: true
-  })
+  });
 
   useEffect(() => {
-    if (!health) {
-      setIsLoading(true);
-      fetchHealthReport()
-        .then((res) => {
-          setHealth(res);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }
+    setIsLoading(true);
+    fetchHealthReport()
+      .then((res) => {
+        setHealth(res);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [thoughtsDatastore?.items?.length]);
 
   if (isLoading) {

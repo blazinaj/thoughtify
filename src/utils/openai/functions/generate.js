@@ -1,8 +1,8 @@
-import {OpenAI} from 'openai';
+import { OpenAI } from 'openai';
 
 const configuration = {
   apiKey: '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',
-  dangerouslyAllowBrowser: true,
+  dangerouslyAllowBrowser: true
 };
 const openai = new OpenAI(configuration);
 
@@ -99,27 +99,32 @@ export const generateImage = async ({ prompt, n = 1, size = '256x256' }) => {
   }
 };
 
-export const handleCompletion = async ({ prompt, seed, responseFormat = { type: 'json_object' } }) => {
+export const handleCompletion = async ({
+  prompt,
+  model = 'gpt-4o',
+  seed,
+  responseFormat = { type: 'json_object' },
+  format
+}) => {
   const configuration = {
     organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
     // apiKey: process.env.OPENAI_API_KEY,
     apiKey: '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',
-    dangerouslyAllowBrowser: true,
-
-  }
+    dangerouslyAllowBrowser: true
+  };
 
   const openai = new OpenAI(configuration);
 
   try {
     const completion = await openai.responses.create({
-      model: 'gpt-3.5-turbo-1106',
+      model,
       input: [{ role: 'developer', content: prompt }],
-      // text: {
-      //   format: 'json_object',
-      // }
+      text: {
+        format
+      }
     });
 
-    console.log({completion})
+    console.log({ completion });
 
     const response = completion.output_text;
 

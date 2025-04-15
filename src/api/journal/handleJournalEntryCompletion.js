@@ -8,7 +8,6 @@ export const handleJournalEntryCompletion = async ({
   tone = 'neutral, factual',
   date
 }) => {
-
   let prompt;
 
   const monthlyPrompt = `

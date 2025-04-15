@@ -29,7 +29,7 @@ export default function JournalTimeline({ cadence = JournalCadence.DAILY }) {
     cadence
   });
 
-  const isSmall = true
+  const isSmall = true;
 
   if (isLoading) {
     return <LoadingScreen sx={{ marginTop: '15vh' }} />;
@@ -50,14 +50,14 @@ export default function JournalTimeline({ cadence = JournalCadence.DAILY }) {
       {journalEntryDataStore?.items
         ?.sort((a, b) => new Date(b.date) - new Date(a.date))
         ?.map((journalEntry, index) => {
-            const isLastEntry = index === journalEntryDataStore.items.length - 1;
+          const isLastEntry = index === journalEntryDataStore.items.length - 1;
           return (
             <JournalTimelineItem
               key={`${journalEntry?.id}-${index}`}
               journalEntry={journalEntry}
               cadence={cadence}
               isSmall={isSmall}
-                isLastEntry={isLastEntry}
+              isLastEntry={isLastEntry}
             />
           );
         })}

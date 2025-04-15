@@ -8,7 +8,7 @@ import { HealthReport as HealthReportModel } from '../../models';
 import { useEffect, useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
-import {ThoughtInput} from "../thoughts/components/ThoughtInput"; // theme css file
+import { ThoughtInput } from '../thoughts/components/ThoughtInput'; // theme css file
 
 const HealthPage = () => {
   const { themeStretch } = useSettings();

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { fetchJournal } from '../../../api/journal/fetchJournal';
 import { useSnackbar } from 'notistack';
-import {DataStore} from "@aws-amplify/datastore";
-import {Thought} from "../../../models";
-import {useDatastore} from "../../../utils/hooks/useDatastore";
+import { DataStore } from '@aws-amplify/datastore';
+import { Thought } from '../../../models';
+import { useDatastore } from '../../../utils/hooks/useDatastore';
 
 /**
  * Fetches Journal entries based on cadence and updates the DataStore if necessary
@@ -18,7 +18,7 @@ export const useJournalSync = ({ cadence }) => {
   const thoughtsDatastore = useDatastore({
     model: Thought,
     enableSubscription: true
-  })
+  });
 
   useEffect(() => {
     console.log('Fetching Journal Entries', cadence);
@@ -28,7 +28,7 @@ export const useJournalSync = ({ cadence }) => {
         await fetchJournal({
           cadence,
           enqueueSnackbar,
-          thoughts: thoughtsDatastore.items,
+          thoughts: thoughtsDatastore.items
         });
       } catch (error) {
         console.error(error);

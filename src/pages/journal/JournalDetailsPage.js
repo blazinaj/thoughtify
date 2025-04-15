@@ -1,13 +1,13 @@
 import Page from '../../utils/components/Page';
-import {Container} from '@mui/material';
+import { Container } from '@mui/material';
 import useSettings from '../../utils/hooks/useSettings';
 import HeaderBreadcrumbs from '../../demo/components/HeaderBreadcrumbs';
-import {useParams} from 'react-router-dom';
-import {useDatastore} from '../../utils/hooks/useDatastore';
-import {JournalEntry, Thought} from '../../models';
+import { useParams } from 'react-router-dom';
+import { useDatastore } from '../../utils/hooks/useDatastore';
+import { JournalEntry, Thought } from '../../models';
 import Card from '../../utils/components/Card';
-import {JournalTimelineItemDetails} from "./components/JournalTimelineItemDetails";
-import * as React from "react";
+import { JournalTimelineItemDetails } from './components/JournalTimelineItemDetails';
+import * as React from 'react';
 
 /**
  * Displays the details of a particular Thought.
@@ -28,7 +28,7 @@ const JournalDetailsPage = () => {
     <Page title="Thoughtify">
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <HeaderBreadcrumbs
-          heading='Journal Entry'
+          heading="Journal Entry"
           icon={'mingcute:thought-line'}
           links={[
             {
@@ -49,7 +49,7 @@ const JournalDetailsPage = () => {
         >
           {datastore?.item?.entry}
         </Card>
-          <JournalTimelineItemDetails item={datastore.item} />,
+        <JournalTimelineItemDetails item={datastore.item} />,
       </Container>
     </Page>
   );

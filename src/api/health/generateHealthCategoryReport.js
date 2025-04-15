@@ -21,9 +21,116 @@ export const generateHealthCategoryReport = async ({ category, thoughts }) => {
       
     `;
 
+  //   'mental_health',
+  //     'emotional_health',
+  //     'physical_health',
+  //     'social_health',
+  //     'diet',
+  //     'spiritual_health'
   const completion = await handleCompletion({
     prompt,
-    seed: 404
+    format: {
+      type: 'json_schema',
+      name: 'health_category_report',
+      schema: {
+        type: 'object',
+        properties: {
+          mental_health: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['overall_status', 'description'],
+            properties: {
+              overall_status: {
+                type: 'string',
+                enum: ['good', 'fair', 'mixed', 'poor']
+              },
+              description: {
+                type: 'string',
+                description: 'A detailed description of the mental health status.'
+              }
+            }
+          },
+          emotional_health: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['overall_status', 'description'],
+            properties: {
+              overall_status: {
+                type: 'string',
+                enum: ['good', 'fair', 'mixed', 'poor']
+              },
+              description: {
+                type: 'string',
+                description: 'A detailed description of the emotion health status.'
+              }
+            }
+          },
+          physical_health: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['overall_status', 'description'],
+            properties: {
+              overall_status: {
+                type: 'string',
+                enum: ['good', 'fair', 'mixed', 'poor']
+              },
+              description: {
+                type: 'string',
+                description: 'A detailed description of the physical health status.'
+              }
+            }
+          },
+          social_health: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['overall_status', 'description'],
+            properties: {
+              overall_status: {
+                type: 'string',
+                enum: ['good', 'fair', 'mixed', 'poor']
+              },
+              description: {
+                type: 'string',
+                description: 'A detailed description of the social health status.'
+              }
+            }
+          },
+          diet: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['overall_status', 'description'],
+            properties: {
+              overall_status: {
+                type: 'string',
+                enum: ['good', 'fair', 'mixed', 'poor']
+              },
+              description: {
+                type: 'string',
+                description: 'A detailed description of the diet status.'
+              }
+            }
+          },
+          spiritual_health: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['overall_status', 'description'],
+            properties: {
+              overall_status: {
+                type: 'string',
+                enum: ['good', 'fair', 'mixed', 'poor']
+              },
+              description: {
+                type: 'string',
+                description: 'A detailed description of the spiritual health status.'
+              }
+            }
+          }
+        },
+        required: ['mental_health', 'emotional_health', 'physical_health', 'social_health', 'diet', 'spiritual_health'],
+        additionalProperties: false
+      }
+    },
+    model: 'gpt-4o'
   });
 
   return {

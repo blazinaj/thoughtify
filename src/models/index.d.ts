@@ -1,72 +1,70 @@
-import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
+import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from '@aws-amplify/datastore';
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from '@aws-amplify/datastore';
 
 export enum JournalCadence {
-  DAILY = "DAILY",
-  WEEKLY = "WEEKLY",
-  MONTHLY = "MONTHLY",
-  YEARLY = "YEARLY"
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
+  YEARLY = 'YEARLY'
 }
 
 export enum NotificationType {
-  MESSAGE = "MESSAGE"
+  MESSAGE = 'MESSAGE'
 }
 
 export enum ProjectStatus {
-  NOT_STARTED = "NOT_STARTED",
-  IN_PROGRESS = "IN_PROGRESS",
-  COMPLETED = "COMPLETED"
+  NOT_STARTED = 'NOT_STARTED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED'
 }
 
 export enum SubscriptionStatus {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE"
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
 }
 
 export enum SubscriptionTier {
-  FREE = "FREE",
-  PREMIUM = "PREMIUM"
+  FREE = 'FREE',
+  PREMIUM = 'PREMIUM'
 }
 
 export enum TaskStatus {
-  NOT_STARTED = "NOT_STARTED",
-  IN_PROGRESS = "IN_PROGRESS",
-  COMPLETED = "COMPLETED"
+  NOT_STARTED = 'NOT_STARTED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED'
 }
 
 export enum ThoughtAttributes {
-  OVERALL_TONE = "overallTone",
-  PEOPLE = "people",
-  PROJECTS = "projects",
-  CATEGORIES = "categories",
-  EMOTIONS = "emotions",
-  REMINDERS = "reminders",
-  QUESTIONS = "questions",
-  PLACES = "places",
-  EVENTS = "events"
+  OVERALL_TONE = 'overallTone',
+  PEOPLE = 'people',
+  PROJECTS = 'projects',
+  CATEGORIES = 'categories',
+  EMOTIONS = 'emotions',
+  REMINDERS = 'reminders',
+  QUESTIONS = 'questions',
+  PLACES = 'places',
+  EVENTS = 'events'
 }
 
 export enum WritingStyle {
-  SIMPLE = "SIMPLE",
-  FUNNY = "FUNNY",
-  DETAILED = "DETAILED",
-  ENGINEERING = "ENGINEERING",
-  POETIC = "POETIC",
-  NARRATIVE = "NARRATIVE",
-  REFLECTIVE = "REFLECTIVE",
-  WHIMSICAL = "WHIMSICAL",
-  SPIRITUAL = "SPIRITUAL",
-  MOTIVATIONAL = "MOTIVATIONAL"
+  SIMPLE = 'SIMPLE',
+  FUNNY = 'FUNNY',
+  DETAILED = 'DETAILED',
+  ENGINEERING = 'ENGINEERING',
+  POETIC = 'POETIC',
+  NARRATIVE = 'NARRATIVE',
+  REFLECTIVE = 'REFLECTIVE',
+  WHIMSICAL = 'WHIMSICAL',
+  SPIRITUAL = 'SPIRITUAL',
+  MOTIVATIONAL = 'MOTIVATIONAL'
 }
 
 export enum WritingBrevity {
-  SHORT = "SHORT",
-  MEDIUM = "MEDIUM",
-  LONG = "LONG"
+  SHORT = 'SHORT',
+  MEDIUM = 'MEDIUM',
+  LONG = 'LONG'
 }
-
-
 
 type EagerBiography = {
   readonly [__modelMeta__]: {
@@ -80,7 +78,7 @@ type EagerBiography = {
   readonly thoughts?: (BiographyThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyBiography = {
   readonly [__modelMeta__]: {
@@ -94,13 +92,13 @@ type LazyBiography = {
   readonly thoughts: AsyncCollection<BiographyThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Biography = LazyLoading extends LazyLoadingDisabled ? EagerBiography : LazyBiography
+export declare type Biography = LazyLoading extends LazyLoadingDisabled ? EagerBiography : LazyBiography;
 
 export declare const Biography: (new (init: ModelInit<Biography>) => Biography) & {
   copyOf(source: Biography, mutator: (draft: MutableModel<Biography>) => MutableModel<Biography> | void): Biography;
-}
+};
 
 type EagerHealthReport = {
   readonly [__modelMeta__]: {
@@ -114,7 +112,7 @@ type EagerHealthReport = {
   readonly thoughts?: (HealthReportThoughts | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyHealthReport = {
   readonly [__modelMeta__]: {
@@ -128,13 +126,16 @@ type LazyHealthReport = {
   readonly thoughts: AsyncCollection<HealthReportThoughts>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type HealthReport = LazyLoading extends LazyLoadingDisabled ? EagerHealthReport : LazyHealthReport
+export declare type HealthReport = LazyLoading extends LazyLoadingDisabled ? EagerHealthReport : LazyHealthReport;
 
 export declare const HealthReport: (new (init: ModelInit<HealthReport>) => HealthReport) & {
-  copyOf(source: HealthReport, mutator: (draft: MutableModel<HealthReport>) => MutableModel<HealthReport> | void): HealthReport;
-}
+  copyOf(
+    source: HealthReport,
+    mutator: (draft: MutableModel<HealthReport>) => MutableModel<HealthReport> | void
+  ): HealthReport;
+};
 
 type EagerJournalEntry = {
   readonly [__modelMeta__]: {
@@ -149,7 +150,7 @@ type EagerJournalEntry = {
   readonly isLoading?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyJournalEntry = {
   readonly [__modelMeta__]: {
@@ -164,13 +165,16 @@ type LazyJournalEntry = {
   readonly isLoading?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type JournalEntry = LazyLoading extends LazyLoadingDisabled ? EagerJournalEntry : LazyJournalEntry
+export declare type JournalEntry = LazyLoading extends LazyLoadingDisabled ? EagerJournalEntry : LazyJournalEntry;
 
 export declare const JournalEntry: (new (init: ModelInit<JournalEntry>) => JournalEntry) & {
-  copyOf(source: JournalEntry, mutator: (draft: MutableModel<JournalEntry>) => MutableModel<JournalEntry> | void): JournalEntry;
-}
+  copyOf(
+    source: JournalEntry,
+    mutator: (draft: MutableModel<JournalEntry>) => MutableModel<JournalEntry> | void
+  ): JournalEntry;
+};
 
 type EagerNotification = {
   readonly [__modelMeta__]: {
@@ -187,7 +191,7 @@ type EagerNotification = {
   readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyNotification = {
   readonly [__modelMeta__]: {
@@ -204,13 +208,16 @@ type LazyNotification = {
   readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Notification = LazyLoading extends LazyLoadingDisabled ? EagerNotification : LazyNotification
+export declare type Notification = LazyLoading extends LazyLoadingDisabled ? EagerNotification : LazyNotification;
 
 export declare const Notification: (new (init: ModelInit<Notification>) => Notification) & {
-  copyOf(source: Notification, mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void): Notification;
-}
+  copyOf(
+    source: Notification,
+    mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void
+  ): Notification;
+};
 
 type EagerProject = {
   readonly [__modelMeta__]: {
@@ -226,7 +233,7 @@ type EagerProject = {
   readonly tasks?: (ProjectTasks | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyProject = {
   readonly [__modelMeta__]: {
@@ -242,13 +249,13 @@ type LazyProject = {
   readonly tasks: AsyncCollection<ProjectTasks>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Project = LazyLoading extends LazyLoadingDisabled ? EagerProject : LazyProject
+export declare type Project = LazyLoading extends LazyLoadingDisabled ? EagerProject : LazyProject;
 
 export declare const Project: (new (init: ModelInit<Project>) => Project) & {
   copyOf(source: Project, mutator: (draft: MutableModel<Project>) => MutableModel<Project> | void): Project;
-}
+};
 
 type EagerSubscriptionPlan = {
   readonly [__modelMeta__]: {
@@ -262,7 +269,7 @@ type EagerSubscriptionPlan = {
   readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazySubscriptionPlan = {
   readonly [__modelMeta__]: {
@@ -276,13 +283,18 @@ type LazySubscriptionPlan = {
   readonly owner?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type SubscriptionPlan = LazyLoading extends LazyLoadingDisabled ? EagerSubscriptionPlan : LazySubscriptionPlan
+export declare type SubscriptionPlan = LazyLoading extends LazyLoadingDisabled
+  ? EagerSubscriptionPlan
+  : LazySubscriptionPlan;
 
 export declare const SubscriptionPlan: (new (init: ModelInit<SubscriptionPlan>) => SubscriptionPlan) & {
-  copyOf(source: SubscriptionPlan, mutator: (draft: MutableModel<SubscriptionPlan>) => MutableModel<SubscriptionPlan> | void): SubscriptionPlan;
-}
+  copyOf(
+    source: SubscriptionPlan,
+    mutator: (draft: MutableModel<SubscriptionPlan>) => MutableModel<SubscriptionPlan> | void
+  ): SubscriptionPlan;
+};
 
 type EagerTask = {
   readonly [__modelMeta__]: {
@@ -298,7 +310,7 @@ type EagerTask = {
   readonly projects?: (ProjectTasks | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyTask = {
   readonly [__modelMeta__]: {
@@ -314,13 +326,13 @@ type LazyTask = {
   readonly projects: AsyncCollection<ProjectTasks>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Task = LazyLoading extends LazyLoadingDisabled ? EagerTask : LazyTask
+export declare type Task = LazyLoading extends LazyLoadingDisabled ? EagerTask : LazyTask;
 
 export declare const Task: (new (init: ModelInit<Task>) => Task) & {
   copyOf(source: Task, mutator: (draft: MutableModel<Task>) => MutableModel<Task> | void): Task;
-}
+};
 
 type EagerThought = {
   readonly [__modelMeta__]: {
@@ -348,7 +360,7 @@ type EagerThought = {
   readonly events?: (string | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyThought = {
   readonly [__modelMeta__]: {
@@ -376,13 +388,13 @@ type LazyThought = {
   readonly events?: (string | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Thought = LazyLoading extends LazyLoadingDisabled ? EagerThought : LazyThought
+export declare type Thought = LazyLoading extends LazyLoadingDisabled ? EagerThought : LazyThought;
 
 export declare const Thought: (new (init: ModelInit<Thought>) => Thought) & {
   copyOf(source: Thought, mutator: (draft: MutableModel<Thought>) => MutableModel<Thought> | void): Thought;
-}
+};
 
 type EagerUser = {
   readonly [__modelMeta__]: {
@@ -407,7 +419,7 @@ type EagerUser = {
   readonly biographyBrevity?: WritingBrevity | keyof typeof WritingBrevity | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyUser = {
   readonly [__modelMeta__]: {
@@ -432,13 +444,13 @@ type LazyUser = {
   readonly biographyBrevity?: WritingBrevity | keyof typeof WritingBrevity | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser;
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
+};
 
 type EagerBiographyThoughts = {
   readonly [__modelMeta__]: {
@@ -452,7 +464,7 @@ type EagerBiographyThoughts = {
   readonly thought: Thought;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyBiographyThoughts = {
   readonly [__modelMeta__]: {
@@ -466,13 +478,18 @@ type LazyBiographyThoughts = {
   readonly thought: AsyncItem<Thought>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type BiographyThoughts = LazyLoading extends LazyLoadingDisabled ? EagerBiographyThoughts : LazyBiographyThoughts
+export declare type BiographyThoughts = LazyLoading extends LazyLoadingDisabled
+  ? EagerBiographyThoughts
+  : LazyBiographyThoughts;
 
 export declare const BiographyThoughts: (new (init: ModelInit<BiographyThoughts>) => BiographyThoughts) & {
-  copyOf(source: BiographyThoughts, mutator: (draft: MutableModel<BiographyThoughts>) => MutableModel<BiographyThoughts> | void): BiographyThoughts;
-}
+  copyOf(
+    source: BiographyThoughts,
+    mutator: (draft: MutableModel<BiographyThoughts>) => MutableModel<BiographyThoughts> | void
+  ): BiographyThoughts;
+};
 
 type EagerHealthReportThoughts = {
   readonly [__modelMeta__]: {
@@ -486,7 +503,7 @@ type EagerHealthReportThoughts = {
   readonly thought: Thought;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyHealthReportThoughts = {
   readonly [__modelMeta__]: {
@@ -500,13 +517,18 @@ type LazyHealthReportThoughts = {
   readonly thought: AsyncItem<Thought>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type HealthReportThoughts = LazyLoading extends LazyLoadingDisabled ? EagerHealthReportThoughts : LazyHealthReportThoughts
+export declare type HealthReportThoughts = LazyLoading extends LazyLoadingDisabled
+  ? EagerHealthReportThoughts
+  : LazyHealthReportThoughts;
 
 export declare const HealthReportThoughts: (new (init: ModelInit<HealthReportThoughts>) => HealthReportThoughts) & {
-  copyOf(source: HealthReportThoughts, mutator: (draft: MutableModel<HealthReportThoughts>) => MutableModel<HealthReportThoughts> | void): HealthReportThoughts;
-}
+  copyOf(
+    source: HealthReportThoughts,
+    mutator: (draft: MutableModel<HealthReportThoughts>) => MutableModel<HealthReportThoughts> | void
+  ): HealthReportThoughts;
+};
 
 type EagerJournalEntryThoughts = {
   readonly [__modelMeta__]: {
@@ -520,7 +542,7 @@ type EagerJournalEntryThoughts = {
   readonly thought: Thought;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyJournalEntryThoughts = {
   readonly [__modelMeta__]: {
@@ -534,13 +556,18 @@ type LazyJournalEntryThoughts = {
   readonly thought: AsyncItem<Thought>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type JournalEntryThoughts = LazyLoading extends LazyLoadingDisabled ? EagerJournalEntryThoughts : LazyJournalEntryThoughts
+export declare type JournalEntryThoughts = LazyLoading extends LazyLoadingDisabled
+  ? EagerJournalEntryThoughts
+  : LazyJournalEntryThoughts;
 
 export declare const JournalEntryThoughts: (new (init: ModelInit<JournalEntryThoughts>) => JournalEntryThoughts) & {
-  copyOf(source: JournalEntryThoughts, mutator: (draft: MutableModel<JournalEntryThoughts>) => MutableModel<JournalEntryThoughts> | void): JournalEntryThoughts;
-}
+  copyOf(
+    source: JournalEntryThoughts,
+    mutator: (draft: MutableModel<JournalEntryThoughts>) => MutableModel<JournalEntryThoughts> | void
+  ): JournalEntryThoughts;
+};
 
 type EagerProjectThoughts = {
   readonly [__modelMeta__]: {
@@ -554,7 +581,7 @@ type EagerProjectThoughts = {
   readonly thought: Thought;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyProjectThoughts = {
   readonly [__modelMeta__]: {
@@ -568,13 +595,18 @@ type LazyProjectThoughts = {
   readonly thought: AsyncItem<Thought>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type ProjectThoughts = LazyLoading extends LazyLoadingDisabled ? EagerProjectThoughts : LazyProjectThoughts
+export declare type ProjectThoughts = LazyLoading extends LazyLoadingDisabled
+  ? EagerProjectThoughts
+  : LazyProjectThoughts;
 
 export declare const ProjectThoughts: (new (init: ModelInit<ProjectThoughts>) => ProjectThoughts) & {
-  copyOf(source: ProjectThoughts, mutator: (draft: MutableModel<ProjectThoughts>) => MutableModel<ProjectThoughts> | void): ProjectThoughts;
-}
+  copyOf(
+    source: ProjectThoughts,
+    mutator: (draft: MutableModel<ProjectThoughts>) => MutableModel<ProjectThoughts> | void
+  ): ProjectThoughts;
+};
 
 type EagerProjectTasks = {
   readonly [__modelMeta__]: {
@@ -588,7 +620,7 @@ type EagerProjectTasks = {
   readonly task: Task;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyProjectTasks = {
   readonly [__modelMeta__]: {
@@ -602,13 +634,16 @@ type LazyProjectTasks = {
   readonly task: AsyncItem<Task>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type ProjectTasks = LazyLoading extends LazyLoadingDisabled ? EagerProjectTasks : LazyProjectTasks
+export declare type ProjectTasks = LazyLoading extends LazyLoadingDisabled ? EagerProjectTasks : LazyProjectTasks;
 
 export declare const ProjectTasks: (new (init: ModelInit<ProjectTasks>) => ProjectTasks) & {
-  copyOf(source: ProjectTasks, mutator: (draft: MutableModel<ProjectTasks>) => MutableModel<ProjectTasks> | void): ProjectTasks;
-}
+  copyOf(
+    source: ProjectTasks,
+    mutator: (draft: MutableModel<ProjectTasks>) => MutableModel<ProjectTasks> | void
+  ): ProjectTasks;
+};
 
 type EagerTaskThoughts = {
   readonly [__modelMeta__]: {
@@ -622,7 +657,7 @@ type EagerTaskThoughts = {
   readonly thought: Thought;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyTaskThoughts = {
   readonly [__modelMeta__]: {
@@ -636,10 +671,13 @@ type LazyTaskThoughts = {
   readonly thought: AsyncItem<Thought>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type TaskThoughts = LazyLoading extends LazyLoadingDisabled ? EagerTaskThoughts : LazyTaskThoughts
+export declare type TaskThoughts = LazyLoading extends LazyLoadingDisabled ? EagerTaskThoughts : LazyTaskThoughts;
 
 export declare const TaskThoughts: (new (init: ModelInit<TaskThoughts>) => TaskThoughts) & {
-  copyOf(source: TaskThoughts, mutator: (draft: MutableModel<TaskThoughts>) => MutableModel<TaskThoughts> | void): TaskThoughts;
-}
+  copyOf(
+    source: TaskThoughts,
+    mutator: (draft: MutableModel<TaskThoughts>) => MutableModel<TaskThoughts> | void
+  ): TaskThoughts;
+};

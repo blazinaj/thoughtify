@@ -26,13 +26,13 @@ const JournalPage = () => {
   const smallToMid = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
 
   const cadenceOptions = [
-      "CURRENT",
+    'CURRENT',
     JournalCadence.DAILY,
     JournalCadence.WEEKLY,
     JournalCadence.MONTHLY,
     JournalCadence.YEARLY,
-      'BIOGRAPHY',
-  ]
+    'BIOGRAPHY'
+  ];
 
   return (
     <Page title="Thoughtify Journal">
