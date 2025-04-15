@@ -61,26 +61,6 @@ export const useThoughtsState = ({ journalEntry }) => {
 
   const [visibleAttributes, setVisibleAttributes] = useState(() => initializeVisibleAttributes(extract) || {});
 
-  // Initializes the visible attributes based on the extract
-  // useEffect(() => {
-  //   if (extract) {
-  //     setVisibleAttributes(attributes => {
-  //       const newAttributes = {...attributes};
-  //       // key is the attribute name, values is an array of values
-  //       // for example: { emotions: ['happy', 'sad'] }
-  //       // these are saved in the dict like this: { 'emotions-happy': true, 'emotions-sad': true }
-  //       for (const [key, values] of Object.entries(extract)) {
-  //         for (const value of values) {
-  //           // uses key-value to avoid potential conflicts. Such as an emotion named 'happy' and a person named 'happy'
-  //           const attributeId = `${key}-${value}`;
-  //           newAttributes[attributeId] = newAttributes[attributeId] ?? true;
-  //         }
-  //       }
-  //       return newAttributes;
-  //     })
-  //   }
-  // }, [extract])
-
   const [showPositiveThoughts, setShowPositiveThoughts] = useState(true);
   const [showNegativeThoughts, setShowNegativeThoughts] = useState(false);
   const [showNeutralThoughts, setShowNeutralThoughts] = useState(true);

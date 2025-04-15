@@ -1,7 +1,7 @@
 import { useDataAccordion } from '../../../utils/hooks/useDataAccordion';
 import { Thought } from '../../../models';
 import { ThoughtDetails } from './ThoughtDetails';
-import { Card, Link, Stack, Typography, CardActionArea } from '@mui/material';
+import {Card, Link, Stack, Typography, CardActionArea, Grid} from '@mui/material';
 import TimelineOppositeContent, { timelineOppositeContentClasses } from '@mui/lab/TimelineOppositeContent';
 import { timelineItemClasses, Timeline } from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -12,7 +12,9 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useMemo } from 'react';
+import {useEffect, useMemo, useState} from 'react';
+import {ThoughtExtractAttributeChips} from "./ThoughtExtracts/components/ThoughtExtractAttributeChips";
+import {ThoughtExtractAttributeChip} from "./ThoughtExtracts/components/ThoughtExtractAttributeChip";
 
 /**
  * A list of Thoughts in Accordion form
@@ -22,59 +24,6 @@ import { useMemo } from 'react';
  * @constructor
  */
 export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
-  /**
-   * If a journal entry is passed in, filter the thoughts by the journal entry id.
-   * @returns {(function(*): *)|undefined}
-   */
-  const getPredicate = () => {
-    if (journalEntry?.id) {
-      return (item) => item.journalEntries.journalEntry.id.eq(journalEntry.id);
-    }
-    return undefined;
-  };
-
-  /**
-   * The thought border is based on the overall tone of the thought.
-   * Green for positive, orange for negative, grey for neutral.
-   * @param item
-   * @returns {string}
-   */
-  const getBorder = (item) => {
-    if (item?.extract?.overallTone === 'positive') {
-      return '2px solid green';
-    }
-    if (item?.extract?.overallTone === 'negative') {
-      return '2px solid #ff9800'; // mui warning
-    }
-    return '2px solid grey';
-  };
-
-  const accordion = useDataAccordion({
-    items: thoughts,
-    model: Thought,
-    typename: 'Thought',
-    titleField: (item) => {
-      return (
-        <Stack direction={'row'} spacing={2}>
-          <Typography onClick={(e) => e.stopPropagation()}>
-            <Link href={`/thoughts/${item?.id}`} underline="hover" color={'inherit'}>
-              {item?.input}
-            </Link>
-          </Typography>
-        </Stack>
-      );
-    },
-    detailsComponent: <ThoughtDetails />,
-    sortFunction: (a, b) => (b?.date || b?.createdAt)?.localeCompare(a?.date || a?.createdAt),
-    predicate: getPredicate(),
-    enableSubscription: true,
-    accordionStyle: (item) => {
-      return {
-        borderLeft: getBorder(item)
-      };
-    },
-    dateField: 'date'
-  });
 
   const isSmall = true;
 
@@ -93,7 +42,6 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
         }
         // get the MM-DD-YYYY part of the date
         const date = thoughtDate.split('T')[0]; // Get the date part
-        console.log({ date });
         if (!groupedThoughts[date]) {
           groupedThoughts[date] = [];
         }
@@ -105,11 +53,6 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
   const groupedThoughts = useMemo(() => {
     return groupThoughtsByDate(thoughts);
   }, [thoughts, journalEntry?.id]); // only re-run when thoughts or journalEntry changes)
-
-  // by the day
-
-  // Group thoughts by date
-  // const groupedThoughts = groupThoughtsByDate(thoughts);
 
   return (
     <Timeline
@@ -144,26 +87,13 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
               <Stack spacing={2}>
                 {isSmall && <Typography color="textSecondary">{formatDate(date, 'DAILY')}</Typography>}
                 {thoughts.map((thought) => {
+
                   return (
-                    <Card>
-                      <CardActionArea
-                        to={`/thoughts/${thought?.id}`}
-                        sx={{ p: 1, pr: 2, pl: 2 }}
-                        component={RouterLink}
-                        // to="/questions"
-                      >
-                        {/*just the time from thought.date*/}
-                        <Stack spacing={2}>
-                          <Typography color="textSecondary">
-                            {new Date(thought.date).toLocaleTimeString([], {
-                              hour: '2-digit',
-                              minute: '2-digit'
-                            })}
-                          </Typography>
-                          {thought?.input}
-                        </Stack>
-                      </CardActionArea>
-                    </Card>
+                    <ThoughtInputText
+                        key={thought.id}
+                        thought={thought}
+                        extract={extract}
+                    />
                   );
                 })}
               </Stack>
@@ -181,30 +111,109 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
 // such as names, places, projects, etc.
 // extract is in form: {people: ['bob', 'alice'], projects: ['project 1', 'project 2']}
 // thought is in form: {input: 'I went to the park with bob and alice', extract: {people: ['bob', 'alice'], projects: ['project 1', 'project 2']}}
-const ThoughtInputText = ({ thought, extract }) => {
-  const { people, projects, places } = extract;
-  const input = thought.input;
+const ThoughtInputText = ({ thought }) => {
 
-  // create a regex for each word in the extract
-  // same as below but make the spread safe for missing attributes
+  const [relatedProjects, setRelatedProjects] = useState([]);
 
-  const regex = new RegExp(`(${[...(people ?? []), ...(projects ?? []), ...(places ?? [])].join('|')})`, 'g');
-
-  // split the input by the regex
-  const parts = input.split(regex);
+  useEffect(() => {
+    const fetchRelatedProjects = async () => {
+      const projectLinks = await thought.relatedProjects?.toArray();
+      const projects = []
+        for (const projectLink of projectLinks) {
+            const project = await projectLink?.project;
+            // only push if not a duplicate
+            if (project && !projects.some((p) => p.id === project.id)) {
+              projects.push(project);
+            }
+        }
+      setRelatedProjects(projects);
+    };
+    fetchRelatedProjects();
+  }, [thought])
 
   return (
-    <Typography>
-      {parts.map((part, index) => {
-        if ([...(people ?? []), ...(projects ?? []), ...(places ?? [])].includes(part)) {
-          return (
-            <Link key={index} href={`/thoughts/${thought.id}`} underline="hover" color={'inherit'}>
-              {part}
-            </Link>
-          );
-        }
-        return part;
-      })}
-    </Typography>
+      <Card>
+        <CardActionArea
+            to={`/thoughts/${thought?.id}`}
+            sx={{ p: 1, pr: 2, pl: 2 }}
+            component={RouterLink}
+            // to="/questions"
+        >
+          {/*just the time from thought.date*/}
+          <Stack spacing={2}>
+            <Typography color="textSecondary">
+              {new Date(thought.date).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </Typography>
+            {thought?.input}
+            <Grid container spacing={1}>
+              {
+              relatedProjects.map((project) => {
+                return (
+                    <Grid item>
+                      <ThoughtExtractAttributeChip type={'projects'} value={project} />
+                    </Grid>
+                )
+              })
+            }              {
+              thought.people?.map((person) => {
+                return (
+                    <Grid item>
+                      <ThoughtExtractAttributeChip type={'people'} value={person} />
+                    </Grid>
+                )
+              })
+            }
+              {
+                thought.categories?.map((item) => {
+                  return (
+                      <Grid item>
+                        <ThoughtExtractAttributeChip type={'categories'} value={item} />
+                      </Grid>
+                  )
+                })
+              }
+              {
+                thought.places?.map((item) => {
+                  return (
+                      <Grid item>
+                        <ThoughtExtractAttributeChip type={'places'} value={item} />
+                      </Grid>
+                  )
+                })
+              }
+              {
+                thought.events?.map((item) => {
+                  return (
+                      <Grid item>
+                        <ThoughtExtractAttributeChip type={'events'} value={item} />
+                      </Grid>
+                  )
+                })
+              }
+              {
+                thought.emotions?.map((item) => {
+                  return (
+                      <Grid item>
+                        <ThoughtExtractAttributeChip type={'emotions'} value={item} />
+                      </Grid>
+                  )
+                })
+              }
+              {
+                thought.reminders?.map((item) => {
+                  return (
+                      <Grid item>
+                        <ThoughtExtractAttributeChip type={'reminders'} value={item} />
+                      </Grid>
+                  )
+                })
+              }
+            </Grid>
+          </Stack>
+        </CardActionArea>
+      </Card>
   );
 };

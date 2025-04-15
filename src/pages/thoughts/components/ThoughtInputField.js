@@ -17,6 +17,13 @@ const RootStyle = styled('div')(({ theme }) => ({
  * Input field for submitting Thoughts.
  */
 export default function ThoughtInputField({ disabled, onSubmit, showDateSelector = false, dateConfig = {}, ...other }) {
+
+  const { transcript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition({
+    clearTranscriptOnListen: true,
+    transcribing: true
+  });
+  const startListening = () => SpeechRecognition.startListening({ continuous: true });
+
   /**
    * State for the input field of the Thought.
    */
@@ -61,10 +68,13 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
    * @returns {Promise<void|string>}
    */
   const handleSend = async () => {
+    SpeechRecognition.stopListening();
+
     if (!message) {
       return '';
     }
     if (onSubmit) {
+
       onSubmit({
         input: message,
         date: showDateSelector ? new Date(form.input.date).toISOString() : new Date().toISOString()
@@ -73,11 +83,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     return setMessage('');
   };
 
-  const { transcript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition({
-    clearTranscriptOnListen: true,
-    transcribing: true
-  });
-  const startListening = () => SpeechRecognition.startListening({ continuous: true });
+
 
   useEffect(() => {
     if (transcript) {

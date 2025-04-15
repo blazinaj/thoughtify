@@ -88,7 +88,6 @@ export const ThoughtDetails = ({ item }) => {
                       // list of projects with name, status, and task progress
                       projects?.map((project) => {
                         const tasks = project.tasks;
-                        console.log({ tasks });
                         const completedTasks = tasks.filter((projectTask) => projectTask.status === 'COMPLETED');
                         const inProgressTasks = tasks.filter((projectTask) => projectTask.status === 'IN_PROGRESS');
                         const value = (completedTasks.length / tasks.length) * 100;
