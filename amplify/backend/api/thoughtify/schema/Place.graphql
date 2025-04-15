@@ -1,0 +1,8 @@
+type Place @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    thoughts: [Thought] @manyToMany(relationName: "PersonThoughts")
+    address: String
+    comments: [Comment]
+}

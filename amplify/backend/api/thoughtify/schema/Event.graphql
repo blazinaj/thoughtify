@@ -1,0 +1,9 @@
+type Event @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    thoughts: [Thought] @manyToMany(relationName: "PersonThoughts")
+    address: String
+    date: AWSDateTime
+    comments: [Comment]
+}

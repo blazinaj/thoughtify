@@ -1,0 +1,19 @@
+type Person @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    name: String!
+    description: String
+    thoughts: [Thought] @manyToMany(relationName: "PersonThoughts")
+    relationShip: PersonRelationship
+    comments: [Comment]
+}
+
+enum PersonRelationship {
+    FRIEND
+    FAMILY
+    COLLEAGUE
+    ACQUAINTANCE
+    PARTNER
+    SIBLING
+    CHILD
+    PARENT
+}

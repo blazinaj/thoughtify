@@ -19,6 +19,8 @@ type Thought @model @auth(rules: [{allow: owner}]) {
     questions: [String]
     places: [String]
     events: [String]
+
+    comments: [Comment]
 }
 
 enum ThoughtAttributes {
