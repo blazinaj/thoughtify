@@ -1,18 +1,17 @@
-import {SignatureV4} from "@aws-sdk/signature-v4";
-import {defaultProvider} from "@aws-sdk/credential-provider-node";
-import {HttpRequest} from "@aws-sdk/protocol-http";
+import { SignatureV4 } from '@aws-sdk/signature-v4';
+import { defaultProvider } from '@aws-sdk/credential-provider-node';
+import { HttpRequest } from '@aws-sdk/protocol-http';
 // eslint-disable-next-line import/no-named-default
-import {default as fetch, Request} from "node-fetch";
-import crypto from "@aws-crypto/sha256-js";
-import {aws_appsync_graphqlEndpoint} from "../../aws-exports.js";
+import { default as fetch, Request } from 'node-fetch';
+import crypto from '@aws-crypto/sha256-js';
+import { aws_appsync_graphqlEndpoint } from '../../aws-exports.js';
 
 const AWS_REGION = process.env.AWS_REGION || 'us-west-2';
 const { Sha256 } = crypto;
 
 export const handleGraphql = async ({ query, variables }) => {
-
   // eslint-disable-next-line camelcase
-  const GRAPHQL_ENDPOINT = aws_appsync_graphqlEndpoint
+  const GRAPHQL_ENDPOINT = aws_appsync_graphqlEndpoint;
 
   const endpoint = new URL(GRAPHQL_ENDPOINT);
 
@@ -65,4 +64,4 @@ export const handleGraphql = async ({ query, variables }) => {
     // },
     body: JSON.stringify(body)
   };
-}
+};

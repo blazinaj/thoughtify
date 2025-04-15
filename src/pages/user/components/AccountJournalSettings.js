@@ -21,7 +21,7 @@ import {
 import { UploadAvatar } from '../../../demo/components/upload';
 import { fData } from '../../../utils/formatNumber';
 import { DataStore } from '@aws-amplify/datastore';
-import {User, WritingBrevity, WritingStyle} from '../../../models';
+import { User, WritingBrevity, WritingStyle } from '../../../models';
 // redux
 // utils
 //
@@ -72,25 +72,21 @@ export default function AccountJournalSettings() {
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Writing Style</InputLabel>
                     <Select label="Writing Style" {...getFieldProps('journalWritingStyle')}>
-                      {
-                        Object.values(WritingStyle).map((style) => (
-                            <MenuItem key={style} value={style}>
-                                {style}
-                            </MenuItem>
-                        ))
-                      }
+                      {Object.values(WritingStyle).map((style) => (
+                        <MenuItem key={style} value={style}>
+                          {style}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Brevity</InputLabel>
                     <Select label="Brevity" {...getFieldProps('journalBrevity')}>
-                      {
-                        Object.values(WritingBrevity).map((length) => (
-                            <MenuItem key={length} value={length}>
-                              {length}
-                            </MenuItem>
-                        ))
-                      }
+                      {Object.values(WritingBrevity).map((length) => (
+                        <MenuItem key={length} value={length}>
+                          {length}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </Stack>

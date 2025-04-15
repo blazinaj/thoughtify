@@ -73,23 +73,23 @@ export default function Router() {
         ),
         children: [
           { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
-            {path: 'thoughts/categories/:id', exact: true, element: <CategoryDetailsPage />},
-            {path: 'thoughts/projects/:id', exact: true, element: <ProjectDetailsPage />},
-            {path: 'thoughts/people/:id', exact: true, element: <PeopleDetailsPage />},
-            {path: 'thoughts/places/:id', exact: true, element: <PlaceDetailsPage />},
-            {path: 'thoughts/emotions/:id', exact: true, element: <EmotionDetailsPage />},
-            {path: 'thoughts/reminders/:id', exact: true, element: <ReminderDetailsPage />},
-            {path: 'thoughts/questions/:id', exact: true, element: <QuestionDetailsPage />},
-            {path: 'thoughts/tasks/:id', exact: true, element: <TaskDetailsPage />},
-            {path: 'thoughts/events/:id', exact: true, element: <EventDetailsPage />},
-            {path: 'thoughts/overallTone/:id', exact: true, element: <OverallToneDetailsPage />},
-            {path: 'thoughts/journals/:id', exact: true, element: <JournalDetailsPage />},
-            { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
-            {path: 'projects', exact: true, element: <ProjectsPage />},
-            {path: 'projects/:id', exact: true, element: <ProjectDetailsPage />},
+          { path: 'thoughts/categories/:id', exact: true, element: <CategoryDetailsPage /> },
+          { path: 'thoughts/projects/:id', exact: true, element: <ProjectDetailsPage /> },
+          { path: 'thoughts/people/:id', exact: true, element: <PeopleDetailsPage /> },
+          { path: 'thoughts/places/:id', exact: true, element: <PlaceDetailsPage /> },
+          { path: 'thoughts/emotions/:id', exact: true, element: <EmotionDetailsPage /> },
+          { path: 'thoughts/reminders/:id', exact: true, element: <ReminderDetailsPage /> },
+          { path: 'thoughts/questions/:id', exact: true, element: <QuestionDetailsPage /> },
+          { path: 'thoughts/tasks/:id', exact: true, element: <TaskDetailsPage /> },
+          { path: 'thoughts/events/:id', exact: true, element: <EventDetailsPage /> },
+          { path: 'thoughts/overallTone/:id', exact: true, element: <OverallToneDetailsPage /> },
+          { path: 'thoughts/journals/:id', exact: true, element: <JournalDetailsPage /> },
+          { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
+          { path: 'projects', exact: true, element: <ProjectsPage /> },
+          { path: 'projects/:id', exact: true, element: <ProjectDetailsPage /> },
 
           { path: 'journal', element: <ThoughtsPage /> },
-            {path: 'journal/:id', exact: true, element: <CategoryDetailsPage />},
+          { path: 'journal/:id', exact: true, element: <CategoryDetailsPage /> },
           { path: 'biography', element: <BiographyPage /> },
           { path: 'user/*', element: <UserAccountPage /> },
           { path: 'health', element: <HealthPage /> }
@@ -118,19 +118,19 @@ export default function Router() {
 }
 
 // IMPORT COMPONENTS
-const ThoughtsPage = Loadable(lazy(() => import('./thoughts/ThoughtsPage')));
-const PlaceDetailsPage = Loadable(lazy(() => import('./thoughts/PlaceDetailsPage')));
-const ThoughtDetailsPage = Loadable(lazy(() => import('./thoughts/ThoughtDetailsPage')));
-const ProjectDetailsPage = Loadable(lazy(() => import('./thoughts/ProjectDetailsPage')));
-const ProjectsPage = Loadable(lazy(() => import('./thoughts/ProjectsPage')));
-const CategoryDetailsPage = Loadable(lazy(() => import('./thoughts/CategoryDetailsPage')));
-const EmotionDetailsPage = Loadable(lazy(() => import('./thoughts/EmotionDetailsPage')));
-const ReminderDetailsPage = Loadable(lazy(() => import('./thoughts/ReminderDetailsPage')));
-const QuestionDetailsPage = Loadable(lazy(() => import('./thoughts/QuestionDetailsPage')));
-const TaskDetailsPage = Loadable(lazy(() => import('./thoughts/TaskDetailsPage')));
-const EventDetailsPage = Loadable(lazy(() => import('./thoughts/EventDetailsPage')));
-const PeopleDetailsPage = Loadable(lazy(() => import('./thoughts/PeopleDetailsPage')));
-const OverallToneDetailsPage = Loadable(lazy(() => import('./thoughts/OverallToneDetailsPage')));
+const ThoughtsPage = Loadable(lazy(() => import('./journal/ThoughtsPage')));
+const PlaceDetailsPage = Loadable(lazy(() => import('./places/PlaceDetailsPage')));
+const ThoughtDetailsPage = Loadable(lazy(() => import('./journal/ThoughtDetailsPage')));
+const ProjectDetailsPage = Loadable(lazy(() => import('./projects/ProjectDetailsPage')));
+const ProjectsPage = Loadable(lazy(() => import('./projects/ProjectsPage')));
+const CategoryDetailsPage = Loadable(lazy(() => import('./journal/CategoryDetailsPage')));
+const EmotionDetailsPage = Loadable(lazy(() => import('./journal/EmotionDetailsPage')));
+const ReminderDetailsPage = Loadable(lazy(() => import('./reminders/ReminderDetailsPage')));
+const QuestionDetailsPage = Loadable(lazy(() => import('./questions/QuestionDetailsPage')));
+const TaskDetailsPage = Loadable(lazy(() => import('./tasks/TaskDetailsPage')));
+const EventDetailsPage = Loadable(lazy(() => import('./events/EventDetailsPage')));
+const PeopleDetailsPage = Loadable(lazy(() => import('./people/PeopleDetailsPage')));
+const OverallToneDetailsPage = Loadable(lazy(() => import('./journal/OverallToneDetailsPage')));
 const JournalPage = Loadable(lazy(() => import('./journal/JournalPage')));
 const JournalDetailsPage = Loadable(lazy(() => import('./journal/JournalDetailsPage')));
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));

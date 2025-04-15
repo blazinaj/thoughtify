@@ -27,13 +27,18 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
   if (type === 'projects') {
     route = `/projects/${value}`;
   }
-  const button = <Chip
+  const button = (
+    <Chip
       title={sentenceCase(type)}
       component={Link}
       sx={{
-        cursor: 'pointer',
+        cursor: 'pointer'
       }}
-      label={sentenceCase(value)} size={'small'} to={`/thoughts/${type}/${value}`} />;
+      label={sentenceCase(value)}
+      size={'small'}
+      to={`/thoughts/${type}/${value}`}
+    />
+  );
   // const children = <ThoughtExtractInsight type={type} value={value} />;
 
   // const modal = useModal({
@@ -42,5 +47,5 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
   //   button
   // });
 
-  return button
+  return button;
 };

@@ -6,7 +6,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
-import {Link, Typography} from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import Timeline from '@mui/lab/Timeline';
 import * as React from 'react';
 
@@ -37,7 +37,7 @@ export const ThoughtExtractTimeline = ({ insight }) => {
       {insight.timeline
         ?.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
         ?.map((timelineEntry, index) => {
-            const isLastEntry = index === insight.timeline.length - 1;
+          const isLastEntry = index === insight.timeline.length - 1;
           return (
             <TimelineItem
               key={`journal-timeline-entry-${timelineEntry.timestamp}`}
@@ -54,19 +54,15 @@ export const ThoughtExtractTimeline = ({ insight }) => {
 
               <TimelineSeparator>
                 <TimelineDot />
-                  {
-                    !isLastEntry && (
-                          <TimelineConnector />
-                      )
-                  }
+                {!isLastEntry && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
                 {isSmall && (
                   <Typography color="textSecondary">{formatDate(timelineEntry.timestamp, 'DAILY')}</Typography>
                 )}
-                  <Link href={`/thoughts/${timelineEntry?.id}`} underline="hover" color={'inherit'}>
-                      {timelineEntry?.summary}
-                  </Link>
+                <Link href={`/thoughts/${timelineEntry?.id}`} underline="hover" color={'inherit'}>
+                  {timelineEntry?.summary}
+                </Link>
               </TimelineContent>
             </TimelineItem>
           );

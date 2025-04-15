@@ -13,7 +13,6 @@ import * as React from 'react';
  * @constructor
  */
 export const ThoughtExtractAttributes = ({ insight, value: attributeValue }) => {
-
   return (
     <Masonry
       spacing={2}
@@ -29,17 +28,23 @@ export const ThoughtExtractAttributes = ({ insight, value: attributeValue }) => 
     >
       {Object.entries(insight)
         .filter(([key, value]) => {
-          return key !== 'thoughts' && key !== 'timeline' && value !== null && value !== undefined && value.length > 0 && value !== attributeValue
+          return (
+            key !== 'thoughts' &&
+            key !== 'timeline' &&
+            value !== null &&
+            value !== undefined &&
+            value.length > 0 &&
+            value !== attributeValue
+          );
         })
         .map(([key, value]) => {
-            console.log({key, value})
           if (!key || !value || value?.length < 1) {
             return null;
           }
           // if the value is an array of one and is only this attribute, then don't show it
-            if (Array.isArray(value) && value.length === 1 && value[0] === attributeValue) {
-                return null;
-            }
+          if (Array.isArray(value) && value.length === 1 && value[0] === attributeValue) {
+            return null;
+          }
           return (
             <Card
               title={sentenceCase(key)}

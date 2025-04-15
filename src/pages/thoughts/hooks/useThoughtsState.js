@@ -1,7 +1,7 @@
-import {useDatastore} from '../../../utils/hooks/useDatastore';
-import {Thought, ThoughtAttributes} from '../../../models';
-import {useEffect, useMemo, useState} from 'react';
-import {useThoughtExtractData} from '../components/ThoughtExtracts/hooks/useThoughtExtractData';
+import { useDatastore } from '../../../utils/hooks/useDatastore';
+import { Thought, ThoughtAttributes } from '../../../models';
+import { useEffect, useMemo, useState } from 'react';
+import { useThoughtExtractData } from '../components/ThoughtExtracts/hooks/useThoughtExtractData';
 
 /**
  * Custom hook to manage the state of the thoughts page.

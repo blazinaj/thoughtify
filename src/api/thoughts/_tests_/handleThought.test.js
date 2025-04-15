@@ -1,4 +1,4 @@
-import {handleThought} from "../handleThought";
+import { handleThought } from '../handleThought';
 
 jest.setTimeout(30000);
 
@@ -12,24 +12,24 @@ describe('handleThought', () => {
       {
         id: '1',
         name: 'Project 1',
-        status: 'IN_PROGRESS',
+        status: 'IN_PROGRESS'
       }
-    ]
+    ];
 
-    const result = await handleThought({thought});
+    const result = await handleThought({ thought });
 
     expect(result).toEqual({
       ...thought,
       projects: [
         {
           name: 'Project 1',
-          status: 'in progress',
+          status: 'in progress'
         },
         {
           name: 'Project 2',
-          status: 'completed',
-        },
-      ],
+          status: 'completed'
+        }
+      ]
     });
-  })
-})
+  });
+});

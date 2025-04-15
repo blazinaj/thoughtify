@@ -3,7 +3,6 @@ import { Notification, User } from '../../models';
 import { createThought } from '../thoughts/createThought';
 
 export const setupUserAccount = async ({ cognitoUser, userData }) => {
-
   const username = cognitoUser?.username;
   const firstName = cognitoUser?.attributes?.given_name || userData?.firstName;
   const lastName = cognitoUser?.attributes?.family_name || userData?.lastName;
