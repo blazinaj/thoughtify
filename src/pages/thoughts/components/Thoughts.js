@@ -90,6 +90,36 @@ const Thoughts = ({ journalEntry }) => {
                     )}
                 </Select>
 
+                {/* number of thoughts */}
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '200px',
+                    height: '40px',
+                }}
+                     >
+                    {
+                        thoughts?.length === 0 && (
+                            'No Thoughts'
+                        )
+                    }
+                    {
+                        thoughts?.length === 1 && (
+                            '1 Thought'
+                        )
+
+                            
+                    }
+                    {
+                        thoughts?.length > 1 && (
+                            `${thoughts.length} Thoughts`
+                        )
+
+
+                    }
+                </Box>
+
                 <Button
                     variant="outlined"
                     onClick={() => setShowFilters(!showFilters)}

@@ -1,8 +1,15 @@
-import { useModal } from '../../../../../utils/hooks/useModal';
-import { ThoughtExtractInsight } from './ThoughtExtractInsight';
-import { Chip } from '@mui/material';
-import { sentenceCase } from 'change-case';
-import { Link } from 'react-router-dom';
+import {Chip} from '@mui/material';
+import {sentenceCase} from 'change-case';
+import {Link} from 'react-router-dom';
+import {
+  Alarm, Category,
+  Event,
+  FaceRetouchingNatural,
+  Map as MapIcon,
+  Person,
+  PsychologyAlt,
+  Workspaces
+} from "@mui/icons-material";
 
 /**
  * Displays the value of a Thought Extract Attribute as a chip that opens a modal
@@ -22,11 +29,25 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
     value = 'unknown';
   }
 
-  const title = `${sentenceCase(type)}: ${value}`;
-  let route = `/thoughts/${type}/${value}`;
+  let linkId = value;
+  let label = value;
+
   if (type === 'projects') {
-    route = `/projects/${value}`;
+    linkId = value.id;
+    label = value.name;
   }
+
+  const iconMap = {
+    'people': <Person/>,
+    'places': <MapIcon/>,
+    'emotions': <FaceRetouchingNatural/>,
+    'projects': <Workspaces/>,
+    'events': <Event/>,
+    'reminders': <Alarm/>,
+    'questions': <PsychologyAlt/>,
+    'categories': <Category/>,
+  }
+
   const button = (
     <Chip
       title={sentenceCase(type)}
@@ -34,18 +55,12 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
       sx={{
         cursor: 'pointer'
       }}
-      label={sentenceCase(value)}
+      label={label && sentenceCase(label)}
       size={'small'}
-      to={`/thoughts/${type}/${value}`}
+      to={`/thoughts/${type}/${linkId}`}
+      icon={iconMap[type]}
     />
   );
-  // const children = <ThoughtExtractInsight type={type} value={value} />;
-
-  // const modal = useModal({
-  //   title,
-  //   children,
-  //   button
-  // });
 
   return button;
 };
