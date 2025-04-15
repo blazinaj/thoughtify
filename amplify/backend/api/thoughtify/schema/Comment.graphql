@@ -1,0 +1,6 @@
+type Comment {
+    id: ID!
+    date: AWSDateTime
+    content: String
+}
+

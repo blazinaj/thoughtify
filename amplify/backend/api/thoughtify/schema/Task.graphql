@@ -6,6 +6,7 @@ type Task @model @auth(rules: [{allow: owner}]) {
     status: TaskStatus
     thoughts: [Thought] @manyToMany(relationName: "TaskThoughts")
     projects: [Project] @manyToMany(relationName: "ProjectTasks")
+    comments: [Comment]
 }
 
 enum TaskStatus {

@@ -6,7 +6,6 @@ import { useMemo } from 'react';
 import shape from './shape';
 import typography from './typography';
 import breakpoints from './breakpoints';
-import { adaptV4Theme } from '@mui/material';
 import componentsOverride from './overrides';
 
 /**
@@ -83,7 +82,7 @@ export const useTheme = () => {
     [themeDirection, isLight, setColor]
   );
 
-  const theme = createTheme(adaptV4Theme(themeOptions));
+  const theme = createTheme(themeOptions);
   theme.components = componentsOverride(theme);
 
   return {
