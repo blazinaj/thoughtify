@@ -1,19 +1,15 @@
-import { useDataAccordion } from '../../../utils/hooks/useDataAccordion';
-import { Thought } from '../../../models';
-import { ThoughtDetails } from './ThoughtDetails';
-import {Card, Link, Stack, Typography, CardActionArea, Grid} from '@mui/material';
-import TimelineOppositeContent, { timelineOppositeContentClasses } from '@mui/lab/TimelineOppositeContent';
-import { timelineItemClasses, Timeline } from '@mui/lab';
+import {Card, CardActionArea, Grid, Stack, Typography} from '@mui/material';
+import TimelineOppositeContent, {timelineOppositeContentClasses} from '@mui/lab/TimelineOppositeContent';
+import {Timeline, timelineItemClasses} from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
-import { formatDate } from '../../../api/journal/createJournalTimeline';
+import {formatDate} from '../../../api/journal/createJournalTimeline';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import * as React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import {useEffect, useMemo, useState} from 'react';
-import {ThoughtExtractAttributeChips} from "./ThoughtExtracts/components/ThoughtExtractAttributeChips";
+import {Link as RouterLink} from 'react-router-dom';
 import {ThoughtExtractAttributeChip} from "./ThoughtExtracts/components/ThoughtExtractAttributeChip";
 
 /**
@@ -71,6 +67,7 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
         return (
           <TimelineItem
             key={`journal-timeline-entry-${date}`}
+            id={`journal-timeline-entry-${index}`}
             sx={{
               borderRadius: '16px'
             }}

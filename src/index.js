@@ -50,6 +50,12 @@ import Amplify from '@aws-amplify/core';
 import awsmobile from './aws-exports';
 import { Analytics } from '@aws-amplify/analytics';
 
+import "intro.js/introjs.css";
+import "intro.js/themes/introjs-modern.css";
+
+
+
+
 // ----------------------------------------------------------------------
 
 // ensures that oAuth redirects happen regardless of where the user is

@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { AccountSetupPage } from '../pages/user/AccountSetupPage';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { setupUserAccount } from '../api/users/setupUserAccount';
-import { DataStore } from '@aws-amplify/datastore';
-import { Auth, Hub } from 'aws-amplify';
-import { getUser } from '../api/users/getUser';
+import {createContext, useContext, useEffect, useState} from 'react';
+import {AccountSetupPage} from '../pages/user/AccountSetupPage';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {setupUserAccount} from '../api/users/setupUserAccount';
+import {DataStore} from '@aws-amplify/datastore';
+import {Auth, Hub} from 'aws-amplify';
+import {getUser} from '../api/users/getUser';
+import introJs from "intro.js";
 
 const initialState = {
   user: null,
@@ -37,11 +38,82 @@ const UserContextProvider = ({ children }) => {
     setShowAccountSetup(true);
   };
 
+  const startOnboarding = async () => {
+    return introJs()
+    .setOptions({
+      steps: [
+        {
+          title: 'Welcome to Thoughtify! 👋',
+          intro: 'Thoughtify empowers your Thoughts. Lets get started!',
+        },
+        {
+          title: 'Collect Your Thoughts',
+          intro: 'Whenever you can, add your Thoughts here. This is your personal space to collect your Thoughts.',
+          element: '#thoughts-page',
+        },
+        {
+          title: 'Your First Thought',
+          intro: 'Get started with your first Thought. We will help you along the way.',
+          element: '#thought-input-container',
+        },
+        {
+          title: 'Explore your Thoughts!',
+            intro: 'Click on the Thought to see more details about it.',
+            element: '#journal-timeline-entry-0',
+          //id={`journal-timeline-entry-${index}`}
+        }
+      ],
+    })
+    .onbeforechange((targetElement) => {
+      console.log(targetElement.id)
+      if (targetElement.id === 'journal-timeline-entry-0') {
+        //
+        const input = document.querySelector('#thought-input-submit');
+        // click
+        if (input) {
+          input.click();
+        }
+      }
+    })
+    .onafterchange((targetElement) => {
+      // thought input, fill in an example thought
+        if (targetElement.id === 'thought-input-container') {
+          // type the input like a user
+          const inputValue = "I just started onboarding with Thoughtify!";
+            const input = document.querySelector('#thought-input-field');
+            if (input) {
+                // use async to type one letter at a time
+                // input.value = '';
+                const typeLetter = (letter, delay) => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            input.value += letter;
+                            resolve();
+                        }, delay);
+                    });
+                }
+                const typeInput = async () => {
+                  // eslint-disable-next-line no-plusplus
+                    for (let i = 0; i < inputValue.length; i++) {
+                        await typeLetter(inputValue[i], 100);
+                    }
+                }
+
+                typeInput();
+            }
+        }
+    })
+    .start()
+
+  }
+
   const onAccountSetupComplete = async ({ user, cognitoUser }) => {
     setUser(user);
 
     setShowAccountSetup(false);
     navigate('/journal');
+    startOnboarding()
+
   };
 
   /**
@@ -113,6 +185,10 @@ const UserContextProvider = ({ children }) => {
         if (location.pathname === '/') {
           navigate('/journal');
         }
+
+        // only for testing
+        // startOnboarding()
+
       } catch (error) {
         setIsInitialized(true);
       }

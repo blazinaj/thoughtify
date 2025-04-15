@@ -59,10 +59,11 @@ const Thoughts = ({ journalEntry }) => {
     }
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} lg={12}>
+    <Grid container spacing={3} id={'thoughts-container'}>
+      <Grid item xs={12} lg={12} id={'thought-input-container'}>
         <ThoughtInput
           journalEntry={journalEntry}
+          data-intro-id={'thought-input'}
           data-intro={
             'Record a Thought here. This can be anything from a note to a bit of venting about your neighbor. Anything goes!'
           }

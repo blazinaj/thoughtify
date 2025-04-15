@@ -19,7 +19,7 @@ const ThoughtsPage = () => {
 
   return (
     <Page title="Thoughtify">
-      <Container maxWidth={themeStretch ? false : 'lg'}>
+      <Container maxWidth={themeStretch ? false : 'lg'} id={'thoughts-page'}>
         <HeaderBreadcrumbs
           heading="Journal"
           subHeading={'Collect your Thoughts and extract Insights'}

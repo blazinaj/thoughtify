@@ -68,6 +68,8 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
    * @returns {Promise<void|string>}
    */
   const handleSend = async () => {
+    setMessage('');
+
     SpeechRecognition.stopListening();
 
     if (!message) {
@@ -75,12 +77,11 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     }
     if (onSubmit) {
 
-      onSubmit({
+      await onSubmit({
         input: message,
         date: showDateSelector ? new Date(form.input.date).toISOString() : new Date().toISOString()
       });
     }
-    return setMessage('');
   };
 
 
@@ -103,6 +104,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     <RootStyle {...other}>
       <Stack direction={'row'} spacing={1}>
         <TextField
+            id={'thought-input-field'}
           disabled={disabled}
           value={message}
           onKeyUp={handleKeyUp}
@@ -123,7 +125,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
             ),
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
+                <IconButton id={'thought-input-submit'} color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
                   <Icon icon={roundSend} width={24} height={24} />
                 </IconButton>
               </InputAdornment>
