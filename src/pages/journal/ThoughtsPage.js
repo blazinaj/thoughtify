@@ -17,20 +17,6 @@ import Scrollbar from '../../demo/components/Scrollbar';
 const ThoughtsPage = () => {
   const { themeStretch } = useSettings();
 
-  const [cadence, setCadence] = useState('CURRENT');
-  const { theme } = useTheme();
-
-  const smallToMid = useMediaQuery(theme.breakpoints.between('xs', 'md'));
-
-  const cadences = [
-    'CURRENT',
-    JournalCadence.DAILY,
-    JournalCadence.WEEKLY,
-    JournalCadence.MONTHLY,
-    JournalCadence.YEARLY,
-    'BIOGRAPHY'
-  ];
-
   return (
     <Page title="Thoughtify">
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -38,52 +24,8 @@ const ThoughtsPage = () => {
           heading="Journal"
           subHeading={'Collect your Thoughts and extract Insights'}
           icon={'carbon:book'}
-          action={
-            !smallToMid && (
-              <Box display="flex" justifyContent="left">
-                <ButtonGroup orientation={'horizontal'} size={'small'}>
-                  {cadences.map((cadenceEnum) => {
-                    return (
-                      <Button
-                        key={cadenceEnum}
-                        onClick={() => {
-                          setCadence(cadenceEnum);
-                        }}
-                        variant={cadence === cadenceEnum ? 'contained' : 'outlined'}
-                        size={'small'}
-                      >
-                        {cadenceEnum === 'CURRENT' ? 'NOW' : cadenceEnum}
-                      </Button>
-                    );
-                  })}
-                </ButtonGroup>
-              </Box>
-            )
-          }
         />
-        {smallToMid && (
-          <Box display="flex" justifyContent="left" sx={{ mb: '2em', mt: '-1em' }}>
-            <Scrollbar>
-              <ButtonGroup orientation={'horizontal'} size={'small'}>
-                {cadences.map((cadenceEnum) => {
-                  return (
-                    <Button
-                      key={cadenceEnum}
-                      onClick={() => {
-                        setCadence(cadenceEnum);
-                      }}
-                      variant={cadence === cadenceEnum ? 'contained' : 'outlined'}
-                      size={'small'}
-                    >
-                      {cadenceEnum === 'CURRENT' ? 'NOW' : cadenceEnum}
-                    </Button>
-                  );
-                })}
-              </ButtonGroup>
-            </Scrollbar>
-          </Box>
-        )}
-        <Thoughts cadence={cadence} />
+        <Thoughts/>
       </Container>
     </Page>
   );
