@@ -1,0 +1,14 @@
+{
+  "resourceName": "attachments",
+  "policyUUID": "a19fcaad",
+  "bucketName": "thoughtify-attachments",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

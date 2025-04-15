@@ -180,5 +180,12 @@
       "providerPlugin": "awscloudformation",
       "service": "Transcribe"
     }
+  },
+  "storage": {
+    "attachments": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }
