@@ -107,8 +107,6 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     }
   };
 
-
-
   useEffect(() => {
     if (transcript) {
       setMessage(transcript);
@@ -122,8 +120,6 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
       startListening();
     }
   };
-
-
 
   const handleAttachment = () => {
 

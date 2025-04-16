@@ -14,6 +14,8 @@ import {ThoughtExtractAttributeChip} from "./ThoughtExtracts/components/ThoughtE
 import {sentenceCase} from "change-case";
 import {getIcon} from "@iconify/react";
 import {AttachFile} from "@mui/icons-material";
+import {useModal} from "../../../utils/hooks/useModal";
+import {ThoughtAttachments} from "./ThoughtAttachments";
 
 /**
  * A list of Thoughts in Accordion form
@@ -153,17 +155,9 @@ const ThoughtInputText = ({ thought }) => {
                 thought.attachments && thought.attachments.length > 0 && (
 
                       <Grid item>
-                      <Chip
-                          title={`${thought.attachments.length} attachment${thought.attachments.length > 1 ? 's' : ''}`}
-                          // component={Link}
-                          sx={{
-                            cursor: 'pointer'
-                          }}
-                          label={`${thought.attachments.length} attachment${thought.attachments.length > 1 ? 's' : ''}`}
-                          size={'small'}
-                          // to={`/thoughts/${type}/${linkId}`}
-                          icon={<AttachFile/>}
-                      />
+                          <ThoughtGalleryAttachmentsChip
+                            attachments={thought.attachments}
+                          />
                       </Grid>
                   )
               }
@@ -235,3 +229,31 @@ const ThoughtInputText = ({ thought }) => {
       </Card>
   );
 };
+
+export const ThoughtGalleryAttachmentsChip = ({ attachments }) => {
+
+    const modal = useModal({
+        title: 'Attachments',
+        children: <ThoughtAttachments attachments={attachments}/>
+    })
+    return (
+        // eslint-disable-next-line
+        <span onClick={e => e.stopPropagation()}>
+            {modal.modal}
+            <Chip
+            title={`${attachments.length} Attachment${attachments.length > 1 ? 's' : ''}`}
+            sx={{
+                cursor: 'pointer'
+            }}
+            onClick={(e) => {
+                e.preventDefault()
+                modal.setIsOpen(true)
+            }}
+            label={`${attachments.length} Attachment${attachments.length > 1 ? 's' : ''}`}
+            size={'small'}
+            icon={<AttachFile/>}
+        />
+        </span>
+
+    )
+}

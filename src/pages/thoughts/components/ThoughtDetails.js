@@ -10,7 +10,7 @@ import {
   LinearProgress,
   List,
   ListItem,
-  ListItemAvatar,
+  ListItemAvatar, ListItemButton, ListItemIcon,
   ListItemText,
   Stack,
   Typography
@@ -22,6 +22,8 @@ import {Icon} from "@iconify/react";
 import prettyBytes from "pretty-bytes";
 import {useModal} from "../../../utils/hooks/useModal";
 import {Storage} from "@aws-amplify/storage";
+import {Photo, Videocam as Video, AudioFile as Audio, FilePresent as File} from "@mui/icons-material";
+import {ThoughtAttachments} from "./ThoughtAttachments";
 
 /**
  * Similar thoughts
@@ -77,12 +79,6 @@ export const ThoughtDetails = ({ item }) => {
     }
   }, [item]);
 
-
-  const modal = useModal({
-    title: 'Attachments',
-    children: <AttachmentsModal attachments={item?.attachments} />,
-  })
-
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -102,28 +98,13 @@ export const ThoughtDetails = ({ item }) => {
           {
               item?.attachments && item?.attachments.length > 0 && (
                   <Card key={'thought-attachments'} title={'Attachments'}>
-                    {modal.modalButton}
                     <List>
                       {
                         item.attachments.map((attachment, index) => (
-                            <ListItem
+                            <AttachmentListItem
                                 key={index}
-                                secondaryAction={
-                                  <IconButton edge="end" aria-label="delete" onClick={() => {
-                                    // setAttachments((prevState) => prevState.filter((_, i) => i !== index));
-                                  }}
-                                  >
-                                    <Icon icon="material-symbols:cancel-outline-rounded" width={24} height={24} />
-                                  </IconButton>
-                                }
-                            >
-                              <ListItemAvatar>
-                                {/*<Avatar*/}
-                                {/*    src={URL.createObjectURL(attachment)}*/}
-                                {/*/>*/}
-                              </ListItemAvatar>
-                              <ListItemText primary={attachment.name} secondary={prettyBytes(attachment.size)} />
-                            </ListItem>
+                              attachment={attachment}
+                            />
                         ))
                       }
                     </List>
@@ -187,32 +168,46 @@ export const ThoughtDetails = ({ item }) => {
 };
 
 
-const AttachmentsModal = ({attachments}) => {
-  const [files, setFiles] = useState([]);
 
-  useEffect(() => {
-    const handleFiles = async () => {
-      const fileArray = [];
-      for (const attachment of attachments) {
-        const signedURL = await Storage.get(attachment.url); // get key from Storage.list
-        fileArray.push(signedURL);
-      }
-      setFiles(fileArray);
+export const AttachmentListItem = ({attachment}) => {
+
+  const modal = useModal({
+    title: 'Attachment',
+    children: <ThoughtAttachments attachments={[attachment]} />,
+  })
+
+  const getFileTypeIcon = (file) => {
+    const fileType = file.type.split('/')[0];
+    switch (fileType) {
+      case 'image':
+        return <Photo/>
+      case 'video':
+        return <Video/>
+      case 'audio':
+        return <Audio/>
+      default:
+        return <File/>
     }
-    if (attachments) {
-      handleFiles();
-    }
-  }, [attachments])
+  }
 
   return (
-    <Stack spacing={2} >
-        <Typography variant="h6">Attachments</Typography>
-      {
-        files.map((file, index) => (
-            <img key={index} src={file} alt={'test '} height={500} content={'image/png'}/>
-        ))
-      }
-    </Stack>
+      <ListItem
+          secondaryAction={
+            <IconButton edge="end" aria-label="delete" onClick={() => {
+              // setAttachments((prevState) => prevState.filter((_, i) => i !== index));
+            }}
+            >
+              <Icon icon="material-symbols:cancel-outline-rounded" width={24} height={24} />
+            </IconButton>
+          }
+      >
+        {modal.modal}
+        <ListItemButton onClick={() => modal.setIsOpen(true)}>
+          <ListItemIcon>
+            {getFileTypeIcon(attachment)}
+          </ListItemIcon>
+          <ListItemText primary={attachment.name} secondary={prettyBytes(attachment.size)} />
+        </ListItemButton>
+      </ListItem>
   )
-
 }

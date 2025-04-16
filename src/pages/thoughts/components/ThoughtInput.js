@@ -28,25 +28,17 @@ export const ThoughtInput = ({ journalEntry, projectId }) => {
   const {owner, user} = useUserContext()
 
   const onSubmit = async ({input, date, attachments}) => {
-    console.log({input, user, owner})
-
     const attachmentResults = [];
 
     // handle file attachments with aws-amplify storage
     for (const attachment of attachments) {
-      console.log({attachment})
       const file = attachment.file;
 
       const filename = `${user.owner}/thoughts/attachments/${attachment.name}`;
-      const result = await Storage.put(filename, file, {
+      const result = await Storage.put(filename, attachment, {
         contentType: attachment.type,
         region: 'us-west-2'
       });
-      //    id: ID!
-      //     url: String
-      //     type: String
-      //     name: String
-      //     size: Int
       console.log({result});
         attachmentResults.push({
             id: result.key,
