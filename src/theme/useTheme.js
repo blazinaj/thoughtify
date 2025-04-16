@@ -35,20 +35,20 @@ export const useTheme = () => {
 
     // add 'grey' color for buttons
     _palette.grey = {
-      'main': '#757575',
-      'dark': '#757575',
-      'light': '#BDBDBD',
-        'contrastText': '#FFFFFF',
-        100: '#F5F5F5',
-        200: '#E0E0E0',
-        300: '#BDBDBD',
-        400: '#9E9E9E',
-        500: '#757575',
-        600: '#616161',
-        700: '#424242',
-        800: '#212121',
-        900: '#000000',
-    }
+      main: '#757575',
+      dark: '#757575',
+      light: '#BDBDBD',
+      contrastText: '#FFFFFF',
+      100: '#F5F5F5',
+      200: '#E0E0E0',
+      300: '#BDBDBD',
+      400: '#9E9E9E',
+      500: '#757575',
+      600: '#616161',
+      700: '#424242',
+      800: '#212121',
+      900: '#000000'
+    };
 
     return _palette;
   };

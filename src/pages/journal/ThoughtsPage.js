@@ -25,7 +25,7 @@ const ThoughtsPage = () => {
           subHeading={'Collect your Thoughts and extract Insights'}
           icon={'carbon:book'}
         />
-        <Thoughts/>
+        <Thoughts />
       </Container>
     </Page>
   );

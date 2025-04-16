@@ -28,7 +28,6 @@ export const ThoughtExtractInsight = ({ type, value, projectId }) => {
     if (type === 'projects') {
       // if this is a projects insight, we need to get the Thoughts through the ProjectThoughts connection
       thoughtsDatastore = await DataStore.query(Thought, (p) => p.relatedProjects.project.id.eq(projectId));
-      console.log({ thoughtsDatastore });
     } else {
       thoughtsDatastore = await DataStore.query(Thought, (p) => p[type].contains(value));
     }
@@ -79,6 +78,13 @@ export const ThoughtExtractInsight = ({ type, value, projectId }) => {
         summary: item.input
       };
     });
+
+    const attachments = thoughtsDatastore
+      .map((item) => item.attachments)
+      .flat()
+      .filter((item) => item !== null)
+      .filter((item, index, self) => self.indexOf(item) === index);
+    console.log({ attachments });
     return {
       thoughts: relatedThoughts,
       people: relatedPeople,
@@ -88,7 +94,8 @@ export const ThoughtExtractInsight = ({ type, value, projectId }) => {
       questions: relatedQuestions,
       events: relatedEvents,
       places: relatedPlaces,
-      timeline
+      timeline,
+      attachments
     };
   };
 

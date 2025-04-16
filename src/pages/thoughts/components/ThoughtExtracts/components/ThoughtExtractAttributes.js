@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import { ThoughtExtractAttributeChip } from './ThoughtExtractAttributeChip';
 import { Masonry } from '@mui/lab';
 import * as React from 'react';
+import { ThoughtAttachmentsList } from '../../ThoughtAttachmentsList';
 
 /**
  * Displays a list of Cards for each Attribute in the Thought Extract
@@ -44,6 +45,19 @@ export const ThoughtExtractAttributes = ({ insight, value: attributeValue }) => 
           // if the value is an array of one and is only this attribute, then don't show it
           if (Array.isArray(value) && value.length === 1 && value[0] === attributeValue) {
             return null;
+          }
+          if (key === 'attachments') {
+            return (
+              <Card
+                title={'Attachments'}
+                key={key}
+                sx={{
+                  display: !value || value?.length < 1 ? 'none' : undefined
+                }}
+              >
+                <ThoughtAttachmentsList attachments={value} />
+              </Card>
+            );
           }
           return (
             <Card

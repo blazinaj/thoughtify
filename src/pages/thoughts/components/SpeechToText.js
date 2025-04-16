@@ -26,7 +26,7 @@ export function SpeechToText(props) {
           return buffer;
         }
         function newBuffer() {
-          console.log('resetting buffer');
+          console.log(' buffer');
           buffer = [];
         }
 
@@ -52,8 +52,6 @@ export function SpeechToText(props) {
     const [recordedAudio, setRecordedAudio] = useState(null);
     useEffect(() => {
       if (recordedAudio) {
-        console.log('recorded!');
-        console.log(recordedAudio);
       }
     }, [recordedAudio]);
 

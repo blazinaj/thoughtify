@@ -3,8 +3,6 @@ import { DataStore } from '@aws-amplify/datastore';
 import { Project, Task } from '../../models';
 
 export const handleThought = async ({ thought, projects, projectId }) => {
-  console.log({ thought });
-
   const openai = new OpenAI({
     dangerouslyAllowBrowser: true,
     organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
@@ -109,13 +107,9 @@ export const handleThought = async ({ thought, projects, projectId }) => {
     tools
   });
 
-  console.log({ response });
-  console.log(response.output);
-  console.log(response.tools);
   const outputs = response.output;
 
   for (const output of outputs) {
-    console.log(output);
     const { arguments: args, type, name } = output;
   }
 

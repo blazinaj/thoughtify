@@ -33,6 +33,8 @@ export const ProjectDetails = ({ project }) => {
 
   const [tasks, setTasks] = useState([]);
 
+  const [attachments, setAttachments] = useState([]);
+
   useEffect(() => {
     const handle = async () => {
       const tasks = (await datastore?.item?.tasks.toArray()) ?? [];
@@ -47,7 +49,7 @@ export const ProjectDetails = ({ project }) => {
       setTasks(res);
     };
     handle();
-  }, [datastore?.item, thoughtsDatastore.items, tasksDatastore.items]);
+  }, [datastore?.item, thoughtsDatastore.items.length, tasksDatastore.items.length]);
 
   return (
     <>
