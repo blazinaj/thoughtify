@@ -1,4 +1,4 @@
-import {Card, CardActionArea, Grid, Stack, Typography} from '@mui/material';
+import {Card, CardActionArea, Chip, Grid, Stack, Typography} from '@mui/material';
 import TimelineOppositeContent, {timelineOppositeContentClasses} from '@mui/lab/TimelineOppositeContent';
 import {Timeline, timelineItemClasses} from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -9,8 +9,13 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import * as React from 'react';
 import {useEffect, useMemo, useState} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link, Link as RouterLink} from 'react-router-dom';
 import {ThoughtExtractAttributeChip} from "./ThoughtExtracts/components/ThoughtExtractAttributeChip";
+import {sentenceCase} from "change-case";
+import {getIcon} from "@iconify/react";
+import {AttachFile} from "@mui/icons-material";
+import {useModal} from "../../../utils/hooks/useModal";
+import {ThoughtAttachments} from "./ThoughtAttachments";
 
 /**
  * A list of Thoughts in Accordion form
@@ -147,6 +152,16 @@ const ThoughtInputText = ({ thought }) => {
             {thought?.input}
             <Grid container spacing={1}>
               {
+                thought.attachments && thought.attachments.length > 0 && (
+
+                      <Grid item>
+                          <ThoughtGalleryAttachmentsChip
+                            attachments={thought.attachments}
+                          />
+                      </Grid>
+                  )
+              }
+              {
               relatedProjects.map((project) => {
                 return (
                     <Grid item>
@@ -214,3 +229,31 @@ const ThoughtInputText = ({ thought }) => {
       </Card>
   );
 };
+
+export const ThoughtGalleryAttachmentsChip = ({ attachments }) => {
+
+    const modal = useModal({
+        title: 'Attachments',
+        children: <ThoughtAttachments attachments={attachments}/>
+    })
+    return (
+        // eslint-disable-next-line
+        <span onClick={e => e.stopPropagation()}>
+            {modal.modal}
+            <Chip
+            title={`${attachments.length} Attachment${attachments.length > 1 ? 's' : ''}`}
+            sx={{
+                cursor: 'pointer'
+            }}
+            onClick={(e) => {
+                e.preventDefault()
+                modal.setIsOpen(true)
+            }}
+            label={`${attachments.length} Attachment${attachments.length > 1 ? 's' : ''}`}
+            size={'small'}
+            icon={<AttachFile/>}
+        />
+        </span>
+
+    )
+}

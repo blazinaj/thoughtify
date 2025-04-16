@@ -24,6 +24,7 @@ type Thought @model @auth(rules: [{allow: owner}]) {
     events: [String]
 
     comments: [Comment]
+    attachments: [Attachment]
 }
 
 enum ThoughtAttributes {
@@ -36,4 +37,14 @@ enum ThoughtAttributes {
     questions,
     places,
     events
+}
+
+type Attachment {
+    id: ID!
+    url: String
+    type: String
+    name: String
+    size: Int
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
 }
