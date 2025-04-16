@@ -38,7 +38,6 @@ export const ThoughtInput = ({ journalEntry, projectId }) => {
         contentType: attachment.type,
         region: 'us-west-2'
       });
-      console.log({ result });
       attachmentResults.push({
         id: result.key,
         url: result.key,
@@ -64,8 +63,6 @@ export const ThoughtInput = ({ journalEntry, projectId }) => {
         })
       );
     }
-
-    console.log({ newThought });
 
     if (journalEntry?.id) {
       await DataStore.save(

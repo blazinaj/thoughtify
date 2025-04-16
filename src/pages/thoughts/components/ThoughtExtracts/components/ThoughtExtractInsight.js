@@ -84,7 +84,6 @@ export const ThoughtExtractInsight = ({ type, value, projectId }) => {
       .flat()
       .filter((item) => item !== null)
       .filter((item, index, self) => self.indexOf(item) === index);
-    console.log({ attachments });
     return {
       thoughts: relatedThoughts,
       people: relatedPeople,

@@ -32,7 +32,7 @@ const RootStyle = styled('div')(({ theme }) => ({
 export default function ThoughtInputField({ disabled, onSubmit, showDateSelector = false, dateConfig = {}, ...other }) {
   const [loading, setLoading] = useState(false);
 
-  const { transcript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition({
+  const { transcript, listening, browserSupportsSpeechRecognition, resetTranscript } = useSpeechRecognition({
     clearTranscriptOnListen: true,
     transcribing: true
   });
@@ -87,6 +87,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     setLoading(true);
 
     SpeechRecognition.stopListening();
+    SpeechRecognition.resetTranscript();
 
     if (!message) {
       return '';
@@ -113,6 +114,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
   const toggleListening = () => {
     if (listening) {
       SpeechRecognition.stopListening();
+      SpeechRecognition.resetTranscript();
     } else {
       startListening();
     }
@@ -187,7 +189,6 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
             onChange={(event) => {
               const files = event.target.files;
               if (files.length > 0) {
-                console.log({ files });
                 setAttachments((prevState) => [...prevState, ...Array.from(files)]);
               }
             }}

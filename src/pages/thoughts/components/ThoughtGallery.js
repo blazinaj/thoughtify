@@ -1,6 +1,6 @@
 import { Card, CardActionArea, Chip, Grid, Stack, Typography } from '@mui/material';
 import TimelineOppositeContent, { timelineOppositeContentClasses } from '@mui/lab/TimelineOppositeContent';
-import { Timeline, timelineItemClasses } from '@mui/lab';
+import { Timeline, timelineContentClasses, timelineItemClasses } from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
 import { formatDate } from '../../../api/journal/createJournalTimeline';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -57,12 +57,16 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
   return (
     <Timeline
       sx={{
+        padding: 0,
         [`& .${timelineOppositeContentClasses.root}`]: {
           flex: 0.2
         },
         [`& .${timelineItemClasses.root}:before`]: {
           flex: 0,
           padding: 0
+        },
+        [`& .${timelineContentClasses.root}`]: {
+          paddingRight: 0
         }
       }}
     >
@@ -73,7 +77,8 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
             key={`journal-timeline-entry-${date}`}
             id={`journal-timeline-entry-${index}`}
             sx={{
-              borderRadius: '16px'
+              borderRadius: '16px',
+              paddingRight: 0
             }}
           >
             {!isSmall && (

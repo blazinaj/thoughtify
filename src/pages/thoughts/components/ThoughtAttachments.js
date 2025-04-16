@@ -11,7 +11,6 @@ export const ThoughtAttachments = ({ attachments }) => {
       const fileArray = [];
       for (const attachment of attachments) {
         const s3Result = await Storage.get(attachment.url, { download: true }); // get key from Storage.list
-        console.log(s3Result);
         const blob = s3Result.Body;
         const blobUrl = URL.createObjectURL(blob);
         fileArray.push({
@@ -41,8 +40,6 @@ export const ThoughtAttachments = ({ attachments }) => {
   return (
     <Stack spacing={2}>
       {files.map((file, index) => {
-        console.log({ file });
-
         return (
           <Stack direction={'column'} spacing={2}>
             <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>

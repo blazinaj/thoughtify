@@ -1,16 +1,14 @@
-import { Grid, Button, Box, useMediaQuery, MenuItem, Select, Stack } from '@mui/material';
+import { Box, Button, Grid, MenuItem, Select, Stack, useMediaQuery } from '@mui/material';
 import { ThoughtInput } from './ThoughtInput';
 import { ThoughtGallery } from './ThoughtGallery';
 import { ThoughtExtracts } from './ThoughtExtracts/components/ThoughtExtracts';
 import { useThoughtsState } from '../hooks/useThoughtsState';
 import { useState } from 'react';
-import { getIcon } from '@iconify/react';
 import JournalTimeline from '../../journal/components/JournalTimeline';
 import { BiographyDisplay } from '../../biography/components/BiographyDisplay';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import { useTheme } from '../../../theme/useTheme';
 import { JournalCadence } from '../../../models';
-import { Filter, FilterList, FilterListOff } from '@mui/icons-material';
+import { FilterList, FilterListOff } from '@mui/icons-material';
 
 /**
  * Displays the Thoughts page for the user.
@@ -37,8 +35,6 @@ const Thoughts = ({ journalEntry }) => {
   const [showFilters, setShowFilters] = useState(false);
   const [cadence, setCadence] = useState('CURRENT');
   const { theme } = useTheme();
-
-  const smallToMid = useMediaQuery(theme.breakpoints.between('xs', 'md'));
 
   const cadences = [
     'CURRENT',
@@ -100,8 +96,8 @@ const Thoughts = ({ journalEntry }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '200px',
-              height: '40px'
+              width: '200px'
+              // height: '40px'
             }}
           >
             {thoughts?.length === 0 && 'No Thoughts'}
@@ -164,7 +160,7 @@ const Thoughts = ({ journalEntry }) => {
         lg={showFilters ? 4 : 0}
         xl={showFilters ? 4 : 0}
         sx={{
-          marginTop: '50px',
+          // marginTop: '50px',
           display: showFilters ? undefined : 'none'
         }}
         order={{
