@@ -1,15 +1,16 @@
-import {Chip} from '@mui/material';
-import {sentenceCase} from 'change-case';
-import {Link} from 'react-router-dom';
+import { Chip } from '@mui/material';
+import { sentenceCase } from 'change-case';
+import { Link } from 'react-router-dom';
 import {
-  Alarm, Category,
+  Alarm,
+  Category,
   Event,
   FaceRetouchingNatural,
   Map as MapIcon,
   Person,
   PsychologyAlt,
   Workspaces
-} from "@mui/icons-material";
+} from '@mui/icons-material';
 
 /**
  * Displays the value of a Thought Extract Attribute as a chip that opens a modal
@@ -38,15 +39,15 @@ export const ThoughtExtractAttributeChip = ({ type, value }) => {
   }
 
   const iconMap = {
-    'people': <Person/>,
-    'places': <MapIcon/>,
-    'emotions': <FaceRetouchingNatural/>,
-    'projects': <Workspaces/>,
-    'events': <Event/>,
-    'reminders': <Alarm/>,
-    'questions': <PsychologyAlt/>,
-    'categories': <Category/>,
-  }
+    people: <Person />,
+    places: <MapIcon />,
+    emotions: <FaceRetouchingNatural />,
+    projects: <Workspaces />,
+    events: <Event />,
+    reminders: <Alarm />,
+    questions: <PsychologyAlt />,
+    categories: <Category />
+  };
 
   const button = (
     <Chip

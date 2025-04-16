@@ -3,13 +3,13 @@ import Router from './pages/routes';
 import RtlLayoutContext from './contexts/RtlLayoutContext';
 import ScrollToTop from './demo/components/ScrollToTop';
 import NotistackProvider from './contexts/NotistackProvider';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {LocalizationProvider} from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 import useLocales from './utils/hooks/useLocales';
-import {ThemeProvider} from './contexts/ThemeProvider';
-import {SettingsProvider} from './contexts/SettingsContext';
-import {CollapseDrawerProvider} from './contexts/CollapseDrawerContext';
-import {UserContextProvider} from './contexts/UserContext';
+import { ThemeProvider } from './contexts/ThemeProvider';
+import { SettingsProvider } from './contexts/SettingsContext';
+import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
+import { UserContextProvider } from './contexts/UserContext';
 
 // ----------------------------------------------------------------------
 

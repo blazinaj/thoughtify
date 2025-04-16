@@ -21,7 +21,6 @@ export const useJournalSync = ({ cadence }) => {
   });
 
   useEffect(() => {
-    console.log('Fetching Journal Entries', cadence);
     const handle = async () => {
       try {
         setIsLoading(true);

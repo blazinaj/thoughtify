@@ -1,16 +1,14 @@
-import {Grid, Button, Box, useMediaQuery, MenuItem, Select, Stack} from '@mui/material';
+import { Box, Button, Grid, MenuItem, Select, Stack, useMediaQuery } from '@mui/material';
 import { ThoughtInput } from './ThoughtInput';
 import { ThoughtGallery } from './ThoughtGallery';
 import { ThoughtExtracts } from './ThoughtExtracts/components/ThoughtExtracts';
 import { useThoughtsState } from '../hooks/useThoughtsState';
 import { useState } from 'react';
-import { getIcon } from '@iconify/react';
 import JournalTimeline from '../../journal/components/JournalTimeline';
 import { BiographyDisplay } from '../../biography/components/BiographyDisplay';
-import ButtonGroup from "@mui/material/ButtonGroup";
-import {useTheme} from "../../../theme/useTheme";
-import {JournalCadence} from "../../../models";
-import {Filter, FilterList, FilterListOff} from "@mui/icons-material";
+import { useTheme } from '../../../theme/useTheme';
+import { JournalCadence } from '../../../models';
+import { FilterList, FilterListOff } from '@mui/icons-material';
 
 /**
  * Displays the Thoughts page for the user.
@@ -35,28 +33,26 @@ const Thoughts = ({ journalEntry }) => {
 
   // show filters by default on xl, lg, md and hide on sm and xs
   const [showFilters, setShowFilters] = useState(false);
-    const [cadence, setCadence] = useState('CURRENT');
-    const { theme } = useTheme();
+  const [cadence, setCadence] = useState('CURRENT');
+  const { theme } = useTheme();
 
-    const smallToMid = useMediaQuery(theme.breakpoints.between('xs', 'md'));
+  const cadences = [
+    'CURRENT',
+    JournalCadence.DAILY,
+    JournalCadence.WEEKLY,
+    JournalCadence.MONTHLY,
+    JournalCadence.YEARLY,
+    'BIOGRAPHY'
+  ];
 
-    const cadences = [
-        'CURRENT',
-        JournalCadence.DAILY,
-        JournalCadence.WEEKLY,
-        JournalCadence.MONTHLY,
-        JournalCadence.YEARLY,
-        'BIOGRAPHY'
-    ];
-
-    const friendlyNames = {
-        [JournalCadence.DAILY]: 'Daily',
-        [JournalCadence.WEEKLY]: 'Weekly',
-        [JournalCadence.MONTHLY]: 'Monthly',
-        [JournalCadence.YEARLY]: 'Yearly',
-        'CURRENT': 'Current',
-        'BIOGRAPHY': 'Biography'
-    }
+  const friendlyNames = {
+    [JournalCadence.DAILY]: 'Daily',
+    [JournalCadence.WEEKLY]: 'Weekly',
+    [JournalCadence.MONTHLY]: 'Monthly',
+    [JournalCadence.YEARLY]: 'Yearly',
+    CURRENT: 'Current',
+    BIOGRAPHY: 'Biography'
+  };
 
   return (
     <Grid container spacing={3} id={'thoughts-container'}>
@@ -69,75 +65,61 @@ const Thoughts = ({ journalEntry }) => {
           }
         />
       </Grid>
-        <Grid item xs={12} md={12}>
-            <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
-                <Select value={cadence} size={'small'} sx={{
-                    width: '200px',
-                }}>
-                    {cadences.map((cadenceEnum) => {
-                            return (
-                                <MenuItem
-                                    key={cadenceEnum}
-                                    onClick={() => {
-                                        setCadence(cadenceEnum);
-                                    }}
-                                    selected={cadence === cadenceEnum}
-                                    value={cadenceEnum}
-                                >
-                                    {friendlyNames[cadenceEnum] || cadenceEnum}
-                                </MenuItem>
-                            );
-                        }
-                    )}
-                </Select>
-
-                {/* number of thoughts */}
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '200px',
-                    height: '40px',
-                }}
-                     >
-                    {
-                        thoughts?.length === 0 && (
-                            'No Thoughts'
-                        )
-                    }
-                    {
-                        thoughts?.length === 1 && (
-                            '1 Thought'
-                        )
-
-                            
-                    }
-                    {
-                        thoughts?.length > 1 && (
-                            `${thoughts.length} Thoughts`
-                        )
-
-
-                    }
-                </Box>
-
-                <Button
-                    variant="outlined"
-                    onClick={() => setShowFilters(!showFilters)}
-                    startIcon={showFilters ? <FilterListOff/> : <FilterList/>}
-                    sx={{
-                        width: '200px',
-                        textColor: 'white',
-                    }}
-                    size={'small'}
-                    color={'grey'}
+      <Grid item xs={12} md={12}>
+        <Stack direction={'row'} spacing={2} justifyContent={'space-between'}>
+          <Select
+            value={cadence}
+            size={'small'}
+            sx={{
+              width: '200px'
+            }}
+          >
+            {cadences.map((cadenceEnum) => {
+              return (
+                <MenuItem
+                  key={cadenceEnum}
+                  onClick={() => {
+                    setCadence(cadenceEnum);
+                  }}
+                  selected={cadence === cadenceEnum}
+                  value={cadenceEnum}
                 >
-                    {showFilters ? 'Hide Filters' : 'Show Filters'}
-                </Button>
-            </Stack>
+                  {friendlyNames[cadenceEnum] || cadenceEnum}
+                </MenuItem>
+              );
+            })}
+          </Select>
 
+          {/* number of thoughts */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '200px'
+              // height: '40px'
+            }}
+          >
+            {thoughts?.length === 0 && 'No Thoughts'}
+            {thoughts?.length === 1 && '1 Thought'}
+            {thoughts?.length > 1 && `${thoughts.length} Thoughts`}
+          </Box>
 
-        </Grid>
+          <Button
+            variant="outlined"
+            onClick={() => setShowFilters(!showFilters)}
+            startIcon={showFilters ? <FilterListOff /> : <FilterList />}
+            sx={{
+              width: '200px',
+              textColor: 'white'
+            }}
+            size={'small'}
+            color={'grey'}
+          >
+            {showFilters ? 'Hide Filters' : 'Show Filters'}
+          </Button>
+        </Stack>
+      </Grid>
 
       <Grid
         item
@@ -178,7 +160,7 @@ const Thoughts = ({ journalEntry }) => {
         lg={showFilters ? 4 : 0}
         xl={showFilters ? 4 : 0}
         sx={{
-          marginTop: '50px',
+          // marginTop: '50px',
           display: showFilters ? undefined : 'none'
         }}
         order={{
