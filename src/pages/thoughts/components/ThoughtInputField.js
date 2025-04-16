@@ -1,11 +1,24 @@
-import { styled } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
-import { Box, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
-import { Icon } from '@iconify/react';
+import {styled} from '@mui/material/styles';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  Avatar,
+  Grid,
+  IconButton,
+  InputAdornment,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Stack,
+  TextField
+} from '@mui/material';
+import {Icon} from '@iconify/react';
 import roundSend from '@iconify/icons-ic/round-send';
-import { useForm } from '../../../utils/hooks/useForm';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { ThoughtInputMicButton } from './ThoughtInputMicButton';
+import {useForm} from '../../../utils/hooks/useForm';
+import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
+import {ThoughtInputMicButton} from './ThoughtInputMicButton';
+import {ThoughtInputAttachmentButton} from "./ThoughtInputAttachmentButton";
+import prettyBytes from 'pretty-bytes';
 
 const RootStyle = styled('div')(({ theme }) => ({
   width: '100%'
@@ -18,6 +31,8 @@ const RootStyle = styled('div')(({ theme }) => ({
  */
 export default function ThoughtInputField({ disabled, onSubmit, showDateSelector = false, dateConfig = {}, ...other }) {
 
+  const [loading, setLoading] = useState(false);
+
   const { transcript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition({
     clearTranscriptOnListen: true,
     transcribing: true
@@ -28,6 +43,8 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
    * State for the input field of the Thought.
    */
   const [message, setMessage] = useState('');
+
+  const [attachments, setAttachments] = useState([]);
 
   /**
    * Handles the change of the input field for the Thought.
@@ -68,7 +85,8 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
    * @returns {Promise<void|string>}
    */
   const handleSend = async () => {
-    setMessage('');
+
+    setLoading(true);
 
     SpeechRecognition.stopListening();
 
@@ -79,8 +97,13 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
 
       await onSubmit({
         input: message,
-        date: showDateSelector ? new Date(form.input.date).toISOString() : new Date().toISOString()
+        date: showDateSelector ? new Date(form.input.date).toISOString() : new Date().toISOString(),
+        attachments,
       });
+
+        setAttachments([]);
+        setMessage('');
+        setLoading(false);
     }
   };
 
@@ -100,45 +123,99 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     }
   };
 
+
+
+  const handleAttachment = () => {
+
+  }
+
+  const fileRef = useRef(null);
+
+  const handleAttachmentButtonClick = () => {
+    fileRef?.current?.click()
+  }
+
   return (
     <RootStyle {...other}>
-      <Stack direction={'row'} spacing={1}>
-        <TextField
-            id={'thought-input-field'}
-          disabled={disabled}
-          value={message}
-          onKeyUp={handleKeyUp}
-          onChange={handleChangeMessage}
-          placeholder="Save a thought..."
-          multiline
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Stack direction="row" spacing={0.5} mr={1.5}>
-                  <ThoughtInputMicButton
-                    toggleListening={toggleListening}
-                    disabled={!browserSupportsSpeechRecognition}
-                    listening={listening}
-                  />
-                </Stack>
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton id={'thought-input-submit'} color="primary" disabled={!message} onClick={handleSend} sx={{ mx: 1 }} size="large">
-                  <Icon icon={roundSend} width={24} height={24} />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-          sx={{
-            height: '100%',
-            width: showDateSelector ? '80%' : '100%'
-          }}
-        />
-
-        {showDateSelector && <Box>{form.display}</Box>}
-      </Stack>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={12}>
+          <TextField
+              id={'thought-input-field'}
+              disabled={disabled || loading}
+              value={message}
+              onKeyUp={handleKeyUp}
+              onChange={handleChangeMessage}
+              placeholder="Save a thought..."
+              multiline
+              InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                      <Stack direction="row" spacing={0.5} mr={1.5}>
+                        <ThoughtInputMicButton
+                            toggleListening={toggleListening}
+                            disabled={!browserSupportsSpeechRecognition}
+                            listening={listening}
+                        />
+                        <ThoughtInputAttachmentButton
+                            onClick={handleAttachmentButtonClick}
+                        />
+                      </Stack>
+                    </InputAdornment>
+                ),
+                endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton id={'thought-input-submit'} color="primary" disabled={!message || loading} onClick={handleSend} sx={{ mx: 1 }} size="large">
+                        <Icon icon={loading ? 'svg-spinners:8-dots-rotate' : roundSend} width={24} height={24} />
+                      </IconButton>
+                    </InputAdornment>
+                )
+              }}
+              sx={{
+                height: '100%',
+                width: showDateSelector ? '80%' : '100%'
+              }}
+          />
+        </Grid>
+        <Grid item xs={12} md={12} sx={{
+          display: attachments?.length > 0 ? undefined : 'none'
+        }}>
+          <input ref={fileRef} type={'file'}
+                 style={{ display: 'none' }}
+                    onChange={(event) => {
+                        const files = event.target.files;
+                        if (files.length > 0) {
+                          console.log({files})
+                            setAttachments((prevState) => [...prevState, ...Array.from(files)]);
+                        }
+                    }
+                    }
+          />
+          <List>
+            {
+                attachments.map((attachment, index) => (
+                    <ListItem
+                        key={index}
+                        secondaryAction={
+                            <IconButton edge="end" aria-label="delete" onClick={() => {
+                                setAttachments((prevState) => prevState.filter((_, i) => i !== index));
+                            }}
+                            >
+                                <Icon icon="material-symbols:cancel-outline-rounded" width={24} height={24} />
+                            </IconButton>
+                        }
+                    >
+                      <ListItemAvatar>
+                        <Avatar
+                            src={URL.createObjectURL(attachment)}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText primary={attachment.name} secondary={prettyBytes(attachment.size)} />
+                    </ListItem>
+                ))
+            }
+          </List>
+        </Grid>
+      </Grid>
     </RootStyle>
   );
 }

@@ -7,12 +7,12 @@ import {
   Thought,
   ThoughtAttributes
 } from '../../../models';
-import { DataStore } from '@aws-amplify/datastore';
+import {DataStore} from '@aws-amplify/datastore';
 import ThoughtInputField from './ThoughtInputField';
-import { generateThoughtExtract } from '../../../api/thoughts/generateThoughtExtract';
-import { getWeek } from 'date-fns';
-import { invokeLambda } from '../../../utils/functions/invokeLambda';
-import { handleThought } from '../../../api/thoughts/handleThought';
+import {generateThoughtExtract} from '../../../api/thoughts/generateThoughtExtract';
+import {handleThought} from '../../../api/thoughts/handleThought';
+import {Storage} from '@aws-amplify/storage';
+import {useUserContext} from "../../../contexts/UserContext";
 
 /**
  * Input Field for Thoughts.
@@ -24,12 +24,58 @@ import { handleThought } from '../../../api/thoughts/handleThought';
  * @constructor
  */
 export const ThoughtInput = ({ journalEntry, projectId }) => {
-  const onSubmit = async (input) => {
+
+  const {owner, user} = useUserContext()
+
+  const onSubmit = async ({input, date, attachments}) => {
+    console.log({input, user, owner})
+
+    const attachmentResults = [];
+
+    // handle file attachments with aws-amplify storage
+    for (const attachment of attachments) {
+      console.log({attachment})
+      const file = attachment.file;
+
+      const filename = `${user.owner}/thoughts/attachments/${attachment.name}`;
+      const result = await Storage.put(filename, file, {
+        contentType: attachment.type,
+        region: 'us-west-2'
+      });
+      //    id: ID!
+      //     url: String
+      //     type: String
+      //     name: String
+      //     size: Int
+      console.log({result});
+        attachmentResults.push({
+            id: result.key,
+            url: result.key,
+            type: attachment.type,
+            name: attachment.name,
+            size: attachment.size
+        })
+    }
+
+
     const newThought = await DataStore.save(
       new Thought({
-        ...input
-      })
+        input,
+        date,
+        attachments: attachmentResults,
+      }),
     );
+
+    if (projectId) {
+        await DataStore.save(
+            new ProjectThoughts({
+              projectId,
+            thoughtId: newThought.id
+            })
+        );
+    }
+
+    console.log({newThought})
 
     if (journalEntry?.id) {
       await DataStore.save(

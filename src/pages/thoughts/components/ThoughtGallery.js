@@ -1,4 +1,4 @@
-import {Card, CardActionArea, Grid, Stack, Typography} from '@mui/material';
+import {Card, CardActionArea, Chip, Grid, Stack, Typography} from '@mui/material';
 import TimelineOppositeContent, {timelineOppositeContentClasses} from '@mui/lab/TimelineOppositeContent';
 import {Timeline, timelineItemClasses} from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -9,8 +9,11 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import * as React from 'react';
 import {useEffect, useMemo, useState} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link, Link as RouterLink} from 'react-router-dom';
 import {ThoughtExtractAttributeChip} from "./ThoughtExtracts/components/ThoughtExtractAttributeChip";
+import {sentenceCase} from "change-case";
+import {getIcon} from "@iconify/react";
+import {AttachFile} from "@mui/icons-material";
 
 /**
  * A list of Thoughts in Accordion form
@@ -146,6 +149,24 @@ const ThoughtInputText = ({ thought }) => {
             </Typography>
             {thought?.input}
             <Grid container spacing={1}>
+              {
+                thought.attachments && thought.attachments.length > 0 && (
+
+                      <Grid item>
+                      <Chip
+                          title={`${thought.attachments.length} attachment${thought.attachments.length > 1 ? 's' : ''}`}
+                          // component={Link}
+                          sx={{
+                            cursor: 'pointer'
+                          }}
+                          label={`${thought.attachments.length} attachment${thought.attachments.length > 1 ? 's' : ''}`}
+                          size={'small'}
+                          // to={`/thoughts/${type}/${linkId}`}
+                          icon={<AttachFile/>}
+                      />
+                      </Grid>
+                  )
+              }
               {
               relatedProjects.map((project) => {
                 return (
