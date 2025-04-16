@@ -2,7 +2,7 @@ type Place @model @auth(rules: [{allow: owner}]) {
     id: ID!
     name: String!
     description: String
-    thoughts: [Thought] @manyToMany(relationName: "PersonThoughts")
+    thoughts: [Thought] @manyToMany(relationName: "PlaceThoughts")
     address: String
     comments: [Comment]
 }

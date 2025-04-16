@@ -8,6 +8,9 @@ type Thought @model @auth(rules: [{allow: owner}]) {
     healthReports: [HealthReport] @manyToMany(relationName: "HealthReportThoughts")
     biographies: [Biography] @manyToMany(relationName: "BiographyThoughts")
     relatedProjects: [Project] @manyToMany(relationName: "ProjectThoughts")
+    relatedPeople: [Person] @manyToMany(relationName: "PersonThoughts")
+    relatedPlaces: [Place] @manyToMany(relationName: "PlaceThoughts")
+    relatedEvents: [Event] @manyToMany(relationName: "EventThoughts")
     tasks: [Task] @manyToMany(relationName: "TaskThoughts")
     
     overallTone: String

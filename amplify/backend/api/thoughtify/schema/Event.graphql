@@ -2,7 +2,7 @@ type Event @model @auth(rules: [{allow: owner}]) {
     id: ID!
     name: String!
     description: String
-    thoughts: [Thought] @manyToMany(relationName: "PersonThoughts")
+    thoughts: [Thought] @manyToMany(relationName: "EventThoughts")
     address: String
     date: AWSDateTime
     comments: [Comment]
