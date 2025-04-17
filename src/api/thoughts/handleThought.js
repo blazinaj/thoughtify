@@ -109,9 +109,5 @@ export const handleThought = async ({ thought, projects, projectId }) => {
 
   const outputs = response.output;
 
-  for (const output of outputs) {
-    const { arguments: args, type, name } = output;
-  }
-
   return outputs;
 };

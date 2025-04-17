@@ -148,7 +148,6 @@ export const ThoughtInput = ({ journalEntry, projectId }) => {
 
           if (name === 'update_task') {
             const task = await DataStore.query(Task, functionArguments.taskId);
-            // if (task.length > 0) {
             await DataStore.save(
               Task.copyOf(task, (updated) => {
                 updated.name = functionArguments.name;
@@ -156,19 +155,16 @@ export const ThoughtInput = ({ journalEntry, projectId }) => {
               })
             );
 
-            // }
           }
 
           if (name === 'update_project') {
             const project = await DataStore.query(Project, functionArguments.projectId);
-            if (project.length > 0) {
               await DataStore.save(
                 Project.copyOf(project[0], (updated) => {
                   updated.name = functionArguments.name;
                   updated.status = functionArguments.status;
                 })
               );
-            }
           }
         }
       }
