@@ -3,12 +3,13 @@ import { ThoughtInput } from './ThoughtInput';
 import { ThoughtGallery } from './ThoughtGallery';
 import { ThoughtExtracts } from './ThoughtExtracts/components/ThoughtExtracts';
 import { useThoughtsState } from '../hooks/useThoughtsState';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import JournalTimeline from '../../journal/components/JournalTimeline';
 import { BiographyDisplay } from '../../biography/components/BiographyDisplay';
 import { useTheme } from '../../../theme/useTheme';
 import { JournalCadence } from '../../../models';
 import { FilterList, FilterListOff } from '@mui/icons-material';
+import {useSearchParams} from "react-router-dom";
 
 /**
  * Displays the Thoughts page for the user.
@@ -31,10 +32,19 @@ const Thoughts = ({ journalEntry }) => {
     setVisibleAttributes
   } = useThoughtsState({ journalEntry });
 
-  // show filters by default on xl, lg, md and hide on sm and xs
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    // show filters by default on xl, lg, md and hide on sm and xs
   const [showFilters, setShowFilters] = useState(false);
-  const [cadence, setCadence] = useState('CURRENT');
-  const { theme } = useTheme();
+  const [cadence, setCadence] = useState(searchParams.get('cadence') ?? 'CURRENT');
+
+  useEffect(() => {
+      if (searchParams.get('cadence') !== cadence) {
+          setSearchParams({
+                cadence
+          })
+      }
+  }, [cadence])
 
   const cadences = [
     'CURRENT',

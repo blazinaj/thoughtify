@@ -1,9 +1,8 @@
-import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import React from 'react';
-import { useModal } from '../../../utils/hooks/useModal';
-import { ThoughtAttachments } from './ThoughtAttachments';
-import { AudioFile as Audio, FilePresent as File, Photo, Videocam as Video } from '@mui/icons-material';
-import { Icon } from '@iconify/react';
+import {useModal} from '../../../utils/hooks/useModal';
+import {ThoughtAttachments} from './ThoughtAttachments';
+import {AudioFile as Audio, FilePresent as File, Photo, Videocam as Video} from '@mui/icons-material';
 import prettyBytes from 'pretty-bytes';
 
 export const ThoughtAttachmentsList = ({ attachments }) => {
@@ -19,7 +18,8 @@ export const ThoughtAttachmentsList = ({ attachments }) => {
 export const AttachmentListItem = ({ attachment }) => {
   const modal = useModal({
     title: 'Attachment',
-    children: <ThoughtAttachments attachments={[attachment]} />
+    children: <ThoughtAttachments attachments={[attachment]} />,
+    fullScreen: true,
   });
 
   const getFileTypeIcon = (file) => {

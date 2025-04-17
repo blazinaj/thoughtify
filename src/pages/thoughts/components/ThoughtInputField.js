@@ -87,7 +87,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
     setLoading(true);
 
     SpeechRecognition.stopListening();
-    SpeechRecognition.resetTranscript();
+    resetTranscript();
 
     if (!message) {
       return '';
@@ -114,7 +114,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
   const toggleListening = () => {
     if (listening) {
       SpeechRecognition.stopListening();
-      SpeechRecognition.resetTranscript();
+      resetTranscript();
     } else {
       startListening();
     }
@@ -189,7 +189,15 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
             onChange={(event) => {
               const files = event.target.files;
               if (files.length > 0) {
-                setAttachments((prevState) => [...prevState, ...Array.from(files)]);
+                // add the URL at this time
+                //URL.createObjectURL(attachment)
+                setAttachments((prevState) => [
+                    ...prevState,
+                  ...Array.from(files)
+                ].map((file) => {
+                  file.url = URL.createObjectURL(file);
+                    return file;
+                }));
               }
             }}
           />
@@ -211,7 +219,7 @@ export default function ThoughtInputField({ disabled, onSubmit, showDateSelector
                 }
               >
                 <ListItemAvatar>
-                  <Avatar src={URL.createObjectURL(attachment)} />
+                  <Avatar src={attachment.url} />
                 </ListItemAvatar>
                 <ListItemText primary={attachment.name} secondary={prettyBytes(attachment.size)} />
               </ListItem>
