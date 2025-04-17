@@ -1,0 +1,11 @@
+type Reminder @model @auth(rules: [
+    # allow owner full auth
+    {allow: owner, operations: [read, create, update, delete]}
+]) {
+    id: ID!
+    title: String
+    content: String
+    status: String # COMPLETED, NOT_COMPLETED
+    dueDate: AWSDateTime
+    owner: String
+}
