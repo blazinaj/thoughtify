@@ -12,7 +12,11 @@ const { Parameters } = await (new aws.SSM())
 
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
+/**
+ * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+ */
 const {OpenAI} = require("openai");
+const aws = require('aws-sdk');
 
 export const handleCompletion = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
