@@ -1,10 +1,6 @@
 import {generateThoughtExtract} from "./functions/generateThoughtExtract.js";
 import {linkAttributes} from "./functions/linkAttributes.js";
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-
  export const handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
 
