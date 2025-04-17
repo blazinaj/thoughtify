@@ -16,6 +16,7 @@ import { getIcon } from '@iconify/react';
 import { AttachFile } from '@mui/icons-material';
 import { useModal } from '../../../utils/hooks/useModal';
 import { ThoughtAttachments } from './ThoughtAttachments';
+import {ThoughtExtractChips} from "./ThoughtExtracts/components/ThoughtExtractChips";
 
 /**
  * A list of Thoughts in Accordion form
@@ -146,62 +147,10 @@ const ThoughtInputText = ({ thought }) => {
             })}
           </Typography>
           {thought?.input}
-          <Grid container spacing={1}>
-            {thought.attachments && thought.attachments.length > 0 && (
-              <Grid item>
-                <ThoughtGalleryAttachmentsChip attachments={thought.attachments} />
-              </Grid>
-            )}
-            {relatedProjects.map((project) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'projects'} value={project} />
-                </Grid>
-              );
-            })}{' '}
-            {thought.people?.map((person) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'people'} value={person} />
-                </Grid>
-              );
-            })}
-            {thought.categories?.map((item) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'categories'} value={item} />
-                </Grid>
-              );
-            })}
-            {thought.places?.map((item) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'places'} value={item} />
-                </Grid>
-              );
-            })}
-            {thought.events?.map((item) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'events'} value={item} />
-                </Grid>
-              );
-            })}
-            {thought.emotions?.map((item) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'emotions'} value={item} />
-                </Grid>
-              );
-            })}
-            {thought.reminders?.map((item) => {
-              return (
-                <Grid item>
-                  <ThoughtExtractAttributeChip type={'reminders'} value={item} />
-                </Grid>
-              );
-            })}
-          </Grid>
+          <ThoughtExtractChips
+            thought={thought}
+            relatedProjects={relatedProjects}
+          />
         </Stack>
       </CardActionArea>
     </Card>
@@ -211,7 +160,8 @@ const ThoughtInputText = ({ thought }) => {
 export const ThoughtGalleryAttachmentsChip = ({ attachments }) => {
   const modal = useModal({
     title: 'Attachments',
-    children: <ThoughtAttachments attachments={attachments} />
+    children: <ThoughtAttachments attachments={attachments} />,
+    fullScreen: true,
   });
   return (
     // eslint-disable-next-line

@@ -18,7 +18,8 @@ export const useModal = ({
   buttonText = 'Open',
   button: buttonInput = <DefaultModalButton text={buttonText} />,
   width,
-  icon
+  icon,
+    fullScreen = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,8 +36,8 @@ export const useModal = ({
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       fullWidth
-      maxWidth="lg"
-      fullScreen={isSmall}
+      maxWidth={fullScreen || "lg"}
+      fullScreen={fullScreen || isSmall}
     >
       <AppBar sx={{ position: 'relative', paddingBottom: '1em' }}>
         {title && (

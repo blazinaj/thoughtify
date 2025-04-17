@@ -12,6 +12,7 @@ import { Card, CardActionArea, Stack, Typography } from '@mui/material';
 import * as React from 'react';
 import { JournalTimelineItemDetails } from './JournalTimelineItemDetails';
 import { Link as RouterLink } from 'react-router-dom';
+import {JournalTimelineChips} from "./JournalTimelineChips";
 
 export const JournalTimelineItem = ({ journalEntry, cadence, isSmall, isLastEntry }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -64,6 +65,8 @@ export const JournalTimelineItem = ({ journalEntry, cadence, isSmall, isLastEntr
               <Stack spacing={2}>
                 {journalEntry?.isLoading && 'Loading..'}
                 {journalEntry?.entry}
+
+                <JournalTimelineChips journalEntry={journalEntry}/>
               </Stack>
             </CardActionArea>
           </Card>
