@@ -34,7 +34,7 @@ export const handleCompletion = async (event) => {
 
     const configuration = {
         organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
-        apiKey: "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",
+        apiKey: "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",
     };
 
     const openai = new OpenAI(configuration);

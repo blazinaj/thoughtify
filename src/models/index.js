@@ -77,7 +77,7 @@ const WritingBrevity = {
   "LONG": "LONG"
 };
 
-const { Biography, Event, HealthReport, JournalEntry, Notification, Person, Place, Project, SubscriptionPlan, Task, Thought, User, BiographyThoughts, EventThoughts, HealthReportThoughts, JournalEntryThoughts, PersonThoughts, PlaceThoughts, ProjectThoughts, ProjectTasks, TaskThoughts, Comment, Attachment } = initSchema(schema);
+const { Biography, Event, HealthReport, JournalEntry, Notification, Person, Place, Project, Reminder, SubscriptionPlan, Task, Thought, User, BiographyThoughts, EventThoughts, HealthReportThoughts, JournalEntryThoughts, PersonThoughts, PlaceThoughts, ProjectThoughts, ProjectTasks, TaskThoughts, Comment, Attachment } = initSchema(schema);
 
 export {
   Biography,
@@ -88,6 +88,7 @@ export {
   Person,
   Place,
   Project,
+  Reminder,
   SubscriptionPlan,
   Task,
   Thought,

@@ -138,6 +138,8 @@ export default function NotificationsPopover() {
     enableSubscriptions: true
   });
 
+  // const remindersDatastore
+
   const notifications = notificationsDatastore.items;
   const setNotifications = notificationsDatastore.setItems;
 
