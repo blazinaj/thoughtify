@@ -1,21 +1,18 @@
-import { Card, CardActionArea, Chip, Grid, Stack, Typography } from '@mui/material';
-import TimelineOppositeContent, { timelineOppositeContentClasses } from '@mui/lab/TimelineOppositeContent';
-import { Timeline, timelineContentClasses, timelineItemClasses } from '@mui/lab';
+import {Avatar, Box, Card, CardActionArea, Chip, Stack, Typography} from '@mui/material';
+import TimelineOppositeContent, {timelineOppositeContentClasses} from '@mui/lab/TimelineOppositeContent';
+import {Timeline, timelineContentClasses, timelineItemClasses} from '@mui/lab';
 import TimelineItem from '@mui/lab/TimelineItem';
-import { formatDate } from '../../../api/journal/createJournalTimeline';
+import {formatDate} from '../../../api/journal/createJournalTimeline';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import * as React from 'react';
-import { useEffect, useMemo, useState } from 'react';
-import { Link, Link as RouterLink } from 'react-router-dom';
-import { ThoughtExtractAttributeChip } from './ThoughtExtracts/components/ThoughtExtractAttributeChip';
-import { sentenceCase } from 'change-case';
-import { getIcon } from '@iconify/react';
-import { AttachFile } from '@mui/icons-material';
-import { useModal } from '../../../utils/hooks/useModal';
-import { ThoughtAttachments } from './ThoughtAttachments';
+import {useEffect, useMemo, useState} from 'react';
+import {Link as RouterLink} from 'react-router-dom';
+import {AttachFile} from '@mui/icons-material';
+import {useModal} from '../../../utils/hooks/useModal';
+import {ThoughtAttachments} from './ThoughtAttachments';
 import {ThoughtExtractChips} from "./ThoughtExtracts/components/ThoughtExtractChips";
 
 /**
@@ -25,7 +22,7 @@ import {ThoughtExtractChips} from "./ThoughtExtracts/components/ThoughtExtractCh
  * @returns {JSX.Element}
  * @constructor
  */
-export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
+export const ThoughtGallery = ({ journalEntry, thoughts, extract, streamView = false, }) => {
   const isSmall = true;
 
   const groupThoughtsByDate = (thoughts) => {
@@ -94,7 +91,7 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
               <Stack spacing={2}>
                 {isSmall && <Typography color="textSecondary">{formatDate(date, 'DAILY')}</Typography>}
                 {thoughts.map((thought) => {
-                  return <ThoughtInputText key={thought.id} thought={thought} extract={extract} />;
+                  return <ThoughtInputText key={thought.id} thought={thought} extract={extract} streamView={streamView} />;
                 })}
               </Stack>
             </TimelineContent>
@@ -111,7 +108,7 @@ export const ThoughtGallery = ({ journalEntry, thoughts, extract }) => {
 // such as names, places, projects, etc.
 // extract is in form: {people: ['bob', 'alice'], projects: ['project 1', 'project 2']}
 // thought is in form: {input: 'I went to the park with bob and alice', extract: {people: ['bob', 'alice'], projects: ['project 1', 'project 2']}}
-const ThoughtInputText = ({ thought }) => {
+const ThoughtInputText = ({ thought, streamView }) => {
   const [relatedProjects, setRelatedProjects] = useState([]);
 
   useEffect(() => {
@@ -140,12 +137,41 @@ const ThoughtInputText = ({ thought }) => {
       >
         {/*just the time from thought.date*/}
         <Stack spacing={2}>
-          <Typography color="textSecondary">
-            {new Date(thought.date).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
-          </Typography>
+            <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+
+                {
+                    streamView && (
+                        // person's name and avatar
+                        <Stack direction={'row'} spacing={1} alignItems={'center'}>
+                            <Avatar
+                                sx={{
+                                    width: 18, height: 18
+                                }}
+                            >
+                                Person
+                            </Avatar>
+                            <Typography color="textSecondary">
+                                Person's Name
+                            </Typography>
+                        </Stack>
+                    )
+                }
+                <Box
+
+                    sx={{'float': 'right'}}
+                >
+                    <Typography color="textSecondary"
+                    >
+                        {new Date(thought.date).toLocaleTimeString([], {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })}
+
+                    </Typography>
+                </Box>
+            </Stack>
+
+
           {thought?.input}
           <ThoughtExtractChips
             thought={thought}

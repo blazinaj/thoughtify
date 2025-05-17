@@ -151,7 +151,7 @@ export const HealthReport = ({ selectedHealthReport }) => {
     }
 
     // generate new health report for today
-    enqueueSnackbar(`Generating new health report for Today}`, {
+    enqueueSnackbar(`Generating new health report for Today`, {
       variant: 'info'
     });
 

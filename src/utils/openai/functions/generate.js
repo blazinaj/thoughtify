@@ -1,7 +1,7 @@
 import { OpenAI } from 'openai';
 
 const configuration = {
-  apiKey: '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',
+  apiKey: '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',
   dangerouslyAllowBrowser: true
 };
 const openai = new OpenAI(configuration);
@@ -109,7 +109,7 @@ export const handleCompletion = async ({
   const configuration = {
     organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
     // apiKey: process.env.OPENAI_API_KEY,
-    apiKey: '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',
+    apiKey: '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',
     dangerouslyAllowBrowser: true
   };
 
@@ -124,12 +124,12 @@ export const handleCompletion = async ({
       }
     });
 
-    console.log({ completion });
+    // console.log({ completion });
 
     const response = completion.output_text;
 
     return response;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };

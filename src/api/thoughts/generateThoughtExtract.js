@@ -1,7 +1,6 @@
-import { DataStore } from '@aws-amplify/datastore';
-import { Thought } from '../../models';
-import { handleCompletion } from '../../utils/openai/functions/generate';
-import { invokeLambda } from '../../utils/functions/invokeLambda';
+import {DataStore} from '@aws-amplify/datastore';
+import {Thought} from '../../models';
+import {invokeLambda} from '../../utils/functions/invokeLambda';
 
 /**
  * Uses openAI to generate a thought extract for a new thought.

@@ -18,7 +18,7 @@ Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }
 const {OpenAI} = require("openai");
 const aws = require('aws-sdk');
 
-exports.handler = async (event) => {
+export const handleCompletion = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
 
     const { prompt, input, format, model = 'gpt-4o' } = event;
@@ -34,22 +34,22 @@ exports.handler = async (event) => {
 
     const configuration = {
         organization: 'org-Gesve0eSdjX4qWCOl3fuhct0',
-        apiKey: "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",
+        apiKey: "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",
     };
 
     const openai = new OpenAI(configuration);
 
     try {
 
-            const completion = await openai.responses.create({
-              model,
-              input: input ?? [{ role: 'developer', content: prompt }],
-              text: {
+        const completion = await openai.responses.create({
+            model,
+            input: input ?? [{ role: 'developer', content: prompt }],
+            text: {
                 format,
-              }
-            });
+            }
+        });
 
-            const response = completion.output_text;
+        const response = completion.output_text;
 
         return {
             statusCode: 200,

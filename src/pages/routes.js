@@ -9,6 +9,7 @@ import AuthGuard from '../guards/AuthGuard';
 // import RoleBasedGuard from '../guards/RoleBasedGuard';
 // components
 import LoadingScreen from '../demo/components/LoadingScreen';
+import PeoplePage from "./people/PeoplePage";
 
 // ----------------------------------------------------------------------
 
@@ -72,6 +73,7 @@ export default function Router() {
           </AuthGuard>
         ),
         children: [
+            // thoughts
           { path: 'thoughts', exact: true, element: <ThoughtsPage /> },
           { path: 'thoughts/categories/:id', exact: true, element: <CategoryDetailsPage /> },
           { path: 'thoughts/projects/:id', exact: true, element: <ProjectDetailsPage /> },
@@ -85,8 +87,16 @@ export default function Router() {
           { path: 'thoughts/overallTone/:id', exact: true, element: <OverallToneDetailsPage /> },
           { path: 'thoughts/journals/:id', exact: true, element: <JournalDetailsPage /> },
           { path: 'thoughts/:id', exact: true, element: <ThoughtDetailsPage /> },
+
+            // projects
           { path: 'projects', exact: true, element: <ProjectsPage /> },
           { path: 'projects/:id', exact: true, element: <ProjectDetailsPage /> },
+
+            // people
+            {path: 'people', exact: true, element: <PeoplePage />},
+
+            // streams
+            {path: 'streams', exact: true, element: <StreamsPage />},
 
           { path: 'journal', element: <ThoughtsPage /> },
           { path: 'journal/:id', exact: true, element: <CategoryDetailsPage /> },
@@ -136,6 +146,7 @@ const JournalDetailsPage = Loadable(lazy(() => import('./journal/JournalDetailsP
 const BiographyPage = Loadable(lazy(() => import('./biography/BiographyPage')));
 const HealthPage = Loadable(lazy(() => import('./health/HealthPage')));
 const UserAccountPage = Loadable(lazy(() => import('./user/UserAccountPage')));
+const StreamsPage = Loadable(lazy(() => import('./streams/StreamsPage')));
 
 // Main
 const LandingPage = Loadable(lazy(() => import('./marketing/LandingPage')));

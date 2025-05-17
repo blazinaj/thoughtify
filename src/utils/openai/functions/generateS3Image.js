@@ -10,9 +10,9 @@ export const generateS3Images = async ({ prompt, numberOfImages = 1 }) => {
 
   const result = await generateImage({ prompt, n: numberOfImages, size: '256x256' });
 
-  console.log('Got AI Response: ');
-
-  console.log(result);
+  // console.log('Got AI Response: ');
+  //
+  // console.log(result);
 
   if (Array.isArray(result)) {
     const s3Promises = [];
@@ -21,7 +21,7 @@ export const generateS3Images = async ({ prompt, numberOfImages = 1 }) => {
 
     // each url of the open AI result
     for (const { url } of result) {
-      console.log({ url });
+      // console.log({ url });
 
       const fileName = v4();
       const key = `lesson-images/${fileName}.png`;
@@ -48,7 +48,7 @@ export const generateS3Images = async ({ prompt, numberOfImages = 1 }) => {
 
         s3Promises.push(fetchPromise);
       } catch (error) {
-        console.log('Error uploading file: ', error);
+        // console.log('Error uploading file: ', error);
       }
     }
 

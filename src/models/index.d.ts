@@ -411,6 +411,42 @@ export declare const Project: (new (init: ModelInit<Project>) => Project) & {
   copyOf(source: Project, mutator: (draft: MutableModel<Project>) => MutableModel<Project> | void): Project;
 }
 
+type EagerReminder = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Reminder, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title?: string | null;
+  readonly content?: string | null;
+  readonly status?: string | null;
+  readonly dueDate?: string | null;
+  readonly owner?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyReminder = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Reminder, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly title?: string | null;
+  readonly content?: string | null;
+  readonly status?: string | null;
+  readonly dueDate?: string | null;
+  readonly owner?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Reminder = LazyLoading extends LazyLoadingDisabled ? EagerReminder : LazyReminder
+
+export declare const Reminder: (new (init: ModelInit<Reminder>) => Reminder) & {
+  copyOf(source: Reminder, mutator: (draft: MutableModel<Reminder>) => MutableModel<Reminder> | void): Reminder;
+}
+
 type EagerSubscriptionPlan = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<SubscriptionPlan, 'id'>;

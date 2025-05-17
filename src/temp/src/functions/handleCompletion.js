@@ -12,14 +12,10 @@ const { Parameters } = await (new aws.SSM())
 
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
 const {OpenAI} = require("openai");
-const aws = require('aws-sdk');
 
-exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
+export const handleCompletion = async (event) => {
+    // console.log(`EVENT: ${JSON.stringify(event)}`);
 
     const { prompt, input, format, model = 'gpt-4o' } = event;
 
@@ -41,15 +37,15 @@ exports.handler = async (event) => {
 
     try {
 
-            const completion = await openai.responses.create({
-              model,
-              input: input ?? [{ role: 'developer', content: prompt }],
-              text: {
+        const completion = await openai.responses.create({
+            model,
+            input: input ?? [{ role: 'developer', content: prompt }],
+            text: {
                 format,
-              }
-            });
+            }
+        });
 
-            const response = completion.output_text;
+        const response = completion.output_text;
 
         return {
             statusCode: 200,
