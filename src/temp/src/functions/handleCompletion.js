@@ -15,7 +15,7 @@ Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }
 const {OpenAI} = require("openai");
 
 export const handleCompletion = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
+    // console.log(`EVENT: ${JSON.stringify(event)}`);
 
     const { prompt, input, format, model = 'gpt-4o' } = event;
 

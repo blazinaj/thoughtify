@@ -124,12 +124,12 @@ export const handleCompletion = async ({
       }
     });
 
-    console.log({ completion });
+    // console.log({ completion });
 
     const response = completion.output_text;
 
     return response;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };

@@ -30,7 +30,7 @@
         "handleCompletion": {
           "secretsPathAmplifyAppId": "d1d8vpf1p4j3dt",
           "deploymentBucketName": "amplify-thoughtify-staging-02929-deployment",
-          "s3Key": "amplify-builds/handleCompletion-713758674d6949775746-build.zip"
+          "s3Key": "amplify-builds/handleCompletion-79355a4a623970365075-build.zip"
         }
       },
       "api": {
@@ -38,6 +38,9 @@
       },
       "predictions": {
         "transcription": {}
+      },
+      "storage": {
+        "attachments": {}
       }
     }
   },
